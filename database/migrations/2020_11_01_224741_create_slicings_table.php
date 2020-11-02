@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateQuantitiesTable extends Migration
+class CreateSlicingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateQuantitiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_quantities', function (Blueprint $table) {
-            $table->bigIncrements('id');
+        Schema::create('slicings', function (Blueprint $table) {
+            $table->id();
             $table->string('name');
-            $table->bigInteger('product_id')->unsigned();
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade')->onUpdate('cascade');
-
-            $table->integer('price');
+            $table->text('logo');
+            $table->text('description');
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ class CreateQuantitiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('quantities');
+        Schema::dropIfExists('slicings');
     }
 }

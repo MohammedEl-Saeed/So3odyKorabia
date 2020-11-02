@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBowelsTable extends Migration
+class CreateWeightsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateBowelsTable extends Migration
      */
     public function up()
     {
-        Schema::create('bowels', function (Blueprint $table) {
-            $table->bigIncrements('id');
+        Schema::create('weights', function (Blueprint $table) {
+            $table->id();
             $table->string('name');
-            $table->integer('price');
+            $table->text('logo');
+            $table->text('description');
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateBowelsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bowels');
+        Schema::dropIfExists('weights');
     }
 }

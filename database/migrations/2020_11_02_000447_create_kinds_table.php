@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSlicersTable extends Migration
+class CreateKindsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateSlicersTable extends Migration
      */
     public function up()
     {
-        Schema::create('slicers', function (Blueprint $table) {
-            $table->bigIncrements('id');
+        Schema::create('kinds', function (Blueprint $table) {
+            $table->id();
             $table->string('name');
-            $table->integer('price');
+            $table->text('logo');
+            $table->text('description');
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateSlicersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('slicers');
+        Schema::dropIfExists('kinds');
     }
 }
