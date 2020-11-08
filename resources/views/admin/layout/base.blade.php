@@ -21,7 +21,11 @@
     <body>
         <div class="wrapper">
             @include('admin.include.header')
-            @yield('content')
+            <div id="content-page" class="content-page">
+                <div class="container-fluid">
+                    @yield('content')
+                </div>
+            </div>
         </div>
         @include('admin.include.footer')
         <!-- ===============================  start vito js files =============================== -->
@@ -56,6 +60,7 @@
     <script src="{{asset('assets/plugins/vito/en/js/worldLow.js?v=7.0.3')}}"></script>
     <script src="{{asset('assets/plugins/vito/en/js/chart-custom.js?v=7.0.3')}}"></script>
     <script src="{{asset('assets/plugins/vito/en/js/custom.js?v=7.0.3')}}"></script>
+    @yield('script')
     <!-- ===============================  end vito js files ================================= -->
     </body>
 </html>

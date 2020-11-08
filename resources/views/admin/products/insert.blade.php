@@ -60,48 +60,45 @@
                                         <input type="text" class="form-control" id="name" name="name" value="{{old('name')}}"  min="3"  max="100" placeholder="Enter a name">
                                         <span class="form-text text-muted">Please enter product name</span>
                                     </div>
-                                    <input type="hidden" name="type" value="Doctor">
-                                    <div class="form-group col-md-12">
-                                        <div id="kt_repeater_1">
-                                            <div class="form-group row">
-                                                <label class="col-md-2 col-form-label">Options:</label>
-                                                <div data-repeater-list="options" class="col-md-10">
-                                                    <div data-repeater-item="" class="form-group row align-items-center">
-                                                        <div class="row w-100">
-                                                            <div class="col-md-4">
-                                                                <label>Option:</label>
-                                                                <select  class="form-control "
-                                                                    name="service_id" value="{{old('option_id')}}">
-                                                                    @if(count($options) > 0)
-                                                                    @foreach($options as $option)
-                                                                    <option value="{{$option->id}}" @if(old('service_id') == $option->id) selected @endif>{{$option->name}}</option>
-                                                                    @endforeach
-                                                                    @endif
-                                                                </select>
-                                                                <div class="d-md-none mb-2"></div>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <label>Price:</label>
-                                                                <input type="number" name="price" value="{{old('price')}}" class="form-control" min="0"
-                                                                    placeholder="Enter Price" />
-                                                                <div class="d-md-none mb-2"></div>
-                                                            </div>
-
-                                                            <div class="col-md-4">
-                                                                <a href="javascript:;" data-repeater-delete=""
-                                                                    class="btn btn-sm font-weight-bolder btn-light-danger mt-5">
-                                                                    <i class="la la-trash-o"></i>Delete</a>
-                                                            </div>
-                                                        </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <label class="col-md-2 col-form-label">Options:</label>
+                                            <div class="col-md-10" id="repeated-product">
+                                                <div class="row w-100 repeated-products">
+                                                    <div class="col-md-4">
+                                                        <label>Option:</label>
+                                                        <select  class="form-control options" name="service_id" value="{{old('option_id')}}">
+                                                            @if(count($options) > 0)
+                                                            @foreach($options as $option)
+                                                            <option value="{{$option->id}}" @if(old('service_id') == $option->id) selected @endif>{{$option->name}}</option>
+                                                            @endforeach
+                                                            @endif
+                                                        </select>
+                                                        <div class="d-md-none mb-2"></div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label>Price:</label>
+                                                        <input type="number" name="price" value="{{old('price')}}" class="form-control price" min="0"
+                                                            placeholder="Enter Price" />
+                                                        <div class="d-md-none mb-2"></div>
+                                                    </div>
+                                                    <div class="col-md-4 text-center">
+                                                        <a class="btn btn-danger delete-product-option" style="margin-top:35px;color:#FFF">
+                                                            <i class="la la-trash-o"></i>
+                                                            Delete
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="form-group row">
-                                                <label class="col-lg-2 col-form-label text-right"></label>
-                                                <div class="col-lg-4">
-                                                    <a href="javascript:;" data-repeater-create=""
-                                                        class="btn btn-sm font-weight-bolder btn-light-primary">
-                                                        <i class="la la-plus"></i>Add</a>
+                                            <label class="col-md-2 col-form-label"></label>
+                                            <div class="col-lg-10 text-center">
+                                                <div class="row w-100">
+                                                    <div class="col-md-8">
+                                                        <a class="btn btn-primary add-product-option" style="margin-top:25px;color:#FFF">
+                                                            <i class="la la-plus"></i>
+                                                            Add
+                                                        </a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -126,6 +123,21 @@
     </div>
 </div>
 <!-- ========================== end new form to add doctor ================================ -->
-
-
+@endsection
+@section('script')
+<script>
+    $('.add-product-option').on('click' , function(){
+        var copy = $('#repeated-product .repeated-products:last-of-type'),
+            clone = copy.clone(true);
+        $('#repeated-product').append(clone);
+        $('#repeated-product .repeated-products:last-of-type').find('.price').val(null);
+    });
+    $('.delete-product-option').on('click' , function(){
+        var len = $('#repeated-product .repeated-products').length;
+        if(len > 1){
+            $(this).parents('.repeated-products').remove();
+        }
+    });
+    
+</script>
 @endsection
