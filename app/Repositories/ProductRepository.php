@@ -1,6 +1,7 @@
 <?php namespace App\Repositories;
 
 use App\Http\Traits\ResponseTraits;
+use App\Models\Product;
 use App\models\Service;
 use App\models\UserServiceDepartment;
 use Illuminate\Database\Eloquent\Model;
@@ -25,9 +26,9 @@ class ProductRepository
     protected $model;
 
     // Constructor to bind model to repo
-    public function __construct(Model $model)
+    public function __construct()
     {
-        $this->model = $model;
+        $this->model = new Product();
     }
 
     /** get all users due to type */
@@ -37,42 +38,43 @@ class ProductRepository
     }
 
     /** add new user in system */
-    public function create($request){
+    public function store($request){
 
         if ($request->hasFile('logo')){
             $logo_path = FileHelper::upload_file('/uploads/products/logos/',$request['logo']);
             $this->model->logo=$logo_path;
         }
+        $this->model->name = $request->name;
+        $this->model->description = $request->description;
+        $this->model->save();
+        if ($request->input('options')) {
+            foreach ($request->input('options') as $key => $option) {
+                $this->model->options()->attach($option, ['price' => $request->input('option_price')[$key]]);
+            }
 
-              $this->model->name = $request->name;
-              $this->model->description=$request->description;
-
-              $this->model->save();
-              $product =$this->model;
-
-//                if($request->type =='birds'){
-//                    $product->kinds()->sync($request->user_services ,false);
-//                  }
-              return $this->model;
+        }
+        $product =$this->model;
+    //                if($request->type =='birds'){
+    //                    $product->kinds()->sync($request->user_services ,false);
+    //                  }
+          return $this->model;
     }
 
     /** show specific user  */
     public function show($id){
-
         return  $this->traitShow($this->model ,$id);
-
     }
 
     /** update user Or when Accepting Update request , new changes will be add to user */
-    public function update($request){
-
+    public function update($request, $id){
+        $arr= [];
+        $arr['name'] = $request->name;
+        $arr['description'] = $request->description;
         if ($request->hasFile('logo')){
             $logo_path = FileHelper::upload_file('/uploads/product/logos/',$request['logo']);
-            $this->model->logo = $logo_path;
+            $arr['logo'] = $request->$logo_path;
         }
-        $this->model->name = $request->name;
-        $this->model->description = $request->description;
-        $this->model->save();
+        return $this->traitupdate($this->model , $id ,$arr);
     }
 
     /** get all updates request */
