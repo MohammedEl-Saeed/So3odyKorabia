@@ -19,3 +19,8 @@ Route::get('/', function () {
 Route::get('/login', function () {
     return view('admin.auth.admin-login');
 });
+
+//Route::group(['middleware' => ['auth']], function () {
+    Route::resource('products', 'Admin\ProductController');
+//    Route
+//});

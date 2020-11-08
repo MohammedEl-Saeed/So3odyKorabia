@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Services\User;
+namespace App\Services;
 
+use App\Models\Product;
+use App\Models\ProductOption;
 use App\Repositories\ProductRepository;
  use App\Http\Traits\BasicTrait;
  use Carbon\CarbonPeriod;
@@ -16,10 +18,10 @@ class ProductService
    use  BasicTrait;
     protected $model ,$product;
 
-    public function __construct(Model $model)
+    public function __construct()
     {
-        $this->model = $model;
-        $this->product = new ProductRepository($this->model);
+//        $this->model = $model;
+        $this->product = new ProductRepository();
     }
     /** get all product by type  */
     public function index(){
@@ -27,8 +29,8 @@ class ProductService
     }
 
     /** add new product to sysytem */
-    public function create($request){
-        return $this->product->addUser($request);
+    public function store($request){
+        return $this->product->store($request);
     }
 
     /** show specific product  */
@@ -62,5 +64,11 @@ class ProductService
     /** delete product */
     public function delete(){
         return $this->product->delete();
+    }
+
+    public function getOptionsByProductId($productId){
+        $data = ProductOption::where('product_id',$productId)->get()->with('options');
+        dd($data);
+        return $data;
     }
 }
