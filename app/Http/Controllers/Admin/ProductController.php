@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Option;
 use App\Models\Product;
+use App\Services\ItemService;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductRequest;
@@ -12,20 +13,32 @@ use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
-    protected $service;
+    protected $service, $itemService, $request;
 
-    public function __construct(ProductService $service){
+    public function __construct(Request $request,ProductService $service, ItemService $itemService){
         $this->service = $service;
+        $this->itemService = $itemService;
+        $this->request = $request;
+        if(!in_array($request->type,$this->productTypes)){
+            abort(404);
+        }
     }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($type)
     {
-        $data = Product::all();
-        return view('admin.products.index',compact('data'));
+        if($type == 'Sacrifice' || $type == 'Bird') {
+            $data = $this->service->index($type);
+            return view('admin.products.index', compact('data', 'type'));
+        } else{
+            $product = $this->service->checkProduct($type);
+            $productId = $product->id;
+            $data = $this->itemService->index($productId);
+            return view('admin.items.index', compact('data', 'productId'));
+        }
     }
 
     /**
@@ -33,10 +46,9 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($type)
     {
-        $options = Option::all();
-        return view('admin.products.insert',compact('options'));
+          return view('admin.products.insert',compact('type'));
     }
 
     /**
@@ -48,7 +60,7 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {
        $this->service->store($request);
-       return redirect('/products');
+       return redirect()->route('products.index',$request->type);
     }
 
     /**
@@ -97,5 +109,9 @@ class ProductController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function dashboard(){
+        return view('admin.dashboard');
     }
 }

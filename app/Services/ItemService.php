@@ -2,9 +2,9 @@
 
 namespace App\Services;
 
-use App\Models\Product;
-use App\Models\ProductOption;
-use App\Repositories\ProductRepository;
+use App\Models\Item;
+use App\Models\ItemOption;
+use App\Repositories\ItemRepository;
  use App\Http\Traits\BasicTrait;
  use Carbon\CarbonPeriod;
  use Carbon\Carbon;
@@ -12,7 +12,7 @@ use App\Repositories\ProductRepository;
  use DB;
 use Illuminate\Database\Eloquent\Model;
 
-class ProductService
+class ItemService
 {
 
    use  BasicTrait;
@@ -21,11 +21,11 @@ class ProductService
     public function __construct()
     {
 //        $this->model = $model;
-        $this->product = new ProductRepository();
+        $this->product = new ItemRepository();
     }
-    /** get all product by type  */
-    public function index($type){
-        return $this->product->index($type)->get();
+    /** get all product by productId  */
+    public function index($productId){
+        return $this->product->index($productId)->get();
     }
 
     /** add new product to sysytem */
@@ -66,8 +66,8 @@ class ProductService
         return $this->product->delete();
     }
 
-    public function getOptionsByProductId($productId){
-       $data = $this->product->getOptionsByProductId($productId);
+    public function getOptionsByItemId($productId){
+       $data = $this->product->getOptionsByItemId($productId);
         dd($data);
         return $data;
     }
@@ -76,15 +76,4 @@ class ProductService
         return $this->product->getOptions();
     }
 
-    public function checkProduct($type){
-        $product = Product::where('type',$type)->first();
-        if(is_null($product)){
-            $product = new Product();
-            $product->name = $type;
-            $product->description = $type;
-            $product->type = $type;
-            $product->save();
-        }
-        return $product;
-    }
 }

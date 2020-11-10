@@ -11,8 +11,8 @@
         <!--begin::Card-->
         <div class="iq-card">
             <div class="card-header">
-                <h5 class="card-title">View All {{$type}}</h5>
-                <a href="{{route('products.create',$type)}}" class="btn btn-text-primary font-weight-bold btn-fixed" data-palcement="top" data-toggle="tooltip" title="Insert {{$type}}">
+                <h5 class="card-title">View All Items</h5>
+                <a href="{{route('items.create',$productId)}}" class="btn btn-text-primary font-weight-bold btn-fixed" data-palcement="top" data-toggle="tooltip" title="Insert {{$productId}}">
                     <i class="fa fa-plus"></i>
                 </a>
             </div>
@@ -41,11 +41,11 @@
                                     </div>
                                 </td>
                                 <td class="text-center">
-{{--                                    <div class="list-user-action">--}}
-                                        <a href="{{route('items.index',$item->id)}}" class="btn btn-info">
-                                            Items
+                                    <div class="list-user-action">
+                                        <a href="{{route('items.index',$productId)}}">
+                                            <img src="{{asset('assets/icons/show-profile-1.svg')}}" alt="icon" class="table-icons" data-palcement="top" data-toggle="tooltip" title="profile" />
                                         </a>
-{{--                                    </div>--}}
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach
@@ -92,7 +92,7 @@ $(document).ready(function(){
     // reject
     $('.list-user-action').on("click" , ".modal-block" , function(){
         var id = $(this).data('modal');
-        {{--let url = "{{ route('products.block.status', ':id') }}";--}}
+        {{--let url = "{{ route('items.block.status', ':id') }}";--}}
         url = url.replace(':id', id);
         $('#blockModal form').attr('action' , url);
 

@@ -26,8 +26,9 @@ class ProductRequest extends FormRequest
         return [
             'name' => 'required',
             'description'=>'required',
-//            'logo' => 'required|mimes:jpeg,jpg,bmp,png|max:20240',
-            'options.*.option_id' => 'exists:options,id',
+            'logo' => 'required|mimes:jpeg,jpg,bmp,png|max:20240',
+            'type' => 'in:Sacrifice,Bird,Butter,Milk,Egg',
+//            'options.*.option_id' => 'exists:options,id',
         ];
     }
 

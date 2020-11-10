@@ -1,18 +1,18 @@
 @extends('admin.layout.base')
 
-@section('title', 'family products')
+@section('title', 'family options')
 
 @section('content')
-@section('main_header', 'Products Section')
-@section('sub_header', 'Show All Products')
+@section('main_header', 'Options Section')
+@section('sub_header', 'Show All Options')
 
 <div class="row">
     <div class="col-md-12">
         <!--begin::Card-->
         <div class="iq-card">
             <div class="card-header">
-                <h5 class="card-title">View All {{$type}}</h5>
-                <a href="{{route('products.create',$type)}}" class="btn btn-text-primary font-weight-bold btn-fixed" data-palcement="top" data-toggle="tooltip" title="Insert {{$type}}">
+                <h5 class="card-title">View All Options</h5>
+                <a href="{{route('options.create')}}" class="btn btn-text-primary font-weight-bold btn-fixed" data-palcement="top" data-toggle="tooltip" title="Insert Pharmacy">
                     <i class="fa fa-plus"></i>
                 </a>
             </div>
@@ -24,9 +24,7 @@
                         <tr>
                             <th>Record ID</th>
                             <th>Name</th>
-                            <th>Description</th>
-                            <th>Logo</th>
-                            <th class="text-center">Actions</th>
+                            <th>Type</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -34,19 +32,7 @@
                             <tr>
                                 <td>{{$index + 1}}</td>
                                 <td>{{$item->name}}</td>
-                                <td>{{$item->description}}</td>
-                                <td class="text-center">
-                                    <div class="list-user-action">
-                                            <img src="{{$item->logo}}" alt="icon" class="table-icons" data-palcement="top" data-toggle="tooltip" title="profile" />
-                                    </div>
-                                </td>
-                                <td class="text-center">
-{{--                                    <div class="list-user-action">--}}
-                                        <a href="{{route('items.index',$item->id)}}" class="btn btn-info">
-                                            Items
-                                        </a>
-{{--                                    </div>--}}
-                                </td>
+                                <td>{{$item->type}}</td>
                             </tr>
                         @endforeach
 
@@ -92,7 +78,7 @@ $(document).ready(function(){
     // reject
     $('.list-user-action').on("click" , ".modal-block" , function(){
         var id = $(this).data('modal');
-        {{--let url = "{{ route('products.block.status', ':id') }}";--}}
+        {{--let url = "{{ route('options.block.status', ':id') }}";--}}
         url = url.replace(':id', id);
         $('#blockModal form').attr('action' , url);
 

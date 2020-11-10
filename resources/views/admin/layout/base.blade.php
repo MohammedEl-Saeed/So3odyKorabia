@@ -60,6 +60,7 @@
     <script src="{{asset('assets/plugins/vito/en/js/worldLow.js?v=7.0.3')}}"></script>
     <script src="{{asset('assets/plugins/vito/en/js/chart-custom.js?v=7.0.3')}}"></script>
     <script src="{{asset('assets/plugins/vito/en/js/custom.js?v=7.0.3')}}"></script>
+    <script src="{{asset('assets/plugins/global/plugins.bundle.js')}}"></script>
     @yield('script')
     <!-- ===============================  end vito js files ================================= -->
     </body>

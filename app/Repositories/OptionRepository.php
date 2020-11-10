@@ -2,8 +2,6 @@
 
 use App\Http\Traits\ResponseTraits;
 use App\Models\Option;
-use App\Models\Product;
-use App\Models\ProductOption;
 use App\models\Service;
 use App\models\UserServiceDepartment;
 use Illuminate\Database\Eloquent\Model;
@@ -20,7 +18,7 @@ use Carbon\Carbon;
 use DB;
 use Auth;
 
-class ProductRepository
+class OptionRepository
 {
     use  BasicTrait;
     use ResponseTraits;
@@ -30,37 +28,21 @@ class ProductRepository
     // Constructor to bind model to repo
     public function __construct()
     {
-        $this->model = new Product();
+        $this->model = new Option();
     }
 
     /** get all users due to type */
-    public function index($type){
-        return  $this->model->where('type',$type);
-
+    public function index(){
+        return  $this->model->orderBy('type')->get();
     }
 
     /** add new user in system */
     public function store($request){
-
-        if ($request->hasFile('logo')){
-            $logo_path = FileHelper::upload_file('/uploads/products/logos/',$request['logo']);
-            $this->model->logo=$logo_path;
-        }
         $this->model->name = $request->name;
-        $this->model->description = $request->description;
         $this->model->type = $request->type;
+        $this->model->price = $request->price;
         $this->model->save();
-        if ($request->input('options')) {
-            foreach ($request->input('options') as $key => $option) {
-                $this->model->options()->attach($option, ['price' => $request->input('option_price')[$key]]);
-            }
-
-        }
-        $product =$this->model;
-    //                if($request->type =='birds'){
-    //                    $product->kinds()->sync($request->user_services ,false);
-    //                  }
-          return $this->model;
+        return $this->model;
     }
 
     /** show specific user  */
@@ -74,7 +56,7 @@ class ProductRepository
         $arr['name'] = $request->name;
         $arr['description'] = $request->description;
         if ($request->hasFile('logo')){
-            $logo_path = FileHelper::upload_file('/uploads/product/logos/',$request['logo']);
+            $logo_path = FileHelper::upload_file('/uploads/option/logos/',$request['logo']);
             $arr['logo'] = $request->$logo_path;
         }
         return $this->traitupdate($this->model , $id ,$arr);
@@ -104,14 +86,9 @@ class ProductRepository
         return $this->traitupdate($this->model,$proudct_id,$arr);
     }
 
-    public function getOptionByProfuctId($productId)
-    {
-        $data = ProductOption::where('product_id', $productId)->get()->with('options');
-        return $data;
-    }
 
-    public function getOptions(){
-        return Option::all();
-    }
+//    public function getServices(){
+//        return Service::all();
+//    }
 
 }

@@ -3,18 +3,17 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Services\ProductService;
+use App\Services\OptionService;
 use Illuminate\Http\Request;
 
-class SacrificeController extends Controller
+class OptionController extends Controller
 {
-
-    protected $service;
-
-    public function __construct(ProductService $service){
+     protected $service;
+    public function __construct(OptionService $service)
+    {
         $this->service = $service;
+        $this->types = ['Bagging','Kind','Package','Size','Slicing','Weight','Head','Bowels'];
     }
-
     /**
      * Display a listing of the resource.
      *
@@ -22,8 +21,8 @@ class SacrificeController extends Controller
      */
     public function index()
     {
-        $data = $this->service->index('Sacrifice');
-        return view('admin.products.index',compact('data'));
+        $data = $this->service->index();
+        return view('admin.options.index',compact('data'));
     }
 
     /**
@@ -33,7 +32,8 @@ class SacrificeController extends Controller
      */
     public function create()
     {
-        //
+        $types = $this->types;
+        return view('admin.options.insert',compact('types'));
     }
 
     /**
@@ -44,8 +44,8 @@ class SacrificeController extends Controller
      */
     public function store(Request $request)
     {
-        $this->product->store($request);
-        return redirect('prdoucts/Sacrifice');
+         $this->service->store($request);
+       return redirect('/options');
     }
 
     /**
@@ -67,7 +67,8 @@ class SacrificeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $option = $this->service->show($id);
+        return view('admin.options.edit',compact('option'));
     }
 
     /**

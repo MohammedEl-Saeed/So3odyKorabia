@@ -3,27 +3,34 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Option;
+use App\Models\Product;
+use App\Services\ItemService;
+use App\Services\OptionService;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
 
-class SacrificeController extends Controller
+class ItemController extends Controller
 {
+    protected $service, $productService, $product, $optionService, $request;
 
-    protected $service;
-
-    public function __construct(ProductService $service){
+    public function __construct(Request $request, ItemService $service, OptionService $optionService,ProductService $productService, Product $product){
         $this->service = $service;
+        $this->productService = $productService;
+        $this->product = $product;
+        $this->optionService = $optionService;
+        //this part of code to check if productId refer to existing product or not
+        $this->checkExistingItem($this->product, $request->id);
     }
-
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($productId)
     {
-        $data = $this->service->index('Sacrifice');
-        return view('admin.products.index',compact('data'));
+        $data = $this->service->index($productId);
+        return view('admin.items.index', compact('data', 'productId'));
     }
 
     /**
@@ -31,9 +38,13 @@ class SacrificeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($productId)
     {
-        //
+        $data = $this->optionService->getOptions();
+//        foreach ($data as $type=>$options){
+//            dd($type);
+//        }
+        return view('admin.items.insert',compact('data','productId'));
     }
 
     /**
@@ -44,8 +55,8 @@ class SacrificeController extends Controller
      */
     public function store(Request $request)
     {
-        $this->product->store($request);
-        return redirect('prdoucts/Sacrifice');
+        $this->service->store($request);
+        return redirect()->route('items.index',$request->product_id);
     }
 
     /**

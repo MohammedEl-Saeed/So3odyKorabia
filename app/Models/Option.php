@@ -8,8 +8,8 @@ class Option extends Model
 {
     protected $fillable = ['name','type','price'];
 
-    public function products(){
-        return $this->belongsToMany(Product::class,'products_options','option_id','product_id')->withPivot('price');
+    public function items(){
+        return $this->belongsToMany(Item::class,'items_options','option_id','item_id')->withPivot('price');
     }
 
 }
