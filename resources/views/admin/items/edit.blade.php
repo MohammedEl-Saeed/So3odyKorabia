@@ -7,14 +7,15 @@
 
 <!-- ========================== start new form to add doctor ============================== -->
 <div class="container-fluid">
-    <form id="main-form-to-add-doctor" class="form" method="post" action="{{route('items.store', $productId)}}" enctype="multipart/form-data">
+    <form id="main-form-to-add-doctor" class="form" method="post" action="{{route('items.update', $productId)}}" enctype="multipart/form-data">
         @csrf
+        {{method_field('PUT')}}
     <div class="row">
         <div class="col-lg-3">
             <div class="iq-card">
                 <div class="iq-card-header d-flex justify-content-between">
                     <div class="iq-header-title">
-                        <h4 class="card-title">Add New Item</h4>
+                        <h4 class="card-title">Edit New Item</h4>
                     </div>
                 </div>
             </div>
@@ -25,7 +26,7 @@
                             <div class="add-img-user profile-img-edit">
                                 <img class="profile-pic img-fluid" src="{{asset('assets/plugins/vito/images/user/11.png')}}" alt="profile-pic">
                                 <div class="p-image">
-                                    <a href="#" class="upload-button btn iq-bg-primary">Add Logo</a>
+                                    <a href="#" class="upload-button btn iq-bg-primary">Edit Logo</a>
                                     <input class="file-upload" required form="main-form-to-add-doctor" type="file" accept="image/*" name="logo">
                                 </div>
                             </div>
@@ -46,14 +47,14 @@
                                 <div class="row">
                                     <div class="form-group col-md-6">
                                         <label for="name">Name:</label>
-                                        <input type="text" class="form-control" id="name" name="name" value="{{old('name')}}"  min="3"  max="100" placeholder="Enter a name">
+                                        <input type="text" class="form-control" id="name" name="name" value="{{old('name',$item->name)}}"  min="3"  max="100" placeholder="Enter a name">
                                         <span class="form-text text-muted">Please enter product name</span>
                                     </div>
                                     <input type="hidden" value="{{$productId}}" name="product_id">
                                     <div class="form-group col-md-12">
                                         <label>description *</label>
                                         <textarea class="form-control"   name="description" placeholder="Enter a Description"
-                                            rows="3">{{old('description')}}</textarea>
+                                            rows="3">{{old('description',$item->description)}}</textarea>
                                         <span class="form-text text-muted">Please enter a menu within text length range 50 and 100.</span>
                                     </div>
                                 </div>
@@ -107,7 +108,7 @@
                                 </div>
                             </div>
                                 <div class="col-md-12">
-                                    <button type="submit" class="btn btn-success ml-2 pull-right">Add New Item</button>
+                                    <button type="submit" class="btn btn-success ml-2 pull-right">Edit New Item</button>
                                     <button type="reset" class="btn btn-secondary pull-right">Cancel</button>
                                     <div class="clearfix"></div>
                                 </div>

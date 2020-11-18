@@ -1,6 +1,6 @@
 @extends('admin.layout.base')
 
-@section('title', 'family products')
+@section('title', 'Products')
 
 @section('content')
 @section('main_header', 'Products Section')

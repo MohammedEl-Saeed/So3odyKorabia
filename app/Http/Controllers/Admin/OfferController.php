@@ -3,17 +3,21 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Services\OptionService;
+use App\Http\Requests\OfferRequest;
+use App\Services\ItemService;
+use App\Services\OfferService;
 use Illuminate\Http\Request;
 
-class OptionController extends Controller
+class OfferController extends Controller
 {
-     protected $service;
-    public function __construct(OptionService $service)
-    {
+
+    protected $service;
+
+    public function __construct(OfferService $service){
         $this->service = $service;
-        $this->types = ['Bagging','Kind','Package','Size','Slicing','Weight','Head','Bowels'];
+
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -22,7 +26,7 @@ class OptionController extends Controller
     public function index()
     {
         $data = $this->service->index();
-        return view('admin.options.index',compact('data'));
+        return view('admin.offers.index', compact('data'));
     }
 
     /**
@@ -32,8 +36,7 @@ class OptionController extends Controller
      */
     public function create()
     {
-        $types = $this->types;
-        return view('admin.options.insert',compact('types'));
+         return view('admin.offers.insert');
     }
 
     /**
@@ -42,10 +45,10 @@ class OptionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(OfferRequest $request)
     {
-         $this->service->store($request);
-       return redirect('/options');
+        $this->service->store($request);
+       return redirect()->route('offers.index');
     }
 
     /**
@@ -56,7 +59,8 @@ class OptionController extends Controller
      */
     public function show($id)
     {
-        //
+         $item = $this->service->show($id);
+        return view('admin.offers.edit',compact('item'));
     }
 
     /**
@@ -67,8 +71,8 @@ class OptionController extends Controller
      */
     public function edit($id)
     {
-        $item = $this->service->show($id);
-        return view('admin.options.edit',compact('item'));
+         $item = $this->service->show($id);
+        return view('admin.offers.edit',compact('item'));
     }
 
     /**

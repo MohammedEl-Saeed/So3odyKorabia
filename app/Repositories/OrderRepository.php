@@ -2,12 +2,14 @@
 
 use App\Http\Traits\ResponseTraits;
 use App\Models\Option;
+use App\Models\Order;
 use App\models\Service;
 use App\models\UserServiceDepartment;
 use Illuminate\Database\Eloquent\Model;
 use App\Helpers\FileHelper;
 use App\Http\Traits\BasicTrait;
 use App\models\User;
+use App\models\CopyUser;
 use App\models\Department;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\BlockedMail;
@@ -16,7 +18,7 @@ use Carbon\Carbon;
 use DB;
 use Auth;
 
-class OptionRepository
+class OrderRepository
 {
     use  BasicTrait;
     use ResponseTraits;
@@ -26,21 +28,26 @@ class OptionRepository
     // Constructor to bind model to repo
     public function __construct()
     {
-        $this->model = new Option();
+        $this->model = new Order();
     }
 
     /** get all users due to type */
     public function index(){
-        return  $this->model->orderBy('type')->get();
+        return  $this->model;
+
     }
 
     /** add new user in system */
     public function store($request){
-        $this->model->name = $request->name;
-        $this->model->type = $request->type;
-        $this->model->price = $request->price;
+
+        $this->model->code = $request->code;
+        $this->model->description = $request->description;
+        $this->model->discount = $request->discount;
+        $this->model->discount_type = $request->discount_type;
+        $this->model->start_at = $request->start_at;
+        $this->model->end_at = $request->end_at;
         $this->model->save();
-        return $this->model;
+          return $this->model;
     }
 
     /** show specific user  */
@@ -51,12 +58,14 @@ class OptionRepository
     /** update user Or when Accepting Update request , new changes will be add to user */
     public function update($request, $id){
         $arr= [];
-        $arr['name'] = $request->name;
+        $arr['code'] = $request->code;
         $arr['description'] = $request->description;
-        if ($request->hasFile('logo')){
-            $logo_path = FileHelper::upload_file('/uploads/option/logos/',$request['logo']);
-            $arr['logo'] = $request->$logo_path;
-        }
+        $arr['discount'] = $request->discount;
+        $arr['discount_type'] = $request->discount_type;
+        $arr['start_at'] = $request->start_at;
+        $arr['end_at'] = $request->end_at;
+        $arr['status'] = $request->status;
+
         return $this->traitupdate($this->model , $id ,$arr);
     }
 
@@ -66,11 +75,10 @@ class OptionRepository
     }
 
 
-//    /** change status for  comming model  */
-//    public function updateStatus($status ,$id){
-//
-//        return $this->traitUpdateStatus($this->model ,$status ,$id);
-//    }
+    /** change status for  comming model  */
+    public function updateStatus($status ,$id){
+        return $this->traitUpdateStatus($this->model ,$status ,$id);
+    }
 
 
      /** admin can block user . If admin blocked user , user couldn`t logged in */
@@ -84,9 +92,7 @@ class OptionRepository
         return $this->traitupdate($this->model,$proudct_id,$arr);
     }
 
-
-//    public function getServices(){
-//        return Service::all();
-//    }
-
+    public function getOrderDetails($orderId){
+        $order = $this->show($orderId);
+    }
 }

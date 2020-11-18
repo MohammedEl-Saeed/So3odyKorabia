@@ -12,7 +12,6 @@ use App\Http\Traits\BasicTrait;
 use App\models\User;
 use App\models\CopyUser;
 use App\models\Department;
-use App\models\MonthlyFinancial;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\BlockedMail;
 use App\Mail\ApprovedMail;

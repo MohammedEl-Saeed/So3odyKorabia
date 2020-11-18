@@ -30,3 +30,7 @@ Route::group(['prefix' => 'products','as' => 'products.'], function () {
 });
 Route::resource('options', 'Admin\OptionController');
 Route::resource('{id}/items', 'Admin\ItemController');
+Route::resource('offers', 'Admin\OfferController');
+Route::resource('orders', 'Admin\OrderController');
+Route::get('orders/accept/{id}','Admin\OrderController@acceptOrder')->name('orders.accept');
+Route::get('orders/reject/{id}','Admin\OrderController@acceptOrder')->name('orders.reject');

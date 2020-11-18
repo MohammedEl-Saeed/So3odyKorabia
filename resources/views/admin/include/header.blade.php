@@ -21,23 +21,28 @@
 {{--                    <a href="{{route('products.index')}}" class="iq-waves-effect"><i class="ri-home-4-line"></i><span>Products</span></a>--}}
 {{--                </li>--}}
                  <li>
-                    <a href="{{route('products.index','Sacrifice')}}" class="iq-waves-effect"><i class="ri-home-4-line"></i><span>Sacrifice</span></a>
+                    <a href="{{route('products.index','Sacrifice')}}" class="iq-waves-effect"><img src="{{asset('assets/logos/sheep.png')}}" class="ri-home-4-line"></img> <span class="h4"> ذبائح </span></a>
                 </li>
                  <li>
-                    <a href="{{route('products.index','Bird')}}" class="iq-waves-effect"><i class="ri-home-4-line"></i><span>Bird</span></a>
+                    <a href="{{route('products.index','Bird')}}" class="iq-waves-effect"><img src="{{asset('assets/logos/chicken.png')}}" class="ri-home-4-line"></img> <span class="h4"> طيور </span></a>
                 </li>
                 <li>
-                    <a href="{{route('products.index','Butter')}}" class="iq-waves-effect"><i class="ri-home-4-line"></i><span>Butter</span></a>
+                    <a href="{{route('products.index','Butter')}}" class="iq-waves-effect"><img src="{{asset('assets/logos/butter.png')}}" class="ri-home-4-line"></img> <span class="h4"> سمن </span></a>
                 </li>
                 <li>
-                    <a href="{{route('products.index','Milk')}}" class="iq-waves-effect"><i class="ri-home-4-line"></i><span>Milk</span></a>
+                    <a href="{{route('products.index','Milk')}}" class="iq-waves-effect"><img src="{{asset('assets/logos/milk.png')}}" class="ri-home-4-line"></img> <span class="h4">ألبان  </span></a>
                 </li>
                 <li>
-                    <a href="{{route('products.index','Egg')}}" class="iq-waves-effect"><i class="ri-home-4-line"></i><span>Egg</span></a>
+                    <a href="{{route('products.index','Egg')}}" class="iq-waves-effect"><img src="{{asset('assets/logos/egg.png')}}" class="ri-home-4-line"></img> <span class="h4"> بيض </span></a>
                 </li>
-
                 <li>
-                    <a href="{{route('options.index')}}" class="iq-waves-effect"><i class="ri-home-4-line"></i><span>Options</span></a>
+                    <a href="{{route('options.index')}}" class="iq-waves-effect"><i class="ri-home-4-line"></i><span class="h4">إضافات </span></a>
+                </li>
+                <li>
+                    <a href="{{route('offers.index')}}" class="iq-waves-effect"><img src="{{asset('assets/logos/sale.png')}}" class="ri-home-4-line"></img> <span class="h4"> عروض </span></a>
+                </li>
+                <li>
+                    <a href="{{route('orders.index')}}" class="iq-waves-effect"><img src="{{asset('assets/logos/sale.png')}}" class="ri-home-4-line"></img> <span class="h4"> طلبات </span></a>
                 </li>
             </ul>
         </nav>

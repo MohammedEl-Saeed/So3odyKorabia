@@ -3,17 +3,20 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Services\OptionService;
+use App\Http\Requests\OrderRequest;
+use App\Services\OrderService;
 use Illuminate\Http\Request;
 
-class OptionController extends Controller
+class OrderController extends Controller
 {
-     protected $service;
-    public function __construct(OptionService $service)
-    {
+
+    protected $service;
+
+    public function __construct(OrderService $service){
         $this->service = $service;
-        $this->types = ['Bagging','Kind','Package','Size','Slicing','Weight','Head','Bowels'];
+
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -22,7 +25,7 @@ class OptionController extends Controller
     public function index()
     {
         $data = $this->service->index();
-        return view('admin.options.index',compact('data'));
+        return view('admin.orders.index', compact('data'));
     }
 
     /**
@@ -32,8 +35,7 @@ class OptionController extends Controller
      */
     public function create()
     {
-        $types = $this->types;
-        return view('admin.options.insert',compact('types'));
+        return view('admin.orders.insert');
     }
 
     /**
@@ -42,10 +44,10 @@ class OptionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(OrderRequest $request)
     {
-         $this->service->store($request);
-       return redirect('/options');
+        $this->service->store($request);
+        return redirect()->route('orders.index');
     }
 
     /**
@@ -56,7 +58,8 @@ class OptionController extends Controller
      */
     public function show($id)
     {
-        //
+        $item = $this->service->show($id);
+        return view('admin.orders.edit',compact('item'));
     }
 
     /**
@@ -68,7 +71,7 @@ class OptionController extends Controller
     public function edit($id)
     {
         $item = $this->service->show($id);
-        return view('admin.options.edit',compact('item'));
+        return view('admin.orders.edit',compact('item'));
     }
 
     /**
@@ -92,5 +95,17 @@ class OptionController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /** accept new order */
+    public function acceptOrder($orderId){
+        try{
+            $this->service->updateStatus('Accepted',$orderId);
+//            event(new NotifcationEvent('you  Updates has been accepted ',url('/analysis/edit/profile'),$updated_id));
+//            $this->addToNotification($updated_id,'you updates has been accepted',url('/analysis/edit/profile'));
+            return redirect()->route('admin.orders.index')->with('flash_success','Request Acceptted and data changed');
+        } catch(\Exception $e){
+            return back()->with('flash_error', 'Something went wrong');
+        }
     }
 }

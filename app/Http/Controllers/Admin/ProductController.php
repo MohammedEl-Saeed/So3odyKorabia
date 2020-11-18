@@ -71,8 +71,8 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product = Product::find($id);
-        return view('admin.products.edit',compact('product'));
+        $item = $this->service->show($id);
+        return view('admin.products.edit',compact('item'));
     }
 
     /**
@@ -83,9 +83,8 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product = Product::find($id);
-        $options = Option::all();
-        return view('admin.products.edit',compact('options','product'));
+        $item = $this->service->show($id);
+        return view('admin.products.edit',compact('item'));
     }
 
     /**

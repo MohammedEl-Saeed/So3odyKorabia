@@ -1,21 +1,15 @@
 @extends('admin.layout.base')
 
-@section('title', 'Items')
+@section('title', 'Offers')
 
 @section('content')
-@section('main_header', 'Products Section')
-@section('sub_header', 'Show All Products')
+@section('main_header', 'Offers Section')
+@section('sub_header', 'Show All Offers')
 
 <div class="row">
     <div class="col-md-12">
         <!--begin::Card-->
         <div class="iq-card">
-            <div class="card-header">
-                <h5 class="card-title">View All Items</h5>
-                <a href="{{route('items.create',$productId)}}" class="btn btn-text-primary font-weight-bold btn-fixed" data-palcement="top" data-toggle="tooltip" title="Insert {{$productId}}">
-                    <i class="fa fa-plus"></i>
-                </a>
-            </div>
             <div class="iq-card-body">
                 <div class="table-responsive">
                     <!--begin: Datatable-->
@@ -23,30 +17,24 @@
                         <thead>
                         <tr>
                             <th>Record ID</th>
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th>Logo</th>
-                            <th class="text-center">Actions</th>
+                            <th>Order Id</th>
+                            <th>Order Total Price</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>User</th>
+                            <th>Actions</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($data as $index=>$item)
                             <tr>
                                 <td>{{$index + 1}}</td>
-                                <td>{{$item->name}}</td>
-                                <td>{{$item->description}}</td>
-                                <td class="text-center">
-                                    <div class="list-user-action">
-                                            <img src="{{$item->logo}}" alt="icon" class="table-icons" data-palcement="top" data-toggle="tooltip" title="profile" />
-                                    </div>
-                                </td>
-                                <td class="text-center">
-                                    <div class="list-user-action">
-                                        <a href="{{route('items.edit',['id'=>$productId,'item'=>$item->id])}}">
-                                            <img src="{{asset('assets/icons/show-profile-1.svg')}}" alt="icon" class="table-icons" data-palcement="top" data-toggle="tooltip" title="profile" />
-                                        </a>
-                                    </div>
-                                </td>
+                                <td>{{$item->id}}</td>
+                                <td>{{$item->total_price}}</td>
+                                <td>{{$item->created_at}}</td>
+                                <td>{{$item->status}}</td>
+                                <td>{{$item->user->name}}</td>
+                                <td>Show</td>
                             </tr>
                         @endforeach
 
@@ -92,7 +80,7 @@ $(document).ready(function(){
     // reject
     $('.list-user-action').on("click" , ".modal-block" , function(){
         var id = $(this).data('modal');
-        {{--let url = "{{ route('items.block.status', ':id') }}";--}}
+        {{--let url = "{{ route('orders.block.status', ':id') }}";--}}
         url = url.replace(':id', id);
         $('#blockModal form').attr('action' , url);
 
