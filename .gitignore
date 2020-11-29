@@ -13,4 +13,6 @@ npm-debug.log
 yarn-error.log
 /public/.htaccess
 /.idea
+.composer.lock
+
 
