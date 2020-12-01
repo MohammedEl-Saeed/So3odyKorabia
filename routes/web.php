@@ -34,3 +34,7 @@ Route::resource('offers', 'Admin\OfferController');
 Route::resource('orders', 'Admin\OrderController');
 Route::get('orders/accept/{id}','Admin\OrderController@acceptOrder')->name('orders.accept');
 Route::get('orders/reject/{id}','Admin\OrderController@acceptOrder')->name('orders.reject');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
