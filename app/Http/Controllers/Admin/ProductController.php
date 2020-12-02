@@ -30,7 +30,7 @@ class ProductController extends Controller
      */
     public function index($type)
     {
-//        dd(Auth::check());
+//        dd(Auth::user());
         if($type == 'Sacrifice' || $type == 'Bird') {
             $data = $this->service->index($type);
             return view('admin.products.index', compact('data', 'type'));

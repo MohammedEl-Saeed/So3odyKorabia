@@ -24,8 +24,9 @@
                         <tr>
                             <th>Record ID</th>
                             <th>Name</th>
-                            <th>Description</th>
-                            <th>Logo</th>
+                            <th>phone</th>
+                            <th>email</th>
+                            <th>Image</th>
                             <th class="text-center">Actions</th>
                         </tr>
                         </thead>
@@ -34,17 +35,26 @@
                             <tr>
                                 <td>{{$index + 1}}</td>
                                 <td>{{$item->name}}</td>
-                                <td>{{$item->description}}</td>
+                                <td>{{$item->phone}}</td>
+                                <td>{{$item->email}}</td>
                                 <td class="text-center">
                                     <div class="list-user-action">
-                                            <img src="{{$item->logo}}" alt="icon" class="table-icons" data-palcement="top" data-toggle="tooltip" title="profile" />
+                                            <img src="{{$item->image}}" alt="icon" class="table-icons" data-palcement="top" data-toggle="tooltip" title="profile" />
                                     </div>
                                 </td>
                                 <td class="text-center">
 {{--                                    <div class="list-user-action">--}}
-                                        <a href="{{route('items.index',$item->id)}}" class="btn btn-info">
-                                            Items
-                                        </a>
+                                    <a href="{{route('users.edit',$item->id)}}" class="btn btn-info">
+                                            Edit
+                                    </a>
+                                    <a href="{{route('user.orders',$item->id)}}" class="btn btn-primary">
+                                            User Orders
+                                    </a>
+                                    <form action="{{route('users.destroy',$item->id)}}" method="POST">
+                                        @csrf
+                                        {{method_field('delete')}}
+                                        <button class="btn btn-danger">Delete</button>
+                                    </form>
 {{--                                    </div>--}}
                                 </td>
                             </tr>

@@ -1,6 +1,7 @@
 <?php namespace App\Repositories;
 
 use App\Http\Traits\ResponseTraits;
+use App\Models\ItemsOption;
 use App\Models\Option;
 use App\Models\Item;
 use App\Models\ItemOption;
@@ -100,9 +101,16 @@ class ItemRepository
         return $this->traitupdate($this->model,$proudct_id,$arr);
     }
 
-    public function getOptionByProfuctId($productId)
+    public function getOptionsByItemId($itemId)
     {
-        $data = ItemOption::where('product_id', $productId)->get()->with('options');
+        $data = ItemsOption::where('item_id', $itemId)->get();
+        $options = [];
+        foreach ($data as $item){
+            $item->name = $item->option->name;
+            unset($item->option);
+            $options[] = $item;
+        }
+//        $data = Item::find($itemId)->options()->withPivot('price');
         return $data;
     }
 

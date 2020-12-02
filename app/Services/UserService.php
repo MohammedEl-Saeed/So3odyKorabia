@@ -38,8 +38,8 @@ class UserService
     }
 
     /** accept updates for user */
-    public function update($updated_data){
-        return  $this->user->update($updated_data);
+    public function update($request, $id){
+        return  $this->user->update($request, $id);
     }
 
     /** block specific user */
@@ -61,8 +61,8 @@ class UserService
 //    }
 
     /** delete user */
-    public function delete(){
-        return $this->user->delete();
+    public function delete($id){
+        return $this->user->delete($id);
     }
 
 }

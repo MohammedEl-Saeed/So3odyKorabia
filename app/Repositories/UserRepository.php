@@ -42,9 +42,11 @@ class UserRepository
         $this->model->name = $request->name;
         $this->model->email = $request->email;
         $this->model->phone = $request->phone;
-        $this->model->discount_type = $request->discount_type;
-        $this->model->start_at = $request->start_at;
-        $this->model->end_at = $request->end_at;
+        $this->model->password = bcrypt($request->password);
+        if ($request->hasFile('image')){
+            $image_path = FileHelper::upload_file('/uploads/users/images/',$request['image']);
+            $this->model->image=$image_path;
+        }
         $this->model->save();
           return $this->model;
     }
@@ -57,14 +59,14 @@ class UserRepository
     /** update user Or when Accepting Update request , new changes will be add to user */
     public function update($request, $id){
         $arr= [];
-        $arr['code'] = $request->code;
-        $arr['description'] = $request->description;
-        $arr['discount'] = $request->discount;
-        $arr['discount_type'] = $request->discount_type;
-        $arr['start_at'] = $request->start_at;
-        $arr['end_at'] = $request->end_at;
-        $arr['status'] = $request->status;
-
+        $arr['name'] = $request->name;
+        $arr['phone'] = $request->phone;
+        $arr['email'] = $request->email;
+        $arr['password'] =  bcrypt($request->password);
+        if ($request->hasFile('image')){
+            $image_path = FileHelper::upload_file('/uploads/users/images/',$request['image']);
+            $arr['image']  =$image_path;
+        }
         return $this->traitupdate($this->model , $id ,$arr);
     }
 
@@ -92,4 +94,7 @@ class UserRepository
         return $this->traitupdate($this->model,$proudct_id,$arr);
     }
 
+    public function delete($id){
+        return $this->traitDelete($this->model, $id);
+    }
 }

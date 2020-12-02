@@ -3,10 +3,17 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRequest;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    protected $service;
+    public function __construct(UserService $service)
+    {
+        $this->service = $service;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +21,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $data = $this->service->index();
+        return view('admin.users.index',compact('data'));
     }
 
     /**
@@ -24,7 +32,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.users.insert');
     }
 
     /**
@@ -33,9 +41,10 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
+        $this->service->store($request);
+        return redirect('/users');
     }
 
     /**
@@ -46,7 +55,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+//        $item = $this->service->show($id);
+//        return view('admin.users.show',compact('item'));
     }
 
     /**
@@ -57,7 +67,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $item = $this->service->show($id);
+        return view('admin.users.edit',compact('item'));
     }
 
     /**
@@ -67,9 +78,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, $id)
     {
-        //
+        $this->service->update($request, $id);
+        return redirect('/users');
     }
 
     /**
@@ -80,6 +92,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+       $this->service->delete($id);
+        return redirect('/users');
     }
 }

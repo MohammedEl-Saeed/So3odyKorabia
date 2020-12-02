@@ -42,7 +42,16 @@
                     <a href="{{route('offers.index')}}" class="iq-waves-effect"><img src="{{asset('assets/logos/sale.png')}}" class="ri-home-4-line"></img> <span class="h4"> عروض </span></a>
                 </li>
                 <li>
-                    <a href="{{route('orders.index')}}" class="iq-waves-effect"><img src="{{asset('assets/logos/sale.png')}}" class="ri-home-4-line"></img> <span class="h4"> طلبات </span></a>
+                    <a href="{{route('orders.index')}}" class="iq-waves-effect">
+                        <span class=" ri-home-4-line h2"></span>
+                        <span class="h4"> طلبات </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('users.index')}}" class="iq-waves-effect">
+                        <span class="fa fa-user h2"></span>
+                        <span class="h4"> العملاء </span>
+                    </a>
                 </li>
             </ul>
         </nav>

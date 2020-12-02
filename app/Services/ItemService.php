@@ -16,64 +16,63 @@ class ItemService
 {
 
    use  BasicTrait;
-    protected $model ,$product;
+    protected $model ,$item;
 
     public function __construct()
     {
 //        $this->model = $model;
-        $this->product = new ItemRepository();
+        $this->item = new ItemRepository();
     }
-    /** get all product by productId  */
+    /** get all item by itemId  */
     public function index($productId){
-        return $this->product->index($productId)->get();
+        return $this->item->index($productId)->get();
     }
 
-    /** add new product to sysytem */
+    /** add new item to sysytem */
     public function store($request){
-        return $this->product->store($request);
+        return $this->item->store($request);
     }
 
-    /** show specific product  */
+    /** show specific item  */
     public function show($id){
-         return $this->product->show($id);
+         return $this->item->show($id);
     }
 
-    /** accept updates for product */
+    /** accept updates for item */
     public function update($updated_data){
-        return  $this->product->update($updated_data);
+        return  $this->item->update($updated_data);
     }
 
-    /** block specific product */
+    /** block specific item */
 
-    public function blockStatus($product_id){
+    public function blockStatus($item_id){
 
-        return  $this->product->blockStatus( $product_id);
+        return  $this->item->blockStatus( $item_id);
 
     }
 
-    public function unblockStatus( $product_id){
+    public function unblockStatus( $item_id){
 
-        return  $this->product->unblockStatus( $product_id);
+        return  $this->item->unblockStatus( $item_id);
     }
 
 
 //    public function getServices(){
-//        return $this->product->getServices();
+//        return $this->item->getServices();
 //    }
 
-    /** delete product */
+    /** delete item */
     public function delete(){
-        return $this->product->delete();
+        return $this->item->delete();
     }
 
-    public function getOptionsByItemId($productId){
-       $data = $this->product->getOptionsByItemId($productId);
-        dd($data);
+    public function getOptionsByItemId($itemId){
+       $data = $this->item->getOptionsByItemId($itemId);
         return $data;
     }
 
     public function getOptions(){
-        return $this->product->getOptions();
+        return $this->item->getOptions();
     }
 
 }

@@ -31,9 +31,21 @@ Route::get('/login', function () {
     });
     Route::resource('options', 'Admin\OptionController');
     Route::resource('users', 'Admin\UserController');
+    Route::get('user/{id}/orders', 'Admin\UserController@userOrders')->name('user.orders');
     Route::resource('{id}/items', 'Admin\ItemController');
     Route::resource('offers', 'Admin\OfferController');
     Route::resource('orders', 'Admin\OrderController');
     Route::get('orders/accept/{id}','Admin\OrderController@acceptOrder')->name('orders.accept');
     Route::get('orders/reject/{id}','Admin\OrderController@acceptOrder')->name('orders.reject');
 //});
+
+Route::resource('options', 'Admin\OptionController');
+Route::resource('{id}/items', 'Admin\ItemController');
+Route::resource('offers', 'Admin\OfferController');
+Route::resource('orders', 'Admin\OrderController');
+Route::get('orders/accept/{id}','Admin\OrderController@acceptOrder')->name('orders.accept');
+Route::get('orders/reject/{id}','Admin\OrderController@acceptOrder')->name('orders.reject');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

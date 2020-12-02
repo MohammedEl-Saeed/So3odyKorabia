@@ -68,7 +68,6 @@ class ProductService
 
     public function getOptionsByProductId($productId){
        $data = $this->product->getOptionsByProductId($productId);
-        dd($data);
         return $data;
     }
 
