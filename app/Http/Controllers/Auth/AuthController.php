@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +18,9 @@ class AuthController extends Controller
      *
      * @return void
      */
-    public function __construct() {
+    public function __construct(UserService $service)
+    {
+        $this->service = $service;
         $this->middleware('auth:api', ['except' => ['login', 'register']]);
     }
 
@@ -55,16 +58,16 @@ class AuthController extends Controller
             'email' => 'required|string|email|max:100|unique:users',
             'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|unique:users',
             'password' => 'required|string|confirmed|min:6',
+            'image' => 'nullable|mimes:jpeg,jpg,bmp,png|max:20240'
         ]);
-
         if($validator->fails()){
             return response()->json($validator->errors()->toJson(), 400);
         }
-
-        $user = User::create(array_merge(
-            $validator->validated(),
-            ['password' => bcrypt($request->password)]
-        ));
+        $user = $this->service->store($request);
+//        $user = User::create(array_merge(
+//            $validator->validated(),
+//            ['password' => bcrypt($request->password)]
+//        ));
 
         return response()->json([
             'message' => 'User successfully registered',
@@ -119,4 +122,26 @@ class AuthController extends Controller
         ]);
     }
 
+    /**
+     * edit a User.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function editProfile(Request $request){
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|min:3',
+            'email' => 'required|unique:users,email,'.Auth::id(),
+            'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|unique:users,phone,'.Auth::id(),
+//            'password' => 'required|string|confirmed|min:6',
+            'image' => 'nullable|mimes:jpeg,jpg,bmp,png|max:20240'
+        ]);
+        if($validator->fails()){
+            return response()->json($validator->errors()->toJson(), 400);
+        }
+        $user = $this->service->update($request, Auth::id());
+        return response()->json([
+            'message' => 'User successfully registered',
+            'user' => $user
+        ], 201);
+    }
 }

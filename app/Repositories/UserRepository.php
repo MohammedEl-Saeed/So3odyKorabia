@@ -67,7 +67,8 @@ class UserRepository
             $image_path = FileHelper::upload_file('/uploads/users/images/',$request['image']);
             $arr['image']  =$image_path;
         }
-        return $this->traitupdate($this->model , $id ,$arr);
+        $this->traitupdate($this->model , $id ,$arr);
+        return $this->traitShow($this->model ,$id);
     }
 
     /** get all updates request */

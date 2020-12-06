@@ -17,4 +17,14 @@ class Item extends Model
         return $this->belongsToMany(Option::class,'items_options','item_id','option_id')->withPivot('price');
     }
 
+    public function getData(){
+        $data = [];
+        $data['id'] = $this->id;
+        $data['name'] = $this->name;
+        $data['description'] = $this->description;
+        $data['type'] = $this->type;
+        $data['logo'] = $this->logo;
+        return $data;
+    }
+
 }

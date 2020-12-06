@@ -28,7 +28,7 @@ class UserRequest extends FormRequest
                 'name' => 'required|min:3',
                 'email' => 'required|unique:users',
                 'phone' => 'required|unique:users|regex:/^([0-9\s\-\+\(\)]*)$/',
-                'password' => 'required|min:6',
+                'password' => 'required|string|min:6',
                 'image' => 'nullable|mimes:jpeg,jpg,bmp,png|max:20240'
             ];
         } elseif($this->method('Field') == 'PUT'){
@@ -36,7 +36,7 @@ class UserRequest extends FormRequest
                 'name' => 'required|min:3',
                 'email' => 'required|unique:users,email,'.$this->user,
                 'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|unique:users,phone,'.$this->user,
-                'password' => 'required|min:6',
+                'password' => 'required|string|min:6',
                 'image' => 'nullable|mimes:jpeg,jpg,bmp,png|max:20240'
             ];
         }
