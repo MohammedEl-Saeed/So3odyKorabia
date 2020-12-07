@@ -32,9 +32,9 @@ Route::group([
 });
 //Route::Post('user/login', 'Auth\AuthController@login')->name('user.login');
 Route::group(['middleware' => ['jwtMiddleware']], function () {
-    Route::post('/get-options', 'API\OrderController@getOptionsByItemId');
-    Route::post('/get-items', 'API\OrderController@getItems');
-    Route::post('/get-products', 'API\OrderController@getProducts');
+    Route::post('/get-options', 'API\ItemController@getOptionsByItemId');
+    Route::post('/get-items', 'API\ItemController@getItems');
+    Route::post('/get-products', 'API\ProductController@getProducts');
 //    Route::get('/edit-profile', [\App\Http\Controllers\Auth\AuthController::class, 'editProfile']);
 
     Route::post('/add-to-cart','API\CartController@addToCart');

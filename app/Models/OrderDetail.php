@@ -4,8 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CartDetail extends Model
+class OrderDetail extends Model
 {
+
 
     public function item(){
         return $this->belongsTo(Item::class,'item_id');
@@ -27,7 +28,7 @@ class CartDetail extends Model
         $data = [];
         $data['id'] = $this->id;
         $data['user_id'] = $this->user_id;
-        $data['cart_id'] = $this->cart_id;
+        $data['order_id'] = $this->order_id;
         $data['total_price'] = $this->total_price;
         $data['product'] = $this->product->getData();
         $data['item'] = $this->item->getData();

@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Models\Item;
-use App\Services\ItemService;
-use App\Services\ProductService;
+use App\Services\OrderService;
 use Illuminate\Http\Request;
 use App\Http\Traits\ResponseTraits;
 use Illuminate\Support\Facades\Validator;
@@ -13,51 +11,15 @@ use Illuminate\Support\Facades\Validator;
 class OrderController extends Controller
 {
     use ResponseTraits;
-    protected $item_service;
+    protected $service;
 
-    public function __construct(ItemService $item_service, ProductService $product_service){
-        $this->item_service = $item_service;
-        $this->product_service = $product_service;
+    public function __construct(OrderService $service){
+        $this->service = $service;
     }
 
-    public function getProducts(Request $request){
-        $validator = Validator::make($request->all(), [
-            'type' => 'in:Sacrifice,Bird,Butter,Milk,Egg',
-        ]);
-        if ($validator->fails()) {
-            return   $this->prepare_response(true,$validator->errors(),'Error validation',$request->all(),0,200) ;
+    public function createOrder(){
+            $data = $this->service->createOrder();
+            return  $this->prepare_response(false,null,'return Successfully',$data,0 ,200);
         }
-        if($request->type == 'Egg' || $request->type == 'Milk' || $request->type == 'Butter'){
-            $product = $this->product_service->index($request->type);
-//            dd($id = $product[0]->id);
-            $data['items'] = $this->item_service->index($product[0]->id);
-            $data ['product_id'] = $product[0]->id;
-        } else {
-            $data = $this->product_service->index($request->type);
-        }
-        return  $this->prepare_response(false,null,'return Successfully',$data,0 ,200);
-    }
-
-    public function getItems(Request $request){
-        $validator = Validator::make($request->all(), [
-            'product_id' => 'exists:products,id',
-        ]);
-        if ($validator->fails()) {
-            return   $this->prepare_response(true,$validator->errors(),'Error validation',$request->all(),0,200) ;
-        }
-        $data = $this->item_service->index($request->product_id);
-        return  $this->prepare_response(false,null,'return Successfully',$data,0 ,200);
-    }
-
-    public function getOptionsByItemId(Request $request){
-        $validator = Validator::make($request->all(), [
-            'item_id' => 'exists:items,id',
-        ]);
-        if ($validator->fails()) {
-            return   $this->prepare_response(true,$validator->errors(),'Error validation',$request->all(),0,200) ;
-        }
-        $data = $this->item_service->getOptionsByItemId($request->item_id);
-        return  $this->prepare_response(false,null,'return Successfully',$data,0 ,200);
-    }
 
 }

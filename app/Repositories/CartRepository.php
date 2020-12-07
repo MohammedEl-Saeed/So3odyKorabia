@@ -45,6 +45,7 @@ class CartRepository
         $this->model->item_options_ids = implode(',',$request->item_options_ids);
         $this->model->total_price = $request->total_price;
         $this->model->quantity = $request->quantity;
+        $this->model->product_type = $request->product_type;
         $cart = $this->updateCart($request->total_price);
         $this->model->cart_id = $cart->id;
         $this->model->user_id = Auth::id();

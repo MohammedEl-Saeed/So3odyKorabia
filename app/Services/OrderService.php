@@ -15,50 +15,50 @@ class OrderService
 {
 
    use  BasicTrait;
-    protected $model ,$product;
+    protected $model ,$order;
 
     public function __construct()
     {
 //        $this->model = $model;
-        $this->product = new OrderRepository();
+        $this->order = new OrderRepository();
     }
-    /** get all product by type  */
+    /** get all order by type  */
     public function index(){
-        return $this->product->index()->get();
+        return $this->order->index();
     }
 
-    /** add new product to sysytem */
-    public function store($request){
-        return $this->product->store($request);
+    /** add new order to database */
+    public function createOrder(){
+        return $this->order->createOrder();
     }
 
-    /** show specific product  */
+    /** show specific order  */
     public function show($id){
-         return $this->product->show($id);
+         return $this->order->show($id);
     }
 
-    /** accept updates for product */
+    /** accept updates for order */
     public function update($updated_data){
-        return  $this->product->update($updated_data);
+        return  $this->order->update($updated_data);
     }
 
-    /** block specific product */
+    /** block specific order */
 
-    public function blockStatus($product_id){
-        return  $this->product->blockStatus( $product_id);
+    public function blockStatus($order_id){
+        return  $this->order->blockStatus( $order_id);
     }
 
-    public function unblockStatus( $product_id){
-        return  $this->product->unblockStatus( $product_id);
+    public function unblockStatus( $order_id){
+        return  $this->order->unblockStatus( $order_id);
     }
 
 //    public function getServices(){
-//        return $this->product->getServices();
+//        return $this->order->getServices();
 //    }
 
-    /** delete product */
+    /** delete order */
     public function delete(){
-        return $this->product->delete();
+        return $this->order->delete();
     }
 
     /** update status for order by accept or reject  */

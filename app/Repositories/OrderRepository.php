@@ -1,19 +1,14 @@
 <?php namespace App\Repositories;
 
 use App\Http\Traits\ResponseTraits;
-use App\Models\Option;
+use App\Models\Cart;
+use App\Models\CartDetail;
 use App\Models\Order;
+use App\Models\OrderDetail;
 use App\models\Service;
 use App\models\UserServiceDepartment;
-use Illuminate\Database\Eloquent\Model;
-use App\Helpers\FileHelper;
 use App\Http\Traits\BasicTrait;
 use App\models\User;
-use App\models\CopyUser;
-use App\models\Department;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\BlockedMail;
-use App\Mail\ApprovedMail;
 use Carbon\Carbon;
 use DB;
 use Auth;
@@ -28,34 +23,40 @@ class OrderRepository
     // Constructor to bind model to repo
     public function __construct()
     {
-        $this->model = new Order();
+        $this->model = new OrderDetail();
     }
 
-    /** get all users due to type */
+    /** get all orders due to type */
     public function index(){
+        $this->model = new Order();
         return  $this->model;
 
     }
 
-    /** add new user in system */
-    public function store($request){
-
-        $this->model->code = $request->code;
-        $this->model->description = $request->description;
-        $this->model->discount = $request->discount;
-        $this->model->discount_type = $request->discount_type;
-        $this->model->start_at = $request->start_at;
-        $this->model->end_at = $request->end_at;
-        $this->model->save();
-          return $this->model;
+    /** add new order in system */
+    public function createOrder(){
+        $cartDetails = CartDetail::where('user_id',Auth::id())->get();
+        $order = $this->newOrder();
+        foreach($cartDetails as $cartDetail){
+            $this->model->product_id = $cartDetail->product_id;
+            $this->model->item_id = $cartDetail->item_id;
+            $this->model->item_options_ids = $cartDetail->item_options_ids;
+            $this->model->total_price = $cartDetail->total_price;
+            $this->model->quantity = $cartDetail->quantity;
+            $this->model->product_type = $cartDetail->product_type;
+            $this->model->order_id = $order->id;
+            $this->model->user_id = Auth::id();
+            $this->model->save();
+        }
+        return $this->model;
     }
 
-    /** show specific user  */
+    /** show specific order  */
     public function show($id){
         return  $this->traitShow($this->model ,$id);
     }
 
-    /** update user Or when Accepting Update request , new changes will be add to user */
+    /** update order Or when Accepting Update request , new changes will be add to order */
     public function update($request, $id){
         $arr= [];
         $arr['code'] = $request->code;
@@ -81,7 +82,7 @@ class OrderRepository
     }
 
 
-     /** admin can block user . If admin blocked user , user couldn`t logged in */
+     /** admin can block order . If admin blocked order , order couldn`t logged in */
     public function blockStatus($blocked_reason =null , $proudct_id){
             $arr['block']=true;
         return $this->traitupdate($this->model, $proudct_id, $arr);
@@ -95,4 +96,19 @@ class OrderRepository
     public function getOrderDetails($orderId){
         $order = $this->show($orderId);
     }
+
+    public function newOrder(){
+        $cart = Cart::where('user_id',Auth::id())->first();
+        $order = new Order();
+        $order->total_price = $cart->total_price;
+        $order->user_id = Auth::id();
+        $order->status = 'Waiting';
+        $order->save();
+        return $order;
+    }
+
+    public function getOrders(){
+
+    }
+
 }
