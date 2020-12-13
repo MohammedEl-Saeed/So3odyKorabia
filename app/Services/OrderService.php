@@ -78,4 +78,9 @@ class OrderService
     public function reOrder($orderId){
         return $this->order->reOrder($orderId);
     }
+
+      public function orderStatus($orderId){
+        return $this->order->orderStatus($orderId);
+    }
+
 }

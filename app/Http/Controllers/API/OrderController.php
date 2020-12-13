@@ -38,4 +38,14 @@ class OrderController extends Controller
         return  $this->prepare_response(false,null,'return Successfully',$data,0 ,200);
     }
 
+    public function orderStatus(Request $request){
+        $validator = Validator::make($request->all(), [
+            'order_id' => 'required|exists:orders,id',
+        ]);
+        if ($validator->fails()) {
+            return   $this->prepare_response(true,$validator->errors(),'Error validation',$request->all(),0,200) ;
+        }
+        $data = $this->service->orderStatus($request->order_id);
+        return  $this->prepare_response(false,null,'return Successfully',$data,0 ,200);
+    }
 }

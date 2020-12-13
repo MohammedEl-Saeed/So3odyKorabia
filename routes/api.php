@@ -46,4 +46,6 @@ Route::group(['middleware' => ['jwtMiddleware']], function () {
     Route::post('new-order','API\OrderController@createOrder');
     Route::post('get-orders','API\OrderController@getOrders');
     Route::post('re-order','API\OrderController@reOrder');
+    Route::post('order-status','API\OrderController@orderStatus');
+
 });

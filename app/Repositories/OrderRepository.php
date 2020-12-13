@@ -119,4 +119,9 @@ class OrderRepository
             $orderDetail->save();
         }
     }
+
+    public function orderStatus($orderId){
+        return $this->traitShow($this->model, $orderId);
+    }
+
 }
