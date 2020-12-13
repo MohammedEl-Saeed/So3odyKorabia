@@ -13,17 +13,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('admin.dashboard');
-});
-Route::get('/login', function () {
-    return view('admin.auth.admin-login');
-});
 
-//Route::group(['middleware' => ['admin_auth']], function () {
-    Route::group(['prefix' => 'products','as' => 'products.'], function () {
+//Route::get('/login', function () {
+//    return view('admin.auth.admin-login');
+//});
+
+Route::group(['middleware' => ['admin_auth']], function () {
+    Route::get('/', function () {
+        return view('admin.dashboard');
+    });
+
+    Route::group(['prefix' => 'products', 'as' => 'products.'], function () {
         Route::get('dashboard', 'Admin\ProductController@dashboard');
-    //Route::resource('products', 'Admin\ProductController');
+        //Route::resource('products', 'Admin\ProductController');
         Route::get('/{type}', 'Admin\ProductController@index')->name('index');
         Route::get('/{type}/create', 'Admin\ProductController@create')->name('create');
         Route::post('/', 'Admin\ProductController@store')->name('store');
@@ -35,17 +37,18 @@ Route::get('/login', function () {
     Route::resource('{id}/items', 'Admin\ItemController');
     Route::resource('offers', 'Admin\OfferController');
     Route::resource('orders', 'Admin\OrderController');
-    Route::get('orders/accept/{id}','Admin\OrderController@acceptOrder')->name('orders.accept');
-    Route::get('orders/reject/{id}','Admin\OrderController@acceptOrder')->name('orders.reject');
+    Route::get('orders/accept/{id}', 'Admin\OrderController@acceptOrder')->name('orders.accept');
+    Route::get('orders/reject/{id}', 'Admin\OrderController@rejectOrder')->name('orders.reject');
+    Route::get('orders/done/{id}', 'Admin\OrderController@doneOrder')->name('orders.done');
 //});
 
-Route::resource('options', 'Admin\OptionController');
-Route::resource('{id}/items', 'Admin\ItemController');
-Route::resource('offers', 'Admin\OfferController');
-Route::resource('orders', 'Admin\OrderController');
-Route::get('orders/accept/{id}','Admin\OrderController@acceptOrder')->name('orders.accept');
-Route::get('orders/reject/{id}','Admin\OrderController@acceptOrder')->name('orders.reject');
-
+    Route::resource('options', 'Admin\OptionController');
+    Route::resource('{id}/items', 'Admin\ItemController');
+    Route::resource('offers', 'Admin\OfferController');
+    Route::resource('orders', 'Admin\OrderController');
+//    Route::get('orders/accept/{id}', 'Admin\OrderController@acceptOrder')->name('orders.accept');
+//    Route::get('orders/reject/{id}', 'Admin\OrderController@acceptOrder')->name('orders.reject');
+});
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

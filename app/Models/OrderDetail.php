@@ -27,8 +27,6 @@ class OrderDetail extends Model
     public function getData(){
         $data = [];
         $data['id'] = $this->id;
-        $data['user_id'] = $this->user_id;
-        $data['order_id'] = $this->order_id;
         $data['total_price'] = $this->total_price;
         $data['product'] = $this->product->getData();
         $data['item'] = $this->item->getData();

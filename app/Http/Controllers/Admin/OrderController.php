@@ -30,8 +30,8 @@ class OrderController extends Controller
         $all_orders = $this->service->index()->get();
         $accepted_orders = $this->service->index()->where('status','Accepted')->get();
         $rejected_orders = $this->service->index()->where('status','Rejected')->get();
-        $Inprogress_orders = $this->service->index()->where('status','InProgress')->get();
-        return view('admin.orders.index', compact('done_orders','new_orders','today_orders','all_orders','accepted_orders','rejected_orders','Inprogress_orders'));
+//        $Inprogress_orders = $this->service->index()->where('status','InProgress')->get();
+        return view('admin.orders.index', compact('done_orders','new_orders','today_orders','all_orders','accepted_orders','rejected_orders'));
     }
 
     /**
@@ -64,8 +64,9 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        $item = $this->service->show($id);
-        return view('admin.orders.edit',compact('item'));
+        $data = $this->service->show($id);
+        dd($data);
+        return view('admin.orders.show',compact('data'));
     }
 
     /**
@@ -114,4 +115,29 @@ class OrderController extends Controller
             return back()->with('flash_error', 'Something went wrong');
         }
     }
+
+     /** reject new order */
+    public function rejectOrder($orderId){
+        try{
+            $this->service->updateStatus('Rejected',$orderId);
+//            event(new NotifcationEvent('you  Updates has been accepted ',url('/analysis/edit/profile'),$updated_id));
+//            $this->addToNotification($updated_id,'you updates has been accepted',url('/analysis/edit/profile'));
+            return redirect()->route('admin.orders.index')->with('flash_success','Request Acceptted and data changed');
+        } catch(\Exception $e){
+            return back()->with('flash_error', 'Something went wrong');
+        }
+    }
+
+  /** done new order */
+    public function doneOrder($orderId){
+        try{
+            $this->service->updateStatus('Done',$orderId);
+//            event(new NotifcationEvent('you  Updates has been accepted ',url('/analysis/edit/profile'),$updated_id));
+//            $this->addToNotification($updated_id,'you updates has been accepted',url('/analysis/edit/profile'));
+            return redirect()->route('admin.orders.index')->with('flash_success','Request Acceptted and data changed');
+        } catch(\Exception $e){
+            return back()->with('flash_error', 'Something went wrong');
+        }
+    }
+
 }

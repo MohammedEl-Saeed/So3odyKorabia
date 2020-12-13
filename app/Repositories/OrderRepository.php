@@ -3,6 +3,7 @@
 use App\Http\Traits\ResponseTraits;
 use App\Models\Cart;
 use App\Models\CartDetail;
+use App\Models\ItemsOption;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\models\Service;
@@ -23,92 +24,99 @@ class OrderRepository
     // Constructor to bind model to repo
     public function __construct()
     {
-        $this->model = new OrderDetail();
+        $this->model = new Order();
     }
 
     /** get all orders due to type */
     public function index(){
-        $this->model = new Order();
         return  $this->model;
 
     }
 
     /** add new order in system */
     public function createOrder(){
-        $cartDetails = CartDetail::where('user_id',Auth::id())->get();
-        $order = $this->newOrder();
-        foreach($cartDetails as $cartDetail){
-            $this->model->product_id = $cartDetail->product_id;
-            $this->model->item_id = $cartDetail->item_id;
-            $this->model->item_options_ids = $cartDetail->item_options_ids;
-            $this->model->total_price = $cartDetail->total_price;
-            $this->model->quantity = $cartDetail->quantity;
-            $this->model->product_type = $cartDetail->product_type;
-            $this->model->order_id = $order->id;
-            $this->model->user_id = Auth::id();
-            $this->model->save();
+        $cart = Cart::where('user_id',Auth::id())->first();
+        if(is_null($cart)){
+            return 'Cart is empty';
+        } else {
+            $order = $this->newOrder();
+            $cartDetails = CartDetail::where('user_id', Auth::id())->get();
+            $this->addOrderDetails($cartDetails, $order->id);
+            $this->updateOrderPrice($order->id);
+            return $this->model;
         }
-        return $this->model;
     }
 
     /** show specific order  */
     public function show($id){
-        return  $this->traitShow($this->model ,$id);
+        $data = [];
+        $order = $this->traitShow($this->model, $id);
+        $data['total_price'] = $order->total_price;
+        $data['order_id'] = $order->id;
+        $data['user'] = $order->user->getData();
+        $orderDetails = OrderDetail::where('order_id',$order->id)->get();
+        foreach($orderDetails as $orderDetail){
+            $results[] = $orderDetail->getData();
+        }
+        $data['orderDetails'] =$results;
+        return $data;
     }
-
-    /** update order Or when Accepting Update request , new changes will be add to order */
-    public function update($request, $id){
-        $arr= [];
-        $arr['code'] = $request->code;
-        $arr['description'] = $request->description;
-        $arr['discount'] = $request->discount;
-        $arr['discount_type'] = $request->discount_type;
-        $arr['start_at'] = $request->start_at;
-        $arr['end_at'] = $request->end_at;
-        $arr['status'] = $request->status;
-
-        return $this->traitupdate($this->model , $id ,$arr);
-    }
-
-    /** get all updates request */
-    public function getUpdatesRequest($type){
-        return $this->traitIndex($this->model);
-    }
-
 
     /** change status for  comming model  */
     public function updateStatus($status ,$id){
         return $this->traitUpdateStatus($this->model ,$status ,$id);
     }
 
-
-     /** admin can block order . If admin blocked order , order couldn`t logged in */
-    public function blockStatus($blocked_reason =null , $proudct_id){
-            $arr['block']=true;
-        return $this->traitupdate($this->model, $proudct_id, $arr);
-    }
-
-    public function unblockStatus($proudct_id){
-        $arr['block']=false;
-        return $this->traitupdate($this->model,$proudct_id,$arr);
-    }
-
-    public function getOrderDetails($orderId){
-        $order = $this->show($orderId);
-    }
-
     public function newOrder(){
-        $cart = Cart::where('user_id',Auth::id())->first();
-        $order = new Order();
-        $order->total_price = $cart->total_price;
-        $order->user_id = Auth::id();
-        $order->status = 'Waiting';
-        $order->save();
-        return $order;
+            $this->model->user_id = Auth::id();
+            $this->model->status = 'Waiting';
+            $this->model->save();
+            return $this->model;
     }
 
     public function getOrders(){
-
+        $data = [];
+        $orders = $this->model->where('user_id',Auth::id())->get();
+        foreach($orders as $order){
+            $orderInfo = $this->show($order->id);
+            unset($orderInfo['user']);
+            $data[] = $orderInfo;
+        }
+        return $data;
     }
 
+    public function reOrder($orderId){
+        $orderDetails = OrderDetail::where('order_id',$orderId)->get();
+        $order = $this->newOrder();
+        $this->addOrderDetails($orderDetails, $order->id);
+        $this->updateOrderPrice($order->id);
+        return $order;
+    }
+
+    public function getTotalPriceFormItem($itemOptionIds){
+        $itemOptionIds = explode(',',$itemOptionIds);
+        $totalPrice = ItemsOption::find($itemOptionIds)->sum('price');
+        return $totalPrice;
+    }
+
+    public function updateOrderPrice($orderId){
+        $price = OrderDetail::where('order_id', $orderId)->sum('total_price');
+        return $this->model->update(['total_price'=>$price]);
+    }
+
+    public function addOrderDetails($cartDetails, $orderId){
+        foreach($cartDetails as $cartDetail){
+            $orderDetail = new OrderDetail();
+            $orderDetail->product_id = $cartDetail->product_id;
+            $orderDetail->item_id = $cartDetail->item_id;
+            $orderDetail->item_options_ids = $cartDetail->item_options_ids;
+//            $orderDetail->total_price = $cartDetail->total_price;
+            $orderDetail->total_price = $this->getTotalPriceFormItem($cartDetail->item_options_ids);
+            $orderDetail->quantity = $cartDetail->quantity;
+            $orderDetail->product_type = $cartDetail->product_type;
+            $orderDetail->order_id = $orderId;
+            $orderDetail->user_id = Auth::id();
+            $orderDetail->save();
+        }
+    }
 }

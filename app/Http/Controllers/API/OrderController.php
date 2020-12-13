@@ -20,6 +20,22 @@ class OrderController extends Controller
     public function createOrder(){
             $data = $this->service->createOrder();
             return  $this->prepare_response(false,null,'return Successfully',$data,0 ,200);
+    }
+
+    public function getOrders(){
+        $data = $this->service->getOrders();
+        return  $this->prepare_response(false,null,'return Successfully',$data,0 ,200);
+    }
+
+    public function reOrder(Request $request){
+        $validator = Validator::make($request->all(), [
+            'order_id' => 'required|exists:orders,id',
+        ]);
+        if ($validator->fails()) {
+            return   $this->prepare_response(true,$validator->errors(),'Error validation',$request->all(),0,200) ;
         }
+        $data = $this->service->reOrder($request->order_id);
+        return  $this->prepare_response(false,null,'return Successfully',$data,0 ,200);
+    }
 
 }

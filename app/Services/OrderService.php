@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Order;
+use App\Repositories\CartRepository;
 use App\Repositories\OrderRepository;
  use App\Http\Traits\BasicTrait;
  use Carbon\CarbonPeriod;
@@ -29,7 +30,11 @@ class OrderService
 
     /** add new order to database */
     public function createOrder(){
-        return $this->order->createOrder();
+        $order = $this->order->createOrder();
+        $cart = new CartRepository();
+        $cart->emptyCart();
+        return $order;
+
     }
 
     /** show specific order  */
@@ -63,7 +68,14 @@ class OrderService
 
     /** update status for order by accept or reject  */
     public function updateStatus($status ,$id){
-        return $this->user->updateStatus($status ,$id);
+        return $this->order->updateStatus($status ,$id);
     }
 
+    public function getOrders(){
+        return $this->order->getOrders();
+    }
+
+    public function reOrder($orderId){
+        return $this->order->reOrder($orderId);
+    }
 }
