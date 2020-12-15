@@ -25,6 +25,7 @@
                             <th>Record ID</th>
                             <th>Name</th>
                             <th>Description</th>
+                            <th>Status</th>
                             <th>Logo</th>
                             <th class="text-center">Actions</th>
                         </tr>
@@ -35,6 +36,7 @@
                                 <td>{{$index + 1}}</td>
                                 <td>{{$item->name}}</td>
                                 <td>{{$item->description}}</td>
+                                <td>{{$item->status}}</td>
                                 <td class="text-center">
                                     <div class="list-user-action">
                                             <img src="{{$item->logo}}" alt="icon" class="table-icons" data-palcement="top" data-toggle="tooltip" title="profile" />
@@ -42,9 +44,26 @@
                                 </td>
                                 <td class="text-center">
 {{--                                    <div class="list-user-action">--}}
-                                        <a href="{{route('items.index',$item->id)}}" class="btn btn-info">
-                                            Items
+                                    <a href="{{route('items.index',$item->id)}}" class="btn btn-info">
+                                        الأنواع
+                                    </a>
+                                    <a href="{{route('products.edit',['type'=>$type,'id'=>$item->id])}}" class="btn btn-primary">
+                                            Edit
+                                    </a>
+                                    @if($item->status == 'Available')
+                                        <a href="{{route('products.unavailable',['type'=>$type,'id'=>$item->id])}}" class="btn btn-danger">
+                                                Unavailable
                                         </a>
+                                    @elseif($item->status == 'Unavailable' || $item->status == 'Sold')
+                                        <a href="{{route('products.available',['type'=>$type,'id'=>$item->id])}}" class="btn btn-success">
+                                            Available
+                                        </a>
+                                    @endif
+                                    @if($item->status == 'Unavailable' || $item->status == 'Available')
+                                        <a href="{{route('products.sold',['type'=>$type,'id'=>$item->id])}}" class="btn btn-warning">
+                                            Sold
+                                        </a>
+                                    @endif
 {{--                                    </div>--}}
                                 </td>
                             </tr>

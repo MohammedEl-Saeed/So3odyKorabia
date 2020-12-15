@@ -92,7 +92,7 @@
                                                     {{--                                                @elseif(($order->status == 'Accepted')--}}
                                                 @endif
                                                 @if($order->status == 'Accepted')
-                                                    <a href="{{route('orders.done',$order->id)}}" class="btn btn-danger">
+                                                    <a href="{{route('orders.done',$order->id)}}" class="btn btn-success">
                                                         Done
                                                     </a>
                                                 @endif
@@ -166,7 +166,7 @@
                                                     {{--                                                @elseif(($order->status == 'Accepted')--}}
                                                 @endif
                                                 @if($order->status == 'Accepted')
-                                                    <a href="{{route('orders.done',$order->id)}}" class="btn btn-danger">
+                                                    <a href="{{route('orders.done',$order->id)}}" class="btn btn-success">
                                                         Done
                                                     </a>
                                                 @endif
@@ -239,7 +239,7 @@
                                                     {{--                                                @elseif(($order->status == 'Accepted')--}}
                                                 @endif
                                                 @if($order->status == 'Accepted')
-                                                    <a href="{{route('orders.done',$order->id)}}" class="btn btn-danger">
+                                                    <a href="{{route('orders.done',$order->id)}}" class="btn btn-success">
                                                         Done
                                                     </a>
                                                 @endif
@@ -311,7 +311,7 @@
                                                     {{--                                                @elseif(($order->status == 'Accepted')--}}
                                                 @endif
                                                 @if($order->status == 'Accepted')
-                                                    <a href="{{route('orders.done',$order->id)}}" class="btn btn-danger">
+                                                    <a href="{{route('orders.done',$order->id)}}" class="btn btn-success">
                                                         Done
                                                     </a>
                                                 @endif
@@ -383,7 +383,7 @@
                                                     {{--                                                @elseif(($order->status == 'Accepted')--}}
                                                 @endif
                                                 @if($order->status == 'Accepted')
-                                                    <a href="{{route('orders.done',$order->id)}}" class="btn btn-danger">
+                                                    <a href="{{route('orders.done',$order->id)}}" class="btn btn-success">
                                                         Done
                                                     </a>
                                                 @endif
@@ -456,7 +456,7 @@
 {{--                                                @elseif(($order->status == 'Accepted')--}}
 {{--                                                @endif--}}
 {{--                                                @if($order->status == 'Accepted')--}}
-{{--                                                    <a href="{{route('orders.done',$order->id)}}" class="btn btn-danger">--}}
+{{--                                                    <a href="{{route('orders.done',$order->id)}}" class="btn btn-success">--}}
 {{--                                                        Done--}}
 {{--                                                    </a>--}}
 {{--                                                @endif--}}
@@ -530,7 +530,7 @@
                                                     {{--                                                @elseif(($order->status == 'Accepted')--}}
                                                 @endif
                                                 @if($order->status == 'Accepted')
-                                                    <a href="{{route('orders.done',$order->id)}}" class="btn btn-danger">
+                                                    <a href="{{route('orders.done',$order->id)}}" class="btn btn-success">
                                                         Done
                                                     </a>
                                                 @endif

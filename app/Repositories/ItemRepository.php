@@ -68,13 +68,15 @@ class ItemRepository
     /** update user Or when Accepting Update request , new changes will be add to user */
     public function update($request, $id){
         $arr= [];
-        $arr['name'] = $request->name;
-        $arr['description'] = $request->description;
         if ($request->hasFile('logo')){
             $logo_path = FileHelper::upload_file('/uploads/items/logos/',$request['logo']);
-            $arr['logo'] = $request->$logo_path;
+            $arr['logo'] = $logo_path;
         }
-        return $this->traitupdate($this->model , $id ,$arr);
+       $arr['name'] = $request->name;
+       $arr['description'] = $request->description;
+        $model = $this->traitupdate($this->model , $id ,$arr);
+        Item::find($id)->options()->sync($request->options);
+        return $model;
     }
 
     /** get all updates request */
@@ -116,6 +118,14 @@ class ItemRepository
 
     public function getOptions(){
         return Option::all();
+    }
+
+    public function delete($id){
+        return $this->traitDelete($this->model, $id);
+    }
+
+    public function changeStatus($status, $itemId){
+        return $this->traitUpdateStatus($this->model, $status, $itemId);
     }
 
 }

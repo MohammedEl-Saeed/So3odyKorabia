@@ -7,7 +7,7 @@
 
 <!-- ========================== start new form to add doctor ============================== -->
 <div class="container-fluid">
-    <form id="main-form-to-add-doctor" class="form" method="post" action="{{route('items.update', $productId)}}" enctype="multipart/form-data">
+    <form id="main-form-to-add-doctor" class="form" method="post" action="{{route('items.update', $item->id)}}" enctype="multipart/form-data">
         @csrf
         {{method_field('PUT')}}
     <div class="row">
@@ -24,10 +24,15 @@
                     <form>
                         <div class="form-group text-center">
                             <div class="add-img-user profile-img-edit">
-                                <img class="profile-pic img-fluid" src="{{asset('assets/plugins/vito/images/user/11.png')}}" alt="profile-pic">
+                                @if($item->logo)
+                                    <img class="profile-pic img-fluid" src="{{$item->logo}}" alt="profile-pic">
+                                @else
+                                    <img class="profile-pic img-fluid" src="{{asset('assets/plugins/vito/images/user/11.png')}}" alt="profile-pic">
+                                @endif
                                 <div class="p-image">
                                     <a href="#" class="upload-button btn iq-bg-primary">Edit Logo</a>
-                                    <input class="file-upload" required form="main-form-to-add-doctor" type="file" accept="image/*" name="logo">
+                                    <input class="file-upload" @if(is_null($item->logo)) required @endif form="main-form-to-add-doctor" type="file" accept="image/*" name="logo">
+                                    <input type="hidden" value="{{$item->logo}}" name="logo_path">
                                 </div>
                             </div>
                         </div>
@@ -50,7 +55,7 @@
                                         <input type="text" class="form-control" id="name" name="name" value="{{old('name',$item->name)}}"  min="3"  max="100" placeholder="Enter a name">
                                         <span class="form-text text-muted">Please enter product name</span>
                                     </div>
-                                    <input type="hidden" value="{{$productId}}" name="product_id">
+                                    <input type="hidden" value="{{$item->product_id}}" name="product_id">
                                     <div class="form-group col-md-12">
                                         <label>description *</label>
                                         <textarea class="form-control"   name="description" placeholder="Enter a Description"
@@ -63,10 +68,43 @@
                                     <div class="form-group row">
                                     <label class="col-md-2 col-form-label">Options:</label>
                                     <div class="col-md-10" id="repeated-product" data-repeater-list="options">
+                                        @if(count($item->options) > 0)
+                                            @foreach($item->options as $index => $itemOption)
+                                                <div class="row w-100 repeated-products" data-repeater-item="">
+                                            <div class="col-md-4">
+                                                <label>Option:</label>
+                                                <select  class="form-control options" name="options[{{$index}}][option_id]" value="{{old('option_id')}}">
+                                                    @if(count($data) > 0)
+                                                        @foreach($data as $type => $options)
+                                                            <optgroup label="{{$type}}">
+                                                                @foreach($options as $option)
+                                                                    <option value="{{$option['id']}}" @if($itemOption->id == $option['id']) selected @endif>{{$option['name']}}</option>
+                                                                @endforeach
+                                                            </optgroup>
+                                                        @endforeach
+                                                    @endif
+                                                </select>
+                                                <div class="d-md-none mb-2"></div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label>Price:</label>
+                                                <input type="number" name="options[{{$index}}][price]" value="{{old('price', $itemOption->pivot->price)}}" class="form-control price" min="0"
+                                                      placeholder="Enter Price" />
+                                                <div class="d-md-none mb-2"></div>
+                                            </div>
+                                            <div class="col-md-4 text-center">
+                                                <a class="btn btn-danger delete-product-option" style="margin-top:35px;color:#FFF">
+                                                    <i class="la la-trash-o"></i>
+                                                    Delete
+                                                </a>
+                                            </div>
+                                        </div>
+                                            @endforeach
+                                        @endif
                                         <div class="row w-100 repeated-products" data-repeater-item="">
                                             <div class="col-md-4">
                                                 <label>Option:</label>
-                                                <select  class="form-control options" name="options[0][option_id]" value="{{old('option_id')}}">
+                                                <select  class="form-control options" name="options[{{count($item->options)}}][option_id]" value="{{old('option_id')}}">
                                                     @if(count($data) > 0)
                                                         @foreach($data as $type => $options)
                                                             <optgroup label="{{$type}}">
@@ -81,7 +119,7 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <label>Price:</label>
-                                                <input type="number" name="options[0][price]" value="{{old('price')}}" class="form-control price" min="0"
+                                                <input type="number" name="options[{{count($item->options)}}][price]" value="{{old('price')}}" class="form-control price" min="0"
                                                        placeholder="Enter Price" />
                                                 <div class="d-md-none mb-2"></div>
                                             </div>
@@ -123,7 +161,8 @@
 @endsection
 @section('script')
 <script>
-    var counter = 1;
+    var optionsCount = "{{count($item->options)}}";
+    var counter =  parseInt(optionsCount) + 1;
     $('.add-product-option').on('click' , function(){
         var copy = $('#repeated-product .repeated-products:last-of-type'),
             clone = copy.clone(true);

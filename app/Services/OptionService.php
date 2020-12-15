@@ -39,8 +39,8 @@ class OptionService
     }
 
     /** accept updates for option */
-    public function update($updated_data){
-        return  $this->option->update($updated_data);
+    public function update($updated_data, $id){
+        return  $this->option->update($updated_data, $id);
     }
 
     /** block specific option */
@@ -62,13 +62,12 @@ class OptionService
 //    }
 
     /** delete option */
-    public function delete(){
-        return $this->option->delete();
+    public function delete($id){
+        return $this->option->delete($id);
     }
 
     public function getOptionsByOptionId($optionId){
         $data = OptionOption::where('option_id',$optionId)->get()->with('options');
-        dd($data);
         return $data;
     }
 

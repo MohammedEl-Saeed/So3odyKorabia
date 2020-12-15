@@ -3,21 +3,17 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\OfferRequest;
-use App\Services\ItemService;
-use App\Services\OfferService;
+use App\Http\Requests\CityRequest;
+use App\Services\CityService;
 use Illuminate\Http\Request;
 
-class OfferController extends Controller
+class CityController extends Controller
 {
-
     protected $service;
-
-    public function __construct(OfferService $service){
+    public function __construct(CityService $service)
+    {
         $this->service = $service;
-
     }
-
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +22,7 @@ class OfferController extends Controller
     public function index()
     {
         $data = $this->service->index();
-        return view('admin.offers.index', compact('data'));
+        return view('admin.cities.index',compact('data'));
     }
 
     /**
@@ -36,7 +32,7 @@ class OfferController extends Controller
      */
     public function create()
     {
-         return view('admin.offers.insert');
+        return view('admin.cities.insert');
     }
 
     /**
@@ -45,10 +41,10 @@ class OfferController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(OfferRequest $request)
+    public function store(CityRequest $request)
     {
         $this->service->store($request);
-       return redirect()->route('offers.index');
+        return redirect('/cities');
     }
 
     /**
@@ -59,8 +55,7 @@ class OfferController extends Controller
      */
     public function show($id)
     {
-         $item = $this->service->show($id);
-        return view('admin.offers.edit',compact('item'));
+        //
     }
 
     /**
@@ -71,8 +66,8 @@ class OfferController extends Controller
      */
     public function edit($id)
     {
-         $item = $this->service->show($id);
-        return view('admin.offers.edit',compact('item'));
+        $item = $this->service->show($id);
+        return view('admin.cities.edit',compact('item'));
     }
 
     /**
@@ -82,10 +77,10 @@ class OfferController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(OfferRequest $request, $id)
+    public function update(CityRequest $request, $id)
     {
         $this->service->update($request, $id);
-        return redirect()->route('offers.index');
+        return redirect('/cities');
     }
 
     /**
@@ -97,6 +92,6 @@ class OfferController extends Controller
     public function destroy($id)
     {
         $this->service->delete($id);
-        return redirect('/offers');
+        return redirect('/options');
     }
 }

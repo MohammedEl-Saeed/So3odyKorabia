@@ -17,7 +17,7 @@
                     </div>
                     <div class="iq-card-body">
                         <div class="new-user-info">
-                            <form id="main-form-to-add-doctor" class="form" method="post" action="{{route('offers.update')}}" enctype="multipart/form-data">
+                            <form id="main-form-to-add-doctor" class="form" method="post" action="{{route('offers.update',$item->id)}}" enctype="multipart/form-data">
                             @csrf
                                 {{method_field('PUT')}}
                                 <div class="row">
@@ -33,7 +33,7 @@
                                     </div>
                                     <div class="col-md-2">
                                         <label>Discount Type:</label>
-                                        <select  class="form-control options" name="type" value="{{old('discount_type')}}">
+                                        <select  class="form-control options" name="discount_type" value="{{old('discount_type')}}">
                                             <option value="value" @if(old('discount_type') || $item->discunt_type == 'value') selected @endif>Value</option>
                                             <option value="percent" @if(old('discount_type') || $item->discunt_type == 'percent') selected @endif>Percentage</option>
                                         </select>
@@ -51,13 +51,26 @@
                                 <div class="row">
                                     <div class="form-group col-md-6">
                                         <label for="start_at">Start at:</label>
-                                        <input type="datetime-local" class="form-control" id="start_at" name="start_at" value="{{old('start_at',$item->start_at)}}"  min="3"  max="100" placeholder="Enter a name">
+                                        <input type="datetime-local" class="form-control" id="start_at" name="start_at" value="{{old('start_at',date('m/d/Y H:m A', strtotime($item->start_at)))}}">
                                         <span class="form-text text-muted">Please enter offer start datetime</span>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="start_at">End at:</label>
-                                        <input type="datetime-local" class="form-control" id="end_at" name="start_at" value="{{old('end_at',$item->end_at)}}"  min="3"  max="100" placeholder="Enter a name">
+                                        <input type="datetime-local" class="form-control" id="end_at" name="end_at" value="{{old('end_at',$item->end_at,date('m/d/Y H:m A', strtotime($item->end_at)))}}">
                                         <span class="form-text text-muted">Please enter offer end datetime</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Status:</label>
+                                        <select  class="form-control options" name="status" value="{{old('status')}}">
+                                            <option value="Available" @if(old('status') || $item->status == 'Available') selected @endif>Available</option>
+                                            <option value="Unavailable" @if(old('status') || $item->status == 'Unavailable') selected @endif>Unavailable</option>
+                                            <option value="Expired" @if(old('status') || $item->status == 'Expired') selected @endif>Expired</option>
+                                            <option value="Closed" @if(old('status') || $item->status == 'Closed') selected @endif>Closed</option>
+                                            <option value="Reopened" @if(old('status') || $item->status == 'Reopened') selected @endif>Reopened</option>
+                                        </select>
+                                        <div class="d-md-none mb-2"></div>
                                     </div>
                                 </div>
                                 <div class="col-md-12">

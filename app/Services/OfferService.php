@@ -38,8 +38,8 @@ class OfferService
     }
 
     /** accept updates for product */
-    public function update($updated_data){
-        return  $this->product->update($updated_data);
+    public function update($updated_data, $id){
+        return  $this->product->update($updated_data, $id);
     }
 
     /** block specific product */
@@ -61,8 +61,8 @@ class OfferService
 //    }
 
     /** delete product */
-    public function delete(){
-        return $this->product->delete();
+    public function delete($id){
+        return $this->product->delete($id);
     }
 
 }

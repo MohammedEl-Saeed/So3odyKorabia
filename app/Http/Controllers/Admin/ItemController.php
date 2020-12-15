@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ItemRequest;
 use App\Models\Option;
 use App\Models\Product;
 use App\Services\ItemService;
@@ -41,8 +42,8 @@ class ItemController extends Controller
     public function create($productId)
     {
         $data = $this->optionService->getOptions();
-//        foreach ($data as $type=>$options){
-//            dd($type);
+//        foreach ($data as $productId=>$options){
+//            dd($productId);
 //        }
         return view('admin.items.insert',compact('data','productId'));
     }
@@ -53,7 +54,7 @@ class ItemController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ItemRequest $request)
     {
         $this->service->store($request);
         return redirect()->route('items.index',$request->product_id);
@@ -76,9 +77,11 @@ class ItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($productId, $id)
     {
-        //
+        $item = $this->service->show($id);
+        $data = $this->optionService->getOptions();
+        return view('admin.items.edit',compact('item','data'));
     }
 
     /**
@@ -88,9 +91,10 @@ class ItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ItemRequest $request, $id)
     {
-        //
+        $this->service->update($request, $id);
+        return redirect()->route('items.index',$request->product_id);
     }
 
     /**
@@ -101,6 +105,26 @@ class ItemController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->service->delete($id);
+        return redirect('/items'.$id);
     }
+
+    public function makeProductUnavailable($productId, $id)
+    {
+        $this->service->changeStatus('Unavailable',$id);
+        return redirect("$productId/items/");
+    }
+
+    public function makeProductAvailable($productId, $id)
+    {
+        $this->service->changeStatus('Available',$id);
+        return redirect("$productId/items/");
+    }
+
+    public function makeProductSold($productId, $id)
+    {
+        $this->service->changeStatus('Sold',$id);
+        return redirect("$productId/items/");
+    }
+
 }

@@ -32,7 +32,6 @@ trait BasicTrait {
 
             $model::where('id', $id)->update([$index =>$value]);
         }
-
     }
 
     function circle_distance($lat1, $lon1, $lat2, $lon2) {

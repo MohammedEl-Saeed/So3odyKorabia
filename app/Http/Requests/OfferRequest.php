@@ -23,13 +23,24 @@ class OfferRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'code' => 'required|unique:offers',
-            'discount'=>'required|numeric',
-            'discount_type'=>'required|in:value,percent',
-            'start_at' => 'required|date|after:now',
-            'end_date' => 'required|date|after:start_date'
-        ];
+        if($this->method('Field') == 'POST') {
+            return [
+                'code' => 'required|unique:offers',
+                'discount' => 'required|numeric',
+                'discount_type' => 'required|in:value,percent',
+                'start_at' => 'required|date|after:now',
+                'end_at' => 'required|date|after:start_date'
+            ];
+        } elseif ($this->method('Field') == 'PUT'){
+            return [
+                'code' => 'required|unique:offers,code,'.$this->offer,
+                'discount' => 'required|numeric',
+                'discount_type' => 'required|in:value,percent',
+                'start_at' => 'required|date',
+                'end_at' => 'required|date|after:start_date',
+                'status' => 'required|date|after:start_date'
+            ];
+        }
     }
 
 }

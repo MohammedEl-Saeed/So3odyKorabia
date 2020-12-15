@@ -32,7 +32,7 @@
                                     </div>
                                     <div class="col-md-2">
                                         <label>Discount Type:</label>
-                                        <select  class="form-control options" name="type" value="{{old('type')}}">
+                                        <select  class="form-control options" name="discount_type" value="{{old('discount_type')}}">
                                             <option value="value" @if(old('discount_type') == 'value') selected @endif>Value</option>
                                             <option value="percent" @if(old('discount_type') == 'percent') selected @endif>Percentage</option>
                                         </select>
@@ -55,7 +55,7 @@
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="start_at">End at:</label>
-                                        <input type="datetime-local" class="form-control" id="end_at" name="start_at" value="{{old('end_at')}}"  min="3"  max="100" placeholder="Enter a name">
+                                        <input type="datetime-local" class="form-control" id="end_at" name="end_at" value="{{old('end_at')}}"  min="3"  max="100" placeholder="Enter a name">
                                         <span class="form-text text-muted">Please enter offer end datetime</span>
                                     </div>
                                 </div>

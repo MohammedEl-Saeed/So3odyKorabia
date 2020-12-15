@@ -19,9 +19,9 @@ class ProductController extends Controller
         $this->service = $service;
         $this->itemService = $itemService;
         $this->request = $request;
-        if(!in_array($request->type,$this->productTypes)){
-            abort(404);
-        }
+//        if(!in_array($request->type,$this->productTypes)){
+//            abort(404);
+//        }
     }
     /**
      * Display a listing of the resource.
@@ -82,10 +82,10 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($type, $id)
     {
         $item = $this->service->show($id);
-        return view('admin.products.edit',compact('item'));
+        return view('admin.products.edit',compact('item','type'));
     }
 
     /**
@@ -95,9 +95,10 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProductRequest $request, $id)
     {
-        //
+        $this->service->update($request, $id);
+       return redirect()->route('products.index',$request->type);
     }
 
     /**
@@ -106,12 +107,32 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, $type)
     {
-        //
+        $this->service->delete($id);
+        return redirect('/products/'.$type);
     }
 
     public function dashboard(){
         return view('admin.dashboard');
     }
+
+    public function makeProductUnavailable($type, $id)
+    {
+        $this->service->changeStatus('Unavailable',$id);
+        return redirect('/products/'.$type);
+    }
+
+    public function makeProductAvailable($type, $id)
+    {
+        $this->service->changeStatus('Available',$id);
+        return redirect('/products/'.$type);
+    }
+
+    public function makeProductSold($type, $id)
+    {
+        $this->service->changeStatus('Sold',$id);
+        return redirect('/products/'.$type);
+    }
+
 }

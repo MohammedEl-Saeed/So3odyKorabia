@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProductRequest extends FormRequest
+class CityRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,16 +23,11 @@ class ProductRequest extends FormRequest
      */
     public function rules()
     {
-        $data  = [
-            'name' => 'required',
-            'description'=>'required',
-            'logo' => 'required|mimes:jpeg,jpg,bmp,png|max:20240',
-            'type' => 'in:Sacrifice,Bird,Butter,Milk,Egg',
+//        dd($this->all());
+        return [
+            'name' => 'required|min:3',
+            'availability' => 'required|in:1,0',
         ];
-        if(!is_null($this->logo_path)){
-            $data['logo'] = 'mimes:jpeg,jpg,bmp,png|max:20240';
-        }
-        return $data;
-    }
 
+    }
 }

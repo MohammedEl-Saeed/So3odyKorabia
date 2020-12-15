@@ -48,6 +48,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{route('cities.index')}}" class="iq-waves-effect">
+                        <span class=" ri-home-4-line h2"></span>
+                        <span class="h4"> المناطق </span>
+                    </a>
+                </li>
+                <li>
                     <a href="{{route('users.index')}}" class="iq-waves-effect">
                         <span class="fa fa-user h2"></span>
                         <span class="h4"> العملاء </span>

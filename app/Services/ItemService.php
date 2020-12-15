@@ -39,8 +39,8 @@ class ItemService
     }
 
     /** accept updates for item */
-    public function update($updated_data){
-        return  $this->item->update($updated_data);
+    public function update($updated_data, $id){
+        return  $this->item->update($updated_data, $id);
     }
 
     /** block specific item */
@@ -73,6 +73,10 @@ class ItemService
 
     public function getOptions(){
         return $this->item->getOptions();
+    }
+
+    public function changeStatus($status, $itemId){
+        return $this->item->changeStatus($status, $itemId);
     }
 
 }

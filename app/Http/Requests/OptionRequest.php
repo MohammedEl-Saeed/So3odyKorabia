@@ -24,7 +24,7 @@ class OptionRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min3',
+            'name' => 'required|min:3',
         ];
     }
 }

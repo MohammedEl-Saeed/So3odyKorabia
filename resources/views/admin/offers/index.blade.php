@@ -28,6 +28,7 @@
                             <th>Discount type</th>
                             <th>Start at</th>
                             <th>End at</th>
+                            <th>Actions</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -39,6 +40,18 @@
                                 <td>{{$item->discount_type}}</td>
                                 <td>{{$item->start_at}}</td>
                                 <td>{{$item->end_at}}</td>
+                                <td class="text-center">
+                                    {{--                                    <div class="list-user-action">--}}
+                                    <a href="{{route('offers.edit',$item->id)}}" class="btn btn-info">
+                                        Edit
+                                    </a>
+                                    <form action="{{route('offers.destroy',$item->id)}}" method="POST">
+                                        @csrf
+                                        {{method_field('delete')}}
+                                        <button class="btn btn-danger">Delete</button>
+                                    </form>
+                                    {{--                                    </div>--}}
+                                </td>
                             </tr>
                         @endforeach
 

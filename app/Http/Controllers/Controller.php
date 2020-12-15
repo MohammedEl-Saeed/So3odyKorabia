@@ -16,7 +16,7 @@ class Controller extends BaseController
     public function checkExistingItem($model, $id){
         $item = $model->find($id);
         if(is_null($item)){
-            abort(404);
+//            abort(404);
         }
     }
 }

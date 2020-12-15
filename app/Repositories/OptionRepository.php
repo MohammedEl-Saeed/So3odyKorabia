@@ -52,11 +52,8 @@ class OptionRepository
     public function update($request, $id){
         $arr= [];
         $arr['name'] = $request->name;
-        $arr['description'] = $request->description;
-        if ($request->hasFile('logo')){
-            $logo_path = FileHelper::upload_file('/uploads/option/logos/',$request['logo']);
-            $arr['logo'] = $request->$logo_path;
-        }
+        $arr['type'] = $request->type;
+        $arr['price'] = $request->price;
         return $this->traitupdate($this->model , $id ,$arr);
     }
 
@@ -84,6 +81,9 @@ class OptionRepository
         return $this->traitupdate($this->model,$proudct_id,$arr);
     }
 
+    public function delete($id){
+        return $this->traitDelete($this->model, $id);
+    }
 
 //    public function getServices(){
 //        return Service::all();

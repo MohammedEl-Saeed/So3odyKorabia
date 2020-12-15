@@ -19,6 +19,7 @@ class CreateItemsTable extends Migration
             $table->text('logo')->nullable();
             $table->text('description');
             $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
+            $table->enum('status',array('Available','Unavailable','Sold'))->default('Available');
             $table->timestamps();
             $table->softDeletes();
         });

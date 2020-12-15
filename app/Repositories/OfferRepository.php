@@ -93,4 +93,8 @@ class OfferRepository
         return $this->traitupdate($this->model,$proudct_id,$arr);
     }
 
+    public function delete($id){
+        return $this->traitDelete($this->model, $id);
+    }
+
 }

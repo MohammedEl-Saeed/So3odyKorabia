@@ -39,8 +39,8 @@ class ProductService
     }
 
     /** accept updates for product */
-    public function update($updated_data){
-        return  $this->product->update($updated_data);
+    public function update($updated_data, $id){
+        return  $this->product->update($updated_data, $id);
     }
 
     /** block specific product */
@@ -86,4 +86,9 @@ class ProductService
         }
         return $product;
     }
+
+    public function changeStatus($status, $productId){
+        return $this->product->changeStatus($status, $productId);
+    }
+
 }

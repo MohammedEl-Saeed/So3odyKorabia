@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Order;
 use App\Repositories\CartRepository;
+use App\Repositories\CityRepository;
 use App\Repositories\OrderRepository;
  use App\Http\Traits\BasicTrait;
  use Carbon\CarbonPeriod;
@@ -83,4 +84,8 @@ class OrderService
         return $this->order->orderStatus($orderId);
     }
 
+    public function getCities(){
+        $city = new CityRepository();
+        return $city->getCities();
+    }
 }

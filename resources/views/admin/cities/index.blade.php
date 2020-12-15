@@ -1,18 +1,18 @@
 @extends('admin.layout.base')
 
-@section('title', 'Options')
+@section('title', 'City')
 
 @section('content')
-@section('main_header', 'Options Section')
-@section('sub_header', 'Show All Options')
+@section('main_header', 'City Section')
+@section('sub_header', 'Show All City')
 
 <div class="row">
     <div class="col-md-12">
         <!--begin::Card-->
         <div class="iq-card">
             <div class="card-header">
-                <h5 class="card-title">View All Options</h5>
-                <a href="{{route('options.create')}}" class="btn btn-text-primary font-weight-bold btn-fixed" data-palcement="top" data-toggle="tooltip" title="Insert Pharmacy">
+                <h5 class="card-title">View All City</h5>
+                <a href="{{route('cities.create')}}" class="btn btn-text-primary font-weight-bold btn-fixed" data-palcement="top" data-toggle="tooltip" title="Insert Pharmacy">
                     <i class="fa fa-plus"></i>
                 </a>
             </div>
@@ -24,7 +24,7 @@
                         <tr>
                             <th>Record ID</th>
                             <th>Name</th>
-                            <th>Type</th>
+                            <th>Availability</th>
                             <th>Actions</th>
                         </tr>
                         </thead>
@@ -33,17 +33,19 @@
                             <tr>
                                 <td>{{$index + 1}}</td>
                                 <td>{{$item->name}}</td>
-                                <td>{{$item->type}}</td>
+                                <td>
+                                    @if($item->availability == 1)
+                                        Available
+                                    @elseif($item->availability == 0)
+                                        Not available
+                                    @endif
+                                </td>
                                 <td class="text-center">
                                     {{--                                    <div class="list-user-action">--}}
-                                    <a href="{{route('options.edit',$item->id)}}" class="btn btn-info">
+                                    <a href="{{route('cities.edit',$item->id)}}" class="btn btn-info">
                                         Edit
                                     </a>
-                                    <form action="{{route('options.destroy',$item->id)}}" method="POST">
-                                        @csrf
-                                        {{method_field('delete')}}
-                                        <button class="btn btn-danger">Delete</button>
-                                    </form>
+
                                     {{--                                    </div>--}}
                                 </td>
                             </tr>
@@ -91,7 +93,7 @@ $(document).ready(function(){
     // reject
     $('.list-user-action').on("click" , ".modal-block" , function(){
         var id = $(this).data('modal');
-        {{--let url = "{{ route('options.block.status', ':id') }}";--}}
+        {{--let url = "{{ route('cities.block.status', ':id') }}";--}}
         url = url.replace(':id', id);
         $('#blockModal form').attr('action' , url);
 

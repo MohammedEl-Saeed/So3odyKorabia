@@ -47,9 +47,9 @@
                                     <a href="{{route('users.edit',$item->id)}}" class="btn btn-info">
                                             Edit
                                     </a>
-                                    <a href="{{route('user.orders',$item->id)}}" class="btn btn-primary">
-                                            User Orders
-                                    </a>
+{{--                                    <a href="{{route('user.orders',$item->id)}}" class="btn btn-primary">--}}
+{{--                                            User Orders--}}
+{{--                                    </a>--}}
                                     <form action="{{route('users.destroy',$item->id)}}" method="POST">
                                         @csrf
                                         {{method_field('delete')}}

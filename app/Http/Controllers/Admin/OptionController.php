@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\OptionRequest;
 use App\Services\OptionService;
 use Illuminate\Http\Request;
 
@@ -42,7 +43,7 @@ class OptionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(OptionRequest $request)
     {
          $this->service->store($request);
        return redirect('/options');
@@ -68,7 +69,8 @@ class OptionController extends Controller
     public function edit($id)
     {
         $item = $this->service->show($id);
-        return view('admin.options.edit',compact('item'));
+        $types = $this->types;
+        return view('admin.options.edit',compact('item','types'));
     }
 
     /**
@@ -78,9 +80,10 @@ class OptionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(OptionRequest $request, $id)
     {
-        //
+         $this->service->update($request, $id);
+       return redirect('/options');
     }
 
     /**
@@ -91,6 +94,7 @@ class OptionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->service->delete($id);
+        return redirect('/options');
     }
 }

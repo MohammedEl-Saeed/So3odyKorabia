@@ -23,12 +23,18 @@ class ItemRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $data = [
             'name' => 'required',
             'description'=>'required',
             'logo' => 'required|mimes:jpeg,jpg,bmp,png|max:20240',
             'product_id' => 'required|exists:products,id',
+            'options.*.option_id' => 'required|exists:options,id',
+            'options.*.price' => 'required|numeric',
         ];
+        if(!is_null($this->logo_path)){
+            $data['logo'] = 'mimes:jpeg,jpg,bmp,png|max:20240';
+        }
+        return $data;
     }
 
 }

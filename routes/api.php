@@ -48,4 +48,10 @@ Route::group(['middleware' => ['jwtMiddleware']], function () {
     Route::post('re-order','API\OrderController@reOrder');
     Route::post('order-status','API\OrderController@orderStatus');
 
+    Route::get('get-cities','API\OrderController@getCities');
+
+    Route::post('add-address','API\UserAddressController@addAddress');
+    Route::post('update-address','API\UserAddressController@updateAddress');
+    Route::get('get-addresses','API\UserAddressController@getUserAddresses');
+
 });

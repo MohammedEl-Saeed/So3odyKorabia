@@ -3,54 +3,49 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Services\OrderService;
-use Illuminate\Http\Request;
 use App\Http\Traits\ResponseTraits;
+use App\Services\UserAddressService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class OrderController extends Controller
+class UserAddressController extends Controller
 {
     use ResponseTraits;
     protected $service;
-
-    public function __construct(OrderService $service){
+    public function __construct(UserAddressService $service){
         $this->service = $service;
     }
 
-    public function createOrder(){
-            $data = $this->service->createOrder();
-            return  $this->prepare_response(false,null,'return Successfully',$data,0 ,200);
-    }
-
-    public function getOrders(){
-        $data = $this->service->getOrders();
-        return  $this->prepare_response(false,null,'return Successfully',$data,0 ,200);
-    }
-
-    public function reOrder(Request $request){
+    public function addAddress(Request $request){
         $validator = Validator::make($request->all(), [
-            'order_id' => 'required|exists:orders,id',
+            'city_id' => 'required|exists:cities,id',
+            'default_address'=>'in:1,0',
+            'district' => 'required|string',
         ]);
         if ($validator->fails()) {
             return   $this->prepare_response(true,$validator->errors(),'Error validation',$request->all(),0,200) ;
         }
-        $data = $this->service->reOrder($request->order_id);
+        $data = $this->service->store($request);
         return  $this->prepare_response(false,null,'return Successfully',$data,0 ,200);
     }
 
-    public function orderStatus(Request $request){
+
+     public function updateAddress(Request $request){
         $validator = Validator::make($request->all(), [
-            'order_id' => 'required|exists:orders,id',
+            'city_id' => 'required|exists:cities,id',
+            'default_address'=>'in:1,0',
+            'district' => 'required|string',
         ]);
         if ($validator->fails()) {
             return   $this->prepare_response(true,$validator->errors(),'Error validation',$request->all(),0,200) ;
         }
-        $data = $this->service->orderStatus($request->order_id);
+        $data = $this->service->update($request, $request->user_address_id);
         return  $this->prepare_response(false,null,'return Successfully',$data,0 ,200);
     }
 
-    public function getCities(){
-        $data = $this->service->getCities();
+    public function getUserAddresses(){
+        $data = $this->service->getAddressesForUser();
         return  $this->prepare_response(false,null,'return Successfully',$data,0 ,200);
     }
+
 }
