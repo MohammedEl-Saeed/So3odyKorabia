@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Helpers\FileHelper;
 use App\Http\Controllers\Controller;
 use App\Services\UserService;
 use Illuminate\Http\Request;
@@ -10,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Validator;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use App\Helpers\SMSHelper;
 
 class AuthController extends Controller
 {
@@ -18,6 +20,7 @@ class AuthController extends Controller
      *
      * @return void
      */
+    protected $service;
     public function __construct(UserService $service)
     {
         $this->service = $service;
@@ -63,12 +66,16 @@ class AuthController extends Controller
         if($validator->fails()){
             return response()->json($validator->errors()->toJson(), 400);
         }
+        $helper = new FileHelper();
+        $code = $helper->generateRandomString(5);
+        $request->code = $code;
         $user = $this->service->store($request);
 //        $user = User::create(array_merge(
 //            $validator->validated(),
 //            ['password' => bcrypt($request->password)]
 //        ));
-
+        $message = new SMSHelper();
+        $message->sendMessage('Please verify your account with this code: \n'.$user->code, $user->phone);
         return response()->json([
             'message' => 'User successfully registered',
             'user' => $user
@@ -143,5 +150,49 @@ class AuthController extends Controller
             'message' => 'User successfully registered',
             'user' => $user
         ], 201);
+    }
+
+    public function sendCode(Request $request){
+        $validator = Validator::make($request->all(), [
+            'phone' => 'required|exists:users,phone',
+        ]);
+        if($validator->fails()){
+            return response()->json($validator->errors()->toJson(), 400);
+        }
+        $this->service->sendCode($request);
+        return response()->json(['error'=>true,'status'=>200,'message'=>'We send code to your mobile, please check it!'],200);
+    }
+
+    public function resetNewPassword(Request $request){
+        $validator = Validator::make($request->all(), [
+            'password' => 'required|min:6',
+            'password_confirmation'=> 'required|same:password'
+        ]);
+        if($validator->fails()){
+            return response()->json($validator->errors()->toJson(), 400);
+        }
+        $data = $this->service->resetPassword($request);
+        if($data == 'error'){
+            return response()->json(['error'=>true,'status'=>1,'message'=>'try again connection failed'],200);
+        }else{
+            return response()->json(['error'=>false,'status'=>0,'message'=>'password has been changed'],200);
+
+        }
+    }
+
+    public function checkCode(Request $request){
+            $validator = Validator::make($request->all(), [
+                'phone' => 'required|exists:users,phone',
+                'code' => 'required|exists:users,code',
+            ]);
+            if($validator->fails()){
+                return response()->json($validator->errors()->toJson(), 400);
+            }
+            $data = $this->service->checkCode($request);
+        if($data){
+            return response()->json(['error'=>false,'status'=>200, 'data'=> $data,'message'=>'Code Checked please reset you password'],200);
+        }else{
+            return response()->json(['error'=>true,'status'=>1,'message'=>'try again code is wrong'],200);
+        }
     }
 }

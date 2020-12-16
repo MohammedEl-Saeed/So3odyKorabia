@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Helpers\FileHelper;
+use App\Helpers\SMSHelper;
 use App\Models\User;
 use App\Repositories\UserRepository;
  use App\Http\Traits\BasicTrait;
@@ -65,4 +67,26 @@ class UserService
         return $this->user->delete($id);
     }
 
+    public function resetPassword($request){
+        return $this->user->resetPassword($request);
+    }
+
+    public function sendCode($request)
+    {
+        $helper = new FileHelper();
+        $code = $helper->generateRandomString(5);
+        $user = User::where('phone',$request->phone)->first()->update(['code'=>$code]);
+        $message = new SMSHelper();
+        $message->sendMessage('Please verify your account with this code: \n'.$user->code, $user->phone);
+    }
+
+    public function checkCode($request)
+    {
+        $user = User::where('phone',$request->phone)->where('code',$request->code)->first();
+        if(!is_null($user)){
+            return $user;
+        } else{
+            return false;
+        }
+    }
 }

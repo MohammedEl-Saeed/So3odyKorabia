@@ -42,6 +42,7 @@ class UserRepository
         $this->model->name = $request->name;
         $this->model->email = $request->email;
         $this->model->phone = $request->phone;
+        $this->model->code = $request->code;
         $this->model->password = bcrypt($request->password);
         if ($request->hasFile('image')){
             $image_path = FileHelper::upload_file('/uploads/users/images/',$request['image']);
@@ -97,5 +98,12 @@ class UserRepository
 
     public function delete($id){
         return $this->traitDelete($this->model, $id);
+    }
+
+    public function resetPassword($request){
+        $user=User::where('phone',$request->phone)->first();
+        $user->password =bcrypt($request->password);
+        $user->save();
+        return $user;
     }
 }

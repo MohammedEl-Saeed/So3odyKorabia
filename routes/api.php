@@ -54,4 +54,8 @@ Route::group(['middleware' => ['jwtMiddleware']], function () {
     Route::post('update-address','API\UserAddressController@updateAddress');
     Route::get('get-addresses','API\UserAddressController@getUserAddresses');
 
+    Route::post('user/send-code', 'API\AuthController@sendCode');
+    Route::post('user/check-code', 'API\AuthController@checkCode');
+    Route::post('user/reset-password', 'API\AuthController@resetNewPassword');
+
 });

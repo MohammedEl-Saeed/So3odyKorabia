@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->text('image')->nullable();
             $table->string('phone')->unique();
+            $table->string('code')->nullable();
             $table->enum('type', ['Customer', 'Admin']);
             $table->string('address_latitude')->nullable();
             $table->string('address_longitude')->nullable();
