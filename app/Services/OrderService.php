@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Offer;
 use App\Models\Order;
 use App\Repositories\CartRepository;
 use App\Repositories\CityRepository;
@@ -30,8 +31,8 @@ class OrderService
     }
 
     /** add new order to database */
-    public function createOrder(){
-        $order = $this->order->createOrder();
+    public function createOrder($request){
+        $order = $this->order->createOrder($request);
         $cart = new CartRepository();
         $cart->emptyCart();
         return $order;
@@ -87,5 +88,15 @@ class OrderService
     public function getCities(){
         $city = new CityRepository();
         return $city->getCities();
+    }
+
+    public function offerAvailability($code){
+        $offer = Offer::where('code',$code)->first();
+        $now = date('Y-m-d H:m:i');
+        if($now > $offer->start_at && $now < $offer->end_at){
+            return $offer->id;
+        } else{
+            return null;
+        }
     }
 }

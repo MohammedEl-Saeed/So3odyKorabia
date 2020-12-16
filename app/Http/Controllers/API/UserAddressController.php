@@ -21,6 +21,7 @@ class UserAddressController extends Controller
             'city_id' => 'required|exists:cities,id',
             'default_address'=>'in:1,0',
             'district' => 'required|string',
+            'street' => 'required|string',
         ]);
         if ($validator->fails()) {
             return   $this->prepare_response(true,$validator->errors(),'Error validation',$request->all(),0,200) ;
@@ -32,9 +33,11 @@ class UserAddressController extends Controller
 
      public function updateAddress(Request $request){
         $validator = Validator::make($request->all(), [
+            'user_address_id' => 'required|exists:user_addresses,id',
             'city_id' => 'required|exists:cities,id',
             'default_address'=>'in:1,0',
             'district' => 'required|string',
+            'street' => 'required|string',
         ]);
         if ($validator->fails()) {
             return   $this->prepare_response(true,$validator->errors(),'Error validation',$request->all(),0,200) ;

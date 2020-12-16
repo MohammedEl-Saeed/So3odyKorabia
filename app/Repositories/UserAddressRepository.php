@@ -78,6 +78,6 @@ class UserAddressRepository
     }
 
     public function getAddressesForUser(){
-        return $this->model::where('user_id',Auth::id)->get();
+        return $this->model::where('user_id',Auth::id())->get();
     }
 }

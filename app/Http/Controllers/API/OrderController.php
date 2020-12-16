@@ -17,9 +17,19 @@ class OrderController extends Controller
         $this->service = $service;
     }
 
-    public function createOrder(){
-            $data = $this->service->createOrder();
-            return  $this->prepare_response(false,null,'return Successfully',$data,0 ,200);
+    public function createOrder(Request $request){
+        $validator = Validator::make($request->all(), [
+            'user_address_id' => 'required|exists:user_addresses,id',
+            'code' => 'exists:offers,code',
+        ]);
+        if ($validator->fails()) {
+            return   $this->prepare_response(true,$validator->errors(),'Error validation',$request->all(),0,200) ;
+        }
+        if(!is_null($request->code)) {
+            $request->offer_id = $this->service->offerAvailability($request->code);
+        }
+        $data = $this->service->createOrder($request);
+        return  $this->prepare_response(false,null,'return Successfully',$data,0 ,200);
     }
 
     public function getOrders(){

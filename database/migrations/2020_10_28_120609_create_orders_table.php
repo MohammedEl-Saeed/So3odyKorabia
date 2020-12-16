@@ -16,6 +16,8 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('user_address_id')->constrained('user_addresses')->onDelete('cascade');
+            $table->foreignId('offer_id')->constrained('offers')->onDelete('cascade');
             $table->double('total_price')->default(0);
             $table->enum('status', ['Waiting','Accepted', 'Rejected','InProgress','Done']);
             $table->timestamps();

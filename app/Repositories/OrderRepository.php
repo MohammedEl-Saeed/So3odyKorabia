@@ -34,12 +34,12 @@ class OrderRepository
     }
 
     /** add new order in system */
-    public function createOrder(){
+    public function createOrder($request){
         $cart = Cart::where('user_id',Auth::id())->first();
         if(is_null($cart)){
             return 'Cart is empty';
         } else {
-            $order = $this->newOrder();
+            $order = $this->newOrder($request);
             $cartDetails = CartDetail::where('user_id', Auth::id())->get();
             $this->addOrderDetails($cartDetails, $order->id);
             $this->updateOrderPrice($order->id);
@@ -67,8 +67,11 @@ class OrderRepository
         return $this->traitUpdateStatus($this->model ,$status ,$id);
     }
 
-    public function newOrder(){
+    public function newOrder($request){
             $this->model->user_id = Auth::id();
+            $this->model->status = 'Waiting';
+            $this->model->user_address_id = $request->user_address_id;
+            $this->model->offer_id = $request->offer_id;
             $this->model->status = 'Waiting';
             $this->model->save();
             return $this->model;
