@@ -231,6 +231,8 @@ return [
 
         'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
+
+        'Setting'      => anlutro\LaravelSettings\Facade::class,
     ],
 
 ];

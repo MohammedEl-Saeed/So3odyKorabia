@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-
+use App\Utility\PaymentCardTypes;
 class CreatePaymentCardsTable extends Migration
 {
     /**
@@ -15,8 +15,7 @@ class CreatePaymentCardsTable extends Migration
     {
         Schema::create('payment_cards', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('user_id');
-            $table->foreign('user_id')->on('users')->references('id');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string('name')->nullable();
             $table->string('number')->unique();
             $table->enum('card_type', PaymentCardTypes::getPaymentCardTypes())->nullable();

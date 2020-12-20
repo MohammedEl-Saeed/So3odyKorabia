@@ -59,6 +59,29 @@
                         <span class="h4"> العملاء </span>
                     </a>
                 </li>
+                <li>
+                    <a href="#" class="iq-waves-effect">
+                        <img src="{{asset('assets/icons/dashboard-menu-4.svg')}}" alt="" class="width-40"/>
+
+                        <span>Settings</span>
+                        <i class="ri-arrow-right-s-line iq-arrow-right"></i>
+                    </a>
+                    <ul class="iq-submenu">
+                        <li>
+{{--                            <a href="{{route('index')}}">--}}
+{{--                                <img src="{{asset('assets/icons/show-medical-departments.svg')}}"  class="w-30-menu"/>--}}
+{{--                                Show Medicals Department--}}
+{{--                            </a>--}}
+                        </li>
+
+                        <li>
+                            <a href="{{route('show.settings.form')}}">
+                                <img src="{{asset('assets/icons/show-medical-departments.svg')}}"  class="w-30-menu"/>
+                                Settings
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </nav>
         <div class="p-3"></div>

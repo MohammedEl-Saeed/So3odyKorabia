@@ -63,6 +63,10 @@ Route::group(['middleware' => ['admin_auth']], function () {
 
     Route::resource('cities', 'Admin\CityController');
 
+//    Route::get('/index', 'Admin\AdminController@index')->name('dashboard');
+    Route::get('show/settings/form', 'Admin\AdminController@showSettingsForm')->name('show.settings.form');
+    Route::post('update/settings', 'Admin\AdminController@updateSettings')->name('update.settings');
+
 //    Route::get('orders/accept/{id}', 'Admin\OrderController@acceptOrder')->name('orders.accept');
 //    Route::get('orders/reject/{id}', 'Admin\OrderController@acceptOrder')->name('orders.reject');
 });

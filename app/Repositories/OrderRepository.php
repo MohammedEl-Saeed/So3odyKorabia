@@ -102,10 +102,10 @@ class OrderRepository
         return $totalPrice;
     }
 
-    public function updateOrderPrice($orderId){
-        $price = OrderDetail::where('order_id', $orderId)->sum('total_price');
-        return $this->model->update(['total_price'=>$price]);
-    }
+//    public function updateOrderPrice($orderId){
+//        $price = OrderDetail::where('order_id', $orderId)->sum('total_price');
+//        return $this->model->update(['total_price'=>$price]);
+//    }
 
     public function addOrderDetails($cartDetails, $orderId){
         foreach($cartDetails as $cartDetail){
@@ -127,4 +127,17 @@ class OrderRepository
         return $this->traitShow($this->model, $orderId);
     }
 
+    public function updateOrderPrice($orderId){
+        $total_price = OrderDetail::where('order_id', $orderId)->sum('total_price');
+        $order = $this->model::find($orderId);
+        $offer = $order->offer;
+        $discount_type = $offer->discount_type;
+        $discount = $offer->discount;
+        if($discount_type == 'percent'){
+            $finalPrice = $total_price - (($discount / 100) * $total_price);
+        } else{
+            $finalPrice = $total_price - $discount;
+        }
+        $this->model->update(['total_price'=>$finalPrice]);
+    }
 }
