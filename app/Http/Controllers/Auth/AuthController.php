@@ -78,10 +78,11 @@ class AuthController extends Controller
 //        ));
         $message = new SMSHelper();
         $message->sendMessage('Please verify your account with this code: \n'.$user->code, $user->phone);
-        return response()->json([
-            'message' => 'User successfully registered',
-            'user' => $user
-        ], 201);
+//        return response()->json([
+//            'message' => 'User successfully registered',
+//            'user' => $user
+//        ], 201);
+        return   $this->prepare_response(false,null,'User successfully registered',$user,200,200) ;
     }
 
 
