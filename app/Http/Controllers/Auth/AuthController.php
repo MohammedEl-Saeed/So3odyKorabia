@@ -36,17 +36,19 @@ class AuthController extends Controller
      */
     public function login(Request $request){
         $validator = Validator::make($request->all(), [
-            'email' => 'required|email',
+            'phone' => 'required',
             'password' => 'required|string|min:6',
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+//            return response()->json($validator->errors(), 422);
+            return $this->prepare_response(true,$validator->errors(),'Error validation',$request->all(),0,200) ;
         }
 
 //        if (! $token = auth()->attempt($validator->validated())) {
-        if (! $token = JWTAuth::attempt(['email' => $request->email,'password' => $request->password])){
-            return response()->json(['error' => 'Unauthorized'], 401);
+        if (! $token = JWTAuth::attempt(['phone' => $request->phone,'password' => $request->password])){
+//            return response()->json(['error' => 'Unauthorized'], 401);
+            return $this->prepare_response(true,$validator->errors(),'Unauthorized',$request->all(),0,401) ;
         }
 
         return $this->createNewToken($token);
@@ -66,7 +68,7 @@ class AuthController extends Controller
             'image' => 'nullable|mimes:jpeg,jpg,bmp,png|max:20240'
         ]);
         if($validator->fails()){
-            return   $this->prepare_response(true,$validator->errors(),'Error validation',$request->all(),0,200) ;
+            return $this->prepare_response(true,$validator->errors(),'Error validation',$request->all(),1,200) ;
         }
         $helper = new FileHelper();
         $code = $helper->generateRandomString(5);
@@ -82,7 +84,7 @@ class AuthController extends Controller
 //            'message' => 'User successfully registered',
 //            'user' => $user
 //        ], 201);
-        return   $this->prepare_response(false,null,'User successfully registered',$user,200,200) ;
+        return   $this->prepare_response(false,null,'User successfully registered',$user,0,200) ;
     }
 
 
@@ -146,13 +148,15 @@ class AuthController extends Controller
             'image' => 'nullable|mimes:jpeg,jpg,bmp,png|max:20240'
         ]);
         if($validator->fails()){
-            return response()->json($validator->errors()->toJson(), 400);
+//            return response()->json($validator->errors()->toJson(), 400);
+            return $this->prepare_response(true,$validator->errors(),'Error validation',$request->all(),1,200) ;
         }
         $user = $this->service->update($request, Auth::id());
-        return response()->json([
-            'message' => 'User successfully registered',
-            'user' => $user
-        ], 201);
+//        return response()->json([
+//            'message' => 'User successfully registered',
+//            'user' => $user
+//        ], 201);
+        return $this->prepare_response(false,null,'User successfully edited',$user,0,200) ;
     }
 
     public function sendCode(Request $request){
@@ -160,10 +164,12 @@ class AuthController extends Controller
             'phone' => 'required|exists:users,phone',
         ]);
         if($validator->fails()){
-            return response()->json($validator->errors()->toJson(), 400);
+//            return response()->json($validator->errors()->toJson(), 400);
+            return $this->prepare_response(true,$validator->errors(),'Error validation',$request->all(),1,200) ;
         }
         $this->service->sendCode($request);
-        return response()->json(['error'=>true,'status'=>200,'message'=>'We send code to your mobile, please check it!'],200);
+//        return response()->json(['error'=>true,'status'=>200,'message'=>'We send code to your mobile, please check it!'],200);
+        return $this->prepare_response(false,null,'We send code to your mobile, please check it!',null,0,200) ;
     }
 
     public function resetNewPassword(Request $request){
