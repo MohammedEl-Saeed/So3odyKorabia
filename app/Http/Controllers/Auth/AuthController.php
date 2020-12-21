@@ -125,13 +125,19 @@ class AuthController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     protected function createNewToken($token){
-        return response()->json([
-            'access_token' => $token,
-            'token_type' => 'bearer',
-//            'expires_in' => auth()->factory()->getTTL() * 60,
-            'expires_in' => auth('api')->factory()->getTTL() * 60,
-            'user' => auth()->user()
-        ]);
+        $data = [];
+        $data['user'] = \auth()->user();
+        $data['access_token'] = $token;
+        $data['token_type'] = 'bearer';
+        return   $this->prepare_response(false,null,'User successfully logged in',$data,0,200) ;
+
+//        return response()->json([
+//            'access_token' => $token,
+//            'token_type' => 'bearer',
+////            'expires_in' => auth()->factory()->getTTL() * 60,
+//            'expires_in' => auth('api')->factory()->getTTL() * 60,
+//            'user' => auth()->user()
+//        ]);
     }
 
     /**
