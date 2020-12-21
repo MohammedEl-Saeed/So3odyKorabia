@@ -16,7 +16,7 @@ class FileHelper
             $ext = $uploaded_file->getClientOriginalExtension();
             $uploaded_file->move(public_path() .$folder_path, $file_name . "." . $ext);
             $local_url = $file_name . "." . $ext;
-            $s3_url    =$folder_path.'/' . $local_url;
+            $s3_url    =$folder_path . $local_url;
 
             return  $s3_url ;
         }

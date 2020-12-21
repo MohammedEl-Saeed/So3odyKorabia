@@ -18,10 +18,11 @@ class RedirectIfNotAdmin
 	{
 
        if(Auth::check()){
-            if(Auth::user()->type =='Admin')
-            return $next($request);
-
-            return redirect('/');
+            if(Auth::user()->type =='Admin') {
+                return $next($request);
+            }else {
+                return redirect('/login');
+            }
         }else{
             return redirect('/login');
         }
