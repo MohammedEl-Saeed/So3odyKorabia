@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Helpers\FileHelper;
 use App\Http\Controllers\Controller;
+use App\Http\Traits\ResponseTraits;
 use App\Services\UserService;
 use Illuminate\Http\Request;
 
@@ -15,6 +16,7 @@ use App\Helpers\SMSHelper;
 
 class AuthController extends Controller
 {
+    use ResponseTraits;
     /**
      * Create a new AuthController instance.
      *
@@ -64,7 +66,7 @@ class AuthController extends Controller
             'image' => 'nullable|mimes:jpeg,jpg,bmp,png|max:20240'
         ]);
         if($validator->fails()){
-            return response()->json($validator->errors()->toJson(), 400);
+            return   $this->prepare_response(true,$validator->errors(),'Error validation',$request->all(),0,200) ;
         }
         $helper = new FileHelper();
         $code = $helper->generateRandomString(5);
