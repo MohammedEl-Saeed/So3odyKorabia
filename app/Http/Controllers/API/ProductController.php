@@ -13,8 +13,10 @@ use Illuminate\Support\Facades\Validator;
 class ProductController extends Controller
 {
     use ResponseTraits;
-    public function __construct(ProductService $product_service){
+    protected $product_service, $item_service;
+    public function __construct(ProductService $product_service, ItemService $item_service){
         $this->product_service = $product_service;
+        $this->item_service = $item_service;
     }
 
     public function getProducts(Request $request){
@@ -25,9 +27,9 @@ class ProductController extends Controller
             return   $this->prepare_response(true,$validator->errors(),'Error validation',$request->all(),0,200) ;
         }
         if($request->type == 'Egg' || $request->type == 'Milk' || $request->type == 'Butter'){
-            $product = $this->product_service->index($request->type);
-            $data['items'] = $this->item_service->index($product[0]->id);
-            $data ['product_id'] = $product[0]->id;
+            $product = $this->product_service->checkProduct($request->type);
+            $data['items'] = $this->item_service->index($product->id);
+            $data ['product_id'] = $product->id;
         } else {
             $data = $this->product_service->index($request->type);
         }
