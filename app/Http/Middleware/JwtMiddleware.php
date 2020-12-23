@@ -23,7 +23,7 @@ class JwtMiddleware
    public function handle($request, Closure $next)
    {
 
-//       try {
+       try {
 
            if (! $user = JWTAuth::parseToken()->authenticate()) {
 
@@ -31,18 +31,18 @@ class JwtMiddleware
 
            }
            return $next($request);
-//       } catch (\Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
+       } catch (\Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
 
-//        return  response()->json(['status'=>1,'error'=>true,'message' => 'token_expired'],401);
+        return  response()->json(['status'=>1,'error'=>true,'message' => 'token_expired'],401);
 
-//       } catch (\Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
+       } catch (\Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
 
-//        return  response()->json(['status'=>1,'error'=>true,'message' => 'token_invalid'],401);
+        return  response()->json(['status'=>1,'error'=>true,'message' => 'token_invalid'],401);
            return $this->responseErrorMsg("token_invalid");
-//       } catch (\Tymon\JWTAuth\Exceptions\JWTException $e) {
+       } catch (\Tymon\JWTAuth\Exceptions\JWTException $e) {
 
-//           return  response()->json(['status'=>1,'error'=>true,'message' => 'absent'],401);
-//       }
+           return  response()->json(['status'=>1,'error'=>true,'message' => 'absent'],401);
+       }
 
        return $next($request);
 

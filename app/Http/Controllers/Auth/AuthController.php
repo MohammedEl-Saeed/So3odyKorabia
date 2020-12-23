@@ -129,7 +129,6 @@ class AuthController extends Controller
         $data['user'] = auth()->user();
         $data['access_token'] = $token;
         $data['token_type'] = 'bearer';
-//        $data['expires_in'] = auth('api')->factory()->getTTL() * 60;
         return   $this->prepare_response(false,null,'User successfully logged in',$data,0,200) ;
 
 //        return response()->json([
