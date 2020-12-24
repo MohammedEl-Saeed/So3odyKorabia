@@ -107,13 +107,14 @@ class ItemRepository
     {
         $data = ItemsOption::where('item_id', $itemId)->get();
         $options = [];
-        foreach ($data as $item){
-            $item->name = $item->option->name;
-            unset($item->option);
-            $options[] = $item;
+        foreach ($data as $itemOption){
+            $itemOption->name = $itemOption->option->name;
+            $options[$itemOption->option->type][] = $itemOption;
+            unset($itemOption->option);
+//            $options[] = $itemOption;
         }
 //        $data = Item::find($itemId)->options()->withPivot('price');
-        return $data;
+        return $options;
     }
 
     public function getOptions(){
