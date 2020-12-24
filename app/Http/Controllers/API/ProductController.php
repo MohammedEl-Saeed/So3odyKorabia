@@ -21,7 +21,7 @@ class ProductController extends Controller
 
     public function getProducts(Request $request){
         $validator = Validator::make($request->all(), [
-            'type' => 'in:Sacrifice,Bird,Butter,Milk,Egg',
+            'type' => 'required|in:Sacrifice,Bird,Butter,Milk,Egg',
         ]);
         if ($validator->fails()) {
             return   $this->prepare_response(true,$validator->errors(),'Error validation',$request->all(),0,200) ;
