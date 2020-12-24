@@ -26,13 +26,13 @@ class ProductController extends Controller
         if ($validator->fails()) {
             return   $this->prepare_response(true,$validator->errors(),'Error validation',$request->all(),0,200) ;
         }
-        if($request->type == 'Egg' || $request->type == 'Milk' || $request->type == 'Butter'){
-            $product = $this->product_service->checkProduct($request->type);
-            $data['items'] = $this->item_service->index($product->id);
-            $data ['product_id'] = $product->id;
-        } else {
+//        if($request->type == 'Egg' || $request->type == 'Milk' || $request->type == 'Butter'){
+//            $product = $this->product_service->checkProduct($request->type);
+//            $data['items'] = $this->item_service->index($product->id);
+//            $data ['product_id'] = $product->id;
+//        } else {
             $data = $this->product_service->index($request->type);
-        }
+//        }
         return  $this->prepare_response(false,null,'return Successfully',$data,0 ,200);
     }
 
