@@ -92,13 +92,15 @@ class CartRepository
     }
 
     private function updateCart($totalPrice){
-        $cart = Cart::where('user_id',Auth::id())->first();
-        if(is_null($cart)) {
-            $cart = new Cart();
-            $cart->user_id = Auth::id();
-        }
-        $cart->total_price += $totalPrice;
-        $cart->save();
+//        $cart = Cart::where('user_id',Auth::id())->first();
+//        if(is_null($cart)) {
+//            $cart = new Cart();
+//            $cart->user_id = Auth::id();
+//        }
+//        $cart->total_price += $totalPrice;
+//        $cart->save();
+        $cart = Cart::firstOrCreate(['user_id'=>Auth::id()]);
+        $cart->increment('total_price',$totalPrice);
         return $cart;
     }
 
@@ -109,16 +111,20 @@ class CartRepository
 
     public function showCartInfo(){
         $data = [];
-        $this->updateCartPrice();
         $cart = Cart::where('user_id',Auth::id())->first();
-        $data['total_price'] = $cart->total_price;
-        $cartDetails = $this->index()->where('user_id',Auth::id())->where('cart_id',$cart->id)->get();
-        foreach($cartDetails as $cartDetail){
-            $results[] = $cartDetail->getData();
+        if ($cart) {
+            $this->updateCartPrice();
+            $data['total_price'] = $cart->total_price;
+            $cartDetails = $this->index()->where('user_id', Auth::id())->where('cart_id', $cart->id)->get();
+            foreach ($cartDetails as $cartDetail) {
+                $results[] = $cartDetail->getData();
 //            $results[$cartDetail->product_id] = $cartDetail->getData();
+            }
+            $data['cartDetails'] = $results;
+            return $data;
+        }else{
+            return 'Your cart is empty';
         }
-        $data['cartDetails'] =$results;
-        return $data;
     }
 
     public function emptyCart(){
