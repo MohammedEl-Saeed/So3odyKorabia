@@ -55,7 +55,7 @@ class CartController extends Controller
             'cart_details_id' => 'required|exists:cart_details,id',
         ]);
         if ($validator->fails()) {
-            return   $this->prepare_response(true,$validator->errors(),'Error validation',$request->all(),0,200) ;
+            return   $this->prepare_response(true,$validator->errors(),'Error validation',false,0,200) ;
         }
         $data = $this->service->delete($request->cart_details_id);
         return  $this->prepare_response(false,null,'return Successfully',$data,0 ,200);
