@@ -32,7 +32,7 @@ class CartController extends Controller
     }
 
     public function showCartInfo(Request $request){
-        $data = $this->service->showCartInfo($request);
+        $data = $this->service->showCartInfo();
         return  $this->prepare_response(false,null,'return Successfully',$data,0 ,200);
     }
 
@@ -55,9 +55,10 @@ class CartController extends Controller
             'cart_details_id' => 'required|exists:cart_details,id',
         ]);
         if ($validator->fails()) {
-            return   $this->prepare_response(true,$validator->errors(),'Error validation',false,0,200) ;
+            return   $this->prepare_response(true,$validator->errors(),'Error validation',null,0,200) ;
         }
-        $data = $this->service->delete($request->cart_details_id);
+         $this->service->delete($request->cart_details_id);
+         $data = $this->service->showCartInfo($request);
         return  $this->prepare_response(false,null,'return Successfully',$data,0 ,200);
     }
 
