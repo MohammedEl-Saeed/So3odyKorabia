@@ -13,6 +13,7 @@ use App\Http\Traits\BasicTrait;
 use App\models\User;
 use App\models\CopyUser;
 use App\models\Department;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\BlockedMail;
 use App\Mail\ApprovedMail;
@@ -106,15 +107,31 @@ class ItemRepository
     public function getOptionsByItemId($itemId)
     {
         $data = ItemsOption::where('item_id', $itemId)->get();
-        $options = [];
-        foreach ($data as $itemOption){
-            $itemOption->name = $itemOption->option->name;
-            $options[$itemOption->option->type][] = $itemOption;
-            unset($itemOption->option);
-//            $options[] = $itemOption;
+        $optionTypes = Config::get('constants.OptionTypes');
+        $optionsData = [];
+        foreach ($optionTypes as $optionType){
+            $options = [];
+            $options['title'] = $optionType;
+            $options['options'] = null;
+            foreach($data as $itemOption){
+                $itemOption->name = $itemOption->option->name;
+                if($itemOption->option->type == $optionType) {
+                    $options['options'][] = $itemOption;
+                }
+                unset($itemOption->option);
+            }
+            $optionsData[]= $options;
         }
+
+//        $options = [];
+//        foreach ($data as $itemOption){
+//            $itemOption->name = $itemOption->option->name;
+//            $options[$itemOption->option->type][] = $itemOption;
+//            unset($itemOption->option);
+////            $options[] = $itemOption;
+//        }
 //        $data = Item::find($itemId)->options()->withPivot('price');
-        return $options;
+        return $optionsData;
     }
 
     public function getOptions(){

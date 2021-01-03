@@ -62,7 +62,9 @@ class UserRepository
         $arr= [];
         $arr['name'] = $request->name;
         $arr['phone'] = $request->phone;
-        $arr['email'] = $request->email;
+        if($request->email) {
+            $arr['email'] = $request->email;
+        }
         $arr['password'] =  bcrypt($request->password);
         if ($request->hasFile('image')){
             $image_path = FileHelper::upload_file('/uploads/users/images/',$request['image']);

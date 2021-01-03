@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\OptionRequest;
 use App\Services\OptionService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 
 class OptionController extends Controller
 {
@@ -33,7 +34,7 @@ class OptionController extends Controller
      */
     public function create()
     {
-        $types = $this->types;
+        $types = Config::get('constants.OptionTypes');
         return view('admin.options.insert',compact('types'));
     }
 
@@ -69,7 +70,7 @@ class OptionController extends Controller
     public function edit($id)
     {
         $item = $this->service->show($id);
-        $types = $this->types;
+        $types = Config::get('constants.OptionTypes');
         return view('admin.options.edit',compact('item','types'));
     }
 
