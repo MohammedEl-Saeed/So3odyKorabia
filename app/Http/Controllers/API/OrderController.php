@@ -23,7 +23,7 @@ class OrderController extends Controller
             'code' => 'exists:offers,code',
         ]);
         if ($validator->fails()) {
-            return   $this->prepare_response(true,$validator->errors(),'Error validation',$request->all(),0,200) ;
+            return $this->prepare_response(true,$validator->errors(),'Error validation',$request->all(),0,200) ;
         }
         if(!is_null($request->code)) {
             $request->offer_id = $this->service->offerAvailability($request->code);

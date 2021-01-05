@@ -107,7 +107,8 @@ class ItemRepository
     public function getOptionsByItemId($itemId)
     {
         $data = ItemsOption::where('item_id', $itemId)->get();
-        $optionTypes = Config::get('constants.OptionTypes');
+        // get option types related to specific item (distinct)
+        $optionTypes = array_unique(Item::find($itemId)->options->pluck('type')->toArray());
         $optionsData = [];
         foreach ($optionTypes as $optionType){
             $options = [];

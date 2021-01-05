@@ -34,10 +34,10 @@ class ItemController extends Controller
             'item_id' => 'exists:items,id',
         ]);
         if ($validator->fails()) {
-            return   $this->prepare_response(true,$validator->errors(),'Error validation',$request->all(),0,200) ;
+            return $this->prepare_response(true,$validator->errors(),'Error validation',$request->all(),0,200) ;
         }
         $data = $this->item_service->getOptionsByItemId($request->item_id);
-        return  $this->prepare_response(false,null,'return Successfully',$data,0 ,200);
+        return $this->prepare_response(false,null,'return Successfully',$data,0 ,200);
     }
 
 }
