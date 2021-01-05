@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 //    return view('admin.auth.admin-login');
 //});
 
-Route::group(['middleware' => ['admin_auth']], function () {
+Route::group(['middleware' => ['auth']], function () {
     Route::get('/', function () {
         return view('admin.dashboard');
     });
