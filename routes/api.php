@@ -32,9 +32,6 @@ Route::group([
 });
 //Route::Post('user/login', 'Auth\AuthController@login')->name('user.login');
 Route::group(['middleware' => ['jwtMiddleware']], function () {
-    Route::post('/get-options', 'API\ItemController@getOptionsByItemId');
-    Route::post('/get-items', 'API\ItemController@getItems');
-    Route::post('/get-products', 'API\ProductController@getProducts');
 //    Route::get('/edit-profile', [\App\Http\Controllers\Auth\AuthController::class, 'editProfile']);
 
     Route::post('/add-to-cart','API\CartController@addToCart');
@@ -47,8 +44,6 @@ Route::group(['middleware' => ['jwtMiddleware']], function () {
     Route::post('get-orders','API\OrderController@getOrders');
     Route::post('re-order','API\OrderController@reOrder');
     Route::post('order-status','API\OrderController@orderStatus');
-
-    Route::get('get-cities','API\OrderController@getCities');
 
     Route::post('add-address','API\UserAddressController@addAddress');
     Route::post('update-address','API\UserAddressController@updateAddress');
@@ -63,4 +58,10 @@ Route::group(['middleware' => ['jwtMiddleware']], function () {
     Route::apiResource('user/paymentCards', "API\PaymentCardsController");
 
 });
+
 Route::get('get-main-categories','API\ProductController@getMainCategories');
+
+Route::post('/get-options', 'API\ItemController@getOptionsByItemId');
+Route::post('/get-items', 'API\ItemController@getItems');
+Route::post('/get-products', 'API\ProductController@getProducts');
+Route::get('get-cities','API\OrderController@getCities');
