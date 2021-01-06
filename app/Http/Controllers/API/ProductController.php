@@ -36,4 +36,8 @@ class ProductController extends Controller
         return  $this->prepare_response(false,null,'return Successfully',$data,0 ,200);
     }
 
+    public function getMainCategories(){
+        $data = $this->product_service->getMainCategories();
+        return  $this->prepare_response(false,null,'return Successfully',$data,0 ,200);
+    }
 }

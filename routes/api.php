@@ -61,3 +61,4 @@ Route::group(['middleware' => ['jwtMiddleware']], function () {
     Route::apiResource('user/paymentCards', "API\PaymentCardsController");
 
 });
+Route::get('get-main-categories','API\ProductController@getMainCategories');

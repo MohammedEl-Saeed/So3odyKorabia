@@ -11,6 +11,7 @@ use App\Repositories\ProductRepository;
  use Auth;
  use DB;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Config;
 
 class ProductService
 {
@@ -89,6 +90,29 @@ class ProductService
 
     public function changeStatus($status, $productId){
         return $this->product->changeStatus($status, $productId);
+    }
+
+    public function getMainCategories(){
+        $mainCategories = Config::get('constants.MainCategories');
+        $data = [];
+       foreach($mainCategories as $mainCategory) {
+           $category['title'] = $mainCategory;
+           $category['hasData'] = 0;
+           $product = Product::where('type', $mainCategory)->first();
+           if ($product) {
+               //check if main category has the same name of product if the same that mean this
+               if ($product->name == $mainCategory) {
+                   // check if product has items or not
+                   if ($product->items) {
+                       $category['hasData'] = 1;
+                   }
+               } else{
+                   $category['hasData'] = 1;
+               }
+          }
+           $data[] = $category;
+       }
+       return $data;
     }
 
 }

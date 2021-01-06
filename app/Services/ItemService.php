@@ -25,7 +25,11 @@ class ItemService
     }
     /** get all item by itemId  */
     public function index($productId){
-        return $this->item->index($productId)->get();
+        $data = $this->item->index($productId)->get();
+        foreach ($data as $item){
+            $item['maxOrder'] = 50;
+        }
+        return $data;
     }
 
     /** add new item to sysytem */
