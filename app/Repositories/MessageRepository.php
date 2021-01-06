@@ -35,7 +35,7 @@ class MessageRepository
     }
 
     /** add new user in system */
-    public function store($request, $parentId){
+    public function store($request, $parentId = null){
         $this->model->user_id = Auth::id();
         $this->model->parent_id = $parentId;
         $this->model->text = $request->text;

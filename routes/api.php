@@ -58,6 +58,8 @@ Route::group(['middleware' => ['jwtMiddleware']], function () {
     Route::post('user/check-code', 'API\AuthController@checkCode');
     Route::post('user/reset-password', 'API\AuthController@resetNewPassword');
 
+    Route::post('send-message','API\MessageController@createMessage');
+
     Route::apiResource('user/paymentCards', "API\PaymentCardsController");
 
 });

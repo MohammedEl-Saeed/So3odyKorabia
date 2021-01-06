@@ -124,6 +124,7 @@
 <script>
     var counter = 1;
     $('.add-product-option').on('click' , function(){
+        counter++;
         var copy = $('#repeated-product .repeated-products:last-of-type'),
             clone = copy.clone(true);
         $('#repeated-product').append(clone);

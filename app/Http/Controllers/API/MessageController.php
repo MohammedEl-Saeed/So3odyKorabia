@@ -21,10 +21,10 @@ class MessageController extends Controller
             'text' => 'required|string',
         ]);
         if ($validator->fails()) {
-            return   $this->prepare_response(true,$validator->errors(),'Error validation',$request->all(),0,200) ;
+            return $this->prepare_response(true,$validator->errors(),'Error validation',$request->all(),0,200) ;
         }
         $data = $this->service->store($request);
-        return  $this->prepare_response(false,null,'return Successfully',$data,0 ,200);
+        return $this->prepare_response(false,null,'return Successfully',$data,0 ,200);
     }
 
 }

@@ -101,35 +101,7 @@
                                         </div>
                                             @endforeach
                                         @endif
-                                        <div class="row w-100 repeated-products" data-repeater-item="">
-                                            <div class="col-md-4">
-                                                <label>Option:</label>
-                                                <select  class="form-control options" name="options[{{count($item->options)}}][option_id]" value="{{old('option_id')}}">
-                                                    @if(count($data) > 0)
-                                                        @foreach($data as $type => $options)
-                                                            <optgroup label="{{$type}}">
-                                                                @foreach($options as $option)
-                                                                    <option value="{{$option['id']}}" @if(old('option_id') == $option['id']) selected @endif>{{$option['name']}}</option>
-                                                                @endforeach
-                                                            </optgroup>
-                                                        @endforeach
-                                                    @endif
-                                                </select>
-                                                <div class="d-md-none mb-2"></div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <label>Price:</label>
-                                                <input type="number" name="options[{{count($item->options)}}][price]" value="{{old('price')}}" class="form-control price" min="0"
-                                                       placeholder="Enter Price" />
-                                                <div class="d-md-none mb-2"></div>
-                                            </div>
-                                            <div class="col-md-4 text-center">
-                                                <a class="btn btn-danger delete-product-option" style="margin-top:35px;color:#FFF">
-                                                    <i class="la la-trash-o"></i>
-                                                    Delete
-                                                </a>
-                                            </div>
-                                        </div>
+
                                     </div>
                                     <label class="col-md-2 col-form-label"></label>
                                     <div class="col-lg-10 text-center">
@@ -162,8 +134,9 @@
 @section('script')
 <script>
     var optionsCount = "{{count($item->options)}}";
-    var counter =  parseInt(optionsCount) + 1;
+    var counter =  parseInt(optionsCount) - 1;
     $('.add-product-option').on('click' , function(){
+        counter++;
         var copy = $('#repeated-product .repeated-products:last-of-type'),
             clone = copy.clone(true);
         $('#repeated-product').append(clone);
