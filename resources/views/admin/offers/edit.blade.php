@@ -33,9 +33,9 @@
                                     </div>
                                     <div class="col-md-2">
                                         <label>Discount Type:</label>
-                                        <select  class="form-control options" name="discount_type" value="{{old('discount_type')}}">
-                                            <option value="value" @if(old('discount_type') || $item->discunt_type == 'value') selected @endif>Value</option>
-                                            <option value="percent" @if(old('discount_type') || $item->discunt_type == 'percent') selected @endif>Percentage</option>
+                                        <select class="form-control options" name="discount_type" value="{{old('discount_type')}}">
+                                            <option value="value" @if(old('discount_type') || $item->discount_type == 'value') selected @endif>Value</option>
+                                            <option value="percent" @if(old('discount_type') || $item->discount_type == 'percent') selected @endif>Percentage</option>
                                         </select>
                                     <div class="d-md-none mb-2"></div>
                                     </div>
@@ -51,12 +51,13 @@
                                 <div class="row">
                                     <div class="form-group col-md-6">
                                         <label for="start_at">Start at:</label>
-                                        <input type="datetime-local" class="form-control" id="start_at" name="start_at" value="{{old('start_at',date('m/d/Y H:m A', strtotime($item->start_at)))}}">
+{{--                                        <input type="datetime-local" class="form-control" id="start_at" name="start_at" value="{{old('start_at', date('m/d/Y h:m A', strtotime($item->start_at)))}}">--}}
+                                        <input type="datetime-local" class="form-control" id="start_at" name="start_at" value="{{old('start_at', $item->start_at)}}">
                                         <span class="form-text text-muted">Please enter offer start datetime</span>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="start_at">End at:</label>
-                                        <input type="datetime-local" class="form-control" id="end_at" name="end_at" value="{{old('end_at',$item->end_at,date('m/d/Y H:m A', strtotime($item->end_at)))}}">
+                                        <input type="datetime-local" class="form-control" id="end_at" name="end_at" value="{{old('end_at', $item->end_at)}}">
                                         <span class="form-text text-muted">Please enter offer end datetime</span>
                                     </div>
                                 </div>

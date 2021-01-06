@@ -38,7 +38,7 @@ class OfferRequest extends FormRequest
                 'discount_type' => 'required|in:value,percent',
                 'start_at' => 'required|date',
                 'end_at' => 'required|date|after:start_date',
-                'status' => 'required|date|after:start_date'
+                'status' => 'in:Available,Unavailable,Expired,Closed,Reopened'
             ];
         }
     }

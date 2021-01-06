@@ -34,7 +34,11 @@ class OfferService
 
     /** show specific product  */
     public function show($id){
-         return $this->product->show($id);
+        $item = $this->product->show($id);
+        //change start_at and end_at format to fit HTML format
+        $item['start_at'] = date('Y-m-d\TH:i:s',strtotime($item->start_at));
+        $item['end_at'] = date('Y-m-d\TH:i:s',strtotime($item->end_at));
+        return $item;
     }
 
     /** accept updates for product */
