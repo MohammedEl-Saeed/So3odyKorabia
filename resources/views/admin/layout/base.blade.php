@@ -24,6 +24,9 @@
             @include('admin.include.header')
             <div id="content-page" class="content-page">
                 <div class="container-fluid">
+                    <div class="m-3">
+                        @include('admin.include.messages_errors')
+                    </div>
                     @yield('content')
                 </div>
             </div>

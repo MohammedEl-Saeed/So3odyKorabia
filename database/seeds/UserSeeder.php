@@ -21,23 +21,23 @@ class UserSeeder extends Seeder
                     'email'=>'admin@mazraa.com',
                     'password'=>'$2y$10$8uuHSMyODfXKe6kP6FhiheK6bvAbsVBcPNEqE9llJrd/VSlHC2E1O', //123456
                     'image'=>'https://pngimage.net/wp-content/uploads/2018/06/logo-admin-png-7.png',
-                    'description'=>'this is Admin describtion',
+//                    'description'=>'this is Admin describtion',
                     'type'=>'Admin'
                     ],
                     [
-                    'name'=>'Admin',
-                    'phone'=>'0111111112',
-                    'email'=>'admin@mail.com',
-                    'password'=>'$2y$10$8uuHSMyODfXKe6kP6FhiheK6bvAbsVBcPNEqE9llJrd/VSlHC2E1O', //123456
+                    'name'=>'Mohammed',
+                    'phone'=>'01124772675',
+                    'email'=>'mohamed@gmail.com',
+                    'password'=>'$2y$10$bhWz5bWsp9/7/m6zxlToZOCoG3AwauqDyDp5CGsLSVLgkPQFQ/2Iy', //12345678
                     'image'=>'https://pngimage.net/wp-content/uploads/2018/06/logo-admin-png-7.png',
-                    'description'=>'this is Admin describtion',
+//                    'description'=>'this is Admin describtion',
                     'type'=>'Admin'
                     ]
             ];
 
             DB::table('users')->insert($data);
 
-            factory(User::class, 15)->create();
+//            factory(User::class, 15)->create();
     }
 
 }

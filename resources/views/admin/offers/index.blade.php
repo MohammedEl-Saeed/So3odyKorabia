@@ -25,7 +25,8 @@
                             <th>Record ID</th>
                             <th>Code</th>
                             <th>Discount</th>
-                            <th>Discount type</th>
+                            <th>Uses number</th>
+                            <th>Count number</th>
                             <th>Start at</th>
                             <th>End at</th>
                             <th>Actions</th>
@@ -37,7 +38,8 @@
                                 <td>{{$index + 1}}</td>
                                 <td>{{$item->code}}</td>
                                 <td>{{$item->discount}}</td>
-                                <td>{{$item->discount_type}}</td>
+                                <td>{{$item->uses_number}}</td>
+                                <td>{{$item->count}}</td>
                                 <td>{{$item->start_at}}</td>
                                 <td>{{$item->end_at}}</td>
                                 <td class="text-center">

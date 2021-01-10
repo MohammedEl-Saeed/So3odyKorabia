@@ -40,14 +40,7 @@ class OfferRepository
     /** add new user in system */
     public function store($request){
 
-        $this->model->code = $request->code;
-        $this->model->description = $request->description;
-        $this->model->discount = $request->discount;
-        $this->model->discount_type = $request->discount_type;
-        $this->model->start_at = $request->start_at;
-        $this->model->end_at = $request->end_at;
-        $this->model->save();
-          return $this->model;
+          return $this->model::create($request->all());
     }
 
     /** show specific user  */
@@ -61,7 +54,8 @@ class OfferRepository
         $arr['code'] = $request->code;
         $arr['description'] = $request->description;
         $arr['discount'] = $request->discount;
-        $arr['discount_type'] = $request->discount_type;
+        $arr['uses_number'] = $request->uses_number;
+//        $arr['discount_type'] = $request->discount_type;
         $arr['start_at'] = $request->start_at;
         $arr['end_at'] = $request->end_at;
         $arr['status'] = $request->status;

@@ -18,7 +18,9 @@ class CreateOffersTable extends Migration
             $table->string('code');
             $table->text('description')->nullable();
             $table->double('discount');
-            $table->enum('discount_type',array('percent','value'))->default('value');
+            $table->integer('uses_number')->nullable();
+            $table->integer('count')->default(0);
+            $table->enum('discount_type',array('percent','value'))->default('percent');
             $table->enum('status',array('Available','Unavailable', 'Expired','Closed','Reopened'))->default('Available');
             $table->dateTime('start_at');
             $table->dateTime('end_at');

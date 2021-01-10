@@ -27,16 +27,13 @@
                                     </div>
                                     <div class="col-md-4">
                                             <label>Discount:</label>
-                                            <input type="number" min="0" name="discount" class="form-control" value="{{old('discount')}}">
+                                            <input type="number" min="0" max="100" name="discount" class="form-control" value="{{old('discount')}}">
                                             <div class="d-md-none mb-2"></div>
                                     </div>
                                     <div class="col-md-2">
-                                        <label>Discount Type:</label>
-                                        <select  class="form-control options" name="discount_type" value="{{old('discount_type')}}">
-                                            <option value="value" @if(old('discount_type') == 'value') selected @endif>Value</option>
-                                            <option value="percent" @if(old('discount_type') == 'percent') selected @endif>Percentage</option>
-                                        </select>
-                                    <div class="d-md-none mb-2"></div>
+                                        <label>Uses number:</label>
+                                        <input type="number" min="0" name="uses_number" class="form-control" value="{{old('uses_number')}}">
+                                        <div class="d-md-none mb-2"></div>
                                     </div>
                                 </div>
                                 <div class="row">

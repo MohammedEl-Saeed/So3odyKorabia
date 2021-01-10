@@ -41,14 +41,12 @@ class AuthController extends Controller
         ]);
 
         if ($validator->fails()) {
-//            return response()->json($validator->errors(), 422);
-            return $this->prepare_response(true,$validator->errors(),'Error validation',$request->all(),0,200) ;
+            return $this->prepare_response(true,$validator->errors(),'Error validation',null,1,200) ;
         }
 
 //        if (! $token = auth()->attempt($validator->validated())) {
         if (! $token = JWTAuth::attempt(['phone' => $request->phone,'password' => $request->password])){
-//            return response()->json(['error' => 'Unauthorized'], 401);
-            return $this->prepare_response(true,$validator->errors(),'Unauthorized',$request->all(),0,401) ;
+            return $this->prepare_response(true,json_decode('{"error":["Incorrect Phone no. or Password"]}'),'Invalid Credential',null,1,200) ;
         }
 
         return $this->createNewToken($token);
@@ -74,12 +72,8 @@ class AuthController extends Controller
         $code = $helper->generateRandomString(5);
         $request->code = $code;
         $user = $this->service->store($request);
-//        $user = User::create(array_merge(
-//            $validator->validated(),
-//            ['password' => bcrypt($request->password)]
-//        ));
         $message = new SMSHelper();
-        $message->sendMessage('Please verify your account with this code: \n'.$user->code, $user->phone);
+        $message->sendMessage('Please verify your account with this code: '.$user->code, $user->phone);
 //        return response()->json([
 //            'message' => 'User successfully registered',
 //            'user' => $user
