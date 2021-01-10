@@ -26,7 +26,6 @@ class AddColumnsToOrdersTable extends Migration
      */
     public function down()
     {
-        Schema::disableForeignKeyConstraints();
         Schema::table('orders', function (Blueprint $table) {
             $table->dropForeign(['user_address_id']);
             $table->dropForeign(['offer_id']);
