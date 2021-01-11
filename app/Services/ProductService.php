@@ -98,12 +98,18 @@ class ProductService
        foreach($mainCategories as $mainCategory) {
            $category['title'] = $mainCategory;
            $category['hasData'] = 0;
+           $category['product_id'] = 0;
+           $subCategories = ['Egg','Milk','Butter'];
            $product = Product::where('type', $mainCategory)->first();
            if ($product) {
                //check if main category has the same name of product if the same that mean this
-               if ($product->name == $mainCategory) {
+//               if($mainCategory == 'Egg'){
+//                   dd($product->id, $product->name, count($product->items));
+//               }
+               if ($product->name == $mainCategory && in_array($mainCategory,$subCategories)) {
+                   $category['product_id'] = $product->id;
                    // check if product has items or not
-                   if ($product->items) {
+                   if (count($product->items) > 0) {
                        $category['hasData'] = 1;
                    }
                } else{

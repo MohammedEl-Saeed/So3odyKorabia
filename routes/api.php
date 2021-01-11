@@ -47,6 +47,7 @@ Route::group(['middleware' => ['jwtMiddleware']], function () {
 
     Route::post('add-address','API\UserAddressController@addAddress');
     Route::post('update-address','API\UserAddressController@updateAddress');
+    Route::post('remove-address','API\UserAddressController@removeAddress');
     Route::get('get-addresses','API\UserAddressController@getUserAddresses');
 
     Route::post('user/send-code', 'API\AuthController@sendCode');

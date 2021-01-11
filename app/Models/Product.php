@@ -24,4 +24,7 @@ class Product extends Model
         return $data;
     }
 
+    public function items(){
+        return $this->hasMany(Item::class);
+    }
 }
