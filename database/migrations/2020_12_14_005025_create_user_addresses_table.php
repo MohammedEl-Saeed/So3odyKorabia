@@ -20,6 +20,9 @@ class CreateUserAddressesTable extends Migration
             $table->string('district');
             $table->string('street')->nullable();
             $table->string('building_number')->nullable();
+            $table->string('floor')->nullable();
+            $table->string('type')->nullable();
+            $table->string('apartment_number')->nullable();
             $table->string('address_latitude')->nullable();
             $table->string('address_longitude')->nullable();
             $table->string('note')->nullable();

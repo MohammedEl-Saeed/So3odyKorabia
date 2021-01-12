@@ -22,9 +22,8 @@ class CreateUsersTable extends Migration
             $table->text('image')->nullable();
             $table->string('phone')->unique()->nullable();
             $table->string('code')->nullable();
+            $table->boolean('code_verified')->default(0);
             $table->enum('type', ['Customer', 'Admin'])->default('Customer');
-            $table->string('address_latitude')->nullable();
-            $table->string('address_longitude')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
