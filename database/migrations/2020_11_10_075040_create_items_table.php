@@ -17,7 +17,9 @@ class CreateItemsTable extends Migration
             $table->id();
             $table->string('name');
             $table->text('logo')->nullable();
-            $table->text('description');
+            $table->integer('order_quantity')->nullable();
+            $table->integer('max_amount')->nullable();
+            $table->integer('count')->default(0);            $table->text('description');
             $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
             $table->enum('status',array('Available','Unavailable','Sold'))->default('Available');
             $table->timestamps();
