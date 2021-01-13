@@ -13,7 +13,7 @@ trait BasicTrait {
 
     public function traitShow($model,$id){
 
-      return  $model->find($id);
+      return  $model->findOrFail($id);
     }
 
     public function traitDelete($model ,$id){

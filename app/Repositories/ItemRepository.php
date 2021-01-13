@@ -49,6 +49,8 @@ class ItemRepository
         $this->model->name = $request->name;
         $this->model->description = $request->description;
         $this->model->product_id = $request->product_id;
+        $this->model->order_quantity = $request->order_quantity;
+        $this->model->max_amount = $request->max_amount;
         $this->model->save();
         $this->model->options()->sync($request->options);
 //        dd($request->all());
@@ -75,6 +77,8 @@ class ItemRepository
         }
        $arr['name'] = $request->name;
        $arr['description'] = $request->description;
+       $arr['order_quantity'] = $request->order_quantity;
+       $arr['max_amount'] = $request->max_amount;
         $model = $this->traitupdate($this->model , $id ,$arr);
         Item::find($id)->options()->sync($request->options);
         return $model;

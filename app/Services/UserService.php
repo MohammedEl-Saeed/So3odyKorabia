@@ -84,6 +84,8 @@ class UserService
     {
         $user = User::where('phone',$request->phone)->where('code',$request->code)->first();
         if(!is_null($user)){
+            $user->code_verified = 1;
+            $user->save;
             return $user;
         } else{
             return false;

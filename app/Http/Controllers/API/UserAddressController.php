@@ -56,10 +56,13 @@ class UserAddressController extends Controller
             'user_address_id' => 'required|exists:user_addresses,id',
         ]);
         if ($validator->fails()) {
-            return   $this->prepare_response(true,$validator->errors(),'Error validation',$request->all(),0,200) ;
+            return $this->prepare_response(true,$validator->errors(),'Error validation',null,0,200) ;
+        }
+        if(!$this->checkAuth($request->user_address_id)){
+            return $this->prepare_response(true,null,'user not allow to delete this item',null,1,200) ;
         }
         $data = $this->service->delete($request->user_address_id);
-        return  $this->prepare_response(false,null,'return Successfully',$data,0 ,200);
+        return $this->prepare_response(false,null,'return Successfully',$data,0 ,200);
     }
 
 }

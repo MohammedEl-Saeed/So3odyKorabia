@@ -63,4 +63,10 @@ class OrderController extends Controller
         $data = $this->service->getCities();
         return  $this->prepare_response(false,null,'return Successfully',$data,0 ,200);
     }
+
+    public function getOffers(){
+        $data = $this->service->getOffers();
+        return  $this->prepare_response(false,null,'return Successfully',$data,0 ,200);
+    }
+
 }

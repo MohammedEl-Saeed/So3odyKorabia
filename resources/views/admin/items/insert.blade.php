@@ -49,6 +49,11 @@
                                         <input type="text" class="form-control" id="name" name="name" value="{{old('name')}}"  min="3"  max="100" placeholder="Enter a name">
                                         <span class="form-text text-muted">Please enter product name</span>
                                     </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="name">Quantity by order:</label>
+                                        <input type="text" class="form-control" id="name" name="order_quantity" value="{{old('order_quantity')}}"  min="3"  max="100" placeholder="Enter a order quantity">
+                                        <span class="form-text text-muted">Please enter order quantity</span>
+                                    </div>
                                     <input type="hidden" value="{{$productId}}" name="product_id">
                                     <div class="form-group col-md-12">
                                         <label>description *</label>

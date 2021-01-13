@@ -30,7 +30,7 @@ class ProductController extends Controller
 //            $product = $this->product_service->checkProduct($request->type);
 //            $data['items'] = $this->item_service->index($product->id);
 //            $data ['product_id'] = $product->id;
-//        } else {
+//        } elgetse {
             $data = $this->product_service->index($request->type);
 //        }
         return  $this->prepare_response(false,null,'return Successfully',$data,0 ,200);
@@ -38,6 +38,7 @@ class ProductController extends Controller
 
     public function getMainCategories(){
         $data = $this->product_service->getMainCategories();
+//        $data['hasCart'] = $this->checkCart();
         return  $this->prepare_response(false,null,'return Successfully',$data,0 ,200);
     }
 }

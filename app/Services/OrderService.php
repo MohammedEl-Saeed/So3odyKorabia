@@ -91,12 +91,29 @@ class OrderService
     }
 
     public function offerAvailability($code){
-        $offer = Offer::where('code',$code)->first();
         $now = date('Y-m-d H:m:i');
-        if($now > $offer->start_at && $now < $offer->end_at){
+        $offer = Offer::where('code',$code)
+            ->whereDate('start_at','<',$now)
+                ->whereDate('end_at','>',$now)
+                ->whereRaw('count < uses_number')
+                ->where('status','Available')
+                ->orWhere('status','Reopened')
+                ->first();
+        if($offer){
             return $offer->id;
         } else{
             return null;
         }
+    }
+
+    public function getOffers(){
+        $now = date('Y-m-d H:m:i');
+        $offers = Offer::whereDate('start_at','<',$now)
+            ->whereDate('end_at','>',$now)
+            ->whereRaw('count < uses_number OR uses_number IS NULL')
+            ->where('status','Available')
+            ->orWhere('status','Reopened')
+            ->get();
+        return $offers;
     }
 }

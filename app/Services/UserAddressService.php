@@ -61,8 +61,8 @@ class UserAddressService
 //    }
 
     /** delete userAddress */
-    public function delete(){
-        return $this->userAddress->delete();
+    public function delete($id){
+        return $this->userAddress->delete($id);
     }
 
     public function getAddressesForUser(){

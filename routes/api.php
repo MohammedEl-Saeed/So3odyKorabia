@@ -51,7 +51,7 @@ Route::group(['middleware' => ['jwtMiddleware']], function () {
     Route::get('get-addresses','API\UserAddressController@getUserAddresses');
 
     Route::post('user/send-code', 'API\AuthController@sendCode');
-    Route::post('user/check-code', 'API\AuthController@checkCode');
+    Route::post('user/verify-code', 'API\AuthController@checkCode');
     Route::post('user/reset-password', 'API\AuthController@resetNewPassword');
 
     Route::post('send-message','API\MessageController@createMessage');
@@ -66,3 +66,4 @@ Route::post('/get-options', 'API\ItemController@getOptionsByItemId');
 Route::post('/get-items', 'API\ItemController@getItems');
 Route::post('/get-products', 'API\ProductController@getProducts');
 Route::get('get-cities','API\OrderController@getCities');
+Route::get('get-offers','API\OrderController@getOffers');

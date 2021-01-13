@@ -95,7 +95,7 @@ class ProductService
     public function getMainCategories(){
         $mainCategories = Config::get('constants.MainCategories');
         $data = [];
-       foreach($mainCategories as $mainCategory) {
+        foreach($mainCategories as $mainCategory) {
            $category['title'] = $mainCategory;
            $category['hasData'] = 0;
            $category['product_id'] = 0;

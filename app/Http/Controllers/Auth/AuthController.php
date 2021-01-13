@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Helpers\FileHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Traits\ResponseTraits;
+use App\Models\CartDetail;
 use App\Services\UserService;
 use Illuminate\Http\Request;
 
@@ -123,6 +124,7 @@ class AuthController extends Controller
         $data['user'] = auth()->user();
         $data['token'] = $token;
         $data['token_type'] = 'bearer';
+        $data['hasCart'] = $this->checkCart();
         return   $this->prepare_response(false,null,'User successfully logged in',$data,0,200) ;
 
 //        return response()->json([
@@ -195,7 +197,7 @@ class AuthController extends Controller
                 'code' => 'required|exists:users,code',
             ]);
             if($validator->fails()){
-                return response()->json($validator->errors()->toJson(), 400);
+                return $this->prepare_response(true,$validator->errors(),'Error validation',null,1,200) ;
             }
             $data = $this->service->checkCode($request);
         if($data){
