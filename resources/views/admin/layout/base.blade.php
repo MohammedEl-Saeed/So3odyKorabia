@@ -5,7 +5,6 @@
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-{{--        <title>@yield('title')</title>--}}
         <title>The Farm | @yield('title')</title>
         <!-- Favicon -->
         <link rel="shortcut icon" href="images/favicon.ico" />
@@ -15,6 +14,8 @@
         <link href="{{asset('assets/plugins/vito/en/css/typography.css?v=7.0.3')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('assets/plugins/vito/en/css/style.css?v=7.0.3')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('assets/plugins/vito/en/css/responsive.css?v=7.0.3')}}" rel="stylesheet" type="text/css" />
+        <link href="{{asset('assets/plugins/datatable/css/jquery.dataTables.min.css')}}" rel="stylesheet" type="text/css" />
+        <link href="{{asset('assets/plugins/datatable/css/buttons.dataTables.min.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('assets/plugins/vito/en/css/custom-lang.css?v=7.0.3')}}" rel="stylesheet" type="text/css" />
         <!-- ====================================== end css vito files ============================ -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
@@ -33,39 +34,103 @@
         </div>
         @include('admin.include.footer')
         <!-- ===============================  start vito js files =============================== -->
-    <script src="{{asset('assets/plugins/vito/en/js/jquery.min.js?v=7.0.3')}}"></script>
-    <script src="{{asset('assets/plugins/vito/en/js/jquery-3.3.1.min.js?v=7.0.3')}}"></script>
-    <script src="{{asset('assets/plugins/vito/en/js/popper.min.js?v=7.0.3')}}"></script>
-    <script src="{{asset('assets/plugins/vito/en/js/bootstrap.min.js?v=7.0.3')}}"></script>
-    <script src="{{asset('assets/plugins/vito/en/js/jquery.appear.js?v=7.0.3')}}"></script>
-    <script src="{{asset('assets/plugins/vito/en/js/countdown.min.js?v=7.0.3')}}"></script>
-    <script src="{{asset('assets/plugins/vito/en/js/waypoints.min.js?v=7.0.3')}}"></script>
-    <script src="{{asset('assets/plugins/vito/en/js/jquery.counterup.min.js?v=7.0.3')}}"></script>
-    <script src="{{asset('assets/plugins/vito/en/js/wow.min.js?v=7.0.3')}}"></script>
-    <script src="{{asset('assets/plugins/vito/en/js/apexcharts.js?v=7.0.3')}}"></script>
-    <script src="{{asset('assets/plugins/vito/en/js/slick.min.js?v=7.0.3')}}"></script>
-    <script src="{{asset('assets/plugins/vito/en/js/select2.min.js?v=7.0.3')}}"></script>
-    <script src="{{asset('assets/plugins/vito/en/js/owl.carousel.min.js?v=7.0.3')}}"></script>
-    <script src="{{asset('assets/plugins/vito/en/js/jquery.magnific-popup.min.js?v=7.0.3')}}"></script>
-    <script src="{{asset('assets/plugins/vito/en/js/smooth-scrollbar.js?v=7.0.3')}}"></script>
-    <script src="{{asset('assets/plugins/vito/en/js/lottie.js?v=7.0.3')}}"></script>
-    <script src="{{asset('assets/plugins/vito/en/js/bodymovin.js?v=7.0.3')}}"></script>
-    <script src="{{asset('assets/plugins/vito/en/js/core.js?v=7.0.3')}}"></script>
-    <script src="{{asset('assets/plugins/vito/en/js/charts.js?v=7.0.3')}}"></script>
-    <script src="{{asset('assets/plugins/vito/en/js/animated.js?v=7.0.3')}}"></script>
-    <script src="{{asset('assets/plugins/vito/en/js/highcharts.js?v=7.0.3')}}"></script>
-    <script src="{{asset('assets/plugins/vito/en/js/highcharts-3d.js?v=7.0.3')}}"></script>
-    <script src="{{asset('assets/plugins/vito/en/js/highcharts-more.js?v=7.0.3')}}"></script>
-    <script src="{{asset('assets/plugins/vito/en/js/kelly.js?v=7.0.3')}}"></script>
-    <script src="{{asset('assets/plugins/vito/en/js/maps.js?v=7.0.3')}}"></script>
-    <script src="{{asset('assets/plugins/vito/en/js/morris.js?v=7.0.3')}}"></script>
-    <script src="{{asset('assets/plugins/vito/en/js/morris.min.js?v=7.0.3')}}"></script>
-    <script src="{{asset('assets/plugins/vito/en/js/raphael-min.js?v=7.0.3')}}"></script>
-    <script src="{{asset('assets/plugins/vito/en/js/worldLow.js?v=7.0.3')}}"></script>
-    <script src="{{asset('assets/plugins/vito/en/js/chart-custom.js?v=7.0.3')}}"></script>
-    <script src="{{asset('assets/plugins/vito/en/js/custom.js?v=7.0.3')}}"></script>
-    <script src="{{asset('assets/plugins/global/plugins.bundle.js')}}"></script>
-    @yield('script')
-    <!-- ===============================  end vito js files ================================= -->
+        <script src="{{asset('assets/plugins/vito/en/js/jquery.min.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/en/js/jquery-3.3.1.min.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/en/js/popper.min.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/en/js/bootstrap.min.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/en/js/jquery.appear.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/en/js/countdown.min.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/en/js/waypoints.min.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/en/js/jquery.counterup.min.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/en/js/wow.min.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/en/js/apexcharts.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/en/js/slick.min.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/en/js/select2.min.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/en/js/owl.carousel.min.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/en/js/jquery.magnific-popup.min.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/en/js/smooth-scrollbar.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/en/js/lottie.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/en/js/bodymovin.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/en/js/core.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/en/js/charts.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/en/js/animated.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/en/js/highcharts.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/en/js/highcharts-3d.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/en/js/highcharts-more.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/en/js/kelly.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/en/js/maps.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/en/js/morris.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/en/js/morris.min.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/en/js/raphael-min.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/en/js/worldLow.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/en/js/chart-custom.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/en/js/custom.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/global/plugins.bundle.js')}}"></script>
+        <!-- ===============================  start datatable js files =============================== -->
+        <script src="{{asset('assets/plugins/datatable/js/jquery.dataTables.min.js')}}"></script>
+        <script src="{{asset('assets/plugins/datatable/js/dataTables.buttons.min.js')}}"></script>
+        <script src="{{asset('assets/plugins/datatable/js/buttons.flash.min.js')}}"></script>
+        <script src="{{asset('assets/plugins/datatable/js/jszip.min.js')}}"></script>
+        <script src="{{asset('assets/plugins/datatable/js/pdfmake.min.js')}}"></script>
+        <script src="{{asset('assets/plugins/datatable/js/vfs_fonts.js')}}"></script>
+        <script src="{{asset('assets/plugins/datatable/js/buttons.html5.min.js')}}"></script>
+        <script src="{{asset('assets/plugins/datatable/js/buttons.print.min.js')}}"></script>
+        <!-- ===============================  end datatable js files =============================== -->
+        <script>
+            $(document).ready(function() {
+                $('.datatable-example').DataTable( {
+                    dom: 'Bfrtip',
+                    buttons: [
+                    {
+                        extend: 'copyHtml5',
+                        text: 'Copy',
+                        titleAttr: 'copy',
+                        title: 'Insurance Companies',
+                        exportOptions: {
+                            columns: ':not(:last-child)',
+                        }
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        text: '<i class="fa fa-file-excel-o"></i> Excel',
+                        titleAttr: 'Export to Excel',
+                        title: 'Insurance Companies',
+                        exportOptions: {
+                            columns: ':not(:last-child)',
+                        }
+                    },
+                    {
+                        extend: 'csvHtml5',
+                        text: '<i class="fa fa-file-text-o"></i> CSV',
+                        titleAttr: 'CSV',
+                        title: 'Insurance Companies',
+                        exportOptions: {
+                            columns: ':not(:last-child)',
+                        }
+                    },
+                    {
+                        extend: 'pdfHtml5',
+                        text: '<i class="fa fa-file-pdf-o"></i> PDF',
+                        titleAttr: 'PDF',
+                        title: 'Insurance Companies',
+                        exportOptions: {
+                            columns: ':not(:last-child)',
+                        },
+                    },
+                    {
+                        extend: 'print',
+                        exportOptions: {
+                        columns: ':visible'
+                        },
+                        customize: function(win) {
+                            $(win.document.body).find( 'table' ).find('td:last-child, th:last-child').remove();
+                        }
+                    },
+                    ]
+                } );
+            } );
+        </script>
+        @yield('script')
+        <!-- ===============================  end vito js files ================================= -->
     </body>
 </html>

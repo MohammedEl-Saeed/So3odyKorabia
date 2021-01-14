@@ -20,7 +20,7 @@
                 <div class="iq-card-body">
                     <div class="table-responsive">
                         <!--begin: Datatable-->
-                        <table class="table table-striped table-bordered mt-4 table-hover text-center" id="kt_datatable">
+                        <table class="table table-striped table-bordered mt-4 table-hover text-center datatable-example" id="kt_datatable">
                             <thead>
                             <tr>
                                 <th>Record ID</th>
