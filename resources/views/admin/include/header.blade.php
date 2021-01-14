@@ -1,76 +1,90 @@
 <div class="iq-sidebar">
     <div class="iq-sidebar-logo d-flex justify-content-between">
-        <a href="index.html">
-        <img src="{{asset('assets/plugins/vito/images/logo.gif')}}" class="img-fluid" alt="">
-        <span>Vito</span>
+        <a href="{{url('/')}}">
+            <img src="{{asset('assets/plugins/vito/images/logo.gif')}}" class="img-fluid" alt="">
+            <span>Vito</span>
         </a>
         <div class="iq-menu-bt-sidebar">
-                <div class="iq-menu-bt align-self-center">
+            <div class="iq-menu-bt align-self-center">
                 <div class="wrapper-menu">
-                    <div class="main-circle"><i class="ri-arrow-left-s-line"></i></div>
-                    <div class="hover-circle"><i class="ri-arrow-right-s-line"></i></div>
-                </div>
+                    <div class="main-circle">
+                        <i class="ri-arrow-left-s-line"></i>
+                    </div>
+                    <div class="hover-circle">
+                        <i class="ri-arrow-right-s-line"></i>
+                    </div>
                 </div>
             </div>
+        </div>
     </div>
     <div id="sidebar-scrollbar">
         <nav class="iq-sidebar-menu">
             <ul class="iq-menu">
-                <li class="iq-menu-title"><i class="ri-subtract-line"></i><span>Dashboard</span></li>
                 <li>
-                    <a href="{{route('products.index','Sacrifice')}}" class="iq-waves-effect"><img src="{{asset('assets/logos/sheep.png')}}" class="ri-home-4-line"></img> <span class="h4"> ذبائح </span></a>
+                    <a href="{{route('products.index','Sacrifice')}}" class="iq-waves-effect">
+                        <img src="{{asset('assets/images/icons/sheep.png')}}" class="images-sidebar"/>
+                        <span> ذبائح </span>
+                    </a>
                 </li>
                 <li>
-                    <a href="{{route('products.index','Bird')}}" class="iq-waves-effect"><img src="{{asset('assets/logos/chicken.png')}}" class="ri-home-4-line"></img> <span class="h4"> طيور </span></a>
+                    <a href="{{route('products.index','Bird')}}" class="iq-waves-effect">
+                        <img src="{{asset('assets/images/icons/chicken.png')}}" class="images-sidebar">
+                        <span > طيور </span>
+                    </a>
                 </li>
                 <li>
-                    <a href="{{route('products.index','Butter')}}" class="iq-waves-effect"><img src="{{asset('assets/logos/butter.png')}}" class="ri-home-4-line"></img> <span class="h4"> سمن </span></a>
+                    <a href="{{route('products.index','Butter')}}" class="iq-waves-effect">
+                        <img src="{{asset('assets/images/icons/butter.png')}}" class="images-sidebar">
+                        <span > سمن </span>
+                    </a>
                 </li>
                 <li>
-                    <a href="{{route('products.index','Milk')}}" class="iq-waves-effect"><img src="{{asset('assets/logos/milk.png')}}" class="ri-home-4-line"></img> <span class="h4">ألبان  </span></a>
+                    <a href="{{route('products.index','Milk')}}" class="iq-waves-effect">
+                        <img src="{{asset('assets/images/icons/milk.png')}}" class="images-sidebar">
+                        <span >ألبان  </span>
+                    </a>
                 </li>
                 <li>
-                    <a href="{{route('products.index','Egg')}}" class="iq-waves-effect"><img src="{{asset('assets/logos/egg.png')}}" class="ri-home-4-line"></img> <span class="h4"> بيض </span></a>
+                    <a href="{{route('products.index','Egg')}}" class="iq-waves-effect">
+                        <img src="{{asset('assets/images/icons/egg.png')}}" class="images-sidebar">
+                        <span > بيض </span>
+                    </a>
                 </li>
                 <li>
-                    <a href="{{route('options.index')}}" class="iq-waves-effect"><i class="ri-home-4-line"></i><span class="h4">إضافات </span></a>
+                    <a href="{{route('options.index')}}" class="iq-waves-effect">
+                        <img src="{{asset('assets/images/icons/egg.png')}}" class="images-sidebar">
+                        <span >إضافات </span>
+                    </a>
                 </li>
                 <li>
-                    <a href="{{route('offers.index')}}" class="iq-waves-effect"><img src="{{asset('assets/logos/sale.png')}}" class="ri-home-4-line"></img> <span class="h4"> عروض </span></a>
+                    <a href="{{route('offers.index')}}" class="iq-waves-effect">
+                        <img src="{{asset('assets/images/icons/egg.png')}}" class="images-sidebar">
+                        <span > عروض </span>
+                    </a>
                 </li>
                 <li>
                     <a href="{{route('orders.index')}}" class="iq-waves-effect">
-                        <span class=" ri-home-4-line h2"></span>
-                        <span class="h4"> طلبات </span>
+                        <img src="{{asset('assets/images/icons/egg.png')}}" class="images-sidebar">
+                        <span > طلبات </span>
                     </a>
                 </li>
                 <li>
                     <a href="{{route('cities.index')}}" class="iq-waves-effect">
-                        <span class=" ri-home-4-line h2"></span>
-                        <span class="h4"> المناطق </span>
+                        <img src="{{asset('assets/images/icons/egg.png')}}" class="images-sidebar">
+                        <span > المناطق </span>
                     </a>
                 </li>
                 <li>
                     <a href="{{route('users.index')}}" class="iq-waves-effect">
-                        <span class="fa fa-user h2"></span>
-                        <span class="h4"> العملاء </span>
+                        <img src="{{asset('assets/images/icons/egg.png')}}" class="images-sidebar">
+                        <span > العملاء </span>
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="iq-waves-effect">
-                        <img src="{{asset('assets/icons/dashboard-menu-4.svg')}}" alt="" class="width-40"/>
-
-                        <span>Settings</span>
-                        <i class="ri-arrow-right-s-line iq-arrow-right"></i>
+                    <a href="{{route('show.settings.form')}}" class="iq-waves-effect">
+                        <img src="{{asset('assets/images/icons/egg.png')}}" class="images-sidebar">
+                        <span > Settings </span>
                     </a>
-                    <ul class="iq-submenu">
-                        <li>
-                            <a href="{{route('show.settings.form')}}">
-                                <img src="{{asset('assets/icons/show-medical-departments.svg')}}"  class="w-30-menu"/>
-                                Settings
-                            </a>
-                        </li>
-                    </ul>
                 </li>
             </ul>
         </nav>
