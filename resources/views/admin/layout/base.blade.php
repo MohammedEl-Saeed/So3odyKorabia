@@ -5,7 +5,6 @@
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-{{--        <title>@yield('title')</title>--}}
         <title>The Farm | @yield('title')</title>
         <!-- Favicon -->
         <link rel="shortcut icon" href="images/favicon.ico" />
@@ -15,6 +14,8 @@
         <link href="{{asset('assets/plugins/vito/en/css/typography.css?v=7.0.3')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('assets/plugins/vito/en/css/style.css?v=7.0.3')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('assets/plugins/vito/en/css/responsive.css?v=7.0.3')}}" rel="stylesheet" type="text/css" />
+        <link href="{{asset('assets/plugins/datatable/css/jquery.dataTables.min.css')}}" rel="stylesheet" type="text/css" />
+        <link href="{{asset('assets/plugins/datatable/css/buttons.dataTables.min.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('assets/plugins/vito/en/css/custom-lang.css?v=7.0.3')}}" rel="stylesheet" type="text/css" />
         <!-- ====================================== end css vito files ============================ -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
@@ -65,6 +66,70 @@
         <script src="{{asset('assets/plugins/vito/en/js/chart-custom.js?v=7.0.3')}}"></script>
         <script src="{{asset('assets/plugins/vito/en/js/custom.js?v=7.0.3')}}"></script>
         <script src="{{asset('assets/plugins/global/plugins.bundle.js')}}"></script>
+        <!-- ===============================  start datatable js files =============================== -->
+        <script src="{{asset('assets/plugins/datatable/js/jquery.dataTables.min.js')}}"></script>
+        <script src="{{asset('assets/plugins/datatable/js/dataTables.buttons.min.js')}}"></script>
+        <script src="{{asset('assets/plugins/datatable/js/buttons.flash.min.js')}}"></script>
+        <script src="{{asset('assets/plugins/datatable/js/jszip.min.js')}}"></script>
+        <script src="{{asset('assets/plugins/datatable/js/pdfmake.min.js')}}"></script>
+        <script src="{{asset('assets/plugins/datatable/js/vfs_fonts.js')}}"></script>
+        <script src="{{asset('assets/plugins/datatable/js/buttons.html5.min.js')}}"></script>
+        <script src="{{asset('assets/plugins/datatable/js/buttons.print.min.js')}}"></script>
+        <!-- ===============================  end datatable js files =============================== -->
+        <script>
+            $(document).ready(function() {
+                $('.datatable-example').DataTable( {
+                    dom: 'Bfrtip',
+                    buttons: [
+                    {
+                        extend: 'copyHtml5',
+                        text: 'Copy',
+                        titleAttr: 'copy',
+                        title: 'Insurance Companies',
+                        exportOptions: {
+                            columns: ':not(:last-child)',
+                        }
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        text: '<i class="fa fa-file-excel-o"></i> Excel',
+                        titleAttr: 'Export to Excel',
+                        title: 'Insurance Companies',
+                        exportOptions: {
+                            columns: ':not(:last-child)',
+                        }
+                    },
+                    {
+                        extend: 'csvHtml5',
+                        text: '<i class="fa fa-file-text-o"></i> CSV',
+                        titleAttr: 'CSV',
+                        title: 'Insurance Companies',
+                        exportOptions: {
+                            columns: ':not(:last-child)',
+                        }
+                    },
+                    {
+                        extend: 'pdfHtml5',
+                        text: '<i class="fa fa-file-pdf-o"></i> PDF',
+                        titleAttr: 'PDF',
+                        title: 'Insurance Companies',
+                        exportOptions: {
+                            columns: ':not(:last-child)',
+                        },
+                    },
+                    {
+                        extend: 'print',
+                        exportOptions: {
+                        columns: ':visible'
+                        },
+                        customize: function(win) {
+                            $(win.document.body).find( 'table' ).find('td:last-child, th:last-child').remove();
+                        }
+                    },
+                    ]
+                } );
+            } );
+        </script>
         @yield('script')
         <!-- ===============================  end vito js files ================================= -->
     </body>

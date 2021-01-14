@@ -11,7 +11,7 @@
         <!--begin::Card-->
         <div class="iq-card">
             <div class="card-header">
-                <h5 class="card-title">View All Users</h5>
+                <h5 class="card-title">View All User</h5>
                 <a href="{{route('users.create')}}" class="btn btn-text-primary font-weight-bold btn-fixed" data-palcement="top" data-toggle="tooltip" title="Insert">
                     <i class="fa fa-plus"></i>
                 </a>
@@ -19,7 +19,7 @@
             <div class="iq-card-body">
                 <div class="table-responsive">
                     <!--begin: Datatable-->
-                    <table class="table table-striped table-bordered mt-4 table-hover text-center" id="kt_datatable">
+                    <table class="table table-striped table-bordered mt-4 table-hover text-center datatable-example" id="kt_datatable">
                         <thead>
                         <tr>
                             <th>Record ID</th>

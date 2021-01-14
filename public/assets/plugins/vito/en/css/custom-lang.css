@@ -183,3 +183,8 @@ a.btn-fixed i{
 .images-sidebar + span {
     font-size: 20px;
 }
+table.dataTable thead th, table.dataTable thead td ,
+table.dataTable.no-footer
+{
+    border-bottom: 2px solid #dee2e6;
+}
