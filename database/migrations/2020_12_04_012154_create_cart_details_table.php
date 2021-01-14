@@ -22,6 +22,7 @@ class CreateCartDetailsTable extends Migration
             $table->string('item_options_ids');
             $table->double('total_price');
             $table->string('product_type')->nullable();
+            $table->string('item_key');
             $table->integer('quantity')->default(0);
             $table->timestamps();
         });

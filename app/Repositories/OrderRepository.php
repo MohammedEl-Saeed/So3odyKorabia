@@ -98,7 +98,9 @@ class OrderRepository
     }
 
     public function getTotalPriceForItem($itemOptionIds){
-        $itemOptionIds = explode(',',$itemOptionIds);
+        if (gettype($itemOptionIds) == 'string') {
+            $itemOptionIds = explode(',', $itemOptionIds);
+        }
         $totalPrice = ItemsOption::find($itemOptionIds)->sum('price');
         return $totalPrice;
     }
