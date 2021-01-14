@@ -3,27 +3,13 @@
 @section('title' , 'dashboard')
 @section('content')
     <div class="row">
-        <div class="col-lg-8">
-            <div class="iq-card">
-                <div class="iq-card-body">
-                <div id="home-chart-06" style="height: 350px;"></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4">
-            <div class="iq-card">
-                <div class="iq-card-body smaill-calender-home">
-                <input type="text" class="flatpicker d-none">
-                </div>
-            </div>
-        </div>
         <div class="col-md-6 col-lg-3">
             <div class="iq-card">
                 <div class="iq-card-body">
                 <div class="text-center"><span>AVG Impressions</span></div>
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="value-box">
-                        <h2 class="mb-0"><span class="counter"><b>2.648</b></span></h2>
+                        <h2 class="mb-0"><span ><b>2.648</b></span></h2>
                         <p class="mb-0 text-secondary line-height"> 26.84% </p>
                     </div>
                     <div class="iq-iconbox iq-bg-danger">
@@ -42,7 +28,7 @@
                 <div class="text-center"><span>AVG Engagements Rate</span></div>
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="value-box">
-                        <h2 class="mb-0"><span class="counter"><b>89.6</b></span></h2>
+                        <h2 class="mb-0"><span ><b>89.6</b></span></h2>
                         <p class="mb-0 pl-2 text-secondary line-height"> 8.64% </p>
                     </div>
                     <div class="iq-iconbox iq-bg-info">
@@ -61,7 +47,7 @@
                 <div class="text-center"><span>AVG Reach</span></div>
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="value-box">
-                        <h2 class="mb-0"><span class="counter"><b>826</b></span></h2>
+                        <h2 class="mb-0"><span ><b>826</b></span></h2>
                         <p class="mb-0 pl-2 text-secondary line-height"> 0.86% </p>
                     </div>
                     <div class="iq-iconbox iq-bg-success">
@@ -80,7 +66,7 @@
                 <div class="text-center"><span>AVG Transport</span></div>
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="value-box">
-                        <h2 class="mb-0"><span class="counter"><b>7.55</b></span></h2>
+                        <h2 class="mb-0"><span ><b>7.55</b></span></h2>
                         <p class="mb-0 pl-2 text-secondary line-height"> 25.5% </p>
                     </div>
                     <div class="iq-iconbox iq-bg-primary">
@@ -275,7 +261,7 @@
                     <li class="d-flex align-items-center">
                         <div class="post-image">
                             <a href="javascript:void();">
-                            <img src="images/page-img/p-2.jpg" alt="post-image" class="img-fluid rounded">
+                            <img src="{{asset('assets/plugins/vito/images/page-img/p-2.jpg')}}" alt="post-image" class="img-fluid rounded">
                             </a>
                         </div>
                         <div class="post-content pl-3">
@@ -300,7 +286,7 @@
                     <li class="d-flex align-items-center">
                         <div class="post-image">
                             <a href="javascript:void();">
-                            <img src="images/page-img/p-3.jpg" alt="post-image" class="img-fluid rounded">
+                            <img src="{{asset('assets/plugins/vito/images/page-img/p-3.jpg')}}" alt="post-image" class="img-fluid rounded">
                             </a>
                         </div>
                         <div class="post-content pl-3">
@@ -325,7 +311,7 @@
                     <li class="d-flex align-items-center">
                         <div class="post-image">
                             <a href="javascript:void();">
-                            <img src="images/page-img/p-4.jpg" alt="post-image" class="img-fluid rounded">
+                            <img src="{{asset('assets/plugins/vito/images/page-img/p-4.jpg')}}" alt="post-image" class="img-fluid rounded">
                             </a>
                         </div>
                         <div class="post-content pl-3">
@@ -350,7 +336,7 @@
                     <li class="d-flex align-items-center">
                         <div class="post-image">
                             <a href="javascript:void();">
-                            <img src="images/page-img/p-5.jpg" alt="post-image" class="img-fluid rounded">
+                            <img src="{{asset('assets/plugins/vito/images/page-img/p-5.jpg')}}" alt="post-image" class="img-fluid rounded">
                             </a>
                         </div>
                         <div class="post-content pl-3">
