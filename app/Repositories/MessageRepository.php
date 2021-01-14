@@ -31,7 +31,7 @@ class MessageRepository
 
     /** get all users due to type */
     public function index(){
-        return  $this->model->orderBy('type')->get();
+        return  $this->model;
     }
 
     /** add new user in system */
