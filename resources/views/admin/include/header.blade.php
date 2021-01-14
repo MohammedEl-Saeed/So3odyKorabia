@@ -17,13 +17,10 @@
         <nav class="iq-sidebar-menu">
             <ul class="iq-menu">
                 <li class="iq-menu-title"><i class="ri-subtract-line"></i><span>Dashboard</span></li>
-{{--                <li>--}}
-{{--                    <a href="{{route('products.index')}}" class="iq-waves-effect"><i class="ri-home-4-line"></i><span>Products</span></a>--}}
-{{--                </li>--}}
-                 <li>
+                <li>
                     <a href="{{route('products.index','Sacrifice')}}" class="iq-waves-effect"><img src="{{asset('assets/logos/sheep.png')}}" class="ri-home-4-line"></img> <span class="h4"> ذبائح </span></a>
                 </li>
-                 <li>
+                <li>
                     <a href="{{route('products.index','Bird')}}" class="iq-waves-effect"><img src="{{asset('assets/logos/chicken.png')}}" class="ri-home-4-line"></img> <span class="h4"> طيور </span></a>
                 </li>
                 <li>
@@ -67,13 +64,6 @@
                         <i class="ri-arrow-right-s-line iq-arrow-right"></i>
                     </a>
                     <ul class="iq-submenu">
-                        <li>
-{{--                            <a href="{{route('index')}}">--}}
-{{--                                <img src="{{asset('assets/icons/show-medical-departments.svg')}}"  class="w-30-menu"/>--}}
-{{--                                Show Medicals Department--}}
-{{--                            </a>--}}
-                        </li>
-
                         <li>
                             <a href="{{route('show.settings.form')}}">
                                 <img src="{{asset('assets/icons/show-medical-departments.svg')}}"  class="w-30-menu"/>
@@ -330,7 +320,17 @@
                             </div>
                             </a>
                             <div class="d-inline-block w-100 text-center p-3">
-                            <a class="bg-primary iq-sign-btn" href="sign-in.html" role="button">Sign out<i class="ri-login-box-line ml-2"></i></a>
+                                <a class="bg-primary iq-sign-btn" onclick="document.getElementById('submit-form').submit()" href="#" role="button">
+                                    Logout
+                                    <i class="ri-login-box-line ml-2"></i>
+                                </a>
+                                <form id="submit-form" method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <a href="{{ route('logout') }}"
+                                                    onclick="event.preventDefault();
+                                                                this.closest('form').submit();">
+                                    </a>
+                                </form>
                             </div>
                         </div>
                     </div>
