@@ -42,7 +42,7 @@
                         </div>
                         <div class="iq-card-body">
                             <div class="table-responsive">
-                                <table class="table table-hover table-striped table-bordered datatable-table text-center">
+                                <table class="table table-hover table-striped table-bordered datatable-example datatable-table text-center">
                                     <thead>
                                     <tr>
                                         <th>Record ID</th>
@@ -118,7 +118,7 @@
                         </div>
                         <div class="iq-card-body">
                             <div class="table-responsive">
-                                <table class="table table-hover table-striped table-bordered datatable-table text-center">
+                                <table class="table table-hover table-striped datatable-example table-bordered datatable-table text-center">
                                     <thead>
                                     <tr>
                                         <th>Record ID</th>
@@ -191,7 +191,7 @@
                         </div>
                         <div class="iq-card-body">
                             <div class="table-responsive">
-                                <table class="table table-hover table-striped table-bordered datatable-table text-center">
+                                <table class="table table-hover table-striped datatable-example table-bordered datatable-table text-center">
                                     <thead>
                                     <tr>
                                         <th>Record ID</th>
@@ -263,7 +263,7 @@
                         </div>
                         <div class="iq-card-body">
                             <div class="table-responsive">
-                                <table class="table table-hover table-striped table-bordered datatable-table text-center">
+                                <table class="table table-hover table-striped datatable-example table-bordered datatable-table text-center">
                                     <thead>
                                     <tr>
                                         <th>Record ID</th>
@@ -335,7 +335,7 @@
                         </div>
                         <div class="iq-card-body">
                             <div class="table-responsive">
-                                <table class="table table-hover table-striped table-bordered datatable-table text-center">
+                                <table class="table table-hover table-striped datatable-example table-bordered datatable-table text-center">
                                     <thead>
                                     <tr>
                                         <th>Record ID</th>
@@ -401,80 +401,6 @@
                         </div>
                     </div>
                 </div>
-{{--                <div class="tab-pane fade" id="inprogressorders">--}}
-{{--                    <div class="iq-card">--}}
-{{--                        <div class="card-header">--}}
-{{--                            <h5 class="card-title">View Rejected Orders</h5>--}}
-{{--                        </div>--}}
-{{--                        <div class="iq-card-body">--}}
-{{--                            <div class="table-responsive">--}}
-{{--                                <table class="table table-hover table-striped table-bordered datatable-table text-center">--}}
-{{--                                    <thead>--}}
-{{--                                    <tr>--}}
-{{--                                        <th>Record ID</th>--}}
-{{--                                        <th>Price</th>--}}
-{{--                                        <th>User</th>--}}
-{{--                                        --}}{{-- <th>Service</th>--}}
-{{--                                        <th>Status</th>--}}
-
-
-{{--                                        <th>Actions</th>--}}
-{{--                                    </tr>--}}
-{{--                                    </thead>--}}
-{{--                                    <tbody>--}}
-{{--                                    @foreach($Inprogress_orders as $index=>$order)--}}
-{{--                                        <tr>--}}
-{{--                                            <td>{{$index + 1}}</td>--}}
-{{--                                            <td>{{$order->total_price}}</td>--}}
-{{--                                            <td>--}}
-{{--                                                <a href="{{route('user.orders' ,$order->user->id)}}">{{$order->user->name}}--}}
-{{--                                                </a>--}}
-{{--                                            </td>--}}
-{{--                                            --}}{{--<td> {{$order->doctor_time->service->name}}</td>--}}
-{{--                                            <td>--}}
-{{--                                                @if($order->status == 'Accepted')--}}
-{{--                                                    <div class="btn btn-primary">{{$order->status}}</div>--}}
-{{--                                                @elseif($order->status == 'Rejected')--}}
-{{--                                                    <div class="btn btn-danger">{{$order->status}}</div>--}}
-{{--                                                @elseif($order->status == 'Waiting')--}}
-{{--                                                    <div class="btn btn-warning">{{$order->status}}</div>--}}
-{{--                                                @elseif($order->status == 'Done')--}}
-{{--                                                    <div class="btn btn-success">{{$order->status}}</div>--}}
-{{--                                                @endif--}}
-{{--                                            </td>--}}
-
-
-{{--                                            <td>--}}
-{{--                                                 <div class="list-user-action">--}}
-{{--                                                @if($order->status == 'Waiting')--}}
-{{--                                                    <a href="{{route('orders.accept',$order->id)}}" class="btn btn-success">--}}
-{{--                                                        Accept--}}
-{{--                                                    </a>--}}
-{{--                                                    <a href="{{route('orders.reject',$order->id)}}" class="btn btn-danger">--}}
-{{--                                                        Reject--}}
-{{--                                                    </a>--}}
-{{--                                                @elseif(($order->status == 'Accepted')--}}
-{{--                                                @endif--}}
-{{--                                                @if($order->status == 'Accepted')--}}
-{{--                                                    <a href="{{route('orders.done',$order->id)}}" class="btn btn-success">--}}
-{{--                                                        Done--}}
-{{--                                                    </a>--}}
-{{--                                                @endif--}}
-{{--                                                <a href="{{route('orders.show',$order->id)}}" class="btn btn-primary">--}}
-{{--                                                        View--}}
-{{--                                                    </a>--}}
-{{--                                                </div>--}}
-{{--                                            </td>--}}
-{{--                                        </tr>--}}
-{{--                                    @endforeach--}}
-{{--                                    </tbody>--}}
-
-{{--                                </table>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-
                 <div class="tab-pane fade" id="rejectedorders">
                     <div class="iq-card">
                         <div class="card-header">
@@ -482,7 +408,7 @@
                         </div>
                         <div class="iq-card-body">
                             <div class="table-responsive">
-                                <table class="table table-hover table-striped table-bordered datatable-table text-center">
+                                <table class="table table-hover table-striped datatable-example table-bordered datatable-table text-center">
                                     <thead>
                                     <tr>
                                         <th>Record ID</th>
