@@ -67,8 +67,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('show/settings/form', 'Admin\AdminController@showSettingsForm')->name('show.settings.form');
     Route::post('update/settings', 'Admin\AdminController@updateSettings')->name('update.settings');
 
-//    Route::get('orders/accept/{id}', 'Admin\OrderController@acceptOrder')->name('orders.accept');
-//    Route::get('orders/reject/{id}', 'Admin\OrderController@acceptOrder')->name('orders.reject');
+    Route::get('messages','Admin\MessageController@index');
+    Route::get('reply-message/{messageId}','Admin\MessageController@replyMessage');
+    Route::post('messages/store','Admin\MessageController@store');
+
 });
 Auth::routes();
 

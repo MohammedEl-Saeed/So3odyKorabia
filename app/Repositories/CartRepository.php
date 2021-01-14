@@ -40,17 +40,25 @@ class CartRepository
 
     /** add new user in system */
     public function addToCart($request){
-        $this->model->product_id = $request->product_id;
-        $this->model->item_id = $request->item_id;
-        $this->model->item_options_ids = implode(',',$request->item_options_ids);
-        $this->model->total_price = $request->total_price;
-        $this->model->quantity = $request->quantity;
-        $this->model->product_type = $request->product_type;
-        $cart = $this->updateCart($request->total_price);
-        $this->model->cart_id = $cart->id;
-        $this->model->user_id = Auth::id();
-        $this->model->save();
-        return $this->model;
+        $item_key = Auth::id().','.$request->item_id.','.$this->model->item_options_ids;
+        $existOrderItem = $this->model::where('item_key',$item_key)->first();
+        if($existOrderItem){
+            $existOrderItem->increment('quantity');
+            return $existOrderItem;
+        } else {
+            $this->model->product_id = $request->product_id;
+            $this->model->item_id = $request->item_id;
+            $this->model->item_options_ids = implode(',', $request->item_options_ids);
+            $this->model->total_price = $request->total_price;
+            $this->model->quantity = $request->quantity;
+            $this->model->product_type = $request->product_type;
+            $this->model->item_key = $item_key;
+            $cart = $this->updateCart($request->total_price);
+            $this->model->cart_id = $cart->id;
+            $this->model->user_id = Auth::id();
+            $this->model->save();
+            return $this->model;
+        }
 
     }
 
