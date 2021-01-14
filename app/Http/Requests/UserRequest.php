@@ -26,7 +26,7 @@ class UserRequest extends FormRequest
         if($this->method('Field') == 'POST') {
             return [
                 'name' => 'required|min:3',
-                'email' => 'required|unique:users',
+                'email' => 'unique:users',
                 'phone' => 'required|unique:users|regex:/^([0-9\s\-\+\(\)]*)$/',
                 'password' => 'required|string|min:6',
                 'image' => 'nullable|mimes:jpeg,jpg,bmp,png|max:20240'
@@ -34,9 +34,9 @@ class UserRequest extends FormRequest
         } elseif($this->method('Field') == 'PUT'){
             return [
                 'name' => 'required|min:3',
-                'email' => 'required|unique:users,email,'.$this->user,
+                'email' => 'unique:users,email,'.$this->user,
                 'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|unique:users,phone,'.$this->user,
-                'password' => 'required|string|min:6',
+                'password' => 'string|min:6|confirmed',
                 'image' => 'nullable|mimes:jpeg,jpg,bmp,png|max:20240'
             ];
         }

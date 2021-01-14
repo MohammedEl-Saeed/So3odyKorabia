@@ -26,7 +26,7 @@ class CreateUserAddressesTable extends Migration
             $table->string('address_latitude')->nullable();
             $table->string('address_longitude')->nullable();
             $table->string('note')->nullable();
-            $table->boolean('default_address')->nullable();
+            $table->boolean('default_address')->default(1);
             $table->timestamps();
         });
     }

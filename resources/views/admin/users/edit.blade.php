@@ -59,14 +59,19 @@
                                     <input type="text" class="form-control" id="phone" name="phone" value="{{old('phone', $item->phone)}}"  min="10"  placeholder="Enter a phone">
                                     <span class="form-text text-muted">Please enter phone</span>
                                 </div>
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-12">
                                     <label for="email">Email:</label>
                                     <input type="email" class="form-control" id="email" name="email" value="{{old('email', $item->email)}}"  placeholder="Enter an email">
                                     <span class="form-text text-muted">Please enter e-mail</span>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="password">Password:</label>
-                                    <input type="password" class="form-control" id="password" name="password" value="{{old('password', $item->password)}}"  min="6"  placeholder="Enter a password">
+                                    <input type="password" class="form-control" id="password" name="password" value="{{old('password')}}" min="6" placeholder="Enter a password">
+                                    <span class="form-text text-muted">Please enter password</span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="password_confirmation">Password Confirmation:</label>
+                                    <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" value="{{old('password_confirmation')}}" min="6" placeholder="Enter a password">
                                     <span class="form-text text-muted">Please enter password</span>
                                 </div>
                                 <input type="hidden" value="User" name="type">

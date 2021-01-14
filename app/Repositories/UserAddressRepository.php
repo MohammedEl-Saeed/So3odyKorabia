@@ -45,11 +45,16 @@ class UserAddressRepository
         $this->model->district = $request->district;
         $this->model->street = $request->street;
         $this->model->building_number = $request->building_number;
-        $this->model->address_latitude = $request->address_latitude;
-        $this->model->address_longitude = $request->address_longitude;
+        $this->model->floor = $request->floor;
+        $this->model->type = $request->type;
+        $this->model->apartment_number = $request->apartment_number;
+//        $this->model->address_latitude = $request->address_latitude;
+//        $this->model->address_longitude = $request->address_longitude;
         $this->model->note = $request->note;
-        $this->model->default_address = $request->default_address;
+        $this->updateDefaultAddress();
+//        $this->model->default_address = $request->default_address;
         $this->model->save();
+
         return $this->model;
     }
 
@@ -65,11 +70,16 @@ class UserAddressRepository
         $arr['district'] = $request->district;
         $arr['street'] = $request->street;
         $arr['building_number'] = $request->building_number;
-        $arr['address_latitude'] = $request->address_latitude;
-        $arr['address_longitude'] = $request->address_longitude;
+        $arr['floor'] = $request->floor;
+        $arr['type'] = $request->type;
+        $arr['apartment_number'] = $request->apartment_number;
+//        $arr['address_latitude'] = $request->address_latitude;
+//        $arr['address_longitude'] = $request->address_longitude;
         $arr['note'] = $request->note;
-        $arr['default_address'] = $request->default_address;
-
+        if($request->default_address){
+            $arr['default_address'] = $request->default_address;
+            $this->updateDefaultAddress();
+        }
         return $this->traitupdate($this->model , $id ,$arr);
     }
 
@@ -79,5 +89,9 @@ class UserAddressRepository
 
     public function getAddressesForUser(){
         return $this->model::where('user_id',Auth::id())->get();
+    }
+
+    public function updateDefaultAddress(){
+       return UserAddress::where('user_id',Auth::id())->update(['default_address'=>0]);
     }
 }
