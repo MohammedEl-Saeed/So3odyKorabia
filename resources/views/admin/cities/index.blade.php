@@ -17,6 +17,14 @@
                 </a>
             </div>
             <div class="iq-card-body">
+                @if(session()->has('success'))
+                    <div class="alert text-white bg-success" role="alert">
+                        <div class="iq-alert-text">{{session()->get('success')}}</div>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <i class="ri-close-line"></i>
+                        </button>
+                    </div>
+                @endif
                 <div class="table-responsive">
                     <!--begin: Datatable-->
                     <table class="table table-striped table-bordered mt-4 table-hover text-center datatable-example" id="kt_datatable">

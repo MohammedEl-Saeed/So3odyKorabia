@@ -10,11 +10,11 @@ use Illuminate\Support\Facades\Config;
 
 class OptionController extends Controller
 {
-     protected $service;
+    protected $service;
     public function __construct(OptionService $service)
     {
         $this->service = $service;
-        $this->types = ['Bagging','Kind','Package','Size','Slicing','Weight','Head','Bowels'];
+        $this->types = ['Bagging', 'Kind', 'Package', 'Size', 'Slicing', 'Weight', 'Head', 'Bowels'];
     }
     /**
      * Display a listing of the resource.
@@ -24,7 +24,7 @@ class OptionController extends Controller
     public function index()
     {
         $data = $this->service->index();
-        return view('admin.options.index',compact('data'));
+        return view('admin.options.index', compact('data'));
     }
 
     /**
@@ -35,7 +35,7 @@ class OptionController extends Controller
     public function create()
     {
         $types = Config::get('constants.OptionTypes');
-        return view('admin.options.insert',compact('types'));
+        return view('admin.options.insert', compact('types'));
     }
 
     /**
@@ -46,8 +46,9 @@ class OptionController extends Controller
      */
     public function store(OptionRequest $request)
     {
-         $this->service->store($request);
-       return redirect('/options');
+        $this->service->store($request);
+        session()->flash('success' , 'option has been added successful');
+        return redirect('/options');
     }
 
     /**
@@ -71,7 +72,7 @@ class OptionController extends Controller
     {
         $item = $this->service->show($id);
         $types = Config::get('constants.OptionTypes');
-        return view('admin.options.edit',compact('item','types'));
+        return view('admin.options.edit', compact('item', 'types'));
     }
 
     /**
@@ -83,8 +84,9 @@ class OptionController extends Controller
      */
     public function update(OptionRequest $request, $id)
     {
-         $this->service->update($request, $id);
-       return redirect('/options');
+        $this->service->update($request, $id);
+        session()->flash('success' , 'option has been updated successful');
+        return redirect('/options');
     }
 
     /**
@@ -96,6 +98,7 @@ class OptionController extends Controller
     public function destroy($id)
     {
         $this->service->delete($id);
+        session()->flash('success' , 'option has been deleted successful');
         return redirect('/options');
     }
 }
