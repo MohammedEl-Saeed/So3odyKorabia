@@ -22,7 +22,7 @@ class UserController extends Controller
     public function index()
     {
         $data = $this->service->index();
-        return view('admin.users.index',compact('data'));
+        return view('admin.users.index', compact('data'));
     }
 
     /**
@@ -44,6 +44,7 @@ class UserController extends Controller
     public function store(UserRequest $request)
     {
         $this->service->store($request);
+        session()->flash('success', 'User has been added successful');
         return redirect('/users');
     }
 
@@ -55,8 +56,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-//        $item = $this->service->show($id);
-//        return view('admin.users.show',compact('item'));
+        //        $item = $this->service->show($id);
+        //        return view('admin.users.show',compact('item'));
     }
 
     /**
@@ -68,7 +69,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $item = $this->service->show($id);
-        return view('admin.users.edit',compact('item'));
+        return view('admin.users.edit', compact('item'));
     }
 
     /**
@@ -81,6 +82,7 @@ class UserController extends Controller
     public function update(UserRequest $request, $id)
     {
         $this->service->update($request, $id);
+        session()->flash('success', 'User has been Updated successful');
         return redirect('/users');
     }
 
@@ -92,7 +94,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-       $this->service->delete($id);
+        $this->service->delete($id);
+        session()->flash('success' , 'User has been Deleted successful');
         return redirect('/users');
     }
 }
