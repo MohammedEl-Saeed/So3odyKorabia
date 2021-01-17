@@ -49,7 +49,7 @@ class ProductController extends Controller
      */
     public function create($type)
     {
-          return view('admin.products.insert',compact('type'));
+        return view('admin.products.insert',compact('type'));
     }
 
     /**

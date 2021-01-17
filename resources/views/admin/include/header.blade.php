@@ -21,31 +21,31 @@
             <ul class="iq-menu">
                 <li>
                     <a href="{{route('products.index','Sacrifice')}}" class="iq-waves-effect">
-                        <img src="{{asset('assets/images/icons/sheep.png')}}" class="images-sidebar"/>
+                        <img src="{{asset('assets/images/icons/sheep.svg')}}" class="images-sidebar"/>
                         <span> ذبائح </span>
                     </a>
                 </li>
                 <li>
                     <a href="{{route('products.index','Bird')}}" class="iq-waves-effect">
-                        <img src="{{asset('assets/images/icons/chicken.png')}}" class="images-sidebar">
+                        <img src="{{asset('assets/images/icons/chicken.svg')}}" class="images-sidebar">
                         <span > طيور </span>
                     </a>
                 </li>
                 <li>
                     <a href="{{route('products.index','Butter')}}" class="iq-waves-effect">
-                        <img src="{{asset('assets/images/icons/butter.png')}}" class="images-sidebar">
+                        <img src="{{asset('assets/images/icons/butter.svg')}}" class="images-sidebar">
                         <span > سمن </span>
                     </a>
                 </li>
                 <li>
                     <a href="{{route('products.index','Milk')}}" class="iq-waves-effect">
-                        <img src="{{asset('assets/images/icons/milk.png')}}" class="images-sidebar">
+                        <img src="{{asset('assets/images/icons/milk.svg')}}" class="images-sidebar">
                         <span >ألبان  </span>
                     </a>
                 </li>
                 <li>
                     <a href="{{route('products.index','Egg')}}" class="iq-waves-effect">
-                        <img src="{{asset('assets/images/icons/egg.png')}}" class="images-sidebar">
+                        <img src="{{asset('assets/images/icons/egg.svg')}}" class="images-sidebar">
                         <span > بيض </span>
                     </a>
                 </li>
@@ -57,7 +57,7 @@
                 </li>
                 <li>
                     <a href="{{route('offers.index')}}" class="iq-waves-effect">
-                        <img src="{{asset('assets/images/icons/offer.png')}}" class="images-sidebar">
+                        <img src="{{asset('assets/images/icons/offer.svg')}}" class="images-sidebar">
                         <span > عروض </span>
                     </a>
                 </li>

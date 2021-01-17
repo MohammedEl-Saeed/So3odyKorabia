@@ -42,10 +42,9 @@ class ItemController extends Controller
     public function create($productId)
     {
         $data = $this->optionService->getOptions();
-//        foreach ($data as $productId=>$options){
-//            dd($productId);
-//        }
-        return view('admin.items.insert',compact('data','productId'));
+        $product = Product::findorFail($productId);
+        $type = $product->type;
+        return view('admin.items.insert',compact('data','productId' , 'type'));
     }
 
     /**
