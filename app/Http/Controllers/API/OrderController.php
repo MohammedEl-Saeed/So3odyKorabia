@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Services\OrderService;
 use Illuminate\Http\Request;
 use App\Http\Traits\ResponseTraits;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class OrderController extends Controller
@@ -29,7 +30,12 @@ class OrderController extends Controller
             $request->offer_id = $this->service->offerAvailability($request->code);
         }
         $data = $this->service->createOrder($request);
-        return  $this->prepare_response(false,null,'return Successfully',$data,0 ,200);
+        if(is_null($data)){
+            $message = 'Your cart is empty';
+        }else{
+            $message = 'return Successfully';
+        }
+        return  $this->prepare_response(false,null,$message,$data,0 ,200);
     }
 
     public function getOrders(){
@@ -53,10 +59,16 @@ class OrderController extends Controller
             'order_id' => 'required|exists:orders,id',
         ]);
         if ($validator->fails()) {
-            return   $this->prepare_response(true,$validator->errors(),'Error validation',$request->all(),0,200) ;
+            return $this->prepare_response(true,$validator->errors(),'Error validation',$request->all(),0,200) ;
         }
         $data = $this->service->orderStatus($request->order_id);
-        return  $this->prepare_response(false,null,'return Successfully',$data,0 ,200);
+        if($data->user_id != Auth::id()){
+            $data = null;
+            $message = 'You may not authorized to show this data';
+        }else{
+            $message = 'return Successfully';
+        }
+        return $this->prepare_response(false,null,$message,$data,0 ,200);
     }
 
     public function getCities(){
@@ -69,4 +81,25 @@ class OrderController extends Controller
         return  $this->prepare_response(false,null,'return Successfully',$data,0 ,200);
     }
 
+    public function checkCode(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'code' => 'required|exists:offers,code',
+        ]);
+        if ($validator->fails()) {
+            return $this->prepare_response(true, $validator->errors(), 'Error validation', $request->all(), 0, 200);
+        }
+        $data = null;
+        $codeId = $this->service->offerAvailability($request->code);
+        $cart = $this->checkCart();
+        if(!$cart){
+            $message = 'You cart is empty!';
+        }elseif(is_null($codeId)){
+            $message = 'This code may you use before or not available now';
+        }else{
+            $data = $this->service->checkCode($request->code);
+            $message = 'return Successfully';
+        }
+        return $this->prepare_response(false,null,$message,$data,0 ,200,4);
+    }
 }

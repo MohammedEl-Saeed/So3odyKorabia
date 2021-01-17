@@ -18,8 +18,9 @@ use App\Mail\ApprovedMail;
 use Carbon\Carbon;
 use DB;
 use Auth;
+use App\Repositories\BaseRepository;
 
-class CartRepository
+class CartRepository extends BaseRepository
 {
     use  BasicTrait;
     use ResponseTraits;
@@ -40,20 +41,26 @@ class CartRepository
 
     /** add new user in system */
     public function addToCart($request){
-        $item_key = Auth::id().','.$request->item_id.','.$this->model->item_options_ids;
+        $item_options_ids = implode(',',$request->item_options_ids);
+        $quantity = $request->quantity;
+        $total_price = $quantity * $this->getTotalPriceForItem($request->item_options_ids);
+        $item_key = Auth::id().','.$request->item_id.','.$item_options_ids;
+        // to increment quantity of cart if this item exists before to this user in cart and if not existed before create new one
         $existOrderItem = $this->model::where('item_key',$item_key)->first();
         if($existOrderItem){
-            $existOrderItem->increment('quantity');
+            $existOrderItem->increment('quantity', $quantity);
+            $existOrderItem->increment('total_price',$total_price);
+            $this->updateCart($total_price);
             return $existOrderItem;
         } else {
             $this->model->product_id = $request->product_id;
             $this->model->item_id = $request->item_id;
-            $this->model->item_options_ids = implode(',', $request->item_options_ids);
-            $this->model->total_price = $request->total_price;
-            $this->model->quantity = $request->quantity;
+            $this->model->item_options_ids = $item_options_ids;
+            $this->model->total_price = $total_price;
+            $this->model->quantity = $quantity;
             $this->model->product_type = $request->product_type;
             $this->model->item_key = $item_key;
-            $cart = $this->updateCart($request->total_price);
+            $cart = $this->updateCart($total_price);
             $this->model->cart_id = $cart->id;
             $this->model->user_id = Auth::id();
             $this->model->save();
@@ -121,7 +128,7 @@ class CartRepository
         $data = [];
         $cart = Cart::where('user_id',Auth::id())->first();
         if ($cart) {
-            $this->updateCartPrice();
+//            $this->updateCartPrice();
             $data['total_price'] = $cart->total_price;
             $cartDetails = $this->index()->where('user_id', Auth::id())->where('cart_id', $cart->id)->get();
             foreach ($cartDetails as $cartDetail) {
@@ -130,8 +137,6 @@ class CartRepository
             }
             $data['cartDetails'] = $results;
             return $data;
-        }else{
-            return 'Your cart is empty';
         }
     }
 

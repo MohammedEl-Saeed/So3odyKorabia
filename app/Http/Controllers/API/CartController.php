@@ -33,7 +33,12 @@ class CartController extends Controller
 
     public function showCartInfo(Request $request){
         $data = $this->service->showCartInfo();
-        return  $this->prepare_response(false,null,'return Successfully',$data,0 ,200);
+        if(is_null($data)){
+            $message = 'Your cart is empty';
+        }else{
+            $message = 'return Successfully';
+        }
+        return  $this->prepare_response(false,null,$message,$data,0 ,200);
     }
 
      public function editCart(Request $request){
@@ -66,7 +71,5 @@ class CartController extends Controller
         $data = $this->service->emptyCart();
         return  $this->prepare_response(false,null,'return Successfully',$data,0 ,200);
     }
-
-
 
 }
