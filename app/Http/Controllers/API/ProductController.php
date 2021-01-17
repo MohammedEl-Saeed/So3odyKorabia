@@ -38,7 +38,22 @@ class ProductController extends Controller
 
     public function getMainCategories(){
         $data = $this->product_service->getMainCategories();
-//        $data['hasCart'] = $this->checkCart();
-        return  $this->prepare_response(false,null,'return Successfully',$data,0 ,200);
+        $hasCart = $this->checkCart();
+        $phone = $this->getSitePhone();
+        return  $this->prepare_response(false,null,'return Successfully',$data,0 ,200, $hasCart, $phone);
+    }
+
+    public function prepare_response($error = false, $errors = null, $message = '', $data = null, $status = 0, $server_status,$hasCart = false, $phone = null)
+    {
+        $array = array(
+            'status'  =>$status,
+            'error'   => $error,
+            'errors'  => $errors,
+            'haseCart'    => $hasCart,
+            'phone'    => $phone,
+            'message' => $message,
+            'data'    => $data
+        );
+        return response()->json($array ,$server_status);
     }
 }

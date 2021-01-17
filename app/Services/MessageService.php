@@ -26,7 +26,7 @@ class MessageService
     }
     /** get all message by type  */
     public function index(){
-        return $this->message->index()->get();
+        return $this->message->index()->with('user')->get();
     }
 
     /** add new message to sysytem */
@@ -36,7 +36,7 @@ class MessageService
 
     /** show specific message  */
     public function show($id){
-         return $this->message->show($id);
+        return $this->message->show($id);
     }
 
     /** delete message */

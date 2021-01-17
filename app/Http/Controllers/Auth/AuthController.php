@@ -124,8 +124,8 @@ class AuthController extends Controller
         $data['user'] = auth()->user();
         $data['token'] = $token;
         $data['token_type'] = 'bearer';
-        $data['hasCart'] = $this->checkCart();
-        return   $this->prepare_response(false,null,'User successfully logged in',$data,0,200) ;
+        $hasCart = $this->checkCart();
+        return   $this->prepare_response(false,null,'User successfully logged in',$data,0,200,$hasCart) ;
 
 //        return response()->json([
 //            'access_token' => $token,
@@ -205,5 +205,18 @@ class AuthController extends Controller
         }else{
             return response()->json(['error'=>true,'status'=>1,'message'=>'try again code is wrong'],200);
         }
+    }
+
+    public function prepare_response($error = false, $errors = null, $message = '', $data = null, $status = 0, $server_status,$hasCart = false)
+    {
+        $array = array(
+            'status'  =>$status,
+            'error'   => $error,
+            'errors'  => $errors,
+            'haseCart'    => $hasCart,
+            'message' => $message,
+            'data'    => $data
+        );
+        return response()->json($array ,$server_status);
     }
 }

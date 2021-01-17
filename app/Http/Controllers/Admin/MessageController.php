@@ -20,6 +20,7 @@ class MessageController extends Controller
 
     public function index(){
         $data = $this->service->index();
+        // dd($data->toArray());
         return view('admin.messages.index', compact('data'));
     }
 

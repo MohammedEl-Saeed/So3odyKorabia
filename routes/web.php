@@ -67,9 +67,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('show/settings/form', 'Admin\AdminController@showSettingsForm')->name('show.settings.form');
     Route::post('update/settings', 'Admin\AdminController@updateSettings')->name('update.settings');
 
-    Route::get('messages','Admin\MessageController@index');
-    Route::get('reply-message/{messageId}','Admin\MessageController@replyMessage');
-    Route::post('messages/store','Admin\MessageController@store');
+    Route::get('messages','Admin\MessageController@index')->name('messages');
+    Route::get('reply-message/{messageId}','Admin\MessageController@replyMessage')->name('messages.reply');
+    Route::post('messages/store','Admin\MessageController@store')->name('messages.store');
 
 });
 Auth::routes();

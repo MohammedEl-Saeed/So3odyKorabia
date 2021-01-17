@@ -15,13 +15,14 @@ class ProductController extends Controller
 {
     protected $service, $itemService, $request;
 
-    public function __construct(Request $request,ProductService $service, ItemService $itemService){
+    public function __construct(Request $request, ProductService $service, ItemService $itemService)
+    {
         $this->service = $service;
         $this->itemService = $itemService;
         $this->request = $request;
-//        if(!in_array($request->type,$this->productTypes)){
-//            abort(404);
-//        }
+        //        if(!in_array($request->type,$this->productTypes)){
+        //            abort(404);
+        //        }
     }
     /**
      * Display a listing of the resource.
@@ -30,11 +31,11 @@ class ProductController extends Controller
      */
     public function index($type)
     {
-//        dd(Auth::user());
-        if($type == 'Sacrifice' || $type == 'Bird') {
+        //        dd(Auth::user());
+        if ($type == 'Sacrifice' || $type == 'Bird') {
             $data = $this->service->index($type);
             return view('admin.products.index', compact('data', 'type'));
-        } else{
+        } else {
             $product = $this->service->checkProduct($type);
             $productId = $product->id;
             $data = $this->itemService->index($productId);
@@ -49,7 +50,7 @@ class ProductController extends Controller
      */
     public function create($type)
     {
-          return view('admin.products.insert',compact('type'));
+        return view('admin.products.insert', compact('type'));
     }
 
     /**
@@ -60,8 +61,9 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-       $this->service->store($request);
-       return redirect()->route('products.index',$request->type);
+        $this->service->store($request);
+        session()->flash('success' , 'product has been added successful');
+        return redirect()->route('products.index', $request->type);
     }
 
     /**
@@ -73,7 +75,7 @@ class ProductController extends Controller
     public function show($id)
     {
         $item = $this->service->show($id);
-        return view('admin.products.edit',compact('item'));
+        return view('admin.products.edit', compact('item'));
     }
 
     /**
@@ -85,7 +87,7 @@ class ProductController extends Controller
     public function edit($type, $id)
     {
         $item = $this->service->show($id);
-        return view('admin.products.edit',compact('item','type'));
+        return view('admin.products.edit', compact('item', 'type'));
     }
 
     /**
@@ -98,7 +100,8 @@ class ProductController extends Controller
     public function update(ProductRequest $request, $id)
     {
         $this->service->update($request, $id);
-       return redirect()->route('products.index',$request->type);
+        session()->flash('success' , 'product has been updated successful');
+        return redirect()->route('products.index', $request->type);
     }
 
     /**
@@ -110,29 +113,30 @@ class ProductController extends Controller
     public function destroy($id, $type)
     {
         $this->service->delete($id);
-        return redirect('/products/'.$type);
+        session()->flash('success' , 'product has been deleted successful');
+        return redirect('/products/' . $type);
     }
 
-    public function dashboard(){
+    public function dashboard()
+    {
         return view('admin.dashboard');
     }
 
     public function makeProductUnavailable($type, $id)
     {
-        $this->service->changeStatus('Unavailable',$id);
-        return redirect('/products/'.$type);
+        $this->service->changeStatus('Unavailable', $id);
+        return redirect('/products/' . $type);
     }
 
     public function makeProductAvailable($type, $id)
     {
-        $this->service->changeStatus('Available',$id);
-        return redirect('/products/'.$type);
+        $this->service->changeStatus('Available', $id);
+        return redirect('/products/' . $type);
     }
 
     public function makeProductSold($type, $id)
     {
-        $this->service->changeStatus('Sold',$id);
-        return redirect('/products/'.$type);
+        $this->service->changeStatus('Sold', $id);
+        return redirect('/products/' . $type);
     }
-
 }

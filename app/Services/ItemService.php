@@ -26,9 +26,6 @@ class ItemService
     /** get all item by itemId  */
     public function index($productId){
         $data = $this->item->index($productId)->get();
-        foreach ($data as $item){
-            $item['maxOrder'] = 50;
-        }
         return $data;
     }
 

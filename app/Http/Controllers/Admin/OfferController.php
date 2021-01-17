@@ -14,9 +14,9 @@ class OfferController extends Controller
 
     protected $service;
 
-    public function __construct(OfferService $service){
+    public function __construct(OfferService $service)
+    {
         $this->service = $service;
-
     }
 
     /**
@@ -37,7 +37,7 @@ class OfferController extends Controller
      */
     public function create()
     {
-         return view('admin.offers.insert');
+        return view('admin.offers.insert');
     }
 
     /**
@@ -49,7 +49,8 @@ class OfferController extends Controller
     public function store(OfferRequest $request)
     {
         $this->service->store($request);
-       return redirect()->route('offers.index');
+        session()->flash('success' , 'offer has been added successful');
+        return redirect()->route('offers.index');
     }
 
     /**
@@ -60,8 +61,8 @@ class OfferController extends Controller
      */
     public function show($id)
     {
-         $item = $this->service->show($id);
-        return view('admin.offers.edit',compact('item'));
+        $item = $this->service->show($id);
+        return view('admin.offers.edit', compact('item'));
     }
 
     /**
@@ -72,8 +73,8 @@ class OfferController extends Controller
      */
     public function edit($id)
     {
-         $item = $this->service->show($id);
-        return view('admin.offers.edit',compact('item'));
+        $item = $this->service->show($id);
+        return view('admin.offers.edit', compact('item'));
     }
 
     /**
@@ -86,6 +87,7 @@ class OfferController extends Controller
     public function update(OfferRequest $request, $id)
     {
         $this->service->update($request, $id);
+        session()->flash('success' , 'offer has been updated successful');
         return redirect()->route('offers.index');
     }
 
@@ -98,6 +100,7 @@ class OfferController extends Controller
     public function destroy($id)
     {
         $this->service->delete($id);
+        session()->flash('success' , 'offer has been deletd successful');
         return redirect('/offers');
     }
 }
