@@ -23,7 +23,15 @@
                     <form>
                         <div class="form-group text-center">
                             <div class="add-img-user profile-img-edit">
-                                <img class="profile-pic img-fluid" src="{{asset('assets/plugins/vito/images/user/11.png')}}" alt="profile-pic">
+                                @if($type == 'Butter')
+                                    <img style="border-radius: 0;" class="profile-pic img-fluid" src="{{asset('assets/images/icons/butter.svg')}}" alt="profile-pic">
+                                @elseif($type == 'Milk')
+                                    <img style="border-radius: 0;" class="profile-pic img-fluid" src="{{asset('assets/images/icons/milk.svg')}}" alt="profile-pic">
+                                @elseif($type == 'Egg')
+                                    <img style="border-radius: 0;" class="profile-pic img-fluid" src="{{asset('assets/images/icons/egg.svg')}}" alt="profile-pic">
+                                @else
+                                    <img class="profile-pic img-fluid" src="{{asset('assets/plugins/vito/images/user/11.png')}}" alt="profile-pic">
+                                @endif
                                 <div class="p-image">
                                     <a href="#" class="upload-button btn iq-bg-primary">Add Logo</a>
                                     <input class="file-upload" required form="main-form-to-add-doctor" type="file" accept="image/*" name="logo">
