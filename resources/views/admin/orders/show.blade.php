@@ -14,11 +14,11 @@
         <link href="{{asset('assets/plugins/vito/en/css/typography.css?v=7.0.3')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('assets/plugins/vito/en/css/style.css?v=7.0.3')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('assets/plugins/vito/en/css/responsive.css?v=7.0.3')}}" rel="stylesheet" type="text/css" />
-        <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet" />
-        <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
-        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-        <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+        <link href="{{asset('assets/plugins/datatable-2/css/responsive.dataTables.min.css')}}" rel="stylesheet" />
+        <link href="{{asset('assets/plugins/datatable-2/css/jquery.dataTables.min.css')}}" rel="stylesheet" />
+        <script src="{{asset('assets/plugins/datatable-2/js/jquery-3.3.1.js')}}"></script>
+        <script src="{{asset('assets/plugins/datatable-2/js/jquery.dataTables.min.js')}}"></script>
+        <script src="{{asset('assets/plugins/datatable-2/js/dataTables.responsive.min.js')}}"></script>
 
         <link href="{{asset('assets/plugins/vito/en/css/custom-lang.css?v=7.0.3')}}" rel="stylesheet" type="text/css" />
         <!-- ====================================== end css vito files ============================ -->
