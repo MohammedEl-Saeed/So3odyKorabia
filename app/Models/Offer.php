@@ -9,6 +9,6 @@ class Offer extends Model
     protected $fillable = ['code','description','discount','discount_type','status','start_at','end_at','uses_number'];
 
     public function user(){
-        return $this->belongsToMany(User::class,'offer_users');
+        return $this->belongsToMany(User::class);
     }
 }
