@@ -168,13 +168,13 @@ sup {
 }
 
 a {
-	color: #827af3;
+	color: #f15e43;
 	text-decoration: none;
 	background-color: transparent
 }
 
 a:hover {
-	color: #0056b3;
+	color: #d16643;
 	text-decoration: underline
 }
 
@@ -4004,8 +4004,8 @@ input[type=submit].btn-block {
 
 .custom-control-input:checked~.custom-control-label::before {
 	color: #fff;
-	border-color: #827af3;
-	background-color: #827af3
+	border-color: #F15E43;
+	background-color: #F15E43
 }
 
 .custom-control-input:focus~.custom-control-label::before {
