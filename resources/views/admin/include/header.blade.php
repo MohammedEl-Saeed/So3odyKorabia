@@ -1,8 +1,7 @@
 <div class="iq-sidebar">
     <div class="iq-sidebar-logo d-flex justify-content-between">
         <a href="{{url('/')}}">
-            <img src="{{asset('assets/plugins/vito/images/logo.gif')}}" class="img-fluid" alt="">
-            <span>Vito</span>
+            <img src="{{asset('assets/images/logos/logo.svg')}}" class="img-fluid" alt="">
         </a>
         <div class="iq-menu-bt-sidebar">
             <div class="iq-menu-bt align-self-center">
