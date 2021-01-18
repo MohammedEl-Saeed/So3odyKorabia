@@ -1,7 +1,8 @@
 <div class="iq-sidebar">
     <div class="iq-sidebar-logo d-flex justify-content-between">
         <a href="{{url('/')}}">
-            <img src="{{asset('assets/images/logos/logo.svg')}}" class="img-fluid" alt="">
+            <img src="{{asset('assets/images/logos/logo.svg')}}" class="img-fluid" alt="meat-village logo">
+            <span > قرية اللحوم </span>
         </a>
         <div class="iq-menu-bt-sidebar">
             <div class="iq-menu-bt align-self-center">
