@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Cart;
 use App\Models\Offer;
 use App\Models\Order;
 use App\Repositories\CartRepository;
@@ -94,12 +95,12 @@ class OrderService
         $now = date('Y-m-d H:m:i');
         $offer = Offer::where('code',$code)
             ->whereDate('start_at','<',$now)
-                ->whereDate('end_at','>',$now)
-                ->whereRaw('count < uses_number')
-                ->where('status','Available')
-                ->orWhere('status','Reopened')
-                ->first();
-        if($offer){
+            ->whereDate('end_at','>',$now)
+            ->whereRaw('count < uses_number OR uses_number IS NULL')
+            ->where('status','Available')
+            ->orWhere('status','Reopened')
+            ->first();
+        if($offer && !$offer->user->contains(Auth::id())){
             return $offer->id;
         } else{
             return null;
@@ -116,4 +117,11 @@ class OrderService
             ->get();
         return $offers;
     }
+
+    public function checkCode($code){
+        $offer = Offer::where('code',$code)->select('discount','discount_type')->first();
+        $cartPrice = Auth::user()->cart->total_price;
+        return $this->order->getOfferedPrice($offer, $cartPrice);
+    }
+
 }

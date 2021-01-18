@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use anlutro\LaravelSettings\SettingsManager;
 use App\Models\CartDetail;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Auth;
+use Setting;
 
 class Controller extends BaseController
 {
@@ -34,5 +36,9 @@ class Controller extends BaseController
         } else{
             return false;
         }
+    }
+
+    public function getSitePhone(){
+       return Setting::get('website_phone');
     }
 }
