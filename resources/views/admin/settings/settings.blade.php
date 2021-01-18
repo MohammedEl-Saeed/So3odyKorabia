@@ -8,28 +8,24 @@
 
 
 <!-- ========================== start new form to add xray center ============================== -->
-<div class="container-fluid">
-    <div class="row">
-
-        <div class="col-lg-9">
-            <div class="iq-card">
-                <div class="iq-card-header d-flex justify-content-between">
-                    <div class="iq-header-title">
-                        <h4 class="card-title">Setting</h4>
-                    </div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="iq-card">
+            <div class="iq-card-header d-flex justify-content-between">
+                <div class="iq-header-title">
+                    <h4 class="card-title">Setting</h4>
                 </div>
-                <div class="iq-card-body">
-                    <div class="new-user-info">
-
-
-                   <form class="form" method="post" action="{{route('update.settings')}}" enctype="multipart/form-data">
+            </div>
+            <div class="iq-card-body">
+                <div class="new-user-info">
+                    <form class="form" method="post" action="{{route('update.settings')}}" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
 
-                        <div class="form-group col-md-12">
-                                    <label for="lname"> website phone:</label>
-                                    <input type="text" name="website_phone" required min="3" max="100" class="form-control"
-                                           placeholder="Enter pharmacy name" value="{{Setting::get('website_phone')}}"/>
+                            <div class="form-group col-md-6">
+                                        <label for="lname"> website phone:</label>
+                                        <input type="text" name="website_phone" required min="3" max="100" class="form-control"
+                                            placeholder="Enter pharmacy name" value="{{Setting::get('website_phone')}}"/>
 
                             </div>
 
@@ -47,8 +43,7 @@
                             <button type="reset" class="btn btn-secondary pull-right">Cancel</button>
                             <div class="clearfix"></div>
                         </div>
-                        </form>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>

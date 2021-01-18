@@ -12,7 +12,7 @@
         <div class="iq-card">
             <div class="card-header">
                 <h5 class="card-title">View All User</h5>
-                <a href="{{route('users.create')}}" class="btn btn-text-primary font-weight-bold btn-fixed" data-palcement="top" data-toggle="tooltip" title="Insert">
+                <a href="{{route('users.create')}}" class="btn btn-text-primary font-weight-bold btn-fixed" data-palcement="top" data-toggle="tooltip" title="Insert User">
                     <i class="fa fa-plus"></i>
                 </a>
             </div>

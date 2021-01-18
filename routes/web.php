@@ -39,6 +39,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('options', 'Admin\OptionController');
 
     Route::resource('users', 'Admin\UserController');
+    Route::get('user/profile', 'Admin\UserController@userProfile')->name('user.profile');
     Route::get('user/{id}/orders', 'Admin\UserController@userOrders')->name('user.orders');
 
     Route::resource('{id}/items', 'Admin\ItemController');
