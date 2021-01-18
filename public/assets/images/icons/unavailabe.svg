@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="36.078" height="30.02" viewBox="0 0 36.078 30.02">
+  <g id="signal" transform="translate(0 -42.65)">
+    <g id="Group_2" data-name="Group 2" transform="translate(0 42.65)">
+      <g id="Group_1" data-name="Group 1" transform="translate(0 0)">
+        <path id="Path_1" data-name="Path 1" d="M31.291,48.7H29.253V44.653h5.824a1,1,0,1,0,0-2H1a.99.99,0,0,0-1,.994,1,1,0,0,0,1,1H6.825v4.048H4.787A4.8,4.8,0,0,0,0,53.487v14.4A4.789,4.789,0,0,0,4.787,72.67h26.5a4.789,4.789,0,0,0,4.787-4.787v-14.4A4.789,4.789,0,0,0,31.291,48.7ZM8.828,44.646H27.243v4.048H8.828ZM34.075,67.883h0a2.788,2.788,0,0,1-2.784,2.784H4.787A2.788,2.788,0,0,1,2,67.883v-14.4A2.788,2.788,0,0,1,4.787,50.7h26.5a2.788,2.788,0,0,1,2.784,2.784Z" transform="translate(0 -42.65)" fill="#2240aa"/>
+      </g>
+    </g>
+    <text id="UNAVAILABLE" transform="translate(3.078 61.969)" fill="#2240aa" font-size="4.3" font-family="HelveticaNeue-Bold, Helvetica Neue" font-weight="700"><tspan x="0" y="0">UNAVAILABLE</tspan></text>
+  </g>
+</svg>

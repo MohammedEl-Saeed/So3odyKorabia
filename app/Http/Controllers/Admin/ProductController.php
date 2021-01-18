@@ -39,7 +39,9 @@ class ProductController extends Controller
             $product = $this->service->checkProduct($type);
             $productId = $product->id;
             $data = $this->itemService->index($productId);
-            return view('admin.items.index', compact('data', 'productId'));
+            $productName = Product::findorFail($productId);
+            $type = $productName->name;
+            return view('admin.items.index', compact('data', 'productId' , 'type'));
         }
     }
 

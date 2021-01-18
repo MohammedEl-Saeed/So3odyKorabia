@@ -6,8 +6,7 @@
 
 
 <!-- ========================== start new form to add doctor ============================== -->
-<div class="container-fluid">
-    <form id="main-form-to-add-doctor" class="form" method="post" action="{{route('items.store', $productId)}}" enctype="multipart/form-data">
+<form id="main-form-to-add-doctor" class="form" method="post" action="{{route('items.store', $productId)}}" enctype="multipart/form-data">
         @csrf
     <div class="row">
         <div class="col-lg-3">
@@ -94,7 +93,7 @@
                                             <div class="col-md-4">
                                                 <label>Price:</label>
                                                 <input type="number" name="options[0][price]" value="{{old('price')}}" class="form-control price" min="0"
-                                                       placeholder="Enter Price" />
+                                                    placeholder="Enter Price" />
                                                 <div class="d-md-none mb-2"></div>
                                             </div>
                                             <div class="col-md-4 text-center">
@@ -129,8 +128,8 @@
                 </div>
         </div>
     </div>
-    </form>
-</div>
+</form>
+
 <!-- ========================== end new form to add doctor ================================ -->
 @endsection
 @section('script')
