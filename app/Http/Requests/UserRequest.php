@@ -29,7 +29,7 @@ class UserRequest extends FormRequest
                 'email' => 'unique:users',
                 'phone' => 'required|unique:users|regex:/^([0-9\s\-\+\(\)]*)$/',
                 'password' => 'required|string|min:6',
-                'image' => 'nullable|mimes:jpeg,jpg,bmp,png|max:20240'
+                'image' => 'nullable|mimes:jpeg,jpg,bmp,png,svg|max:20240'
             ];
         } elseif($this->method('Field') == 'PUT'){
             return [
