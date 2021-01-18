@@ -40,6 +40,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('users', 'Admin\UserController');
     Route::get('user/{id}/orders', 'Admin\UserController@userOrders')->name('user.orders');
+    Route::get('user/{id}/orders', 'Admin\UserController@userOrders')->name('user.orders');
 
     Route::resource('{id}/items', 'Admin\ItemController');
     Route::get('items/{productId}/available/{id}','Admin\ItemController@makeProductAvailable')->name('items.available');
