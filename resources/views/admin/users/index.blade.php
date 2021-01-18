@@ -51,19 +51,16 @@
                                     </div>
                                 </td>
                                 <td class="text-center">
-{{--                                    <div class="list-user-action">--}}
-                                    <a href="{{route('users.edit',$item->id)}}" class="btn btn-info">
-                                            Edit
+                                    <a href="{{route('users.edit',$item->id)}}">
+                                        <img data-palcement="bottom" data-toggle="tooltip" title="Edit" src="{{asset('assets/images/icons/edit.svg')}}" class="icons-table" />
                                     </a>
-{{--                                    <a href="{{route('user.orders',$item->id)}}" class="btn btn-primary">--}}
-{{--                                            User Orders--}}
-{{--                                    </a>--}}
-                                    <form action="{{route('users.destroy',$item->id)}}" method="POST">
+                                    <form class="d-inline" action="{{route('users.destroy',$item->id)}}" method="POST">
                                         @csrf
                                         {{method_field('delete')}}
-                                        <button class="btn btn-danger">Delete</button>
+                                        <button class="del-btn">
+                                            <img data-palcement="bottom" data-toggle="tooltip" title="Delete" src="{{asset('assets/images/icons/delete.svg')}}" class="icons-table" />
+                                        </button>
                                     </form>
-{{--                                    </div>--}}
                                 </td>
                             </tr>
                         @endforeach

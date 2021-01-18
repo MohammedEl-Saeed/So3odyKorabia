@@ -49,12 +49,9 @@
                                     @endif
                                 </td>
                                 <td class="text-center">
-                                    {{--                                    <div class="list-user-action">--}}
-                                    <a href="{{route('cities.edit',$item->id)}}" class="btn btn-info">
-                                        Edit
+                                    <a href="{{route('cities.edit',$item->id)}}">
+                                        <img data-palcement="bottom" data-toggle="tooltip" title="Edit" src="{{asset('assets/images/icons/edit.svg')}}" class="icons-table" />
                                     </a>
-
-                                    {{--                                    </div>--}}
                                 </td>
                             </tr>
                         @endforeach
