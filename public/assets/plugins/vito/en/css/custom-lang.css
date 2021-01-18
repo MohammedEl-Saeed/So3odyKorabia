@@ -190,7 +190,7 @@ table.dataTable.no-footer
 }
 .iq-email-listbox .iq-email-sender-list>li{
     border-top: none !important;
-    border-bottom: 1px solid #eef0f4;
+    border-bottom: 1px solid #f6eeed;
 }
 .iq-email-listbox .iq-email-sender-list>li:last-of-type{
     border-bottom: none;

@@ -2729,8 +2729,8 @@ fieldset:disabled a.btn {
 .btn-primary:not(:disabled):not(.disabled):active,
 .show>.btn-primary.dropdown-toggle {
 	color: #fff;
-	background: #827af3;
-    border-color: #827af3;
+	background: #d16643;
+    border-color: #d16643;
 }
 
 .btn-primary:not(:disabled):not(.disabled).active:focus,
@@ -4013,13 +4013,13 @@ input[type=submit].btn-block {
 }
 
 .custom-control-input:focus:not(:checked)~.custom-control-label::before {
-	border-color: #80bdff
+	border-color: #f26e55
 }
 
 .custom-control-input:not(:disabled):active~.custom-control-label::before {
 	color: #fff;
-	background-color: #b3d7ff;
-	border-color: #b3d7ff
+	background-color: #f7b0a3;
+	border-color: #f7b0a3
 }
 
 .custom-control-input:disabled~.custom-control-label,
@@ -4323,8 +4323,8 @@ input[type=submit].btn-block {
 }
 
 .custom-range::-webkit-slider-thumb:active {
-	background-color: #b3d7ff
-}
+	background-color: #f7b0a3
+}f7b0a3
 
 .custom-range::-webkit-slider-runnable-track {
 	width: 100%;
@@ -4356,7 +4356,7 @@ input[type=submit].btn-block {
 }
 
 .custom-range::-moz-range-thumb:active {
-	background-color: #b3d7ff
+	background-color: #f7b0a3
 }
 
 .custom-range::-moz-range-track {
@@ -4391,7 +4391,7 @@ input[type=submit].btn-block {
 }
 
 .custom-range::-ms-thumb:active {
-	background-color: #b3d7ff
+	background-color: #f7b0a3
 }
 
 .custom-range::-ms-track {
