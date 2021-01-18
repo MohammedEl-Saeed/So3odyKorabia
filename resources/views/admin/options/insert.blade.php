@@ -25,16 +25,16 @@
                                         <input type="text" class="form-control" id="name" name="name" value="{{old('name')}}"  min="3"  max="100" placeholder="Enter a name">
                                         <span class="form-text text-muted">Please enter option name</span>
                                     </div>
-                                        <div class="col-md-4">
-                                            <label>Type:</label>
-                                            <select  class="form-control options" name="type" value="{{old('type')}}">
-                                                @if(isset($types))
-                                                    @foreach($types as $type)
-                                                        <option value="{{$type}}" @if(old('type') == $type) selected @endif>{{$type}}</option>
-                                                    @endforeach
-                                                @endif
-                                            </select>
-                                            <div class="d-md-none mb-2"></div>
+                                    <div class="col-md-6">
+                                        <label>Type:</label>
+                                        <select  class="form-control options" name="type" value="{{old('type')}}">
+                                            @if(isset($types))
+                                                @foreach($types as $type)
+                                                    <option value="{{$type}}" @if(old('type') == $type) selected @endif>{{$type}}</option>
+                                                @endforeach
+                                            @endif
+                                        </select>
+                                        <div class="d-md-none mb-2"></div>
                                     </div>
                                 </div>
                                 <div class="col-md-12">

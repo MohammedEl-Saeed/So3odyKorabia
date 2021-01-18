@@ -20,7 +20,7 @@
                             <form id="main-form-to-add-doctor" class="form" method="post" action="{{route('offers.store')}}" enctype="multipart/form-data">
                             @csrf
                                 <div class="row">
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md-4">
                                         <label for="code">Code:</label>
                                         <input type="text" class="form-control" id="code" name="code" value="{{old('code')}}"  min="3"  max="100" placeholder="Enter a name">
                                         <span class="form-text text-muted">Please enter offer code</span>
@@ -30,20 +30,13 @@
                                             <input type="number" min="0" max="100" name="discount" class="form-control" value="{{old('discount')}}">
                                             <div class="d-md-none mb-2"></div>
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col-md-4">
                                         <label>Uses number:</label>
                                         <input type="number" min="0" name="uses_number" class="form-control" value="{{old('uses_number')}}">
                                         <div class="d-md-none mb-2"></div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="form-group col-md-12">
-                                        <label for="start_at">Offer Description:</label>
-                                        <textarea class="form-control"  name="description" placeholder="Enter a Description"
-                                                  rows="3">{{old('description')}}</textarea>
-                                        <span class="form-text text-muted">Please enter a menu within text length range 50 and 100.</span>
-                                    </div>
-                                </div>
+
                                 <div class="row">
                                     <div class="form-group col-md-6">
                                         <label for="start_at">Start at:</label>
@@ -56,6 +49,15 @@
                                         <span class="form-text text-muted">Please enter offer end datetime</span>
                                     </div>
                                 </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+                                        <label for="start_at">Offer Description:</label>
+                                        <textarea class="form-control"  name="description" placeholder="Enter a Description" rows="3">{{old('description')}}</textarea>
+                                        <span class="form-text text-muted">Please enter a menu within text length range 50 and 100.</span>
+                                    </div>
+                                </div>
+                                
                                 <div class="col-md-12">
                                     <button type="submit" class="btn btn-success ml-2 pull-right">Add New Offer</button>
                                     <button type="reset" class="btn btn-secondary pull-right">Cancel</button>

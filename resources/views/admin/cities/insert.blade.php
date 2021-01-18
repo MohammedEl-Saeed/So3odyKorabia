@@ -25,13 +25,13 @@
                                         <input type="text" class="form-control" id="name" name="name" value="{{old('name')}}"  min="3"  max="100" placeholder="Enter a name">
                                         <span class="form-text text-muted">Please enter option name</span>
                                     </div>
-                                        <div class="col-md-4">
-                                            <label>Availability:</label>
-                                            <select  class="form-control cities" name="availability">
-                                                <option value="1">Available</option>
-                                                <option value="0">Not available</option>
-                                            </select>
-                                            <div class="d-md-none mb-2"></div>
+                                    <div class="col-md-6">
+                                        <label>Availability:</label>
+                                        <select  class="form-control cities" name="availability">
+                                            <option value="1">Available</option>
+                                            <option value="0">Not available</option>
+                                        </select>
+                                        <div class="d-md-none mb-2"></div>
                                     </div>
                                 </div>
                                 <div class="col-md-12">

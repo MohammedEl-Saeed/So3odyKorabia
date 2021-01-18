@@ -12,7 +12,7 @@
         <div class="iq-card">
             <div class="card-header">
                 <h5 class="card-title">View All Items</h5>
-                <a href="{{route('items.create',$productId)}}" class="btn btn-text-primary font-weight-bold btn-fixed" data-palcement="top" data-toggle="tooltip" title="Insert {{$productId}}">
+                <a href="{{route('items.create',$productId)}}" class="btn btn-text-primary font-weight-bold btn-fixed" data-palcement="top" data-toggle="tooltip" title="إضافة {{$type}}">
                     <i class="fa fa-plus"></i>
                 </a>
             </div>
