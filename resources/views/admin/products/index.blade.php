@@ -51,28 +51,26 @@
                                     </div>
                                 </td>
                                 <td class="text-center">
-{{--                                    <div class="list-user-action">--}}
-                                    <a href="{{route('items.index',$item->id)}}" class="btn btn-info">
-                                        الأنواع
+                                    <a href="{{route('items.index',$item->id)}}">
+                                        <img data-palcement="bottom" data-toggle="tooltip" title="الانواع" src="{{asset('assets/images/icons/types.svg')}}" class="icons-table" />
                                     </a>
-                                    <a href="{{route('products.edit',['type'=>$type,'id'=>$item->id])}}" class="btn btn-primary">
-                                            Edit
+                                    <a href="{{route('products.edit',['type'=>$type,'id'=>$item->id])}}">
+                                        <img data-palcement="bottom" data-toggle="tooltip" title="Edit" src="{{asset('assets/images/icons/edit.svg')}}" class="icons-table" />
                                     </a>
                                     @if($item->status == 'Available')
-                                        <a href="{{route('products.unavailable',['type'=>$type,'id'=>$item->id])}}" class="btn btn-danger">
-                                                Unavailable
+                                        <a href="{{route('products.unavailable',['type'=>$type,'id'=>$item->id])}}">
+                                            <img data-palcement="bottom" data-toggle="tooltip" title="Unavailable" src="{{asset('assets/images/icons/unavailabe.svg')}}" class="icons-table" />
                                         </a>
                                     @elseif($item->status == 'Unavailable' || $item->status == 'Sold')
-                                        <a href="{{route('products.available',['type'=>$type,'id'=>$item->id])}}" class="btn btn-success">
-                                            Available
+                                        <a href="{{route('products.available',['type'=>$type,'id'=>$item->id])}}">
+                                            <img data-palcement="bottom" data-toggle="tooltip" title="Available" src="{{asset('assets/images/icons/available.svg')}}" class="icons-table" />
                                         </a>
                                     @endif
                                     @if($item->status == 'Unavailable' || $item->status == 'Available')
-                                        <a href="{{route('products.sold',['type'=>$type,'id'=>$item->id])}}" class="btn btn-warning">
-                                            Sold
+                                        <a href="{{route('products.sold',['type'=>$type,'id'=>$item->id])}}">
+                                            <img data-palcement="bottom" data-toggle="tooltip" title="Sold" src="{{asset('assets/images/icons/sold.svg')}}" class="icons-table" />
                                         </a>
                                     @endif
-{{--                                    </div>--}}
                                 </td>
                             </tr>
                         @endforeach
