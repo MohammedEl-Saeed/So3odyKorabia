@@ -59,7 +59,7 @@ General
 *::-moz-selection { background: #D16643; color: #ffffff; text-shadow: none; }
 ::-moz-selection { background: #D16643; color: #ffffff; text-shadow: none; }
 ::selection { background: #D16643; color: #ffffff; text-shadow: none; }
-body { font-family: 'Muli', sans-serif; font-weight: 400; font-style: normal; font-size: 14px; line-height: 1.8; padding: 0; margin: 0; color: #a09e9e; background: #fcefed; }
+body { font-family: 'Muli', sans-serif; font-weight: 400; font-style: normal; font-size: 14px; line-height: 1.8; padding: 0; margin: 0; color: #a09e9e; background: #ffedea; }
 a, .btn { -webkit-transition: all 0.5s ease-out 0s; -moz-transition: all 0.5s ease-out 0s; -ms-transition: all 0.5s ease-out 0s; -o-transition: all 0.5s ease-out 0s; transition: all 0.5s ease-out 0s; }
 a, button, input, btn { outline: medium none !important; }
 .uppercase { text-transform: uppercase; }
@@ -363,7 +363,7 @@ a.bg-primary:focus, a.bg-primary:hover, button.bg-primary:focus, button.bg-prima
 /*----------------------------------------------
 Alert
 ------------------------------------------------*/
-.alert-primary { color: #D16643; border-color: #D16643; background-color: #fcefed; }
+.alert-primary { color: #D16643; border-color: #D16643; background-color: #ffedea; }
 .alert-secondary { color: #a09e9e; border-color: #d6d8d5; background-color: #f1f2f1; }
 .alert-success { color: #27b345; border-color: #b2efb2; background-color: #eefff2; }
 .alert-danger { color: #f14336; border-color: #f7c6c6; background-color: #fff5f4; }
@@ -383,7 +383,7 @@ Alert
 /*----------------------------------------------
 list Group
 ------------------------------------------------*/
-.list-group-item-primary { background-color: #fcefed; color: #D16643; }
+.list-group-item-primary { background-color: #ffedea; color: #D16643; }
 .list-group-item-secondary { color: #a09e9e; background-color: #f1f2f1; }
 .list-group-item-success { color: #27b345; background-color: #eefff2; }
 .list-group-item-danger { color: #f14336; background-color: #fff5f4; }
