@@ -128,6 +128,26 @@
                     },
                     ]
                 } );
+
+                $('.iq-menu-bt-sidebar').on('click' , function(){
+                    if($('.logo-text').hasClass('delete-logo-text')){
+                        $('.logo-text').removeClass('delete-logo-text');
+                    }else{
+                        $('.logo-text').addClass('delete-logo-text');
+                    }
+                });
+
+                $('.iq-sidebar').on('mouseleave' , function(){
+                    if($('.logo-text').hasClass('delete-logo-text')){
+                        $('.logo-text').fadeOut(300);
+                    }
+                });
+
+                $('.iq-sidebar').on('mouseenter' , function(){
+                    if($('.logo-text').hasClass('delete-logo-text')){
+                        $('.logo-text').fadeIn(300);
+                    }
+                });
             } );
         </script>
         @yield('script')
