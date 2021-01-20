@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Option;
 use App\Models\OptionOption;
+use App\Models\OptionType;
 use App\Repositories\OptionRepository;
  use App\Http\Traits\BasicTrait;
  use Carbon\CarbonPeriod;
@@ -66,8 +67,8 @@ class OptionService
         return $this->option->delete($id);
     }
 
-    public function getOptionsByOptionId($optionId){
-        $data = OptionOption::where('option_id',$optionId)->get()->with('options');
+    public function getOptionsByItemId($optionId){
+        $data = ItemOption::where('option_id',$optionId)->get()->with('options');
         return $data;
     }
 
@@ -82,4 +83,7 @@ class OptionService
         return $options;
     }
 
+    public function getOptionTypes(){
+        return OptionType::all()->pluck('name','id');
+    }
 }

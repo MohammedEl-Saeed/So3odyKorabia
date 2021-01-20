@@ -27,7 +27,7 @@ class AuthController extends Controller
     public function __construct(UserService $service)
     {
         $this->service = $service;
-        $this->middleware('auth:api', ['except' => ['login', 'register']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register','sendCode','verifyCode','resetPassword']]);
     }
 
     /**
@@ -42,12 +42,12 @@ class AuthController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return $this->prepare_response(true,$validator->errors(),'Error validation',null,1,200) ;
+            return $this->prepareResponse(true,$validator->errors(),'Error validation',null,1,200) ;
         }
 
 //        if (! $token = auth()->attempt($validator->validated())) {
         if (! $token = JWTAuth::attempt(['phone' => $request->phone,'password' => $request->password])){
-            return $this->prepare_response(true,json_decode('{"error":["Incorrect Phone no. or Password"]}'),'Invalid Credential',null,1,200) ;
+            return $this->prepareResponse(true,json_decode('{"error":["Incorrect Phone no. or Password"]}'),'Invalid Credential',null,1,200) ;
         }
 
         return $this->createNewToken($token);
@@ -125,7 +125,7 @@ class AuthController extends Controller
         $data['token'] = $token;
         $data['token_type'] = 'bearer';
         $hasCart = $this->checkCart();
-        return   $this->prepare_response(false,null,'User successfully logged in',$data,0,200,$hasCart) ;
+        return   $this->prepareResponse(false,null,'User successfully logged in',$data,0,200,$hasCart) ;
 
 //        return response()->json([
 //            'access_token' => $token,
@@ -207,7 +207,7 @@ class AuthController extends Controller
         }
     }
 
-    public function prepare_response($error = false, $errors = null, $message = '', $data = null, $status = 0, $server_status,$hasCart = false)
+    public function prepareResponse($error = false, $errors = null, $message = '', $data = null, $status = 0, $server_status,$hasCart = false)
     {
         $array = array(
             'status'  =>$status,

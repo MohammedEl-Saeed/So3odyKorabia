@@ -10,6 +10,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Auth;
 use Setting;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class Controller extends BaseController
 {
@@ -31,7 +32,11 @@ class Controller extends BaseController
     }
 
     public function checkCart(){
-        if(count(CartDetail::where('user_id',Auth::id())->get()) > 0){
+        $userId = Auth::id();
+        if(is_null($userId)){
+            $userId = auth('api')->id();
+        }
+        if(count(CartDetail::where('user_id',$userId)->get()) > 0){
             return true;
         } else{
             return false;

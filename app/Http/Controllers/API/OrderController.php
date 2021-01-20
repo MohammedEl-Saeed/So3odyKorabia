@@ -87,7 +87,7 @@ class OrderController extends Controller
             'code' => 'required|exists:offers,code',
         ]);
         if ($validator->fails()) {
-            return $this->prepare_response(true, $validator->errors(), 'Error validation', $request->all(), 0, 200);
+            return $this->prepare_response(true, $validator->errors(), 'Error validation', null, 0, 200);
         }
         $data = null;
         $codeId = $this->service->offerAvailability($request->code);

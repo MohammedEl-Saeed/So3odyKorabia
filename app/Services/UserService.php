@@ -75,9 +75,12 @@ class UserService
     {
         $helper = new FileHelper();
         $code = $helper->generateRandomString(5);
-        $user = User::where('phone',$request->phone)->first()->update(['code'=>$code]);
+//        dd($code);
+        $user = User::where('phone',$request->phone);
+        $user->update(['code'=>$code]);
+        $user = $user->first();
         $message = new SMSHelper();
-        $message->sendMessage('Please verify your account with this code: \n'.$user->code, $user->phone);
+        $message->sendMessage('Please verify your account with this code: '.$user->code, $user->phone);
     }
 
     public function checkCode($request)

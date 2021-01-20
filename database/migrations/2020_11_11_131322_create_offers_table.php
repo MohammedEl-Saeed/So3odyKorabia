@@ -17,6 +17,7 @@ class CreateOffersTable extends Migration
             $table->id();
             $table->string('code');
             $table->text('description')->nullable();
+            $table->text('image')->nullable();
             $table->double('discount');
             $table->integer('uses_number')->nullable();
             $table->integer('count')->default(0);

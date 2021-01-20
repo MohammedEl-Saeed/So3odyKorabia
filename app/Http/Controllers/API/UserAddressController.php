@@ -33,7 +33,7 @@ class UserAddressController extends Controller
 
      public function updateAddress(Request $request){
         $validator = Validator::make($request->all(), [
-            'user_address_id' => 'required|exists:user_addresses,id',
+            'id' => 'required|exists:user_addresses,id',
             'city_id' => 'required|exists:cities,id',
             'default_address'=>'in:1,0',
             'district' => 'required|string',
@@ -42,7 +42,7 @@ class UserAddressController extends Controller
         if ($validator->fails()) {
             return   $this->prepare_response(true,$validator->errors(),'Error validation',$request->all(),0,200) ;
         }
-        $data = $this->service->update($request, $request->user_address_id);
+        $data = $this->service->update($request, $request->id);
         return  $this->prepare_response(false,null,'return Successfully',$data,0 ,200);
     }
 
@@ -53,12 +53,12 @@ class UserAddressController extends Controller
 
     public function removeAddress(Request $request){
         $validator = Validator::make($request->all(), [
-            'user_address_id' => 'required|exists:user_addresses,id',
+            'id' => 'required|exists:user_addresses,id',
         ]);
         if ($validator->fails()) {
-            return $this->prepare_response(true,$validator->errors(),'Error validation',null,0,200) ;
+            return $this->prepare_response(true,$validator->errors(),'Error validation',null,1,200) ;
         }
-        if(!$this->checkAuth($request->user_address_id)){
+        if(!$this->checkAuth($request->id)){
             return $this->prepare_response(true,null,'user not allow to delete this item',null,1,200) ;
         }
         $data = $this->service->delete($request->user_address_id);

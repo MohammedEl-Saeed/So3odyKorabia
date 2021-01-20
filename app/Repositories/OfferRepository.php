@@ -39,7 +39,11 @@ class OfferRepository
 
     /** add new user in system */
     public function store($request){
-
+        if ($request->hasFile('image')){
+            $image_path = FileHelper::upload_file('/uploads/users/images/',$request['image']);
+            $request->image = $image_path;
+        }
+        dd($request->image);
           return $this->model::create($request->all());
     }
 
@@ -59,7 +63,10 @@ class OfferRepository
         $arr['start_at'] = $request->start_at;
         $arr['end_at'] = $request->end_at;
         $arr['status'] = $request->status;
-
+        if ($request->hasFile('image')){
+            $image_path = FileHelper::upload_file('/uploads/users/images/',$request['image']);
+            $arr['image']  =$image_path;
+        }
         return $this->traitupdate($this->model , $id ,$arr);
     }
 
