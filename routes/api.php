@@ -29,6 +29,11 @@ Route::group([
     Route::post('/refresh', [\App\Http\Controllers\Auth\AuthController::class, 'refresh']);
     Route::get('/user-profile', [\App\Http\Controllers\Auth\AuthController::class, 'userProfile']);
     Route::post('/edit-profile', [\App\Http\Controllers\Auth\AuthController::class, 'editProfile'])->middleware('jwtMiddleware');
+
+    Route::post('/send-code', '\App\Http\Controllers\Auth\AuthController@sendCode');
+    Route::post('/verify-code', 'Auth\AuthController@checkCode');
+    Route::post('/reset-password', 'Auth\AuthController@resetNewPassword');
+
 });
 //Route::Post('user/login', 'Auth\AuthController@login')->name('user.login');
 Route::group(['middleware' => ['jwtMiddleware']], function () {
@@ -50,10 +55,6 @@ Route::group(['middleware' => ['jwtMiddleware']], function () {
     Route::post('remove-address','API\UserAddressController@removeAddress');
     Route::get('get-addresses','API\UserAddressController@getUserAddresses');
 
-    Route::post('user/send-code', 'API\AuthController@sendCode');
-    Route::post('user/verify-code', 'API\AuthController@checkCode');
-    Route::post('user/reset-password', 'API\AuthController@resetNewPassword');
-
     Route::post('send-message','API\MessageController@createMessage');
 
     Route::post('check-promo-code','API\OrderController@checkCode');
@@ -61,8 +62,8 @@ Route::group(['middleware' => ['jwtMiddleware']], function () {
     Route::apiResource('user/paymentCards', "API\PaymentCardsController");
 
 });
-
 Route::get('get-main-categories','API\ProductController@getMainCategories');
+
 
 Route::post('/get-options', 'API\ItemController@getOptionsByItemId');
 Route::post('/get-items', 'API\ItemController@getItems');

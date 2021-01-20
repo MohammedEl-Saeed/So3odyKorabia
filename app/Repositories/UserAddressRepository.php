@@ -48,8 +48,8 @@ class UserAddressRepository
         $this->model->floor = $request->floor;
         $this->model->type = $request->type;
         $this->model->apartment_number = $request->apartment_number;
-//        $this->model->address_latitude = $request->address_latitude;
-//        $this->model->address_longitude = $request->address_longitude;
+        $this->model->address_latitude = $request->address_latitude;
+        $this->model->address_longitude = $request->address_longitude;
         $this->model->note = $request->note;
         $this->updateDefaultAddress();
 //        $this->model->default_address = $request->default_address;
@@ -73,8 +73,8 @@ class UserAddressRepository
         $arr['floor'] = $request->floor;
         $arr['type'] = $request->type;
         $arr['apartment_number'] = $request->apartment_number;
-//        $arr['address_latitude'] = $request->address_latitude;
-//        $arr['address_longitude'] = $request->address_longitude;
+        $arr['address_latitude'] = $request->address_latitude;
+        $arr['address_longitude'] = $request->address_longitude;
         $arr['note'] = $request->note;
         if($request->default_address){
             $arr['default_address'] = $request->default_address;
