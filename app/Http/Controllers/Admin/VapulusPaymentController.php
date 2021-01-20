@@ -26,4 +26,70 @@ class VapulusPaymentController extends Controller
         return view('payment.card', compact('orderId'));
     }
 
+    //https://repl.it/@islamvapulus/php-http-request-with-hashing
+    function generateHash($hashSecret,$postData) {
+        ksort($postData);
+        $message="";
+        $appendAmp=0;
+        foreach($postData as $key => $value) {
+            if (strlen($value) > 0) {
+                if ($appendAmp == 0) {
+                    $message .= $key . '=' . $value;
+                    $appendAmp = 1;
+                } else {
+                    $message .= '&' . $key . "=" . $value;
+                }
+            }
+        }
+
+        $secret = pack('H*', $hashSecret);
+        return hash_hmac('sha256', $message, $secret);
+    }
+
+    function HTTPPost($url, array $params) {
+        $query = http_build_query($params);
+        $ch    = curl_init();
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HEADER, false);
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $query);
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        $decodedResponse = json_decode($response);
+        if ($decodedResponse->statusCode == 200) {
+            $htmlBodyContent = $decodedResponse->data->htmlBodyContent;
+            return view('payment.test_payment', compact('htmlBodyContent'));
+        } else {
+            return $response;
+        }
+//        return $response;
+    }
+
+    public function pay(Request $request){
+        $postData = array(
+            'sessionId' => $request->sessionId,
+            'mobileNumber' => '01124772675',
+            'email' => 'dev.teraninja28@gmail.com',
+            'amount' => '15.0',
+            'firstName' => 'Mohammed',
+            'lastName' => 'El-Saeed',
+            'onAccept' => 'https://example.com/success',
+            'onFail' => 'http://example.com/fail'
+        );
+
+        $secureHash= '6fd7d27e34353562626362632d343131';
+        $postData['hashSecret'] = $this->generateHash($secureHash,$postData);
+
+        $postData['appId']='738bdc3e-167e-4afb-aeb9-a3a535c8ac53';
+        $postData['password']='12345678A';
+
+        $url ='https://api.vapulus.com:1338/app/session/pay';
+
+        $output = $this->HTTPPost($url,$postData);
+
+        print_r($output);
+    }
 }
