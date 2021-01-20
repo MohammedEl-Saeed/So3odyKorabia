@@ -61,6 +61,8 @@ Route::group(['middleware' => ['jwtMiddleware']], function () {
 
     Route::apiResource('user/paymentCards', "API\PaymentCardsController");
 
+    Route::get('/createPayForm', 'API\VapulusPaymentController@createPayForm')->name('createPayForm');
+
 });
 Route::get('get-main-categories','API\ProductController@getMainCategories');
 
