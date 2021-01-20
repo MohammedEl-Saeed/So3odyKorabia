@@ -6,7 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
     <link href="https://getbootstrap.com/docs/3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- INCLUDE SESSION.JS JAVASCRIPT LIBRARY -->
-    <script src="https://api.vapulus.com:1338/app/session/script?appId=cb716c4b-e085-4a8e-83cd-90a3e68a1640"></script>
+    <script src="https://api.vapulus.com:1338/app/session/script?appId=738bdc3e-167e-4afb-aeb9-a3a535c8ac53"></script>
     <!-- APPLY CLICK-JACKING STYLING AND HIDE CONTENTS OF THE PAGE -->
     <style id="antiClickjack">
         body {

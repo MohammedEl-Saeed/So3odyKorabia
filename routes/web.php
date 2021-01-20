@@ -77,7 +77,7 @@ Auth::routes();
 
 Route::group(['prefix' => 'vapulusPayment', 'as' => 'vapulusPayment.'], function () {
 //    Route::get('/createPayForm', 'VapulusPaymentController@createPayForm')->name('createPayForm');
-    Route::get('/payFormWithType/{type}/{id}/{user_id}/{amount}', 'Admin\VapulusPaymentController@payFormWithType')->name('payFormWithType');
+    Route::get('/payFormWithType/{order_id}', 'Admin\VapulusPaymentController@payForm')->name('payFormWithType');
     Route::post('/pay', 'Admin\VapulusPaymentController@pay')->name('pay');
     Route::get('/{type}/{id}/{user_id}/{amount}/successCallback', 'Admin\VapulusPaymentController@successCallback')->name('successCallback');
 });
