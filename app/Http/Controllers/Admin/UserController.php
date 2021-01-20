@@ -98,4 +98,8 @@ class UserController extends Controller
         session()->flash('success' , 'User has been Deleted successful');
         return redirect('/users');
     }
+
+    public function userProfile(){
+        return view('admin.users.profile');
+    }
 }

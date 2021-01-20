@@ -56,10 +56,10 @@ import Css
 /*---------------------------------------------------------------------
 General
 -----------------------------------------------------------------------*/
-*::-moz-selection { background: #827af3; color: #ffffff; text-shadow: none; }
-::-moz-selection { background: #827af3; color: #ffffff; text-shadow: none; }
-::selection { background: #827af3; color: #ffffff; text-shadow: none; }
-body { font-family: 'Muli', sans-serif; font-weight: 400; font-style: normal; font-size: 14px; line-height: 1.8; padding: 0; margin: 0; color: #a09e9e; background: #efeefd; }
+*::-moz-selection { background: #D16643; color: #ffffff; text-shadow: none; }
+::-moz-selection { background: #D16643; color: #ffffff; text-shadow: none; }
+::selection { background: #D16643; color: #ffffff; text-shadow: none; }
+body { font-family: 'Muli', sans-serif; font-weight: 400; font-style: normal; font-size: 14px; line-height: 1.8; padding: 0; margin: 0; color: #a09e9e; background: #ffedea; }
 a, .btn { -webkit-transition: all 0.5s ease-out 0s; -moz-transition: all 0.5s ease-out 0s; -ms-transition: all 0.5s ease-out 0s; -o-transition: all 0.5s ease-out 0s; transition: all 0.5s ease-out 0s; }
 a, button, input, btn { outline: medium none !important; }
 .uppercase { text-transform: uppercase; }
@@ -217,10 +217,10 @@ Background Color
 /*----------------------------------------------
 Background Color Opacity
 ------------------------------------------------*/
-.iq-bg-primary { background: rgba(130, 122, 243, 0.2); background: -moz-linear-gradient(left, rgba(130, 122, 243, 0.2) 0%, rgba(180, 122, 243, 0.2) 100%); background: -webkit-gradient(left top, right top, color-stop(0%, rgba(130, 122, 243, 0.2)), color-stop(100%, rgba(180, 122, 243, 0.2))); background: -webkit-linear-gradient(left, rgba(130, 122, 243, 0.2) 0%, rgba(180, 122, 243, 0.2) 100%); background: -o-linear-gradient(left, rgba(130, 122, 243, 0.2) 0%, rgba(180, 122, 243, 0.2) 100%); background: -ms-linear-gradient(left, rgba(130, 122, 243, 0.2) 0%, rgba(180, 122, 243, 0.2) 100%); background: linear-gradient(to right, rgba(130, 122, 243, 0.2) 0%, rgba(180, 122, 243, 0.2) 100%); filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#d16643', endColorstr='#ffac91', GradientType=1); color: #d16643 !important; }
+.iq-bg-primary { background: rgba(209, 102, 67, 0.2); background: -moz-linear-gradient(left, rgba(209, 102, 67, 0.2) 0%, rgba(255, 172, 145, 0.2) 100%); background: -webkit-gradient(left top, right top, color-stop(0%, rgba(209, 102, 67, 0.2)), color-stop(100%, rgba(255, 172, 145, 0.2))); background: -webkit-linear-gradient(left, rgba(209, 102, 67, 0.2) 0%, rgba(255, 172, 145, 0.2) 100%); background: -o-linear-gradient(left, rgba(209, 102, 67, 0.2) 0%, rgba(255, 172, 145, 0.2) 100%); background: -ms-linear-gradient(left, rgba(209, 102, 67, 0.2) 0%, rgba(255, 172, 145, 0.2) 100%); background: linear-gradient(to right, rgba(209, 102, 67, 0.2) 0%, rgba(255, 172, 145, 0.2) 100%); filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#d16643', endColorstr='#ffac91', GradientType=1); color: #d16643 !important; }
 .iq-bg-secondary { background: #f1f2f1 !important; color: #a09e9e !important; }
 .iq-bg-success { background: #eefff2 !important; color: #27b345 !important; }
-.iq-bg-danger { background: #fff5f4 !important; color: #f14336 !important; }
+.iq-bg-danger { background: #ffddd8 !important; color: #f14336 !important; }
 .iq-bg-warning { background: #fffcf3 !important; color: #fbc647 !important; }
 .iq-bg-info { background: #e5fafc !important; color: #6ce6f4 !important; }
 .iq-bg-dark { background: #f0efef !important; color: #3f414d !important; }
@@ -229,7 +229,7 @@ Background Color Opacity
 .iq-bg-primary-hover:hover { background: #fcdeda !important; }
 .iq-bg-primary-secondary-hover:hover { background: #f1f2f1 !important; }
 .iq-bg-primary-success-hover:hover { background: #eefff2 !important; }
-.iq-bg-primary-danger-hover:hover { background: #fff5f4 !important; }
+.iq-bg-primary-danger-hover:hover { background: #ffddd8 !important; }
 .iq-bg-primary-warning-hover:hover { background: #fffcf3 !important; }
 .iq-bg-primary-info-hover:hover { background: #e5fafc !important; }
 .iq-bg-primary-dark-hover:hover { background: #f0efef !important; }
@@ -237,7 +237,7 @@ Background Color Opacity
 /*----------------------------------------------
 Text Color
 ------------------------------------------------*/
-.text-primary { color: #827af3 !important; }
+.text-primary { color: #d16643 !important; }
 .text-secondary { color: #a09e9e !important; }
 .text-success { color: #27b345 !important; }
 .text-danger { color: #f14336 !important; }
@@ -301,14 +301,14 @@ Card
 
 /*--------------*/
 .nav-pills .nav-item a { color: #393c52; font-family: 'Muli', sans-serif; }
-.nav-pills .nav-link.active, .nav-pills .show>.nav-link { color: #827af3; background: #fcdeda; }
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link { color: #d16643; background: #fcdeda; }
 .nav-pills .nav-link:hover { color: #d16643; }
 
 /*--------------*/
 .nav-tabs { border-bottom: 2px solid #f2edff; margin-bottom: 15px; }
 .nav-tabs .nav-item { margin-bottom: -2px; }
 .nav-tabs .nav-item a { color: #393c52; font-family: 'Muli', sans-serif; border: none; border-bottom: 2px solid transparent; }
-.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active { border-bottom: 2px solid #827af3; color: #827af3; }
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active { border-bottom: 2px solid #D16643; color: #D16643; }
 
 /*---------------------------------------------------------------------
 Background overlay color
@@ -363,7 +363,7 @@ a.bg-primary:focus, a.bg-primary:hover, button.bg-primary:focus, button.bg-prima
 /*----------------------------------------------
 Alert
 ------------------------------------------------*/
-.alert-primary { color: #827af3; border-color: #827af3; background-color: #efeefd; }
+.alert-primary { color: #D16643; border-color: #D16643; background-color: #ffedea; }
 .alert-secondary { color: #a09e9e; border-color: #d6d8d5; background-color: #f1f2f1; }
 .alert-success { color: #27b345; border-color: #b2efb2; background-color: #eefff2; }
 .alert-danger { color: #f14336; border-color: #f7c6c6; background-color: #fff5f4; }
@@ -383,7 +383,7 @@ Alert
 /*----------------------------------------------
 list Group
 ------------------------------------------------*/
-.list-group-item-primary { background-color: #efeefd; color: #827af3; }
+.list-group-item-primary { background-color: #ffedea; color: #D16643; }
 .list-group-item-secondary { color: #a09e9e; background-color: #f1f2f1; }
 .list-group-item-success { color: #27b345; background-color: #eefff2; }
 .list-group-item-danger { color: #f14336; background-color: #fff5f4; }
@@ -392,4 +392,4 @@ list Group
 .list-group-item-light { color: #a09e9e; background-color: #e9edf4; }
 .list-group-item-dark { color: #3f414d; background-color: #f0efef; }
 .list-group-item-action { color: #3f414d; }
-.list-group-item.active { background-color: #827af3; border-color: #827af3; }
+.list-group-item.active { background-color: #D16643; border-color: #D16643; }

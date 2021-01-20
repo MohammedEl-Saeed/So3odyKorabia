@@ -12,7 +12,7 @@
         <div class="iq-card">
             <div class="card-header">
                 <h5 class="card-title">View All Options</h5>
-                <a href="{{route('options.create')}}" class="btn btn-text-primary font-weight-bold btn-fixed" data-palcement="top" data-toggle="tooltip" title="Insert Pharmacy">
+                <a href="{{route('options.create')}}" class="btn btn-text-primary font-weight-bold btn-fixed" data-palcement="top" data-toggle="tooltip" title="Insert option">
                     <i class="fa fa-plus"></i>
                 </a>
             </div>
@@ -43,16 +43,16 @@
                                 <td>{{$item->name}}</td>
                                 <td>{{$item->type}}</td>
                                 <td class="text-center">
-                                    {{--                                    <div class="list-user-action">--}}
-                                    <a href="{{route('options.edit',$item->id)}}" class="btn btn-info">
-                                        Edit
+                                    <a href="{{route('options.edit',$item->id)}}">
+                                        <img data-palcement="bottom" data-toggle="tooltip" title="Edit" src="{{asset('assets/images/icons/edit.svg')}}" class="icons-table" />
                                     </a>
                                     <form action="{{route('options.destroy',$item->id)}}" method="POST">
                                         @csrf
                                         {{method_field('delete')}}
-                                        <button class="btn btn-danger">Delete</button>
+                                        <button class="del-btn">
+                                            <img data-palcement="bottom" data-toggle="tooltip" title="Delete" src="{{asset('assets/images/icons/delete.svg')}}" class="icons-table" />
+                                        </button>
                                     </form>
-                                    {{--                                    </div>--}}
                                 </td>
                             </tr>
                         @endforeach

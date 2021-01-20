@@ -12,7 +12,7 @@
         <div class="iq-card">
             <div class="card-header">
                 <h5 class="card-title">View All Items</h5>
-                <a href="{{route('items.create',$productId)}}" class="btn btn-text-primary font-weight-bold btn-fixed" data-palcement="top" data-toggle="tooltip" title="Insert {{$productId}}">
+                <a href="{{route('items.create',$productId)}}" class="btn btn-text-primary font-weight-bold btn-fixed" data-palcement="top" data-toggle="tooltip" title="إضافة {{$type}}">
                     <i class="fa fa-plus"></i>
                 </a>
             </div>
@@ -51,25 +51,23 @@
                                     </div>
                                 </td>
                                 <td class="text-center">
-{{--                                    <div class="list-user-action">--}}
-                                        <a href="{{route('items.edit',['id'=>$productId,'item'=>$item->id])}}" class="btn btn-primary">
-                                            Edit
+                                    <a href="{{route('items.edit',['id'=>$productId,'item'=>$item->id])}}">
+                                        <img data-palcement="bottom" data-toggle="tooltip" title="Edit" src="{{asset('assets/images/icons/edit.svg')}}" class="icons-table" />
                                     </a>
                                     @if($item->status == 'Available')
-                                        <a href="{{route('items.unavailable',['productId'=>$productId,'id'=>$item->id])}}" class="btn btn-danger">
-                                                Unavailable
+                                        <a href="{{route('items.unavailable',['productId'=>$productId,'id'=>$item->id])}}">
+                                            <img data-palcement="bottom" data-toggle="tooltip" title="Unavailable" src="{{asset('assets/images/icons/unavailabe.svg')}}" class="icons-table" />
                                         </a>
                                     @elseif($item->status == 'Unavailable' || $item->status == 'Sold')
-                                        <a href="{{route('items.available',['productId'=>$productId,'id'=>$item->id])}}" class="btn btn-success">
-                                            Available
+                                        <a href="{{route('items.available',['productId'=>$productId,'id'=>$item->id])}}">
+                                            <img data-palcement="bottom" data-toggle="tooltip" title="Available" src="{{asset('assets/images/icons/available.svg')}}" class="icons-table" />
                                         </a>
                                     @endif
                                     @if($item->status == 'Unavailable' || $item->status == 'Available')
-                                        <a href="{{route('items.sold',['productId'=>$productId,'id'=>$item->id])}}" class="btn btn-warning">
-                                            Sold
+                                        <a href="{{route('items.sold',['productId'=>$productId,'id'=>$item->id])}}">
+                                            <img data-palcement="bottom" data-toggle="tooltip" title="Sold" src="{{asset('assets/images/icons/sold.svg')}}" class="icons-table" />
                                         </a>
                                     @endif
-{{--                                    </div>--}}
                                 </td>
                             </tr>
                         @endforeach

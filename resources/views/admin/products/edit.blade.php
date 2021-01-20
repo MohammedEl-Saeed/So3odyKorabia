@@ -6,8 +6,7 @@
 
 
 <!-- ========================== start new form to add doctor ============================== -->
-<div class="container-fluid">
-    <form id="main-form-to-add-doctor" class="form" method="post" action="{{route('products.update',$item->id)}}" enctype="multipart/form-data">
+<form id="main-form-to-add-doctor" class="form" method="post" action="{{route('products.update',$item->id)}}" enctype="multipart/form-data">
         @csrf
         {{method_field('PUT')}}
     <div class="row">
@@ -27,7 +26,7 @@
                                 @if($item->logo)
                                     <img class="profile-pic img-fluid" src="{{$item->logo}}" alt="profile-pic">
                                 @else
-                                     <img class="profile-pic img-fluid" src="{{asset('assets/plugins/vito/images/user/11.png')}}" alt="profile-pic">
+                                    <img class="profile-pic img-fluid" src="{{asset('assets/plugins/vito/images/user/11.png')}}" alt="profile-pic">
                                 @endif
                                     <div class="p-image">
                                         <a href="#" class="upload-button btn iq-bg-primary">Edit Logo</a>
@@ -73,8 +72,7 @@
                 </div>
         </div>
     </div>
-    </form>
-</div>
+</form>
 <!-- ========================== end new form to add doctor ================================ -->
 @endsection
 @section('script')

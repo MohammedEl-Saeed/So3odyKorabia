@@ -190,8 +190,20 @@ table.dataTable.no-footer
 }
 .iq-email-listbox .iq-email-sender-list>li{
     border-top: none !important;
-    border-bottom: 1px solid #eef0f4;
+    border-bottom: 1px solid #f6eeed;
 }
 .iq-email-listbox .iq-email-sender-list>li:last-of-type{
     border-bottom: none;
+}
+.icons-table{
+    width: 30px !important;
+    display: inline-block;
+    height: 30px !important;
+    /* filter: invert(50%) sepia(7%) saturate(4615%) hue-rotate(322deg) brightness(110%) contrast(104%); */
+    filter: invert(44%) sepia(97%) saturate(472%) hue-rotate(329deg) brightness(91%) contrast(79%);
+    margin-right: 8px;
+}
+.del-btn{
+    border: none;
+    background-color: transparent;
 }

@@ -1,7 +1,8 @@
 <div class="iq-sidebar">
     <div class="iq-sidebar-logo d-flex justify-content-between">
         <a href="{{url('/')}}">
-            <img src="{{asset('assets/images/logos/logo.svg')}}" class="img-fluid" alt="">
+            <img src="{{asset('assets/images/logos/logo.svg')}}" class="img-fluid" alt="meat-village logo">
+            <p class="logo-text" style="padding: 10px 0 0 10px;font-size: 20px;color: #4C2910;"> قرية اللحوم </p>
         </a>
         <div class="iq-menu-bt-sidebar">
             <div class="iq-menu-bt align-self-center">
@@ -19,72 +20,83 @@
     <div id="sidebar-scrollbar">
         <nav class="iq-sidebar-menu">
             <ul class="iq-menu">
-                <li>
+                <li class="{{active_link('products' , 'Sacrifice')}}">
                     <a href="{{route('products.index','Sacrifice')}}" class="iq-waves-effect">
                         <img src="{{asset('assets/images/icons/sheep.svg')}}" class="images-sidebar"/>
                         <span> ذبائح </span>
                     </a>
                 </li>
-                <li>
+
+                <li class="{{active_link('products' , 'Bird')}}">
                     <a href="{{route('products.index','Bird')}}" class="iq-waves-effect">
                         <img src="{{asset('assets/images/icons/chicken.svg')}}" class="images-sidebar">
                         <span > طيور </span>
                     </a>
                 </li>
-                <li>
+
+                <li class="{{active_link('products' , 'Butter')}}">
                     <a href="{{route('products.index','Butter')}}" class="iq-waves-effect">
                         <img src="{{asset('assets/images/icons/butter.svg')}}" class="images-sidebar">
                         <span > سمن </span>
                     </a>
                 </li>
-                <li>
+
+                <li class="{{active_link('products' , 'Milk')}}">
                     <a href="{{route('products.index','Milk')}}" class="iq-waves-effect">
                         <img src="{{asset('assets/images/icons/milk.svg')}}" class="images-sidebar">
                         <span >ألبان  </span>
                     </a>
                 </li>
-                <li>
+
+                <li class="{{active_link('products' , 'Egg')}}">
                     <a href="{{route('products.index','Egg')}}" class="iq-waves-effect">
                         <img src="{{asset('assets/images/icons/egg.svg')}}" class="images-sidebar">
                         <span > بيض </span>
                     </a>
                 </li>
-                <li>
+
+                <li class="{{active_link('options')}}">
                     <a href="{{route('options.index')}}" class="iq-waves-effect">
                         <img src="{{asset('assets/images/icons/options.png')}}" class="images-sidebar">
                         <span >إضافات </span>
                     </a>
                 </li>
-                <li>
+
+                <li class="{{active_link('offers')}}">
                     <a href="{{route('offers.index')}}" class="iq-waves-effect">
                         <img src="{{asset('assets/images/icons/offer.svg')}}" class="images-sidebar">
                         <span > عروض </span>
                     </a>
                 </li>
-                <li>
+
+                <li class="{{active_link('orders')}}">
                     <a href="{{route('orders.index')}}" class="iq-waves-effect">
                         <img src="{{asset('assets/images/icons/order.png')}}" class="images-sidebar">
                         <span > طلبات </span>
                     </a>
                 </li>
-                <li>
+
+                <li class="{{active_link('cities')}}">
                     <a href="{{route('cities.index')}}" class="iq-waves-effect">
                         <img src="{{asset('assets/images/icons/place.png')}}" class="images-sidebar">
                         <span > المناطق </span>
                     </a>
                 </li>
-                <li>
+
+                <li class="{{active_link('users')}}">
                     <a href="{{route('users.index')}}" class="iq-waves-effect">
                         <img src="{{asset('assets/images/icons/farmer.png')}}" class="images-sidebar">
                         <span > العملاء </span>
                     </a>
                 </li>
-                <li>
+
+                <li class="{{active_link('show' , 'settings')}}">
                     <a href="{{route('show.settings.form')}}" class="iq-waves-effect">
                         <img src="{{asset('assets/images/icons/settings.png')}}" class="images-sidebar">
                         <span > الإعدادات </span>
                     </a>
                 </li>
+
             </ul>
         </nav>
         <div class="p-3"></div>
@@ -224,16 +236,16 @@
                             <h5 class="mb-0 text-white line-height">Hello Nik jone</h5>
                             <span class="text-white font-size-12">Available</span>
                             </div>
-                            <a href="profile.html" class="iq-sub-card iq-bg-primary-hover">
-                            <div class="media align-items-center">
-                                <div class="rounded iq-card-icon iq-bg-primary">
-                                    <i class="ri-file-user-line"></i>
+                            <a href="{{route('user.profile')}}" class="iq-sub-card iq-bg-primary-hover">
+                                <div class="media align-items-center">
+                                    <div class="rounded iq-card-icon iq-bg-primary">
+                                        <i class="ri-file-user-line"></i>
+                                    </div>
+                                    <div class="media-body ml-3">
+                                        <h6 class="mb-0 ">My Profile</h6>
+                                        <p class="mb-0 font-size-12">View personal profile details.</p>
+                                    </div>
                                 </div>
-                                <div class="media-body ml-3">
-                                    <h6 class="mb-0 ">My Profile</h6>
-                                    <p class="mb-0 font-size-12">View personal profile details.</p>
-                                </div>
-                            </div>
                             </a>
                             <a href="profile-edit.html" class="iq-sub-card iq-bg-primary-hover">
                             <div class="media align-items-center">

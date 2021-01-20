@@ -6,9 +6,8 @@
 
 
 <!-- ========================== start new form to add doctor ============================== -->
-<div class="container-fluid">
-    <form id="main-form-to-add-doctor" class="form" method="post" action="{{route('products.store')}}" enctype="multipart/form-data">
-        @csrf
+<form id="main-form-to-add-doctor" class="form" method="post" action="{{route('products.store')}}" enctype="multipart/form-data">
+    @csrf
     <div class="row">
         <div class="col-lg-3">
             <div class="iq-card">
@@ -73,8 +72,7 @@
                 </div>
         </div>
     </div>
-    </form>
-</div>
+</form>
 <!-- ========================== end new form to add doctor ================================ -->
 @endsection
 @section('script')

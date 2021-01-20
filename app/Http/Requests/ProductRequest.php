@@ -26,7 +26,7 @@ class ProductRequest extends FormRequest
         $data  = [
             'name' => 'required',
             'description'=>'required',
-            'logo' => 'required|mimes:jpeg,jpg,bmp,png|max:20240',
+            'logo' => 'required|mimes:jpeg,jpg,bmp,png,svg|max:20240',
             'type' => 'in:Sacrifice,Bird,Butter,Milk,Egg',
         ];
         if(!is_null($this->logo_path)){
