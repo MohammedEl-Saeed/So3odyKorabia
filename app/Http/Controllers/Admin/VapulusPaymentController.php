@@ -61,6 +61,7 @@ class VapulusPaymentController extends Controller
         $decodedResponse = json_decode($response);
         if ($decodedResponse->statusCode == 200) {
             $htmlBodyContent = $decodedResponse->data->htmlBodyContent;
+            ini_set('memory_limit', '-1');
             return view('payment.test_payment', compact('htmlBodyContent'));
         } else {
             return $response;

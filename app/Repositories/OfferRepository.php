@@ -43,7 +43,6 @@ class OfferRepository
             $image_path = FileHelper::upload_file('/uploads/users/images/',$request['image']);
             $request->image = $image_path;
         }
-        dd($request->image);
           return $this->model::create($request->all());
     }
 
