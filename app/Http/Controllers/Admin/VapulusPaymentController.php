@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CreatePayFormRequest;
-use App\Models\Order;
 use Illuminate\Http\Request;
 
 class VapulusPaymentController extends Controller
@@ -27,11 +25,12 @@ class VapulusPaymentController extends Controller
     }
 
     //https://repl.it/@islamvapulus/php-http-request-with-hashing
-    function generateHash($hashSecret,$postData) {
+    function generateHash($hashSecret, $postData)
+    {
         ksort($postData);
-        $message="";
-        $appendAmp=0;
-        foreach($postData as $key => $value) {
+        $message = "";
+        $appendAmp = 0;
+        foreach ($postData as $key => $value) {
             if (strlen($value) > 0) {
                 if ($appendAmp == 0) {
                     $message .= $key . '=' . $value;
@@ -46,17 +45,45 @@ class VapulusPaymentController extends Controller
         return hash_hmac('sha256', $message, $secret);
     }
 
-    function HTTPPost($url, array $params) {
+    function HTTPPost($url, array $params)
+    {
         $query = http_build_query($params);
-        $ch    = curl_init();
+        $ch = curl_init();
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HEADER, false);
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $query);
+
         $response = curl_exec($ch);
         curl_close($ch);
+
+        return $response;
+    }
+
+    public function pay(Request $request)
+    {
+        $postData = array(
+            'sessionId' => $request->sessionId,
+            'mobileNumber' => '01124772675',
+            'email' => 'dev.teraninja28@gmail.com',
+            'amount' => '15.0',
+            'firstName' => 'Mohammed',
+            'lastName' => 'El-Saeed',
+            'onAccept' => url(route('vapulusPayment.successCallback', ['order_id' => $request->order_id])),
+            'onFail' => url(route('vapulusPayment.failCallback', ['order_id' => $request->order_id]))
+        );
+
+        $secureHash = '6fd7d27e34353562626362632d343131';
+        $postData['hashSecret'] = $this->generateHash($secureHash, $postData);
+
+        $postData['appId'] = '738bdc3e-167e-4afb-aeb9-a3a535c8ac53';
+        $postData['password'] = '12345678A';
+
+        $url = 'https://api.vapulus.com:1338/app/session/pay';
+
+        $response = $this->HTTPPost($url, $postData);
 
         $decodedResponse = json_decode($response);
         if ($decodedResponse->statusCode == 200) {
@@ -65,31 +92,16 @@ class VapulusPaymentController extends Controller
         } else {
             return $response;
         }
-//        return $response;
+
     }
 
-    public function pay(Request $request){
-        $postData = array(
-            'sessionId' => $request->sessionId,
-            'mobileNumber' => '01124772675',
-            'email' => 'dev.teraninja28@gmail.com',
-            'amount' => '15.0',
-            'firstName' => 'Mohammed',
-            'lastName' => 'El-Saeed',
-            'onAccept' => 'https://example.com/success',
-            'onFail' => 'http://example.com/fail'
-        );
+    public function successCallback($order_id)
+    {
+        dd("success payment method callback " . $order_id);
+    }
 
-        $secureHash= '6fd7d27e34353562626362632d343131';
-        $postData['hashSecret'] = $this->generateHash($secureHash,$postData);
-
-        $postData['appId']='738bdc3e-167e-4afb-aeb9-a3a535c8ac53';
-        $postData['password']='12345678A';
-
-        $url ='https://api.vapulus.com:1338/app/session/pay';
-
-        $output = $this->HTTPPost($url,$postData);
-
-        print_r($output);
+    public function failCallback($order_id)
+    {
+        dd("fail payment method callback " . $order_id);
     }
 }
