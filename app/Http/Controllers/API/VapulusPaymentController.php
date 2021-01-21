@@ -22,7 +22,7 @@ class VapulusPaymentController extends Controller
         $order = Order::find($request->order_id);
         $response = [
             'data' => $order,
-            "url" => url(route('vapulusPayment.payFormWithType', $data))
+            "url" => url(route('vapulusPayment.payForm', $data))
         ];
         return response()->json($response);
     }
