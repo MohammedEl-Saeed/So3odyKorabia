@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 
 class VapulusPaymentController extends Controller
@@ -13,9 +15,9 @@ class VapulusPaymentController extends Controller
 
     public function __construct()
     {
-        $this->secureHash = 'a59f1cc564356264356632392d313539';
-        $this->appID = 'cb716c4b-e085-4a8e-83cd-90a3e68a1640';
-        $this->password = '123456';
+        $this->secureHash = '6fd7d27e34353562626362632d343131';
+        $this->appID = '738bdc3e-167e-4afb-aeb9-a3a535c8ac53';
+        $this->password = '12345678A';
     }
 
 
@@ -75,11 +77,11 @@ class VapulusPaymentController extends Controller
             'onFail' => url(route('vapulusPayment.failCallback', ['order_id' => $request->order_id]))
         );
 
-        $secureHash = '6fd7d27e34353562626362632d343131';
+        $secureHash = $this->secureHash;
         $postData['hashSecret'] = $this->generateHash($secureHash, $postData);
 
-        $postData['appId'] = '738bdc3e-167e-4afb-aeb9-a3a535c8ac53';
-        $postData['password'] = '12345678A';
+        $postData['appId'] = $this->appID;
+        $postData['password'] = $this->password;
 
         $url = 'https://api.vapulus.com:1338/app/session/pay';
 
@@ -95,17 +97,57 @@ class VapulusPaymentController extends Controller
 
     }
 
-    public function successCallback($order_id)
+    public function successCallback($order_id, Request $request)
     {
-        $message = 'success payment';
-        return view('payment.success_payment', compact('message'));
+        if ($this->checkTranscationID($request->transactionId)) {
+            $trancaction = new Transaction();
+            $order = Order::findOrFail($order_id);
+            $trancaction->user_id = $order->user_id;
+            $trancaction->order_id = $order_id;
+            $trancaction->transaction_id = $request->transactionId;
+            $trancaction->amount = $order->total_price;
+            $trancaction->status = $request->status;
+            $trancaction->save();
+            $message = 'success payment';
+            return view('payment.success_payment', compact('message'));
+        }
+        $message = 'failed payment';
+        return view('payment.fail_payment', compact('message'));
 //        dd("success payment method callback " . $order_id);
     }
 
-    public function failCallback($order_id)
+    public function failCallback($order_id, Request $request)
     {
+        if ($this->checkTranscationID($request->transactionId)) {
+            $trancaction = new Transaction();
+            $order = Order::findOrFail($order_id);
+            $trancaction->user_id = $order->user_id;
+            $trancaction->order_id = $order_id;
+            $trancaction->transactionId = $request->transactionId;
+            $trancaction->amount = $order->total_price;
+            $trancaction->status = $request->status;
+            $trancaction->save();
+        }
         $message = 'failed payment';
         return view('payment.fail_payment', compact('message'));
 //        dd("fail payment method callback " . $order_id);
+    }
+
+    public function checkTranscationID($transcationID)
+    {
+        $postData = array(
+            'transactionId' => $transcationID
+        );
+        $postData['hashSecret'] = $this->generateHash($this->secureHash, $postData);
+        $postData['appId'] = $this->appID;
+        $postData['password'] = $this->password;
+        $url = 'https://api.vapulus.com:1338/app/transactionInfo';
+        $response = $this->HTTPPost($url, $postData);
+        $decodedResponse = json_decode($response);
+        if ($decodedResponse->statusCode == 200) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
