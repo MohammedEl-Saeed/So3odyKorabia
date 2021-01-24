@@ -75,6 +75,8 @@
         <script src="{{asset('assets/plugins/datatable/js/vfs_fonts.js')}}"></script>
         <script src="{{asset('assets/plugins/datatable/js/buttons.html5.min.js')}}"></script>
         <script src="{{asset('assets/plugins/datatable/js/buttons.print.min.js')}}"></script>
+        <script src="{{asset('service-worker.js')}}"></script>
+        <script src="https://js.pusher.com/beams/1.0/push-notifications-cdn.js"></script>
         <!-- ===============================  end datatable js files =============================== -->
         <script>
             $(document).ready(function() {
@@ -149,6 +151,16 @@
                     }
                 });
             } );
+{{--        </script>--}}
+{{--        <script>--}}
+            const beamsClient = new PusherPushNotifications.Client({
+                instanceId: '72becb2c-5c2a-4830-96d0-60da5a3172ab',
+            });
+
+            beamsClient.start()
+                .then(() => beamsClient.addDeviceInterest('hello'))
+                .then(() => console.log('Successfully registered and subscribed!'))
+                .catch(console.error);
         </script>
         @yield('script')
         <!-- ===============================  end vito js files ================================= -->

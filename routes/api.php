@@ -30,8 +30,8 @@ Route::group([
     Route::post('/edit-profile', [\App\Http\Controllers\Auth\AuthController::class, 'editProfile'])->middleware('jwtMiddleware');
 
     Route::post('/send-code', '\App\Http\Controllers\Auth\AuthController@sendCode');
-    Route::post('/verify-code', 'Auth\AuthController@checkCode');
-    Route::post('/reset-password', 'Auth\AuthController@resetNewPassword');
+    Route::post('/verify-code', '\App\Http\Controllers\Auth\AuthController@checkCode');
+    Route::post('/reset-password', '\App\Http\Controllers\Auth\AuthController@resetNewPassword');
 
 });
 //Route::Post('user/login', 'Auth\AuthController@login')->name('user.login');
