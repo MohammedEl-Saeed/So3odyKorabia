@@ -27,7 +27,7 @@ class AuthController extends Controller
     public function __construct(UserService $service)
     {
         $this->service = $service;
-        $this->middleware('auth:api', ['except' => ['login', 'register','sendCode','verifyCode','resetPassword']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register','sendCode','checkCode','resetNewPassword']]);
     }
 
     /**
@@ -44,12 +44,10 @@ class AuthController extends Controller
         if ($validator->fails()) {
             return $this->prepareResponse(true,$validator->errors(),'Error validation',null,1,200) ;
         }
-
-//        if (! $token = auth()->attempt($validator->validated())) {
-        if (! $token = JWTAuth::attempt(['phone' => $request->phone,'password' => $request->password])){
-            return $this->prepareResponse(true,json_decode('{"error":["Incorrect Phone no. or Password"]}'),'Invalid Credential',null,1,200) ;
+        $this->service->checkVerified($request);
+        if (!$token = JWTAuth::attempt(['phone' => $request->phone, 'password' => $request->password])) {
+            return $this->prepareResponse(true, json_decode('{"error":["Incorrect Phone no. or Password"]}'), 'Invalid Credential', null, 1, 200);
         }
-
         return $this->createNewToken($token);
     }
 
@@ -181,14 +179,16 @@ class AuthController extends Controller
             'password_confirmation'=> 'required|same:password'
         ]);
         if($validator->fails()){
-            return response()->json($validator->errors()->toJson(), 400);
+//            return response()->json($validator->errors()->toJson(), 400);
+            return $this->prepare_response(true,$validator->errors(),'Error validation',null,1,400) ;
         }
         $data = $this->service->resetPassword($request);
         if($data == 'error'){
-            return response()->json(['error'=>true,'status'=>1,'message'=>'try again connection failed'],200);
+//            return response()->json(['error'=>true,'status'=>1,'message'=>'try again connection failed'],200);
+            return $this->prepare_response(true,null,'try again connection failed',null,1,200) ;
         }else{
-            return response()->json(['error'=>false,'status'=>0,'message'=>'password has been changed'],200);
-
+//            return response()->json(['error'=>false,'status'=>0,'message'=>'password has been changed'],200);
+            return $this->prepare_response(false,null,'password has been changed',null,0,200) ;
         }
     }
 
@@ -202,8 +202,7 @@ class AuthController extends Controller
             }
             $data = $this->service->checkCode($request);
         if($data){
-            return $this->prepare_response(false,$validator->errors(),'Code Checked please reset you password',null,1,200) ;
-//            return response()->json(['error'=>false,'status'=>200, 'data'=> $data,'message'=>'Code Checked please reset you password'],200);
+            return $this->prepare_response(false,$validator->errors(),'Code Checked please reset you password',null,0,200) ;
         }else{
             return $this->prepare_response(true,$validator->errors(),'try again code is wrong',null,1,200) ;
 //            return response()->json(['error'=>true,'status'=>1,'message'=>'try again code is wrong'],200);

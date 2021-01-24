@@ -88,10 +88,23 @@ class UserService
         $user = User::where('phone',$request->phone)->where('code',$request->code)->first();
         if(!is_null($user)){
             $user->code_verified = 1;
-            $user->save;
+            $user->save();
             return $user;
         } else{
             return false;
+        }
+    }
+
+    public function checkVerified($request){
+        $user = User::where('phone',$request->phone);
+
+        if (is_null($user)){
+            return $this->prepareResponse(true, json_decode('{"error":["Incorrect Phone no. or Password"]}'), 'Please verify your phone', null, 1, 200);
+        } else{
+            if($user->code_verified == 0){
+                return $this->prepareResponse(true, json_decode('{"error":["you are not verified"]}'), 'Please verify your phone', null, 1, 200);
+            }
+            return true;
         }
     }
 }

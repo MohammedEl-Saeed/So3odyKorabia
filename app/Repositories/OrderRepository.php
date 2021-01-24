@@ -51,8 +51,9 @@ class OrderRepository extends BaseRepository
     public function show($id){
         $data = [];
         $order = $this->traitShow($this->model, $id);
-        $data['total_price'] = $order->total_price;
         $data['order_id'] = $order->id;
+        $data['total_price'] = $order->total_price;
+        $data['status'] = $order->status;
         $data['created_at'] = $order->created_at;
         $data['updated_at'] = $order->updated_at;
         $data['user'] = $order->user->getData();
