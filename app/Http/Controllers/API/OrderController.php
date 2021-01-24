@@ -102,7 +102,7 @@ class OrderController extends Controller
             $data = $this->service->checkCode($request->code);
             $message = 'return Successfully';
         }
-        event(new BeamsEvent(['1'], $data));
+//        event(new BeamsEvent(['1'], $data));
 
         //
 //        event(new BeamsEvent($this->getUsers([$patient_id]),$this->getNotificationObject('Reservation',

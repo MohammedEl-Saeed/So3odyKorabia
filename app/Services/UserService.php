@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Helpers\FileHelper;
 use App\Helpers\SMSHelper;
+use App\Http\Traits\ResponseTraits;
 use App\Models\User;
 use App\Repositories\UserRepository;
  use App\Http\Traits\BasicTrait;
@@ -16,7 +17,7 @@ use Illuminate\Database\Eloquent\Model;
 class UserService
 {
 
-   use  BasicTrait;
+   use  BasicTrait, ResponseTraits;
     protected $model ,$user;
 
     public function __construct()
@@ -96,15 +97,15 @@ class UserService
     }
 
     public function checkVerified($request){
-        $user = User::where('phone',$request->phone);
-
+        $user = User::where('phone',$request->phone)->first();
         if (is_null($user)){
-            return $this->prepareResponse(true, json_decode('{"error":["Incorrect Phone no. or Password"]}'), 'Please verify your phone', null, 1, 200);
+            $message = '{"error":["Incorrect Phone no. or Password"]}';
         } else{
             if($user->code_verified == 0){
-                return $this->prepareResponse(true, json_decode('{"error":["you are not verified"]}'), 'Please verify your phone', null, 1, 200);
+               $message = '{"error":["you are not verified"]}' ;
             }
-            return true;
+            $message = 'success';
         }
+        return $message;
     }
 }

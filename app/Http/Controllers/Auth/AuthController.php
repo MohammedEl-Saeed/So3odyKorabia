@@ -37,18 +37,24 @@ class AuthController extends Controller
      */
     public function login(Request $request){
         $validator = Validator::make($request->all(), [
-            'phone' => 'required',
+            'phone' => 'required|exists:users',
             'password' => 'required|string|min:6',
+        ],[
+            'phone.exists' => 'Incorrect Phone no. or Password',
         ]);
 
         if ($validator->fails()) {
             return $this->prepareResponse(true,$validator->errors(),'Error validation',null,1,200) ;
         }
-        $this->service->checkVerified($request);
-        if (!$token = JWTAuth::attempt(['phone' => $request->phone, 'password' => $request->password])) {
-            return $this->prepareResponse(true, json_decode('{"error":["Incorrect Phone no. or Password"]}'), 'Invalid Credential', null, 1, 200);
+        $user = User::where('phone',$request->phone)->where('code_verified',1)->first();
+        if($user) {
+            if (!$token = JWTAuth::attempt(['phone' => $request->phone, 'password' => $request->password])) {
+                return $this->prepareResponse(true, json_decode('{"error":["Incorrect Phone no. or Password"]}'), 'Invalid Credential', null, 1, 200);
+            }
+            return $this->createNewToken($token);
+        } else{
+            return $this->prepareResponse(true, json_decode('{"error":["you are not verified"]}'), 'you are not verified', null, 1, 200);
         }
-        return $this->createNewToken($token);
     }
 
     /**
@@ -123,7 +129,7 @@ class AuthController extends Controller
         $data['token'] = $token;
         $data['token_type'] = 'bearer';
         $hasCart = $this->checkCart();
-        return   $this->prepareResponse(false,null,'User successfully logged in',$data,0,200,$hasCart) ;
+        return $this->prepareResponse(false,null,'User successfully logged in',$data,0,200,$hasCart) ;
 
 //        return response()->json([
 //            'access_token' => $token,
