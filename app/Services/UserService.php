@@ -72,16 +72,15 @@ class UserService
         return $this->user->resetPassword($request);
     }
 
-    public function sendCode($request)
+    public function sendCode($phone, $phoneAttribute = 'phone')
     {
         $helper = new FileHelper();
         $code = $helper->generateRandomString(5);
-//        dd($code);
-        $user = User::where('phone',$request->phone);
+        $user = User::where($phoneAttribute, $phone);
         $user->update(['code'=>$code]);
         $user = $user->first();
         $message = new SMSHelper();
-        $message->sendMessage('Please verify your account with this code: '.$user->code, $user->phone);
+        $message->sendMessage('Please verify your account with this code: '.$user->code, $user->$phoneAttribute);
     }
 
     public function checkCode($request)
@@ -96,16 +95,16 @@ class UserService
         }
     }
 
-    public function checkVerified($request){
-        $user = User::where('phone',$request->phone)->first();
-        if (is_null($user)){
-            $message = '{"error":["Incorrect Phone no. or Password"]}';
+    public function checkPhone($request){
+        $user = User::where('id',Auth::id())
+            ->where('new_phone',$request->new_phone)
+            ->where('code',$request->code)->first();
+        if(!is_null($user)){
+            $user->phone = $request->new_phone;
+            $user->save();
+            return $user;
         } else{
-            if($user->code_verified == 0){
-               $message = '{"error":["you are not verified"]}' ;
-            }
-            $message = 'success';
+            return false;
         }
-        return $message;
     }
 }

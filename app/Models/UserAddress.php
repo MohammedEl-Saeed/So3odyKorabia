@@ -15,4 +15,13 @@ class UserAddress extends Model
         return $this->belongsTo(City::class);
     }
 
+    public function getData(){
+        $data = [];
+        $data['id'] = $this->id;
+        $data['name'] = $this->name;
+        $data['email'] = $this->email;
+        $data['type'] = $this->type;
+        $data['image'] = $this->image;
+        return $data;
+    }
 }

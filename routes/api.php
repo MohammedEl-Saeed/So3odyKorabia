@@ -28,6 +28,8 @@ Route::group([
     Route::post('/refresh', [\App\Http\Controllers\Auth\AuthController::class, 'refresh']);
     Route::get('/user-profile', [\App\Http\Controllers\Auth\AuthController::class, 'userProfile']);
     Route::post('/edit-profile', [\App\Http\Controllers\Auth\AuthController::class, 'editProfile'])->middleware('jwtMiddleware');
+    Route::post('/change-phone', [\App\Http\Controllers\Auth\AuthController::class, 'changePhone'])->middleware('jwtMiddleware');
+    Route::post('/verify-phone', [\App\Http\Controllers\Auth\AuthController::class, 'verifyPhone'])->middleware('jwtMiddleware');
 
     Route::post('/send-code', '\App\Http\Controllers\Auth\AuthController@sendCode');
     Route::post('/verify-code', '\App\Http\Controllers\Auth\AuthController@checkCode');

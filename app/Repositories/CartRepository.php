@@ -127,6 +127,7 @@ class CartRepository extends BaseRepository
     public function showCartInfo(){
         $data = [];
         $cart = Cart::where('user_id',Auth::id())->first();
+        $results = [];
         if ($cart) {
 //            $this->updateCartPrice();
             $data['total_price'] = $cart->total_price;
@@ -147,6 +148,9 @@ class CartRepository extends BaseRepository
     }
 
     public function delete($cartDetailsId){
+        $cart = Cart::where('user_id',Auth::id())->first();
+        $cart->total_price = $cart->total_price - $this->model::find($cartDetailsId)->total_price;
+        $cart->update();
         $this->traitDelete($this->model,$cartDetailsId);
         $data = $this->traitIndex($this->model);
         if(count($data) == 0){

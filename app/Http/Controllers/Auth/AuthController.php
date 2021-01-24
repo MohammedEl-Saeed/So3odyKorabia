@@ -83,7 +83,7 @@ class AuthController extends Controller
 //            'message' => 'User successfully registered',
 //            'user' => $user
 //        ], 201);
-        return   $this->prepare_response(false,null,'User successfully registered',$user,0,200) ;
+        return   $this->prepare_response(false,null,'User successfully registered',$user,0,201) ;
     }
 
 
@@ -94,7 +94,6 @@ class AuthController extends Controller
      */
     public function logout() {
         auth()->logout();
-
         return response()->json(['message' => 'User successfully signed out']);
     }
 
@@ -125,12 +124,14 @@ class AuthController extends Controller
      */
     protected function createNewToken($token){
         $data = [];
-        $data['user'] = auth()->user();
+        $user = auth()->user();
+        $data['user'] = $user;
+        $data['address'] = $user->addresses->where('default_address',1)->first()->toArray();
+        unset($user['addresses']);
         $data['token'] = $token;
         $data['token_type'] = 'bearer';
         $hasCart = $this->checkCart();
         return $this->prepareResponse(false,null,'User successfully logged in',$data,0,200,$hasCart) ;
-
 //        return response()->json([
 //            'access_token' => $token,
 //            'token_type' => 'bearer',
@@ -173,8 +174,7 @@ class AuthController extends Controller
 //            return response()->json($validator->errors()->toJson(), 400);
             return $this->prepare_response(true,$validator->errors(),'Error validation',$request->all(),1,200) ;
         }
-        $this->service->sendCode($request);
-//        return response()->json(['error'=>true,'status'=>200,'message'=>'We send code to your mobile, please check it!'],200);
+        $this->service->sendCode($request->phone);
         return $this->prepare_response(false,null,'We send code to your mobile, please check it!',null,0,200) ;
     }
 
@@ -215,16 +215,49 @@ class AuthController extends Controller
         }
     }
 
-    public function prepareResponse($error = false, $errors = null, $message = '', $data = null, $status = 0, $server_status,$hasCart = false)
+    public function prepareResponse($error = false, $errors = null, $message = '', $data = null, $status = 0, $server_status,$hasCart = false, $address = null)
     {
         $array = array(
             'status'  =>$status,
             'error'   => $error,
             'errors'  => $errors,
             'haseCart'    => $hasCart,
+            'address'    => $address,
             'message' => $message,
             'data'    => $data
         );
         return response()->json($array ,$server_status);
+    }
+
+    public function changePhone(Request $request){
+        $validator = Validator::make($request->all(), [
+            'new_phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|unique:users,phone',
+        ]);
+        if($validator->fails()){
+//            return response()->json($validator->errors()->toJson(), 400);
+            return $this->prepare_response(true,$validator->errors(),'Error validation',$request->all(),1,200) ;
+        }
+        $user = \auth()->user();
+        $user->new_phone = $request->new_phone;
+        $user->save();
+        $this->service->sendCode($request->new_phone,'new_phone');
+        return $this->prepare_response(false,null,'We send code to your mobile, please check it!',null,0,200) ;
+
+    }
+
+    public function verifyPhone(Request $request){
+        $validator = Validator::make($request->all(), [
+            'new_phone' => 'required|exists:users,new_phone',
+            'code' => 'required|exists:users,code',
+        ]);
+        if($validator->fails()){
+            return $this->prepare_response(true,$validator->errors(),'Error validation',null,1,200) ;
+        }
+        $data = $this->service->checkPhone($request);
+        if($data){
+            return $this->prepare_response(false,$validator->errors(),'Code Checked your phone is changed',null,0,200) ;
+        }else{
+            return $this->prepare_response(true,$validator->errors(),'try again code is wrong',null,1,200) ;
+        }
     }
 }
