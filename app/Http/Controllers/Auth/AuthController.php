@@ -126,7 +126,7 @@ class AuthController extends Controller
         $data = [];
         $user = auth()->user();
         $data['user'] = $user;
-        $data['address'] = $user->addresses->where('default_address',1)->first()->toArray();
+        $data['address'] = $user->addresses->where('default_address',1)->first();
         unset($user['addresses']);
         $data['token'] = $token;
         $data['token_type'] = 'bearer';
