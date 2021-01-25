@@ -215,14 +215,13 @@ class AuthController extends Controller
         }
     }
 
-    public function prepareResponse($error = false, $errors = null, $message = '', $data = null, $status = 0, $server_status,$hasCart = false, $address = null)
+    public function prepareResponse($error = false, $errors = null, $message = '', $data = null, $status = 0, $server_status,$hasCart = false)
     {
         $array = array(
             'status'  =>$status,
             'error'   => $error,
             'errors'  => $errors,
             'haseCart'    => $hasCart,
-            'address'    => $address,
             'message' => $message,
             'data'    => $data
         );

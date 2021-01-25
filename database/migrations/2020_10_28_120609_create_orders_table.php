@@ -17,7 +17,9 @@ class CreateOrdersTable extends Migration
             $table->bigIncrements('id');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->double('total_price')->default(0);
-            $table->enum('status', ['Waiting','Accepted', 'Rejected','InProgress','Done']);
+            $table->tinyInteger('payment_type')->default(0);
+            $table->text('transfer_image')->nullable();
+            $table->enum('status', ['Waiting','Accepted', 'Rejected','InProgress','Inway','Done']);
             $table->timestamps();
         });
     }
