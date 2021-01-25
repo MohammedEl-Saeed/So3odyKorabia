@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\OptionRequest;
+use App\Models\OptionType;
 use App\Services\OptionService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
@@ -34,7 +35,8 @@ class OptionController extends Controller
      */
     public function create()
     {
-        $types = Config::get('constants.OptionTypes');
+//        $types = Config::get('constants.OptionTypes');
+        $types = $this->service->getOptionTypes();
         return view('admin.options.insert', compact('types'));
     }
 
@@ -71,7 +73,8 @@ class OptionController extends Controller
     public function edit($id)
     {
         $item = $this->service->show($id);
-        $types = Config::get('constants.OptionTypes');
+//        $types = Config::get('constants.OptionTypes');
+        $types = $this->service->getOptionTypes();
         return view('admin.options.edit', compact('item', 'types'));
     }
 

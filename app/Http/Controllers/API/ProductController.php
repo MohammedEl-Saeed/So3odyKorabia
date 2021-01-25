@@ -8,7 +8,9 @@ use App\Services\ItemService;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
 use App\Http\Traits\ResponseTraits;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class ProductController extends Controller
 {
@@ -37,9 +39,11 @@ class ProductController extends Controller
     }
 
     public function getMainCategories(){
-        $data = $this->product_service->getMainCategories();
+        // to get authenticate user if he logged in and send token to check if he hasCart
+//        $user = auth('api')->user();
         $hasCart = $this->checkCart();
         $phone = $this->getSitePhone();
+        $data = $this->product_service->getMainCategories();
         return  $this->prepare_response(false,null,'return Successfully',$data,0 ,200, $hasCart, $phone);
     }
 

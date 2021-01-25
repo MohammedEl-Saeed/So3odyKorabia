@@ -27,7 +27,7 @@ class AuthController extends Controller
     public function __construct(UserService $service)
     {
         $this->service = $service;
-        $this->middleware('auth:api', ['except' => ['login', 'register']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register','sendCode','checkCode','resetNewPassword']]);
     }
 
     /**
@@ -37,20 +37,24 @@ class AuthController extends Controller
      */
     public function login(Request $request){
         $validator = Validator::make($request->all(), [
-            'phone' => 'required',
+            'phone' => 'required|exists:users',
             'password' => 'required|string|min:6',
+        ],[
+            'phone.exists' => 'Incorrect Phone no. or Password',
         ]);
 
         if ($validator->fails()) {
-            return $this->prepare_response(true,$validator->errors(),'Error validation',null,1,200) ;
+            return $this->prepareResponse(true,$validator->errors(),'Error validation',null,1,200) ;
         }
-
-//        if (! $token = auth()->attempt($validator->validated())) {
-        if (! $token = JWTAuth::attempt(['phone' => $request->phone,'password' => $request->password])){
-            return $this->prepare_response(true,json_decode('{"error":["Incorrect Phone no. or Password"]}'),'Invalid Credential',null,1,200) ;
+        $user = User::where('phone',$request->phone)->where('code_verified',1)->first();
+        if($user) {
+            if (!$token = JWTAuth::attempt(['phone' => $request->phone, 'password' => $request->password])) {
+                return $this->prepareResponse(true, json_decode('{"error":["Incorrect Phone no. or Password"]}'), 'Invalid Credential', null, 1, 200);
+            }
+            return $this->createNewToken($token);
+        } else{
+            return $this->prepareResponse(true, json_decode('{"error":["you are not verified"]}'), 'you are not verified', null, 1, 200);
         }
-
-        return $this->createNewToken($token);
     }
 
     /**
@@ -79,7 +83,7 @@ class AuthController extends Controller
 //            'message' => 'User successfully registered',
 //            'user' => $user
 //        ], 201);
-        return   $this->prepare_response(false,null,'User successfully registered',$user,0,200) ;
+        return   $this->prepare_response(false,null,'User successfully registered',$user,0,201) ;
     }
 
 
@@ -90,7 +94,6 @@ class AuthController extends Controller
      */
     public function logout() {
         auth()->logout();
-
         return response()->json(['message' => 'User successfully signed out']);
     }
 
@@ -121,12 +124,14 @@ class AuthController extends Controller
      */
     protected function createNewToken($token){
         $data = [];
-        $data['user'] = auth()->user();
+        $user = auth()->user();
+        $data['user'] = $user;
+        $data['address'] = $user->addresses->where('default_address',1)->first()->toArray();
+        unset($user['addresses']);
         $data['token'] = $token;
         $data['token_type'] = 'bearer';
         $hasCart = $this->checkCart();
-        return   $this->prepare_response(false,null,'User successfully logged in',$data,0,200,$hasCart) ;
-
+        return $this->prepareResponse(false,null,'User successfully logged in',$data,0,200,$hasCart) ;
 //        return response()->json([
 //            'access_token' => $token,
 //            'token_type' => 'bearer',
@@ -169,25 +174,27 @@ class AuthController extends Controller
 //            return response()->json($validator->errors()->toJson(), 400);
             return $this->prepare_response(true,$validator->errors(),'Error validation',$request->all(),1,200) ;
         }
-        $this->service->sendCode($request);
-//        return response()->json(['error'=>true,'status'=>200,'message'=>'We send code to your mobile, please check it!'],200);
+        $this->service->sendCode($request->phone);
         return $this->prepare_response(false,null,'We send code to your mobile, please check it!',null,0,200) ;
     }
 
     public function resetNewPassword(Request $request){
         $validator = Validator::make($request->all(), [
+            'phone' => 'required|exists:users,phone',
             'password' => 'required|min:6',
             'password_confirmation'=> 'required|same:password'
         ]);
         if($validator->fails()){
-            return response()->json($validator->errors()->toJson(), 400);
+//            return response()->json($validator->errors()->toJson(), 400);
+            return $this->prepare_response(true,$validator->errors(),'Error validation',null,1,400) ;
         }
         $data = $this->service->resetPassword($request);
         if($data == 'error'){
-            return response()->json(['error'=>true,'status'=>1,'message'=>'try again connection failed'],200);
+//            return response()->json(['error'=>true,'status'=>1,'message'=>'try again connection failed'],200);
+            return $this->prepare_response(true,null,'try again connection failed',null,1,200) ;
         }else{
-            return response()->json(['error'=>false,'status'=>0,'message'=>'password has been changed'],200);
-
+//            return response()->json(['error'=>false,'status'=>0,'message'=>'password has been changed'],200);
+            return $this->prepare_response(false,null,'password has been changed',null,0,200) ;
         }
     }
 
@@ -201,22 +208,56 @@ class AuthController extends Controller
             }
             $data = $this->service->checkCode($request);
         if($data){
-            return response()->json(['error'=>false,'status'=>200, 'data'=> $data,'message'=>'Code Checked please reset you password'],200);
+            return $this->prepare_response(false,$validator->errors(),'Code Checked please reset you password',null,0,200) ;
         }else{
-            return response()->json(['error'=>true,'status'=>1,'message'=>'try again code is wrong'],200);
+            return $this->prepare_response(true,$validator->errors(),'try again code is wrong',null,1,200) ;
+//            return response()->json(['error'=>true,'status'=>1,'message'=>'try again code is wrong'],200);
         }
     }
 
-    public function prepare_response($error = false, $errors = null, $message = '', $data = null, $status = 0, $server_status,$hasCart = false)
+    public function prepareResponse($error = false, $errors = null, $message = '', $data = null, $status = 0, $server_status,$hasCart = false, $address = null)
     {
         $array = array(
             'status'  =>$status,
             'error'   => $error,
             'errors'  => $errors,
             'haseCart'    => $hasCart,
+            'address'    => $address,
             'message' => $message,
             'data'    => $data
         );
         return response()->json($array ,$server_status);
+    }
+
+    public function changePhone(Request $request){
+        $validator = Validator::make($request->all(), [
+            'new_phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|unique:users,phone',
+        ]);
+        if($validator->fails()){
+//            return response()->json($validator->errors()->toJson(), 400);
+            return $this->prepare_response(true,$validator->errors(),'Error validation',$request->all(),1,200) ;
+        }
+        $user = \auth()->user();
+        $user->new_phone = $request->new_phone;
+        $user->save();
+        $this->service->sendCode($request->new_phone,'new_phone');
+        return $this->prepare_response(false,null,'We send code to your mobile, please check it!',null,0,200) ;
+
+    }
+
+    public function verifyPhone(Request $request){
+        $validator = Validator::make($request->all(), [
+            'new_phone' => 'required|exists:users,new_phone',
+            'code' => 'required|exists:users,code',
+        ]);
+        if($validator->fails()){
+            return $this->prepare_response(true,$validator->errors(),'Error validation',null,1,200) ;
+        }
+        $data = $this->service->checkPhone($request);
+        if($data){
+            return $this->prepare_response(false,$validator->errors(),'Code Checked your phone is changed',null,0,200) ;
+        }else{
+            return $this->prepare_response(true,$validator->errors(),'try again code is wrong',null,1,200) ;
+        }
     }
 }

@@ -53,7 +53,10 @@ return [
         'null' => [
             'driver' => 'null',
         ],
-
+        'beams' => [
+            'secret_key' => env('PUSHER_BEAMS_SECRET_KEY'),
+            'instance_id' => env('PUSHER_BEAMS_INSTANCE_ID'),
+        ]
     ],
 
 ];

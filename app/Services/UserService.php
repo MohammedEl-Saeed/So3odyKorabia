@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Helpers\FileHelper;
 use App\Helpers\SMSHelper;
+use App\Http\Traits\ResponseTraits;
 use App\Models\User;
 use App\Repositories\UserRepository;
  use App\Http\Traits\BasicTrait;
@@ -16,7 +17,7 @@ use Illuminate\Database\Eloquent\Model;
 class UserService
 {
 
-   use  BasicTrait;
+   use  BasicTrait, ResponseTraits;
     protected $model ,$user;
 
     public function __construct()
@@ -71,13 +72,15 @@ class UserService
         return $this->user->resetPassword($request);
     }
 
-    public function sendCode($request)
+    public function sendCode($phone, $phoneAttribute = 'phone')
     {
         $helper = new FileHelper();
         $code = $helper->generateRandomString(5);
-        $user = User::where('phone',$request->phone)->first()->update(['code'=>$code]);
+        $user = User::where($phoneAttribute, $phone);
+        $user->update(['code'=>$code]);
+        $user = $user->first();
         $message = new SMSHelper();
-        $message->sendMessage('Please verify your account with this code: \n'.$user->code, $user->phone);
+        $message->sendMessage('Please verify your account with this code: '.$user->code, $user->$phoneAttribute);
     }
 
     public function checkCode($request)
@@ -85,7 +88,20 @@ class UserService
         $user = User::where('phone',$request->phone)->where('code',$request->code)->first();
         if(!is_null($user)){
             $user->code_verified = 1;
-            $user->save;
+            $user->save();
+            return $user;
+        } else{
+            return false;
+        }
+    }
+
+    public function checkPhone($request){
+        $user = User::where('id',Auth::id())
+            ->where('new_phone',$request->new_phone)
+            ->where('code',$request->code)->first();
+        if(!is_null($user)){
+            $user->phone = $request->new_phone;
+            $user->save();
             return $user;
         } else{
             return false;

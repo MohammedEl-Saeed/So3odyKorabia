@@ -12,4 +12,7 @@ class Option extends Model
         return $this->belongsToMany(Item::class,'items_options','option_id','item_id')->withPivot('price');
     }
 
+    public function optionType(){
+        return $this->belongsTo(OptionType::class, 'option_type_id');
+    }
 }

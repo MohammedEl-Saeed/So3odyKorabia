@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->text('image')->nullable();
             $table->string('phone')->unique()->nullable();
+            $table->string('new_phone')->unique()->nullable();
             $table->string('code')->nullable();
             $table->boolean('code_verified')->default(0);
             $table->enum('type', ['Customer', 'Admin'])->default('Customer');

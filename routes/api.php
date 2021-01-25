@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,43 +28,48 @@ Route::group([
     Route::post('/refresh', [\App\Http\Controllers\Auth\AuthController::class, 'refresh']);
     Route::get('/user-profile', [\App\Http\Controllers\Auth\AuthController::class, 'userProfile']);
     Route::post('/edit-profile', [\App\Http\Controllers\Auth\AuthController::class, 'editProfile'])->middleware('jwtMiddleware');
+    Route::post('/change-phone', [\App\Http\Controllers\Auth\AuthController::class, 'changePhone'])->middleware('jwtMiddleware');
+    Route::post('/verify-phone', [\App\Http\Controllers\Auth\AuthController::class, 'verifyPhone'])->middleware('jwtMiddleware');
+
+    Route::post('/send-code', '\App\Http\Controllers\Auth\AuthController@sendCode');
+    Route::post('/verify-code', '\App\Http\Controllers\Auth\AuthController@checkCode');
+    Route::post('/reset-password', '\App\Http\Controllers\Auth\AuthController@resetNewPassword');
+
 });
 //Route::Post('user/login', 'Auth\AuthController@login')->name('user.login');
 Route::group(['middleware' => ['jwtMiddleware']], function () {
 //    Route::get('/edit-profile', [\App\Http\Controllers\Auth\AuthController::class, 'editProfile']);
 
-    Route::post('/add-to-cart','API\CartController@addToCart');
-    Route::post('/show-cart-info','API\CartController@showCartInfo');
-    Route::post('/empty-cart','API\CartController@emptyCart');
-    Route::post('/remove-from-cart','API\CartController@removeFromCart');
-    Route::post('/edit-cart','API\CartController@editCart');
+    Route::post('/add-to-cart', 'API\CartController@addToCart');
+    Route::post('/show-cart-info', 'API\CartController@showCartInfo');
+    Route::post('/empty-cart', 'API\CartController@emptyCart');
+    Route::post('/remove-from-cart', 'API\CartController@removeFromCart');
+    Route::post('/edit-cart', 'API\CartController@editCart');
 
-    Route::post('new-order','API\OrderController@createOrder');
-    Route::post('get-orders','API\OrderController@getOrders');
-    Route::post('re-order','API\OrderController@reOrder');
-    Route::post('order-status','API\OrderController@orderStatus');
+    Route::post('new-order', 'API\OrderController@createOrder');
+    Route::post('get-orders', 'API\OrderController@getOrders');
+    Route::post('re-order', 'API\OrderController@reOrder');
+    Route::post('order-status', 'API\OrderController@orderStatus');
 
-    Route::post('add-address','API\UserAddressController@addAddress');
-    Route::post('update-address','API\UserAddressController@updateAddress');
-    Route::post('remove-address','API\UserAddressController@removeAddress');
-    Route::get('get-addresses','API\UserAddressController@getUserAddresses');
+    Route::post('add-address', 'API\UserAddressController@addAddress');
+    Route::post('update-address', 'API\UserAddressController@updateAddress');
+    Route::post('remove-address', 'API\UserAddressController@removeAddress');
+    Route::get('get-addresses', 'API\UserAddressController@getUserAddresses');
 
-    Route::post('user/send-code', 'API\AuthController@sendCode');
-    Route::post('user/verify-code', 'API\AuthController@checkCode');
-    Route::post('user/reset-password', 'API\AuthController@resetNewPassword');
+    Route::post('send-message', 'API\MessageController@createMessage');
 
-    Route::post('send-message','API\MessageController@createMessage');
-
-    Route::post('check-promo-code','API\OrderController@checkCode');
+    Route::post('check-promo-code', 'API\OrderController@checkCode');
 
     Route::apiResource('user/paymentCards', "API\PaymentCardsController");
 
-});
 
-Route::get('get-main-categories','API\ProductController@getMainCategories');
+});
+Route::get('/create-pay-form', 'API\VapulusPaymentController@createPayForm')->name('createPayForm');
+Route::get('get-main-categories', 'API\ProductController@getMainCategories');
+
 
 Route::post('/get-options', 'API\ItemController@getOptionsByItemId');
 Route::post('/get-items', 'API\ItemController@getItems');
 Route::post('/get-products', 'API\ProductController@getProducts');
-Route::get('get-cities','API\OrderController@getCities');
-Route::get('get-offers','API\OrderController@getOffers');
+Route::get('get-cities', 'API\OrderController@getCities');
+Route::get('get-offers', 'API\OrderController@getOffers');

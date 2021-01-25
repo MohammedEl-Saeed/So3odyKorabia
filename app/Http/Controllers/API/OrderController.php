@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Events\BeamsEvent;
 use App\Http\Controllers\Controller;
+use App\Http\Traits\NotificationTrait;
 use App\Services\OrderService;
 use Illuminate\Http\Request;
 use App\Http\Traits\ResponseTraits;
@@ -11,7 +13,7 @@ use Illuminate\Support\Facades\Validator;
 
 class OrderController extends Controller
 {
-    use ResponseTraits;
+    use ResponseTraits, NotificationTrait;
     protected $service;
 
     public function __construct(OrderService $service){
@@ -87,7 +89,7 @@ class OrderController extends Controller
             'code' => 'required|exists:offers,code',
         ]);
         if ($validator->fails()) {
-            return $this->prepare_response(true, $validator->errors(), 'Error validation', $request->all(), 0, 200);
+            return $this->prepare_response(true, $validator->errors(), 'Error validation', null, 0, 200);
         }
         $data = null;
         $codeId = $this->service->offerAvailability($request->code);
@@ -100,6 +102,15 @@ class OrderController extends Controller
             $data = $this->service->checkCode($request->code);
             $message = 'return Successfully';
         }
+//        event(new BeamsEvent(['1'], $data));
+
+        //
+//        event(new BeamsEvent($this->getUsers([$patient_id]),$this->getNotificationObject('Reservation',
+//                'Doctor Accept  Your Reservation',
+//                ProviderTypes::PATIENT,
+//                ProviderTypes::DOCTOR,
+//                NotificationTypes::DOCTOR_RESERVATION, $request->id)));
+        //
         return $this->prepare_response(false,null,$message,$data,0 ,200,4);
     }
 }

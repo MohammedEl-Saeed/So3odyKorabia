@@ -7,6 +7,8 @@ use App\Http\Requests\MessageRequest;
 use App\Models\User;
 use App\Services\MessageService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SupportReply;
 
 class MessageController extends Controller
 {
@@ -32,6 +34,7 @@ class MessageController extends Controller
 
     public function store(MessageRequest $request){
         $this->service->store($request);
+        Mail::to($request->to)->send(new SupportReply($request));
         return redirect()->route('offers.index');
     }
 }
