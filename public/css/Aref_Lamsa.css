@@ -1,0 +1,14 @@
+@font-face {
+    font-family: 'Aref_Lamsa';
+    src: url('fonts/aref-lamsa.eot');
+    src: url('fonts/aref-lamsa.eot?#iefix') format('embedded-opentype'),
+         url('fonts/aref-lamsa.woff2') format('woff2'),
+         url('fonts/aref-lamsa.woff') format('woff'),
+         url('fonts/aref-lamsa.ttf')  format('truetype'),
+         url('fonts/aref-lamsa.svg#Aref_Lamsa') format('svg');
+}
+
+body , div , p , ul , li , header , footer , aside , nav , table , thead , tbody , tfoot , tr , th , td ,
+h1 , h2 , h3 , h4 , h5 ,h6 {
+    font-family: 'Aref_Lamsa' !important;
+}
