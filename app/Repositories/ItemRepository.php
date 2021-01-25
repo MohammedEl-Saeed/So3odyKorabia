@@ -75,12 +75,13 @@ class ItemRepository
             $logo_path = FileHelper::upload_file('/uploads/items/logos/',$request['logo']);
             $arr['logo'] = $logo_path;
         }
-       $arr['name'] = $request->name;
-       $arr['description'] = $request->description;
-       $arr['order_quantity'] = $request->order_quantity;
-       $arr['max_amount'] = $request->max_amount;
+        $arr['name'] = $request->name;
+        $arr['description'] = $request->description;
+        $arr['order_quantity'] = $request->order_quantity;
+        $arr['max_amount'] = $request->max_amount;
         $model = $this->traitupdate($this->model , $id ,$arr);
-        Item::find($id)->options()->sync($request->options);
+        $this->updateItemOptions($request->options, $id);
+//        Item::find($id)->options()->sync($request->options);
         return $model;
     }
 
@@ -151,4 +152,23 @@ class ItemRepository
         return $this->traitUpdateStatus($this->model, $status, $itemId);
     }
 
+    public function updateItemOptions($options, $itemId){
+        $newOptionIds = [];
+        foreach($options as $option){
+            $newOptionIds[] = $option['option_id'];
+            $itemOption = ItemsOption::where('item_id',$itemId)->where('option_id',$option['option_id'])->first();
+            //update item option if exist and else not exist create new one
+            if($itemOption){
+                $itemOption->price = $option['price'];
+                $itemOption->update();
+            } else{
+                $itemOption->item_id = $itemId;
+                $itemOption->option_id = $option['option_id'];
+                $itemOption->price = $option['price'];
+                $itemOption->save();
+            }
+        }
+        // delete item options there not return from update item
+        ItemsOption::where('item_id',$itemId)->whereNotIn('option_id',$newOptionIds)->delete();
+    }
 }

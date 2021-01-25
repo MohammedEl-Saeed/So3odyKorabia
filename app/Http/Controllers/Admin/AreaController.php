@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Area;
-use App\Http\Services\AreaService;
+use App\Models\City;
+use App\Services\AreaService;
 use App\Http\Requests\AreaRequest;
 use Illuminate\Http\Request;
 
@@ -33,7 +34,9 @@ class AreaController extends Controller
      */
     public function create()
     {
-        return view('admin.areas.insert');
+        $cities = City::all()->pluck('name','id');
+//        dd($cities);
+        return view('admin.areas.insert',compact('cities'));
     }
 
     /**
@@ -70,7 +73,8 @@ class AreaController extends Controller
     public function edit($id)
     {
         $item = $this->service->show($id);
-        return view('admin.areas.edit',compact('item'));
+        $cities = City::all()->pluck('name','id');
+        return view('admin.areas.edit',compact('item','cities'));
     }
 
     /**
@@ -106,9 +110,9 @@ class AreaController extends Controller
      * @param  int  $subjectId
      * @return \Illuminate\Http\Response
      */
-    public function getAreasOfSubjects($subjectId)
+    public function getAreasOfCitiess($cityId)
     {
-        $data = $this->service->getAreasOfSubjects($subjectId);
+        $data = $this->service->getAreasOfSubjects($cityId);
         return response()->json($data);
     }
 }

@@ -17,12 +17,12 @@
                 <div class="iq-card-body">
                     <div class="new-user-info">
                         <form id="main-form-to-add-doctor" class="form" method="post" action="{{route('cities.store')}}" enctype="multipart/form-data">
-                        @csrf
+                         @csrf
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label for="name">Name:</label>
                                     <input type="text" class="form-control" id="name" name="name" value="{{old('name')}}"  min="3"  max="100" placeholder="Enter a name">
-                                    <span class="form-text text-muted">Please enter option name</span>
+                                    <span class="form-text text-muted">Please enter name</span>
                                 </div>
                                 <div class="col-md-6">
                                     <label>Availability:</label>

@@ -1,18 +1,16 @@
 @extends('admin.layout.base')
-
-@section('title', 'Offers')
-
+@section('title', 'Area')
 @section('content')
-@section('main_header', 'Offers Section')
-@section('sub_header', 'Show All Offers')
+@section('main_header', 'Area Section')
+@section('sub_header', 'Show All Areas')
 
 <div class="row">
     <div class="col-md-12">
         <!--begin::Card-->
         <div class="iq-card">
             <div class="card-header">
-                <h5 class="card-title">View All Offers</h5>
-                <a href="{{route('offers.create')}}" class="btn btn-text-primary font-weight-bold btn-fixed" data-palcement="top" data-toggle="tooltip" title="Insert Offer">
+                <h5 class="card-title">View All Area</h5>
+                <a href="{{route('areas.create')}}" class="btn btn-text-primary font-weight-bold btn-fixed" data-palcement="top" data-toggle="tooltip" title="Insert Area">
                     <i class="fa fa-plus"></i>
                 </a>
             </div>
@@ -21,40 +19,36 @@
                     <div class="alert text-white bg-success" role="alert">
                         <div class="iq-alert-text">{{session()->get('success')}}</div>
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <i class="ri-close-line"></i>
+                            <i class="ri-close-line"></i>
                         </button>
                     </div>
                 @endif
                 <div class="table-responsive">
                     <!--begin: Datatable-->
-                    <table class="table table-striped table-bordered mt-4 table-hover text-center datatable-example" id="kt_datatable">
+                    <table class="table table-striped table-bordered mt-4 datatable-example">
                         <thead>
                         <tr>
-                            <th>Record ID</th>
-                            <th>Code</th>
-                            <th>Discount</th>
-                            <th>Uses number</th>
-                            <th>Count number</th>
-                            <th>Start at</th>
-                            <th>End at</th>
-                            <th>Actions</th>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Delivery Time</th>
+                            <th>Delivery Cost</th>
+                            <th>Area</th>
+                            <th>action</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($data as $index=>$item)
+                        @foreach($data as $i=>$area)
                             <tr>
-                                <td>{{$index + 1}}</td>
-                                <td>{{$item->code}}</td>
-                                <td>{{$item->discount}}</td>
-                                <td>{{$item->uses_number}}</td>
-                                <td>{{$item->count}}</td>
-                                <td>{{$item->start_at}}</td>
-                                <td>{{$item->end_at}}</td>
+                                <td>{{$i+=1}}</td>
+                                <td>{{$area->name}}</td>
+                                <td>{{$area->delivery_time}}</td>
+                                <td>{{$area->delivery_cost}}</td>
+                                <td>{{$area->city->name}}</td>
                                 <td class="text-center">
-                                    <a href="{{route('offers.edit',$item->id)}}" >
+                                    <a href="{{route('areas.edit',$area->id)}}" >
                                         <img data-palcement="bottom" data-toggle="tooltip" title="Edit" src="{{asset('assets/images/icons/edit.svg')}}" class="icons-table" />
                                     </a>
-                                    <form action="{{route('offers.destroy',$item->id)}}" method="POST">
+                                    <form action="{{route('areas.destroy',$area->id)}}" method="POST">
                                         @csrf
                                         {{method_field('delete')}}
                                         <button class="del-btn">
@@ -64,7 +58,6 @@
                                 </td>
                             </tr>
                         @endforeach
-
                         </tbody>
                     </table>
                     <!--end: Datatable-->

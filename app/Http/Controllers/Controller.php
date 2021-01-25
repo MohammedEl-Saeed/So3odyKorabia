@@ -44,7 +44,6 @@ class Controller extends BaseController
     }
 
     public function getSitePhone(){
-//        $phone = '0111111111';
        $phone = Setting::get('website_phone');
         return $phone;
     }

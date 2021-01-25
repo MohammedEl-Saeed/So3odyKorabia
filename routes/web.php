@@ -63,6 +63,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('orders', 'Admin\OrderController');
 
     Route::resource('cities', 'Admin\CityController');
+    Route::resource('areas','Admin\AreaController');
+    Route::get('get/areas/{id}','Admin\AreaController@getAreasOfCity')->name('get.areas');
 
 //    Route::get('/index', 'Admin\AdminController@index')->name('dashboard');
     Route::get('show/settings/form', 'Admin\AdminController@showSettingsForm')->name('show.settings.form');
