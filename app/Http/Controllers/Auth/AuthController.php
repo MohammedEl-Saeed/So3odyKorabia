@@ -53,7 +53,7 @@ class AuthController extends Controller
             }
             return $this->createNewToken($token);
         } else{
-            return $this->prepareResponse(true, json_decode('{"error":["you are not verified"]}'), 'you are not verified', null, 1, 200);
+            return $this->prepareResponse(true, json_decode('{"error":["you are not verified"]}'), 'you are not verified', null, 2, 200);
         }
     }
 

@@ -23,4 +23,16 @@ class BaseRepository
         $totalPrice = ItemsOption::find($itemOptionIds)->sum('price');
         return $totalPrice;
     }
+
+    public function updateTotalPriceForCart($cartId){
+        $cartDetails = CartDetail::where('cart_id',$cartId)->get();
+        $totalPrice = 0;
+        foreach ($cartDetails as $cartDetail){
+            $cartDetailPrice = $this->getTotalPriceForItem($cartDetail->item_options_ids);
+            $cartDetail->update(['total_price'=>$cartDetailPrice]);
+            $totalPrice += $cartDetailPrice;
+        }
+        Cart::find($cartId)->update(['total_price'=>$totalPrice]);
+        return $totalPrice;
+    }
 }
