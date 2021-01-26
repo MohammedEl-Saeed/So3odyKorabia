@@ -69,8 +69,9 @@ class UserAddressService
     public function getAddressesForUser(){
         $addresses = $this->userAddress->getAddressesForUser();
         foreach ($addresses as $address){
-            $address->city = $address->city->name;
-            $address->area = $address->area->name;
+            $address->city_name = $address->city->name;
+            $address->area_name = $address->area->name;
+            unset($address->city,$address->area);
         }
         return $addresses;
     }
