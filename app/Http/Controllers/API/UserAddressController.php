@@ -60,7 +60,7 @@ class UserAddressController extends Controller
         if(!$this->checkAuth($request->id)){
             return $this->prepare_response(true,null,'user not allow to delete this item',null,1,200) ;
         }
-        $data = $this->service->delete($request->user_address_id);
+        $data = $this->service->delete($request->id);
         return $this->prepare_response(false,null,'return Successfully',$data,0 ,200);
     }
 
