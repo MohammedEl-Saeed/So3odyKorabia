@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Area;
 use App\Models\UserAddress;
 use App\Repositories\UserAddressRepository;
  use App\Http\Traits\BasicTrait;
@@ -69,4 +70,7 @@ class UserAddressService
         return $this->userAddress->getAddressesForUser();
     }
 
+    public function getAreas($cityId){
+        return Area::where('city_id',$cityId)->get();
+    }
 }

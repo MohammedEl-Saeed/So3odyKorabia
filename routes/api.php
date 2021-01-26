@@ -71,5 +71,6 @@ Route::get('get-main-categories', 'API\ProductController@getMainCategories');
 Route::post('/get-options', 'API\ItemController@getOptionsByItemId');
 Route::post('/get-items', 'API\ItemController@getItems');
 Route::post('/get-products', 'API\ProductController@getProducts');
-Route::get('get-cities', 'API\OrderController@getCities');
 Route::get('get-offers', 'API\OrderController@getOffers');
+Route::get('get-cities', 'API\OrderController@getCities');
+Route::get('get-areas/{cityId}', 'API\UserAddressController@getAreas');

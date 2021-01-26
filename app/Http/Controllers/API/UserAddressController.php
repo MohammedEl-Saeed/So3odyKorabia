@@ -19,6 +19,7 @@ class UserAddressController extends Controller
     public function addAddress(Request $request){
         $validator = Validator::make($request->all(), [
             'city_id' => 'required|exists:cities,id',
+            'area_id' => 'required|exists:areas,id',
             'default_address'=>'in:1,0',
             'district' => 'required|string',
             'street' => 'required|string',
@@ -35,6 +36,7 @@ class UserAddressController extends Controller
         $validator = Validator::make($request->all(), [
             'id' => 'required|exists:user_addresses,id',
             'city_id' => 'required|exists:cities,id',
+            'area_id' => 'required|exists:areas,id',
             'default_address'=>'in:1,0',
             'district' => 'required|string',
             'street' => 'required|string',
@@ -62,6 +64,17 @@ class UserAddressController extends Controller
             return $this->prepare_response(true,null,'user not allow to delete this item',null,1,200) ;
         }
         $data = $this->service->delete($request->user_address_id);
+        return $this->prepare_response(false,null,'return Successfully',$data,0 ,200);
+    }
+
+     public function getAreas($cityId){
+        $validator = Validator::make(['city_id'=>$cityId], [
+            'city_id' => 'required|exists:cities,id',
+        ]);
+        if ($validator->fails()) {
+            return $this->prepare_response(true,$validator->errors(),'Error validation',null,1,200) ;
+        }
+        $data = $this->service->getAreas($cityId);
         return $this->prepare_response(false,null,'return Successfully',$data,0 ,200);
     }
 
