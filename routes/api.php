@@ -59,6 +59,7 @@ Route::group(['middleware' => ['jwtMiddleware']], function () {
     Route::post('send-message', 'API\MessageController@createMessage');
 
     Route::post('check-promo-code', 'API\OrderController@checkCode');
+    Route::post('check-order-price-details', 'API\OrderController@getOrderPriceDetails');
 
     Route::apiResource('user/paymentCards', "API\PaymentCardsController");
 

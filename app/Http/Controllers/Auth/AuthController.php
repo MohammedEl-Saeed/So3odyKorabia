@@ -208,9 +208,9 @@ class AuthController extends Controller
             }
             $data = $this->service->checkCode($request);
         if($data){
-            return $this->prepare_response(false,$validator->errors(),'Code Checked please reset you password',null,0,200) ;
+            return $this->prepare_response(false,$validator->errors(),'Code Checked',null,0,200) ;
         }else{
-            return $this->prepare_response(true,$validator->errors(),'try again code is wrong',null,1,200) ;
+            return $this->prepare_response(true,null,'try again code is wrong',null,1,200) ;
 //            return response()->json(['error'=>true,'status'=>1,'message'=>'try again code is wrong'],200);
         }
     }
