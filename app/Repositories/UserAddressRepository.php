@@ -80,7 +80,8 @@ class UserAddressRepository
             $arr['default_address'] = $request->default_address;
             $this->updateDefaultAddress();
         }
-        return $this->traitupdate($this->model , $id ,$arr);
+         $this->traitupdate($this->model , $id ,$arr);
+        return $this->traitShow($this->model,$id);
     }
 
     public function delete($id){
