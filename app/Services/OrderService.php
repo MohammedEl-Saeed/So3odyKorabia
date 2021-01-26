@@ -151,7 +151,11 @@ class OrderService
         //get price after using promocode
         if($offer) {
             $totalPriceAfterOffer = $this->order->getOfferedPrice($offer, $cartPrice);
-            $data['promoCodePercent'] = $offer->discount;
+            if($offer->discount_type == 'percent'){
+                $data['promoCodePercent'] = ($offer->discount/100) * $cartPrice ;
+            } else{
+                $data['promoCodePercent'] = $offer->discount;
+            }
         }
         $data['cartPrice'] = $cartPrice;
         $data['deliveryFees'] = $deliveryFees;
