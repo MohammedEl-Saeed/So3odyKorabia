@@ -20,8 +20,6 @@ class UserAddressController extends Controller
         $validator = Validator::make($request->all(), [
             'city_id' => 'required|exists:cities,id',
             'area_id' => 'required|exists:areas,id',
-            'default_address'=>'in:1,0',
-            'district' => 'required|string',
             'street' => 'required|string',
         ]);
         if ($validator->fails()) {
