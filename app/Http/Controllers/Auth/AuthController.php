@@ -53,7 +53,7 @@ class AuthController extends Controller
             }
             return $this->createNewToken($token);
         } else{
-            return $this->prepareResponse(true, json_decode('{"error":["you are not verified"]}'), 'you are not verified', null, 1, 200);
+            return $this->prepareResponse(true, json_decode('{"error":["you are not verified"]}'), 'you are not verified', null, 2, 200);
         }
     }
 
@@ -126,7 +126,7 @@ class AuthController extends Controller
         $data = [];
         $user = auth()->user();
         $data['user'] = $user;
-        $data['address'] = $user->addresses->where('default_address',1)->first()->toArray();
+        $data['address'] = $user->addresses->where('default_address',1)->first();
         unset($user['addresses']);
         $data['token'] = $token;
         $data['token_type'] = 'bearer';
@@ -208,21 +208,20 @@ class AuthController extends Controller
             }
             $data = $this->service->checkCode($request);
         if($data){
-            return $this->prepare_response(false,$validator->errors(),'Code Checked please reset you password',null,0,200) ;
+            return $this->prepare_response(false,$validator->errors(),'Code Checked',null,0,200) ;
         }else{
-            return $this->prepare_response(true,$validator->errors(),'try again code is wrong',null,1,200) ;
+            return $this->prepare_response(true,null,'try again code is wrong',null,1,200) ;
 //            return response()->json(['error'=>true,'status'=>1,'message'=>'try again code is wrong'],200);
         }
     }
 
-    public function prepareResponse($error = false, $errors = null, $message = '', $data = null, $status = 0, $server_status,$hasCart = false, $address = null)
+    public function prepareResponse($error = false, $errors = null, $message = '', $data = null, $status = 0, $server_status,$hasCart = false)
     {
         $array = array(
             'status'  =>$status,
             'error'   => $error,
             'errors'  => $errors,
             'haseCart'    => $hasCart,
-            'address'    => $address,
             'message' => $message,
             'data'    => $data
         );

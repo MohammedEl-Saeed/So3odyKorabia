@@ -15,6 +15,10 @@ class UserAddress extends Model
         return $this->belongsTo(City::class);
     }
 
+     public function area(){
+        return $this->belongsTo(Area::class,'area_id');
+    }
+
     public function getData(){
         $data = [];
         $data['id'] = $this->id;

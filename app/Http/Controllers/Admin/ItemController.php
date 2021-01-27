@@ -82,6 +82,9 @@ class ItemController extends Controller
     public function edit($productId, $id)
     {
         $item = $this->service->show($id);
+        if($productId != $item->product_id){
+            abort(404);
+        }
         $data = $this->optionService->getOptions();
         return view('admin.items.edit',compact('item','data'));
     }

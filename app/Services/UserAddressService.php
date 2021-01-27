@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Area;
 use App\Models\UserAddress;
 use App\Repositories\UserAddressRepository;
  use App\Http\Traits\BasicTrait;
@@ -66,7 +67,16 @@ class UserAddressService
     }
 
     public function getAddressesForUser(){
-        return $this->userAddress->getAddressesForUser();
+        $addresses = $this->userAddress->getAddressesForUser();
+        foreach ($addresses as $address){
+            $address->city_name = $address->city->name;
+            $address->area_name = $address->area->name;
+            unset($address->city,$address->area);
+        }
+        return $addresses;
     }
 
+    public function getAreas($cityId){
+        return Area::where('city_id',$cityId)->get();
+    }
 }

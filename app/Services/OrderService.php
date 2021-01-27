@@ -3,7 +3,9 @@
 namespace App\Services;
 
 use App\Http\Traits\BasicTrait;
+use App\Models\Cart;
 use App\Models\Offer;
+use App\Models\UserAddress;
 use App\Repositories\CartRepository;
 use App\Repositories\CityRepository;
 use App\Repositories\OrderRepository;
@@ -131,9 +133,38 @@ class OrderService
 
     public function checkCode($code)
     {
-        $offer = Offer::where('code', $code)->select('discount', 'discount_type')->first();
+        $offer = $this->getOffer($code);
         $cartPrice = Auth::user()->cart->total_price;
         return $this->order->getOfferedPrice($offer, $cartPrice);
     }
 
+    public function getOrderPriceDetails($request){
+        $data = [];
+        $cartId = Auth::user()->cart->id ?? 0;
+        $cartPrice = 0;
+        if($cartId) {
+            $cartPrice = $this->order->updateTotalPriceForCart($cartId);
+        }
+        $deliveryFees = UserAddress::find($request->address_id)->area->delivery_cost ?? 0;
+        $offer = $this->getOffer($request->code);
+        $totalPriceAfterOffer = $cartPrice;
+        //get price after using promocode
+        if($offer) {
+            $totalPriceAfterOffer = $this->order->getOfferedPrice($offer, $cartPrice);
+            if($offer->discount_type == 'percent'){
+                $data['promoCodePercent'] = ($offer->discount/100) * $cartPrice ;
+            } else{
+                $data['promoCodePercent'] = $offer->discount;
+            }
+        }
+        $data['cartPrice'] = $cartPrice;
+        $data['deliveryFees'] = $deliveryFees;
+        //get price after add delivery fees
+        $data['totalPrice'] = $totalPriceAfterOffer + $deliveryFees;
+        return $data;
+    }
+
+    private function getOffer($code){
+        return Offer::where('code', $code)->select('discount', 'discount_type')->first();
+    }
 }

@@ -79,6 +79,13 @@
                 <li class="{{active_link('cities')}}">
                     <a href="{{route('cities.index')}}" class="iq-waves-effect">
                         <img src="{{asset('assets/images/icons/place.png')}}" class="images-sidebar">
+                        <span > المدن </span>
+                    </a>
+                </li>
+
+                <li class="{{active_link('areas')}}">
+                    <a href="{{route('areas.index')}}" class="iq-waves-effect">
+                        <img src="{{asset('assets/images/icons/place.png')}}" class="images-sidebar">
                         <span > المناطق </span>
                     </a>
                 </li>

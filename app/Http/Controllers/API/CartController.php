@@ -28,7 +28,12 @@ class CartController extends Controller
             return   $this->prepare_response(true,$validator->errors(),'Error validation',$request->all(),0,200) ;
         }
         $data = $this->service->addToCart($request);
-        return  $this->prepare_response(false,null,'return Successfully',$data,0 ,200);
+        if(is_null($data)){
+            $message = 'Data not added to cart, you have max order quantity for this item!';
+        } else{
+            $message = 'return Successfully';
+        }
+        return  $this->prepare_response(false,null, $message, $data,0 ,200);
     }
 
     public function showCartInfo(Request $request){
@@ -49,7 +54,7 @@ class CartController extends Controller
             'quantity' => 'required|numeric',
         ]);
         if ($validator->fails()) {
-            return   $this->prepare_response(true,$validator->errors(),'Error validation',$request->all(),0,200) ;
+            return $this->prepare_response(true,$validator->errors(),'Error validation',$request->all(),0,200) ;
         }
         $data = $this->service->editCart($request, $request->cart_details_id);
         return  $this->prepare_response(false,null,'return Successfully',$data,0 ,200);

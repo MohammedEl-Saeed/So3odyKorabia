@@ -2,6 +2,7 @@
 
 use App\Http\Traits\ResponseTraits;
 use App\Models\CartDetail;
+use App\Models\Item;
 use App\Models\Option;
 use App\Models\Cart;
 use App\models\Service;
@@ -41,6 +42,9 @@ class CartRepository extends BaseRepository
 
     /** add new user in system */
     public function addToCart($request){
+        if(!$this->checkQuantity($request->item_id, $request->quantity)){
+            return null;
+        }
         $item_options_ids = implode(',',$request->item_options_ids);
         $quantity = $request->quantity;
         $total_price = $quantity * $this->getTotalPriceForItem($request->item_options_ids);
@@ -90,30 +94,11 @@ class CartRepository extends BaseRepository
         return $this->traitUpdateStatus($this->model ,$status ,$id);
     }
 
-
-     /** admin can block user . If admin blocked user , user couldn`t logged in */
-    public function blockStatus($blocked_reason =null , $proudct_id){
-            $arr['block']=true;
-        return $this->traitupdate($this->model, $proudct_id, $arr);
-    }
-
-    public function unblockStatus($proudct_id){
-        $arr['block']=false;
-        return $this->traitupdate($this->model,$proudct_id,$arr);
-    }
-
     public function getCartDetails($orderId){
         $order = $this->show($orderId);
     }
 
     private function updateCart($totalPrice){
-//        $cart = Cart::where('user_id',Auth::id())->first();
-//        if(is_null($cart)) {
-//            $cart = new Cart();
-//            $cart->user_id = Auth::id();
-//        }
-//        $cart->total_price += $totalPrice;
-//        $cart->save();
         $cart = Cart::firstOrCreate(['user_id'=>Auth::id()]);
         $cart->increment('total_price',$totalPrice);
         return $cart;
@@ -129,8 +114,9 @@ class CartRepository extends BaseRepository
         $cart = Cart::where('user_id',Auth::id())->first();
         $results = [];
         if ($cart) {
+            $cartTotalPrice = $this->updateTotalPriceForCart($cart->id);
 //            $this->updateCartPrice();
-            $data['total_price'] = $cart->total_price;
+            $data['total_price'] = $cartTotalPrice;
             $cartDetails = $this->index()->where('user_id', Auth::id())->where('cart_id', $cart->id)->get();
             foreach ($cartDetails as $cartDetail) {
                 $results[] = $cartDetail->getData();
@@ -139,6 +125,7 @@ class CartRepository extends BaseRepository
             $data['cartDetails'] = $results;
             return $data;
         }
+        return null;
     }
 
     public function emptyCart(){
@@ -157,5 +144,16 @@ class CartRepository extends BaseRepository
             Cart::where('user_id',Auth::id())->delete();
         }
         return true;
+    }
+
+    public function checkQuantity($itemId, $quantity){
+       $maxQuantity = Item::find($itemId)->order_quantity;
+       $cartQuantity = $this->model::where('user_id',Auth::id())
+           ->where('item_id',$itemId)->sum('quantity');
+       $totalQuantity = $cartQuantity + $quantity;
+       if($totalQuantity > $maxQuantity){
+           return false;
+       }
+       return true;
     }
 }

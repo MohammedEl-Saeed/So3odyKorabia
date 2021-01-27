@@ -42,7 +42,7 @@ class UserAddressRepository
 
         $this->model->user_id = Auth::id();
         $this->model->city_id = $request->city_id;
-        $this->model->district = $request->district;
+        $this->model->area_id = $request->area_id;
         $this->model->street = $request->street;
         $this->model->building_number = $request->building_number;
         $this->model->floor = $request->floor;
@@ -67,7 +67,7 @@ class UserAddressRepository
     public function update($request, $id){
         $arr= [];
         $arr['city_id'] = $request->city_id;
-        $arr['district'] = $request->district;
+        $arr['area_id'] = $request->area_id;
         $arr['street'] = $request->street;
         $arr['building_number'] = $request->building_number;
         $arr['floor'] = $request->floor;
@@ -80,7 +80,8 @@ class UserAddressRepository
             $arr['default_address'] = $request->default_address;
             $this->updateDefaultAddress();
         }
-        return $this->traitupdate($this->model , $id ,$arr);
+         $this->traitupdate($this->model , $id ,$arr);
+        return $this->traitShow($this->model,$id);
     }
 
     public function delete($id){
