@@ -12,3 +12,12 @@ body , div , p , ul , li , header , footer , aside , nav , table , thead , tbody
 h1 , h2 , h3 , h4 , h5 ,h6 {
     font-family: 'Aref_Lamsa' !important;
 }
+body{
+    font-size:18px !important;
+}
+.images-sidebar + span {
+    font-size: 25px;
+}
+.form-control{
+    font-size: 18px;
+}
