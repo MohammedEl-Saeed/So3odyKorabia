@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ItemsOption extends Model
 {
+//    use SoftDeletes;
     public function option(){
         return $this->belongsTo(Option::class,'option_id');
     }

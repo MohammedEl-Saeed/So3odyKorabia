@@ -19,6 +19,7 @@ class CreateItemsOptionsTable extends Migration
             $table->foreignId('option_id')->constrained('options')->onDelete('cascade');
             $table->string('price')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
