@@ -86,7 +86,7 @@
                     buttons: [
                     {
                         extend: 'copyHtml5',
-                        text: 'Copy',
+                        text: '<i class="fa fa-copy"></i> Copy',
                         titleAttr: 'copy',
                         title: 'Insurance Companies',
                         exportOptions: {
@@ -122,6 +122,8 @@
                     },
                     {
                         extend: 'print',
+                        text: '<i class="fa fa-print"></i> Print',
+                        titleAttr: 'print',
                         exportOptions: {
                         columns: ':visible'
                         },
