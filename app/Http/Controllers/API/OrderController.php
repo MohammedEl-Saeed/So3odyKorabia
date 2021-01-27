@@ -25,7 +25,7 @@ class OrderController extends Controller
             'user_address_id' => 'required|exists:user_addresses,id',
             'code' => 'exists:offers,code',
             'payment_type'=>'required|in:0,1,2',
-            'transfer_image'=>'required_if:payment_type,1'
+            'transfer_image'=>'required_if:payment_type,1|mimes:jpeg,jpg,bmp,png|max:20240'
         ]);
         if ($validator->fails()) {
             return $this->prepare_response(true,$validator->errors(),'Error validation',$request->all(),0,200) ;
