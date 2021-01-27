@@ -2,7 +2,7 @@
     <div class="iq-sidebar-logo d-flex justify-content-between">
         <a href="{{url('/')}}">
             <img src="{{asset('assets/images/logos/logo.svg')}}" class="img-fluid" alt="meat-village logo">
-            <p class="logo-text" style="padding: 10px 0 0 10px;font-size: 24px;color: #4C2910;"> قرية اللحوم </p>
+            <p class="logo-text" style="padding: 10px 10px 0 0;font-size: 24px;color: #4C2910;"> قرية اللحوم </p>
         </a>
         <div class="iq-menu-bt-sidebar">
             <div class="iq-menu-bt align-self-center">
@@ -146,7 +146,6 @@
                         <a class="iq-sub-card" href="#"><img src="{{asset('assets/plugins/vito/images/small/flag-04.png')}}" alt="img-flaf" class="img-fluid mr-2" />Italian</a>
                         <a class="iq-sub-card" href="#"><img src="{{asset('assets/plugins/vito/images/small/flag-05.png')}}" alt="img-flaf" class="img-fluid mr-2" />German</a>
                         <a class="iq-sub-card" href="#"><img src="{{asset('assets/plugins/vito/images/small/flag-06.png')}}" alt="img-flaf" class="img-fluid mr-2" />Japanese</a>
-
                     </div>
                 </li>
                 <li class="nav-item">

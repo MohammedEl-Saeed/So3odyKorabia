@@ -10,10 +10,10 @@
         <link rel="shortcut icon" href="images/favicon.ico" />
 
         <!-- ====================================== start css vito files ========================== -->
-        <link href="{{asset('assets/plugins/vito/en/css/bootstrap.min.css?v=7.0.3')}}" rel="stylesheet" type="text/css" />
-        <link href="{{asset('assets/plugins/vito/en/css/typography.css?v=7.0.3')}}" rel="stylesheet" type="text/css" />
-        <link href="{{asset('assets/plugins/vito/en/css/style.css?v=7.0.3')}}" rel="stylesheet" type="text/css" />
-        <link href="{{asset('assets/plugins/vito/en/css/responsive.css?v=7.0.3')}}" rel="stylesheet" type="text/css" />
+        <link href="{{asset('assets/plugins/vito/ar/css/bootstrap.min.css?v=7.0.3')}}" rel="stylesheet" type="text/css" />
+        <link href="{{asset('assets/plugins/vito/ar/css/typography.css?v=7.0.3')}}" rel="stylesheet" type="text/css" />
+        <link href="{{asset('assets/plugins/vito/ar/css/style.css?v=7.0.3')}}" rel="stylesheet" type="text/css" />
+        <link href="{{asset('assets/plugins/vito/ar/css/responsive.css?v=7.0.3')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('assets/plugins/datatable/css/jquery.dataTables.min.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('assets/plugins/datatable/css/buttons.dataTables.min.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('assets/plugins/vito/en/css/custom-lang.css?v=7.0.3')}}" rel="stylesheet" type="text/css" />
@@ -35,37 +35,37 @@
         </div>
         @include('admin.include.footer')
         <!-- ===============================  start vito js files =============================== -->
-        <script src="{{asset('assets/plugins/vito/en/js/jquery.min.js?v=7.0.3')}}"></script>
-        <script src="{{asset('assets/plugins/vito/en/js/jquery-3.3.1.min.js?v=7.0.3')}}"></script>
-        <script src="{{asset('assets/plugins/vito/en/js/popper.min.js?v=7.0.3')}}"></script>
-        <script src="{{asset('assets/plugins/vito/en/js/bootstrap.min.js?v=7.0.3')}}"></script>
-        <script src="{{asset('assets/plugins/vito/en/js/jquery.appear.js?v=7.0.3')}}"></script>
-        <script src="{{asset('assets/plugins/vito/en/js/countdown.min.js?v=7.0.3')}}"></script>
-        <script src="{{asset('assets/plugins/vito/en/js/waypoints.min.js?v=7.0.3')}}"></script>
-        <script src="{{asset('assets/plugins/vito/en/js/jquery.counterup.min.js?v=7.0.3')}}"></script>
-        <script src="{{asset('assets/plugins/vito/en/js/wow.min.js?v=7.0.3')}}"></script>
-        <script src="{{asset('assets/plugins/vito/en/js/apexcharts.js?v=7.0.3')}}"></script>
-        <script src="{{asset('assets/plugins/vito/en/js/slick.min.js?v=7.0.3')}}"></script>
-        <script src="{{asset('assets/plugins/vito/en/js/select2.min.js?v=7.0.3')}}"></script>
-        <script src="{{asset('assets/plugins/vito/en/js/owl.carousel.min.js?v=7.0.3')}}"></script>
-        <script src="{{asset('assets/plugins/vito/en/js/jquery.magnific-popup.min.js?v=7.0.3')}}"></script>
-        <script src="{{asset('assets/plugins/vito/en/js/smooth-scrollbar.js?v=7.0.3')}}"></script>
-        <script src="{{asset('assets/plugins/vito/en/js/lottie.js?v=7.0.3')}}"></script>
-        <script src="{{asset('assets/plugins/vito/en/js/bodymovin.js?v=7.0.3')}}"></script>
-        <script src="{{asset('assets/plugins/vito/en/js/core.js?v=7.0.3')}}"></script>
-        <script src="{{asset('assets/plugins/vito/en/js/charts.js?v=7.0.3')}}"></script>
-        <script src="{{asset('assets/plugins/vito/en/js/animated.js?v=7.0.3')}}"></script>
-        <script src="{{asset('assets/plugins/vito/en/js/highcharts.js?v=7.0.3')}}"></script>
-        <script src="{{asset('assets/plugins/vito/en/js/highcharts-3d.js?v=7.0.3')}}"></script>
-        <script src="{{asset('assets/plugins/vito/en/js/highcharts-more.js?v=7.0.3')}}"></script>
-        <script src="{{asset('assets/plugins/vito/en/js/kelly.js?v=7.0.3')}}"></script>
-        <script src="{{asset('assets/plugins/vito/en/js/maps.js?v=7.0.3')}}"></script>
-        <script src="{{asset('assets/plugins/vito/en/js/morris.js?v=7.0.3')}}"></script>
-        <script src="{{asset('assets/plugins/vito/en/js/morris.min.js?v=7.0.3')}}"></script>
-        <script src="{{asset('assets/plugins/vito/en/js/raphael-min.js?v=7.0.3')}}"></script>
-        <script src="{{asset('assets/plugins/vito/en/js/worldLow.js?v=7.0.3')}}"></script>
-        <script src="{{asset('assets/plugins/vito/en/js/chart-custom.js?v=7.0.3')}}"></script>
-        <script src="{{asset('assets/plugins/vito/en/js/custom.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/ar/js/jquery.min.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/ar/js/jquery-3.3.1.min.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/ar/js/popper.min.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/ar/js/bootstrap.min.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/ar/js/jquery.appear.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/ar/js/countdown.min.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/ar/js/waypoints.min.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/ar/js/jquery.counterup.min.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/ar/js/wow.min.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/ar/js/apexcharts.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/ar/js/slick.min.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/ar/js/select2.min.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/ar/js/owl.carousel.min.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/ar/js/jquery.magnific-popup.min.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/ar/js/smooth-scrollbar.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/ar/js/lottie.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/ar/js/bodymovin.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/ar/js/core.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/ar/js/charts.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/ar/js/animated.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/ar/js/highcharts.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/ar/js/highcharts-3d.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/ar/js/highcharts-more.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/ar/js/kelly.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/ar/js/maps.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/ar/js/morris.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/ar/js/morris.min.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/ar/js/raphael-min.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/ar/js/worldLow.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/ar/js/chart-custom.js?v=7.0.3')}}"></script>
+        <script src="{{asset('assets/plugins/vito/ar/js/custom.js?v=7.0.3')}}"></script>
         <script src="{{asset('assets/plugins/global/plugins.bundle.js')}}"></script>
         <!-- ===============================  start datatable js files =============================== -->
         <script src="{{asset('assets/plugins/datatable/js/jquery.dataTables.min.js')}}"></script>
