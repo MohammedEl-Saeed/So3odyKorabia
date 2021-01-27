@@ -1,3 +1,14 @@
+.wrapper{
+    direction: rtl;
+}
+/* .iq-top-navbar {
+    right: auto;
+    left: 30px;
+}
+.content-page{
+    margin-right: 260px;
+    margin-left: 0;
+} */
 .padding-10{
     padding: 10 !important;
 }
@@ -20,7 +31,7 @@ div#lottie-beil, div#lottie-mail, div#lottie-fullscreen {
 }
 .btn-fixed{
     position: fixed;
-    right: 50px;
+    left: 50px;
     bottom: 80px;
     width: 50px;
     height: 50px;
@@ -176,7 +187,7 @@ a.btn-fixed i{
 }
 .images-sidebar
 {
-    margin-right: 10px;
+    margin-left: 10px;
     width: 35px;
     height: 35px;
 }
@@ -207,3 +218,12 @@ table.dataTable.no-footer
     border: none;
     background-color: transparent;
 }
+.scrollbar-track-y {
+    left: 0 !important;
+    right: unset !important;
+    background: #ffedea !important;
+}
+.scrollbar-thumb {
+    background: #d16643 !important;
+}
+

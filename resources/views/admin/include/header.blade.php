@@ -2,7 +2,7 @@
     <div class="iq-sidebar-logo d-flex justify-content-between">
         <a href="{{url('/')}}">
             <img src="{{asset('assets/images/logos/logo.svg')}}" class="img-fluid" alt="meat-village logo">
-            <p class="logo-text" style="padding: 10px 0 0 10px;font-size: 20px;color: #4C2910;"> قرية اللحوم </p>
+            <p class="logo-text" style="padding: 10px 10px 0 0;font-size: 24px;color: #4C2910;"> قرية اللحوم </p>
         </a>
         <div class="iq-menu-bt-sidebar">
             <div class="iq-menu-bt align-self-center">
@@ -146,7 +146,6 @@
                         <a class="iq-sub-card" href="#"><img src="{{asset('assets/plugins/vito/images/small/flag-04.png')}}" alt="img-flaf" class="img-fluid mr-2" />Italian</a>
                         <a class="iq-sub-card" href="#"><img src="{{asset('assets/plugins/vito/images/small/flag-05.png')}}" alt="img-flaf" class="img-fluid mr-2" />German</a>
                         <a class="iq-sub-card" href="#"><img src="{{asset('assets/plugins/vito/images/small/flag-06.png')}}" alt="img-flaf" class="img-fluid mr-2" />Japanese</a>
-
                     </div>
                 </li>
                 <li class="nav-item">
@@ -230,9 +229,9 @@
             <ul class="navbar-list">
                 <li>
                 <a href="#" class="search-toggle iq-waves-effect d-flex align-items-center">
-                    <img src="{{asset('assets/plugins/vito/images/user/1.jpg')}}" class="img-fluid rounded mr-3" alt="user">
+                    <img src="{{asset(auth()->user()->image)}}" class="img-fluid rounded mr-3" alt="user">
                     <div class="caption">
-                        <h6 class="mb-0 line-height">Nik jone</h6>
+                        <h6 class="mb-0 line-height">{{auth()->user()->name}}</h6>
                         <span class="font-size-12">Available</span>
                     </div>
                 </a>
@@ -240,7 +239,7 @@
                     <div class="iq-card shadow-none m-0">
                         <div class="iq-card-body p-0 ">
                             <div class="bg-primary p-3">
-                            <h5 class="mb-0 text-white line-height">Hello Nik jone</h5>
+                            <h5 class="mb-0 text-white line-height">Hello {{auth()->user()->name}}</h5>
                             <span class="text-white font-size-12">Available</span>
                             </div>
                             <a href="{{route('user.profile')}}" class="iq-sub-card iq-bg-primary-hover">
