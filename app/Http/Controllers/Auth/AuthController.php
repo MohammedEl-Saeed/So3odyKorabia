@@ -126,7 +126,11 @@ class AuthController extends Controller
         $data = [];
         $user = auth()->user();
         $data['user'] = $user;
-        $data['address'] = $user->addresses->where('default_address',1)->first();
+        $userAddress = $user->addresses->where('default_address',1)->first();
+        if(!is_null($userAddress)){
+            $userAddress = $userAddress->getData();
+        }
+        $data['address'] = $userAddress;
         unset($user['addresses']);
         $data['token'] = $token;
         $data['token_type'] = 'bearer';
@@ -199,16 +203,16 @@ class AuthController extends Controller
     }
 
     public function checkCode(Request $request){
-            $validator = Validator::make($request->all(), [
-                'phone' => 'required|exists:users,phone',
-                'code' => 'required|exists:users,code',
-            ]);
-            if($validator->fails()){
-                return $this->prepare_response(true,$validator->errors(),'Error validation',null,1,200) ;
-            }
-            $data = $this->service->checkCode($request);
+        $validator = Validator::make($request->all(), [
+            'phone' => 'required|exists:users,phone',
+            'code' => 'required|exists:users,code',
+        ]);
+        if($validator->fails()){
+            return $this->prepare_response(true,$validator->errors(),'Error validation',null,1,200) ;
+        }
+        $data = $this->service->checkCode($request);
         if($data){
-            return $this->prepare_response(false,$validator->errors(),'Code Checked',null,0,200) ;
+            return $this->prepare_response(false,null,'Code Checked',null,0,200) ;
         }else{
             return $this->prepare_response(true,null,'try again code is wrong',null,1,200) ;
 //            return response()->json(['error'=>true,'status'=>1,'message'=>'try again code is wrong'],200);

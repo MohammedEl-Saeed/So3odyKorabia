@@ -14,7 +14,6 @@ trait ResponseTraits {
             'data'    => $data
         );
 
-
         return response()->json($array ,$server_status);
     }
 
