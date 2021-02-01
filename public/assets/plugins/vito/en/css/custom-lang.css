@@ -226,4 +226,7 @@ table.dataTable.no-footer
 .scrollbar-thumb {
     background: #d16643 !important;
 }
+.iq-footer{
+    direction: rtl;
+}
 
