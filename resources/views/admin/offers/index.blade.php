@@ -11,14 +11,14 @@
         <!--begin::Card-->
         <div class="iq-card">
             <div class="card-header">
-                <h5 class="card-title">View All Offers</h5>
-                <a href="{{route('offers.create')}}" class="btn btn-text-primary font-weight-bold btn-fixed" data-palcement="top" data-toggle="tooltip" title="Insert Offer">
+                <h5 class="card-title">العروض</h5>
+                <a href="{{route('offers.create')}}" class="btn btn-text-primary font-weight-bold btn-fixed" data-palcement="top" data-toggle="tooltip" title="أضافة عرض">
                     <i class="fa fa-plus"></i>
                 </a>
             </div>
             <div class="iq-card-body">
                 @if(session()->has('success'))
-                    <div class="alert text-white bg-success" role="alert">
+                    <div class="alert text-white bg-primary" role="alert">
                         <div class="iq-alert-text">{{session()->get('success')}}</div>
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <i class="ri-close-line"></i>
@@ -31,12 +31,12 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Code</th>
-                            <th>Discount</th>
-                            <th>Uses number</th>
-                            <th>Count number</th>
-                            <th>Start at</th>
-                            <th>End at</th>
+                            <th>الكود</th>
+                            <th>الخصم</th>
+                            <th>الرقم</th>
+                            <th>العدد</th>
+                            <th>يبدا في </th>
+                            <th>ينتهي في</th>
                             <th>الاجراءات </th>
                         </tr>
                         </thead>
