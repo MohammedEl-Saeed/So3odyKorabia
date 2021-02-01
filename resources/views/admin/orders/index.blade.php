@@ -6,423 +6,421 @@
 @section('main_header', 'Offers Section')
 @section('sub_header', 'Show All Offers')
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="iq-card">
-                <div class="iq-card-body">
-                    <ul class="nav nav-pills d-flex align-items-end profile-feed-items p-0 m-0">
-                        <li>
-                            <a class="nav-link active" data-toggle="pill" href="#allorders">All</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" data-toggle="pill" href="#todayorders">Today</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" data-toggle="pill" href="#neworders">New</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" data-toggle="pill" href="#pastorders">Past</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" data-toggle="pill" href="#acceptedorders">Accepted</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" data-toggle="pill" href="#rejectedorders">Rejected</a>
-                        </li>
-                    </ul>
+<div class="row">
+    <div class="col-md-12">
+        <div class="iq-card">
+            <div class="iq-card-body">
+                <ul class="nav nav-pills d-flex align-items-end profile-feed-items p-0 m-0">
+                    <li>
+                        <a class="nav-link active" data-toggle="pill" href="#allorders">All</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" data-toggle="pill" href="#todayorders">Today</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" data-toggle="pill" href="#neworders">New</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" data-toggle="pill" href="#pastorders">Past</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" data-toggle="pill" href="#acceptedorders">Accepted</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" data-toggle="pill" href="#rejectedorders">Rejected</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="tab-content">
+            <div class="tab-pane fade active show" id="allorders">
+                <div class="iq-card">
+                    <div class="card-header">
+                        <h5 class="card-title">View All Orders</h5>
+                    </div>
+                    <div class="iq-card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-striped table-bordered datatable-example datatable-table text-center">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Price</th>
+                                    <th>User</th>
+                                    <th>Status</th>
+                                    <th>الاجراءات </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($all_orders as $index=>$order)
+                                    <tr>
+                                        <td>{{$index + 1}}</td>
+                                        <td>{{$order->total_price}}</td>
+                                        <td>
+                                            <a href="{{route('user.orders' ,$order->user->id)}}">
+                                                {{$order->user->name}}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            @if($order->status == 'Accepted')
+                                                <div class="btn btn-primary">{{$order->status}}</div>
+                                            @elseif($order->status == 'Rejected')
+                                                <div class="btn btn-danger">{{$order->status}}</div>
+                                            @elseif($order->status == 'InProgress')
+                                                <div class="btn btn-info">{{$order->status}}</div>
+                                            @elseif($order->status == 'Waiting')
+                                                <div class="btn btn-warning">{{$order->status}}</div>
+                                            @elseif($order->status == 'Done')
+                                                <div class="btn btn-success">{{$order->status}}</div>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if($order->status == 'Waiting')
+                                                <a href="{{route('orders.accept',$order->id)}}" >
+                                                    <img data-palcement="bottom" data-toggle="tooltip" title="Accept" src="{{asset('assets/images/icons/accept.svg')}}" class="icons-table" />
+                                                </a>
+                                                <a href="{{route('orders.reject',$order->id)}}">
+                                                    <img data-palcement="bottom" data-toggle="tooltip" title="Reject" src="{{asset('assets/images/icons/reject.svg')}}" class="icons-table" />
+                                                </a>
+                                            @endif
+                                            @if($order->status == 'Accepted')
+                                                <a href="{{route('orders.done',$order->id)}}" >
+                                                    <img data-palcement="bottom" data-toggle="tooltip" title="Done" src="{{asset('assets/images/icons/done.svg')}}" class="icons-table" />
+                                                </a>
+                                            @endif
+                                            <a href="{{route('orders.show',$order->id)}}" >
+                                                <img data-palcement="bottom" data-toggle="tooltip" title="View" src="{{asset('assets/images/icons/view.svg')}}" class="icons-table" />
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="tab-content">
-                <div class="tab-pane fade active show" id="allorders">
-                    <div class="iq-card">
-                        <div class="card-header">
-                            <h5 class="card-title">View All Orders</h5>
-                        </div>
-                        <div class="iq-card-body">
-                            <div class="table-responsive">
-                                <table class="table table-hover table-striped table-bordered datatable-example datatable-table text-center">
-                                    <thead>
+            <div class="tab-pane fade" id="todayorders">
+                <div class="iq-card">
+                    <div class="card-header">
+                        <h5 class="card-title">View Today Orders</h5>
+                    </div>
+                    <div class="iq-card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-striped datatable-example table-bordered datatable-table text-center">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Price</th>
+                                    <th>User</th>
+                                    <th>Status</th>
+                                    <th>الاجراءات </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($today_orders as $index=>$order)
                                     <tr>
-                                        <th>#</th>
-                                        <th>Price</th>
-                                        <th>User</th>
-                                        <th>Status</th>
-                                        <th>الاجراءات </th>
+                                        <td>{{$index + 1}}</td>
+                                        <td>{{$order->total_price}}</td>
+                                        <td>
+                                            <a href="{{route('user.orders' ,$order->user->id)}}">{{$order->user->name}}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            @if($order->status == 'Accepted')
+                                                <div class="btn btn-primary">{{$order->status}}</div>
+                                            @elseif($order->status == 'Rejected')
+                                                <div class="btn btn-danger">{{$order->status}}</div>
+                                            @elseif($order->status == 'Waiting')
+                                                <div class="btn btn-warning">{{$order->status}}</div>
+                                            @elseif($order->status == 'Done')
+                                                <div class="btn btn-success">{{$order->status}}</div>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if($order->status == 'Waiting')
+                                                <a href="{{route('orders.accept',$order->id)}}" >
+                                                    <img data-palcement="bottom" data-toggle="tooltip" title="Accept" src="{{asset('assets/images/icons/accept.svg')}}" class="icons-table" />
+                                                </a>
+                                                <a href="{{route('orders.reject',$order->id)}}" >
+                                                    <img data-palcement="bottom" data-toggle="tooltip" title="Reject" src="{{asset('assets/images/icons/reject.svg')}}" class="icons-table" />
+                                                </a>
+                                            @endif
+                                            @if($order->status == 'Accepted')
+                                                <a href="{{route('orders.done',$order->id)}}" >
+                                                    <img data-palcement="bottom" data-toggle="tooltip" title="Done" src="{{asset('assets/images/icons/done.svg')}}" class="icons-table" />
+                                                </a>
+                                            @endif
+                                            <a href="{{route('orders.show',$order->id)}}" >
+                                                <img data-palcement="bottom" data-toggle="tooltip" title="View" src="{{asset('assets/images/icons/view.svg')}}" class="icons-table" />
+                                            </a>
+                                        </td>
                                     </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($all_orders as $index=>$order)
-                                        <tr>
-                                            <td>{{$index + 1}}</td>
-                                            <td>{{$order->total_price}}</td>
-                                            <td>
-                                                <a href="{{route('user.orders' ,$order->user->id)}}">
-                                                    {{$order->user->name}}
-                                                </a>
-                                            </td>
-                                            <td>
-                                                @if($order->status == 'Accepted')
-                                                    <div class="btn btn-primary">{{$order->status}}</div>
-                                                @elseif($order->status == 'Rejected')
-                                                    <div class="btn btn-danger">{{$order->status}}</div>
-                                                @elseif($order->status == 'InProgress')
-                                                    <div class="btn btn-info">{{$order->status}}</div>
-                                                @elseif($order->status == 'Waiting')
-                                                    <div class="btn btn-warning">{{$order->status}}</div>
-                                                @elseif($order->status == 'Done')
-                                                    <div class="btn btn-success">{{$order->status}}</div>
-                                                @endif
-                                            </td>
-                                            <td>
-                                                @if($order->status == 'Waiting')
-                                                    <a href="{{route('orders.accept',$order->id)}}" >
-                                                        <img data-palcement="bottom" data-toggle="tooltip" title="Accept" src="{{asset('assets/images/icons/accept.svg')}}" class="icons-table" />
-                                                    </a>
-                                                    <a href="{{route('orders.reject',$order->id)}}">
-                                                        <img data-palcement="bottom" data-toggle="tooltip" title="Reject" src="{{asset('assets/images/icons/reject.svg')}}" class="icons-table" />
-                                                    </a>
-                                                @endif
-                                                @if($order->status == 'Accepted')
-                                                    <a href="{{route('orders.done',$order->id)}}" >
-                                                        <img data-palcement="bottom" data-toggle="tooltip" title="Done" src="{{asset('assets/images/icons/done.svg')}}" class="icons-table" />
-                                                    </a>
-                                                @endif
-                                                <a href="{{route('orders.show',$order->id)}}" >
-                                                    <img data-palcement="bottom" data-toggle="tooltip" title="View" src="{{asset('assets/images/icons/view.svg')}}" class="icons-table" />
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
+                                @endforeach
+                                </tbody>
 
-                                    </tbody>
-
-                                </table>
-                            </div>
+                            </table>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="tab-pane fade" id="todayorders">
-                    <div class="iq-card">
-                        <div class="card-header">
-                            <h5 class="card-title">View Today Orders</h5>
-                        </div>
-                        <div class="iq-card-body">
-                            <div class="table-responsive">
-                                <table class="table table-hover table-striped datatable-example table-bordered datatable-table text-center">
-                                    <thead>
+            <div class="tab-pane fade" id="neworders">
+                <div class="iq-card">
+                    <div class="card-header">
+                        <h5 class="card-title">View New Orders</h5>
+                    </div>
+                    <div class="iq-card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-striped datatable-example table-bordered datatable-table text-center">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Price</th>
+                                    <th>User</th>
+                                    <th>Status</th>
+                                    <th>الاجراءات </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($new_orders as $index=>$order)
                                     <tr>
-                                        <th>#</th>
-                                        <th>Price</th>
-                                        <th>User</th>
-                                        <th>Status</th>
-                                        <th>الاجراءات </th>
+                                        <td>{{$index + 1}}</td>
+                                        <td>{{$order->total_price}}</td>
+                                        <td>
+                                            <a href="{{route('user.orders' ,$order->user->id)}}">{{$order->user->name}}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            @if($order->status == 'Accepted')
+                                                <div class="btn btn-primary">{{$order->status}}</div>
+                                            @elseif($order->status == 'Rejected')
+                                                <div class="btn btn-danger">{{$order->status}}</div>
+                                            @elseif($order->status == 'Waiting')
+                                                <div class="btn btn-warning">{{$order->status}}</div>
+                                            @elseif($order->status == 'Done')
+                                                <div class="btn btn-success">{{$order->status}}</div>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if($order->status == 'Waiting')
+                                                <a href="{{route('orders.accept',$order->id)}}" >
+                                                    <img data-palcement="bottom" data-toggle="tooltip" title="Accept" src="{{asset('assets/images/icons/accept.svg')}}" class="icons-table" />
+                                                </a>
+                                                <a href="{{route('orders.reject',$order->id)}}">
+                                                    <img data-palcement="bottom" data-toggle="tooltip" title="Reject" src="{{asset('assets/images/icons/reject.svg')}}" class="icons-table" />
+                                                </a>
+                                            @endif
+                                            @if($order->status == 'Accepted')
+                                                <a href="{{route('orders.done',$order->id)}}" >
+                                                    <img data-palcement="bottom" data-toggle="tooltip" title="Done" src="{{asset('assets/images/icons/done.svg')}}" class="icons-table" />
+                                                </a>
+                                            @endif
+                                            <a href="{{route('orders.show',$order->id)}}" >
+                                                <img data-palcement="bottom" data-toggle="tooltip" title="View" src="{{asset('assets/images/icons/view.svg')}}" class="icons-table" />
+                                            </a>
+                                        </td>
                                     </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($today_orders as $index=>$order)
-                                        <tr>
-                                            <td>{{$index + 1}}</td>
-                                            <td>{{$order->total_price}}</td>
-                                            <td>
-                                                <a href="{{route('user.orders' ,$order->user->id)}}">{{$order->user->name}}
-                                                </a>
-                                            </td>
-                                            <td>
-                                                @if($order->status == 'Accepted')
-                                                    <div class="btn btn-primary">{{$order->status}}</div>
-                                                @elseif($order->status == 'Rejected')
-                                                    <div class="btn btn-danger">{{$order->status}}</div>
-                                                @elseif($order->status == 'Waiting')
-                                                    <div class="btn btn-warning">{{$order->status}}</div>
-                                                @elseif($order->status == 'Done')
-                                                    <div class="btn btn-success">{{$order->status}}</div>
-                                                @endif
-                                            </td>
-                                            <td>
-                                                @if($order->status == 'Waiting')
-                                                    <a href="{{route('orders.accept',$order->id)}}" >
-                                                        <img data-palcement="bottom" data-toggle="tooltip" title="Accept" src="{{asset('assets/images/icons/accept.svg')}}" class="icons-table" />
-                                                    </a>
-                                                    <a href="{{route('orders.reject',$order->id)}}" >
-                                                        <img data-palcement="bottom" data-toggle="tooltip" title="Reject" src="{{asset('assets/images/icons/reject.svg')}}" class="icons-table" />
-                                                    </a>
-                                                @endif
-                                                @if($order->status == 'Accepted')
-                                                    <a href="{{route('orders.done',$order->id)}}" >
-                                                        <img data-palcement="bottom" data-toggle="tooltip" title="Done" src="{{asset('assets/images/icons/done.svg')}}" class="icons-table" />
-                                                    </a>
-                                                @endif
-                                                <a href="{{route('orders.show',$order->id)}}" >
-                                                    <img data-palcement="bottom" data-toggle="tooltip" title="View" src="{{asset('assets/images/icons/view.svg')}}" class="icons-table" />
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                    </tbody>
-
-                                </table>
-                            </div>
+                                @endforeach
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="tab-pane fade" id="neworders">
-                    <div class="iq-card">
-                        <div class="card-header">
-                            <h5 class="card-title">View New Orders</h5>
-                        </div>
-                        <div class="iq-card-body">
-                            <div class="table-responsive">
-                                <table class="table table-hover table-striped datatable-example table-bordered datatable-table text-center">
-                                    <thead>
+            <div class="tab-pane fade" id="pastorders">
+                <div class="iq-card">
+                    <div class="card-header">
+                        <h5 class="card-title">View Past Orders</h5>
+                    </div>
+                    <div class="iq-card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-striped datatable-example table-bordered datatable-table text-center">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Price</th>
+                                    <th>User</th>
+                                    <th>Status</th>
+                                    <th>الاجراءات </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($done_orders as $index=>$order)
                                     <tr>
-                                        <th>#</th>
-                                        <th>Price</th>
-                                        <th>User</th>
-                                        <th>Status</th>
-                                        <th>الاجراءات </th>
+                                        <td>{{$index + 1}}</td>
+                                        <td>{{$order->total_price}}</td>
+                                        <td>
+                                            <a href="{{route('user.orders' ,$order->user->id)}}">{{$order->user->name}}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            @if($order->status == 'Accepted')
+                                                <div class="btn btn-primary">{{$order->status}}</div>
+                                            @elseif($order->status == 'Rejected')
+                                                <div class="btn btn-danger">{{$order->status}}</div>
+                                            @elseif($order->status == 'Waiting')
+                                                <div class="btn btn-warning">{{$order->status}}</div>
+                                            @elseif($order->status == 'Done')
+                                                <div class="btn btn-success">{{$order->status}}</div>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if($order->status == 'Waiting')
+                                                <a href="{{route('orders.accept',$order->id)}}">
+                                                    <img data-palcement="bottom" data-toggle="tooltip" title="Accept" src="{{asset('assets/images/icons/accept.svg')}}" class="icons-table" />
+                                                </a>
+                                                <a href="{{route('orders.reject',$order->id)}}">
+                                                    <img data-palcement="bottom" data-toggle="tooltip" title="Reject" src="{{asset('assets/images/icons/reject.svg')}}" class="icons-table" />
+                                                </a>
+                                            @endif
+                                            @if($order->status == 'Accepted')
+                                                <a href="{{route('orders.done',$order->id)}}">
+                                                    <img data-palcement="bottom" data-toggle="tooltip" title="Done" src="{{asset('assets/images/icons/done.svg')}}" class="icons-table" />
+                                                </a>
+                                            @endif
+                                            <a href="{{route('orders.show',$order->id)}}">
+                                                <img data-palcement="bottom" data-toggle="tooltip" title="View" src="{{asset('assets/images/icons/view.svg')}}" class="icons-table" />
+                                            </a>
+                                        </td>
                                     </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($new_orders as $index=>$order)
-                                        <tr>
-                                            <td>{{$index + 1}}</td>
-                                            <td>{{$order->total_price}}</td>
-                                            <td>
-                                                <a href="{{route('user.orders' ,$order->user->id)}}">{{$order->user->name}}
-                                                </a>
-                                            </td>
-                                            <td>
-                                                @if($order->status == 'Accepted')
-                                                    <div class="btn btn-primary">{{$order->status}}</div>
-                                                @elseif($order->status == 'Rejected')
-                                                    <div class="btn btn-danger">{{$order->status}}</div>
-                                                @elseif($order->status == 'Waiting')
-                                                    <div class="btn btn-warning">{{$order->status}}</div>
-                                                @elseif($order->status == 'Done')
-                                                    <div class="btn btn-success">{{$order->status}}</div>
-                                                @endif
-                                            </td>
-                                            <td>
-                                                @if($order->status == 'Waiting')
-                                                    <a href="{{route('orders.accept',$order->id)}}" >
-                                                        <img data-palcement="bottom" data-toggle="tooltip" title="Accept" src="{{asset('assets/images/icons/accept.svg')}}" class="icons-table" />
-                                                    </a>
-                                                    <a href="{{route('orders.reject',$order->id)}}">
-                                                        <img data-palcement="bottom" data-toggle="tooltip" title="Reject" src="{{asset('assets/images/icons/reject.svg')}}" class="icons-table" />
-                                                    </a>
-                                                @endif
-                                                @if($order->status == 'Accepted')
-                                                    <a href="{{route('orders.done',$order->id)}}" >
-                                                        <img data-palcement="bottom" data-toggle="tooltip" title="Done" src="{{asset('assets/images/icons/done.svg')}}" class="icons-table" />
-                                                    </a>
-                                                @endif
-                                                <a href="{{route('orders.show',$order->id)}}" >
-                                                    <img data-palcement="bottom" data-toggle="tooltip" title="View" src="{{asset('assets/images/icons/view.svg')}}" class="icons-table" />
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
+                                @endforeach
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="tab-pane fade" id="pastorders">
-                    <div class="iq-card">
-                        <div class="card-header">
-                            <h5 class="card-title">View Past Orders</h5>
-                        </div>
-                        <div class="iq-card-body">
-                            <div class="table-responsive">
-                                <table class="table table-hover table-striped datatable-example table-bordered datatable-table text-center">
-                                    <thead>
+            <div class="tab-pane fade" id="acceptedorders">
+                <div class="iq-card">
+                    <div class="card-header">
+                        <h5 class="card-title">View Accepted Orders</h5>
+                    </div>
+                    <div class="iq-card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-striped datatable-example table-bordered datatable-table text-center">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Price</th>
+                                    <th>User</th>
+                                    <th>Status</th>
+                                    <th>الاجراءات </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($accepted_orders as $index=>$order)
                                     <tr>
-                                        <th>#</th>
-                                        <th>Price</th>
-                                        <th>User</th>
-                                        <th>Status</th>
-                                        <th>الاجراءات </th>
+                                        <td>{{$index + 1}}</td>
+                                        <td>{{$order->total_price}}</td>
+                                        <td>
+                                            <a href="{{route('user.orders' ,$order->user->id)}}">{{$order->user->name}}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            @if($order->status == 'Accepted')
+                                                <div class="btn btn-primary">{{$order->status}}</div>
+                                            @elseif($order->status == 'Rejected')
+                                                <div class="btn btn-danger">{{$order->status}}</div>
+                                            @elseif($order->status == 'Waiting')
+                                                <div class="btn btn-warning">{{$order->status}}</div>
+                                            @elseif($order->status == 'Done')
+                                                <div class="btn btn-success">{{$order->status}}</div>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if($order->status == 'Waiting')
+                                                <a href="{{route('orders.accept',$order->id)}}">
+                                                    <img data-palcement="bottom" data-toggle="tooltip" title="Accept" src="{{asset('assets/images/icons/accept.svg')}}" class="icons-table" />
+                                                </a>
+                                                <a href="{{route('orders.reject',$order->id)}}">
+                                                    <img data-palcement="bottom" data-toggle="tooltip" title="Reject" src="{{asset('assets/images/icons/reject.svg')}}" class="icons-table" />
+                                                </a>
+                                            @endif
+                                            @if($order->status == 'Accepted')
+                                                <a href="{{route('orders.done',$order->id)}}">
+                                                    <img data-palcement="bottom" data-toggle="tooltip" title="Done" src="{{asset('assets/images/icons/done.svg')}}" class="icons-table" />
+                                                </a>
+                                            @endif
+                                            <a href="{{route('orders.show',$order->id)}}">
+                                                <img data-palcement="bottom" data-toggle="tooltip" title="View" src="{{asset('assets/images/icons/view.svg')}}" class="icons-table" />
+                                            </a>
+                                        </td>
                                     </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($done_orders as $index=>$order)
-                                        <tr>
-                                            <td>{{$index + 1}}</td>
-                                            <td>{{$order->total_price}}</td>
-                                            <td>
-                                                <a href="{{route('user.orders' ,$order->user->id)}}">{{$order->user->name}}
-                                                </a>
-                                            </td>
-                                            <td>
-                                                @if($order->status == 'Accepted')
-                                                    <div class="btn btn-primary">{{$order->status}}</div>
-                                                @elseif($order->status == 'Rejected')
-                                                    <div class="btn btn-danger">{{$order->status}}</div>
-                                                @elseif($order->status == 'Waiting')
-                                                    <div class="btn btn-warning">{{$order->status}}</div>
-                                                @elseif($order->status == 'Done')
-                                                    <div class="btn btn-success">{{$order->status}}</div>
-                                                @endif
-                                            </td>
-                                            <td>
-                                                @if($order->status == 'Waiting')
-                                                    <a href="{{route('orders.accept',$order->id)}}">
-                                                        <img data-palcement="bottom" data-toggle="tooltip" title="Accept" src="{{asset('assets/images/icons/accept.svg')}}" class="icons-table" />
-                                                    </a>
-                                                    <a href="{{route('orders.reject',$order->id)}}">
-                                                        <img data-palcement="bottom" data-toggle="tooltip" title="Reject" src="{{asset('assets/images/icons/reject.svg')}}" class="icons-table" />
-                                                    </a>
-                                                @endif
-                                                @if($order->status == 'Accepted')
-                                                    <a href="{{route('orders.done',$order->id)}}">
-                                                        <img data-palcement="bottom" data-toggle="tooltip" title="Done" src="{{asset('assets/images/icons/done.svg')}}" class="icons-table" />
-                                                    </a>
-                                                @endif
-                                                <a href="{{route('orders.show',$order->id)}}">
-                                                    <img data-palcement="bottom" data-toggle="tooltip" title="View" src="{{asset('assets/images/icons/view.svg')}}" class="icons-table" />
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
+                                @endforeach
+                                </tbody>
+
+                            </table>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="tab-pane fade" id="acceptedorders">
-                    <div class="iq-card">
-                        <div class="card-header">
-                            <h5 class="card-title">View Accepted Orders</h5>
-                        </div>
-                        <div class="iq-card-body">
-                            <div class="table-responsive">
-                                <table class="table table-hover table-striped datatable-example table-bordered datatable-table text-center">
-                                    <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Price</th>
-                                        <th>User</th>
-                                        <th>Status</th>
-                                        <th>الاجراءات </th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($accepted_orders as $index=>$order)
-                                        <tr>
-                                            <td>{{$index + 1}}</td>
-                                            <td>{{$order->total_price}}</td>
-                                            <td>
-                                                <a href="{{route('user.orders' ,$order->user->id)}}">{{$order->user->name}}
-                                                </a>
-                                            </td>
-                                            <td>
-                                                @if($order->status == 'Accepted')
-                                                    <div class="btn btn-primary">{{$order->status}}</div>
-                                                @elseif($order->status == 'Rejected')
-                                                    <div class="btn btn-danger">{{$order->status}}</div>
-                                                @elseif($order->status == 'Waiting')
-                                                    <div class="btn btn-warning">{{$order->status}}</div>
-                                                @elseif($order->status == 'Done')
-                                                    <div class="btn btn-success">{{$order->status}}</div>
-                                                @endif
-                                            </td>
-                                            <td>
-                                                @if($order->status == 'Waiting')
-                                                    <a href="{{route('orders.accept',$order->id)}}">
-                                                        <img data-palcement="bottom" data-toggle="tooltip" title="Accept" src="{{asset('assets/images/icons/accept.svg')}}" class="icons-table" />
-                                                    </a>
-                                                    <a href="{{route('orders.reject',$order->id)}}">
-                                                        <img data-palcement="bottom" data-toggle="tooltip" title="Reject" src="{{asset('assets/images/icons/reject.svg')}}" class="icons-table" />
-                                                    </a>
-                                                @endif
-                                                @if($order->status == 'Accepted')
-                                                    <a href="{{route('orders.done',$order->id)}}">
-                                                        <img data-palcement="bottom" data-toggle="tooltip" title="Done" src="{{asset('assets/images/icons/done.svg')}}" class="icons-table" />
-                                                    </a>
-                                                @endif
-                                                <a href="{{route('orders.show',$order->id)}}">
-                                                    <img data-palcement="bottom" data-toggle="tooltip" title="View" src="{{asset('assets/images/icons/view.svg')}}" class="icons-table" />
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                    </tbody>
-
-                                </table>
-                            </div>
-                        </div>
+            <div class="tab-pane fade" id="rejectedorders">
+                <div class="iq-card">
+                    <div class="card-header">
+                        <h5 class="card-title">View Rejected Orders</h5>
                     </div>
-                </div>
-
-                <div class="tab-pane fade" id="rejectedorders">
-                    <div class="iq-card">
-                        <div class="card-header">
-                            <h5 class="card-title">View Rejected Orders</h5>
-                        </div>
-                        <div class="iq-card-body">
-                            <div class="table-responsive">
-                                <table class="table table-hover table-striped datatable-example table-bordered datatable-table text-center">
-                                    <thead>
+                    <div class="iq-card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-striped datatable-example table-bordered datatable-table text-center">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Price</th>
+                                    <th>User</th>
+                                    <th>Status</th>
+                                    <th>الاجراءات </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($rejected_orders as $index=>$order)
                                     <tr>
-                                        <th>#</th>
-                                        <th>Price</th>
-                                        <th>User</th>
-                                        <th>Status</th>
-                                        <th>الاجراءات </th>
+                                        <td>{{$index + 1}}</td>
+                                        <td>{{$order->total_price}}</td>
+                                        <td>
+                                            <a href="{{route('user.orders' ,$order->user->id)}}">{{$order->user->name}}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            @if($order->status == 'Accepted')
+                                                <div class="btn btn-primary">{{$order->status}}</div>
+                                            @elseif($order->status == 'Rejected')
+                                                <div class="btn btn-danger">{{$order->status}}</div>
+                                            @elseif($order->status == 'Waiting')
+                                                <div class="btn btn-warning">{{$order->status}}</div>
+                                            @elseif($order->status == 'Done')
+                                                <div class="btn btn-success">{{$order->status}}</div>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if($order->status == 'Waiting')
+                                                <a href="{{route('orders.accept',$order->id)}}">
+                                                    <img data-palcement="bottom" data-toggle="tooltip" title="Accept" src="{{asset('assets/images/icons/accept.svg')}}" class="icons-table" />
+                                                </a>
+                                                <a href="{{route('orders.reject',$order->id)}}">
+                                                    <img data-palcement="bottom" data-toggle="tooltip" title="Reject" src="{{asset('assets/images/icons/reject.svg')}}" class="icons-table" />
+                                                </a>
+                                            @endif
+                                            @if($order->status == 'Accepted')
+                                                <a href="{{route('orders.done',$order->id)}}">
+                                                    <img data-palcement="bottom" data-toggle="tooltip" title="Done" src="{{asset('assets/images/icons/done.svg')}}" class="icons-table" />
+                                                </a>
+                                            @endif
+                                            <a href="{{route('orders.show',$order->id)}}">
+                                                <img data-palcement="bottom" data-toggle="tooltip" title="View" src="{{asset('assets/images/icons/view.svg')}}" class="icons-table" />
+                                            </a>
+                                        </td>
                                     </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($rejected_orders as $index=>$order)
-                                        <tr>
-                                            <td>{{$index + 1}}</td>
-                                            <td>{{$order->total_price}}</td>
-                                            <td>
-                                                <a href="{{route('user.orders' ,$order->user->id)}}">{{$order->user->name}}
-                                                </a>
-                                            </td>
-                                            <td>
-                                                @if($order->status == 'Accepted')
-                                                    <div class="btn btn-primary">{{$order->status}}</div>
-                                                @elseif($order->status == 'Rejected')
-                                                    <div class="btn btn-danger">{{$order->status}}</div>
-                                                @elseif($order->status == 'Waiting')
-                                                    <div class="btn btn-warning">{{$order->status}}</div>
-                                                @elseif($order->status == 'Done')
-                                                    <div class="btn btn-success">{{$order->status}}</div>
-                                                @endif
-                                            </td>
-                                            <td>
-                                                @if($order->status == 'Waiting')
-                                                    <a href="{{route('orders.accept',$order->id)}}">
-                                                        <img data-palcement="bottom" data-toggle="tooltip" title="Accept" src="{{asset('assets/images/icons/accept.svg')}}" class="icons-table" />
-                                                    </a>
-                                                    <a href="{{route('orders.reject',$order->id)}}">
-                                                        <img data-palcement="bottom" data-toggle="tooltip" title="Reject" src="{{asset('assets/images/icons/reject.svg')}}" class="icons-table" />
-                                                    </a>
-                                                @endif
-                                                @if($order->status == 'Accepted')
-                                                    <a href="{{route('orders.done',$order->id)}}">
-                                                        <img data-palcement="bottom" data-toggle="tooltip" title="Done" src="{{asset('assets/images/icons/done.svg')}}" class="icons-table" />
-                                                    </a>
-                                                @endif
-                                                <a href="{{route('orders.show',$order->id)}}">
-                                                    <img data-palcement="bottom" data-toggle="tooltip" title="View" src="{{asset('assets/images/icons/view.svg')}}" class="icons-table" />
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                    </tbody>
+                                @endforeach
+                                </tbody>
 
-                                </table>
-                            </div>
+                            </table>
                         </div>
                     </div>
                 </div>

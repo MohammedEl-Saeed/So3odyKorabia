@@ -49,7 +49,7 @@ class OptionController extends Controller
     public function store(OptionRequest $request)
     {
         $this->service->store($request);
-        session()->flash('success' , 'option has been added successful');
+        session()->flash('success' , 'تمت الاضافة');
         return redirect('/options');
     }
 
@@ -88,7 +88,7 @@ class OptionController extends Controller
     public function update(OptionRequest $request, $id)
     {
         $this->service->update($request, $id);
-        session()->flash('success' , 'option has been updated successful');
+        session()->flash('success' , 'تم تعديل الاضافة بنجاح');
         return redirect('/options');
     }
 
@@ -101,7 +101,7 @@ class OptionController extends Controller
     public function destroy($id)
     {
         $this->service->delete($id);
-        session()->flash('success' , 'option has been deleted successful');
+        session()->flash('success' , 'تم حذف الاضافة بنجاح');
         return redirect('/options');
     }
 }

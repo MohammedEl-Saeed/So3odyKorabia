@@ -64,7 +64,7 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {
         $this->service->store($request);
-        session()->flash('success' , 'product has been added successful');
+        session()->flash('success' , 'تم أضافة المنتج بنجاح');
         return redirect()->route('products.index', $request->type);
     }
 
@@ -102,7 +102,7 @@ class ProductController extends Controller
     public function update(ProductRequest $request, $id)
     {
         $this->service->update($request, $id);
-        session()->flash('success' , 'product has been updated successful');
+        session()->flash('success' , 'تم تعديل المنتج بنجاح');
         return redirect()->route('products.index', $request->type);
     }
 
@@ -115,7 +115,7 @@ class ProductController extends Controller
     public function destroy($id, $type)
     {
         $this->service->delete($id);
-        session()->flash('success' , 'product has been deleted successful');
+        session()->flash('success' , 'تم حذف المنتج بنجاح');
         return redirect('/products/' . $type);
     }
 

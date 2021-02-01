@@ -58,7 +58,7 @@ class ItemController extends Controller
     public function store(ItemRequest $request)
     {
         $this->service->store($request);
-        session()->flash('success' , 'item has been added successful');
+        session()->flash('success' , 'تم أضافة المنتج بنجاح');
         return redirect()->route('items.index',$request->product_id);
     }
 
@@ -99,7 +99,7 @@ class ItemController extends Controller
     public function update(ItemRequest $request, $id)
     {
         $this->service->update($request, $id);
-        session()->flash('success' , 'item has been updated successful');
+        session()->flash('success' , 'تم تعديل المنتج بنجاح');
         return redirect()->route('items.index',$request->product_id);
     }
 
@@ -112,7 +112,7 @@ class ItemController extends Controller
     public function destroy($id)
     {
         $this->service->delete($id);
-        session()->flash('success' , 'item has been deleted successful');
+        session()->flash('success' , 'تم حذف المنتج بنجاح');
         return redirect('/items'.$id);
     }
 
