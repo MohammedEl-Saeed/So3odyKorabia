@@ -28,10 +28,10 @@
                     <table class="table table-striped table-bordered mt-4 table-hover text-center datatable-example" id="kt_datatable">
                         <thead>
                         <tr>
-                            <th>Record ID</th>
+                            <th>#</th>
                             <th>Name</th>
                             <th>Availability</th>
-                            <th>Actions</th>
+                            <th>الاجراءات </th>
                         </tr>
                         </thead>
                         <tbody>

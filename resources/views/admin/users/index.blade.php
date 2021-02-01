@@ -30,12 +30,12 @@
                     <table class="table table-striped table-bordered mt-4 table-hover text-center datatable-example" id="kt_datatable">
                         <thead>
                         <tr>
-                            <th>Record ID</th>
+                            <th>#</th>
                             <th>Name</th>
                             <th>phone</th>
                             <th>email</th>
                             <th>Image</th>
-                            <th class="text-center">Actions</th>
+                            <th class="text-center">الاجراءات </th>
                         </tr>
                         </thead>
                         <tbody>

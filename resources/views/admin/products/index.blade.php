@@ -11,7 +11,7 @@
         <!--begin::Card-->
         <div class="iq-card">
             <div class="card-header">
-                <h5 class="card-title">View All {{$type}}</h5>
+                <h5 class="card-title">عرض  {{$type}}</h5>
                 <a href="{{route('products.create',$type)}}" class="btn btn-text-primary font-weight-bold btn-fixed" data-palcement="top" data-toggle="tooltip" title="Insert {{$type}}">
                     <i class="fa fa-plus"></i>
                 </a>
@@ -30,12 +30,12 @@
                     <table class="table table-striped table-bordered mt-4 datatable-example table-hover text-center" id="kt_datatable">
                         <thead>
                         <tr>
-                            <th>Record ID</th>
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th>Status</th>
-                            <th>Logo</th>
-                            <th class="text-center">Actions</th>
+                            <th>#</th>
+                            <th>الاسم</th>
+                            <th>الوصف</th>
+                            <th>الحالة</th>
+                            <th>الشعار</th>
+                            <th class="text-center">الاجراءات </th>
                         </tr>
                         </thead>
                         <tbody>

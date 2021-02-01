@@ -30,14 +30,14 @@
                     <table class="table table-striped table-bordered mt-4 table-hover text-center datatable-example" id="kt_datatable">
                         <thead>
                         <tr>
-                            <th>Record ID</th>
+                            <th>#</th>
                             <th>Code</th>
                             <th>Discount</th>
                             <th>Uses number</th>
                             <th>Count number</th>
                             <th>Start at</th>
                             <th>End at</th>
-                            <th>Actions</th>
+                            <th>الاجراءات </th>
                         </tr>
                         </thead>
                         <tbody>

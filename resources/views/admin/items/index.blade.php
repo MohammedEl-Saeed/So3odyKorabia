@@ -30,12 +30,12 @@
                     <table class="table table-striped table-bordered mt-4 table-hover text-center datatable-example" id="kt_datatable">
                         <thead>
                         <tr>
-                            <th>Record ID</th>
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th>Status</th>
-                            <th>Logo</th>
-                            <th class="text-center">Actions</th>
+                            <th>#</th>
+                            <th>الاسم</th>
+                            <th>الوصف</th>
+                            <th>الحالة</th>
+                            <th>الشعار</th>
+                            <th class="text-center">الاجراءات </th>
                         </tr>
                         </thead>
                         <tbody>

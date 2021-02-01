@@ -45,11 +45,11 @@
                                 <table class="table table-hover table-striped table-bordered datatable-example datatable-table text-center">
                                     <thead>
                                     <tr>
-                                        <th>Record ID</th>
+                                        <th>#</th>
                                         <th>Price</th>
                                         <th>User</th>
                                         <th>Status</th>
-                                        <th>Actions</th>
+                                        <th>الاجراءات </th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -114,11 +114,11 @@
                                 <table class="table table-hover table-striped datatable-example table-bordered datatable-table text-center">
                                     <thead>
                                     <tr>
-                                        <th>Record ID</th>
+                                        <th>#</th>
                                         <th>Price</th>
                                         <th>User</th>
                                         <th>Status</th>
-                                        <th>Actions</th>
+                                        <th>الاجراءات </th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -179,11 +179,11 @@
                                 <table class="table table-hover table-striped datatable-example table-bordered datatable-table text-center">
                                     <thead>
                                     <tr>
-                                        <th>Record ID</th>
+                                        <th>#</th>
                                         <th>Price</th>
                                         <th>User</th>
                                         <th>Status</th>
-                                        <th>Actions</th>
+                                        <th>الاجراءات </th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -243,11 +243,11 @@
                                 <table class="table table-hover table-striped datatable-example table-bordered datatable-table text-center">
                                     <thead>
                                     <tr>
-                                        <th>Record ID</th>
+                                        <th>#</th>
                                         <th>Price</th>
                                         <th>User</th>
                                         <th>Status</th>
-                                        <th>Actions</th>
+                                        <th>الاجراءات </th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -307,11 +307,11 @@
                                 <table class="table table-hover table-striped datatable-example table-bordered datatable-table text-center">
                                     <thead>
                                     <tr>
-                                        <th>Record ID</th>
+                                        <th>#</th>
                                         <th>Price</th>
                                         <th>User</th>
                                         <th>Status</th>
-                                        <th>Actions</th>
+                                        <th>الاجراءات </th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -372,11 +372,11 @@
                                 <table class="table table-hover table-striped datatable-example table-bordered datatable-table text-center">
                                     <thead>
                                     <tr>
-                                        <th>Record ID</th>
+                                        <th>#</th>
                                         <th>Price</th>
                                         <th>User</th>
                                         <th>Status</th>
-                                        <th>Actions</th>
+                                        <th>الاجراءات </th>
                                     </tr>
                                     </thead>
                                     <tbody>
