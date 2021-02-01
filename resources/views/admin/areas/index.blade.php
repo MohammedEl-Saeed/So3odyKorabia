@@ -25,7 +25,7 @@
                 @endif
                 <div class="table-responsive">
                     <!--begin: Datatable-->
-                    <table class="table table-striped table-bordered mt-4 datatable-example">
+                    <table class="table table-striped text-center table-bordered mt-4 datatable-example">
                         <thead>
                         <tr>
                             <th>#</th>
@@ -48,7 +48,7 @@
                                     <a href="{{route('areas.edit',$area->id)}}" >
                                         <img data-palcement="bottom" data-toggle="tooltip" title="تعديل" src="{{asset('assets/images/icons/edit.svg')}}" class="icons-table" />
                                     </a>
-                                    <form action="{{route('areas.destroy',$area->id)}}" method="POST">
+                                    <form action="{{route('areas.destroy',$area->id)}}" class="d-inline" method="POST">
                                         @csrf
                                         {{method_field('delete')}}
                                         <button class="del-btn">

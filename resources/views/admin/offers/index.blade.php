@@ -54,7 +54,7 @@
                                     <a href="{{route('offers.edit',$item->id)}}" >
                                         <img data-palcement="bottom" data-toggle="tooltip" title="تعديل" src="{{asset('assets/images/icons/edit.svg')}}" class="icons-table" />
                                     </a>
-                                    <form action="{{route('offers.destroy',$item->id)}}" method="POST">
+                                    <form action="{{route('offers.destroy',$item->id)}}" class="d-inline" method="POST">
                                         @csrf
                                         {{method_field('delete')}}
                                         <button class="del-btn">
