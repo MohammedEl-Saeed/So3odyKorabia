@@ -48,7 +48,7 @@
                                 </td>
                                 <td class="text-center">
                                     <a href="{{route('cities.edit',$item->id)}}">
-                                        <img data-palcement="bottom" data-toggle="tooltip" title="Edit" src="{{asset('assets/images/icons/edit.svg')}}" class="icons-table" />
+                                        <img data-palcement="bottom" data-toggle="tooltip" title="تعديل" src="{{asset('assets/images/icons/edit.svg')}}" class="icons-table" />
                                     </a>
                                 </td>
                             </tr>

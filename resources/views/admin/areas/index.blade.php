@@ -9,8 +9,8 @@
         <!--begin::Card-->
         <div class="iq-card">
             <div class="card-header">
-                <h5 class="card-title">View All Area</h5>
-                <a href="{{route('areas.create')}}" class="btn btn-text-primary font-weight-bold btn-fixed" data-palcement="top" data-toggle="tooltip" title="Insert Area">
+                <h5 class="card-title">عرض كل المناظق</h5>
+                <a href="{{route('areas.create')}}" class="btn btn-text-primary font-weight-bold btn-fixed" data-palcement="top" data-toggle="tooltip" title="أضافة منظقه">
                     <i class="fa fa-plus"></i>
                 </a>
             </div>
@@ -29,11 +29,11 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Name</th>
-                            <th>Delivery Time</th>
-                            <th>Delivery Cost</th>
-                            <th>Area</th>
-                            <th>action</th>
+                            <th>الاسم</th>
+                            <th>وقت التوصيل </th>
+                            <th>تكلفة التوصيل</th>
+                            <th>المنظقة</th>
+                            <th>الاجرارت</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -46,13 +46,13 @@
                                 <td>{{$area->city->name}}</td>
                                 <td class="text-center">
                                     <a href="{{route('areas.edit',$area->id)}}" >
-                                        <img data-palcement="bottom" data-toggle="tooltip" title="Edit" src="{{asset('assets/images/icons/edit.svg')}}" class="icons-table" />
+                                        <img data-palcement="bottom" data-toggle="tooltip" title="تعديل" src="{{asset('assets/images/icons/edit.svg')}}" class="icons-table" />
                                     </a>
                                     <form action="{{route('areas.destroy',$area->id)}}" method="POST">
                                         @csrf
                                         {{method_field('delete')}}
                                         <button class="del-btn">
-                                            <img data-palcement="bottom" data-toggle="tooltip" title="Delete" src="{{asset('assets/images/icons/delete.svg')}}" class="icons-table" />
+                                            <img data-palcement="bottom" data-toggle="tooltip" title="حذف" src="{{asset('assets/images/icons/delete.svg')}}" class="icons-table" />
                                         </button>
                                     </form>
                                 </td>

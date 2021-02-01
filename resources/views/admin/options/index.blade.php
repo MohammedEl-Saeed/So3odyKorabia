@@ -44,13 +44,13 @@
                                 <td>{{$item->type}}</td>
                                 <td class="text-center">
                                     <a href="{{route('options.edit',$item->id)}}">
-                                        <img data-palcement="bottom" data-toggle="tooltip" title="Edit" src="{{asset('assets/images/icons/edit.svg')}}" class="icons-table" />
+                                        <img data-palcement="bottom" data-toggle="tooltip" title="تعديل" src="{{asset('assets/images/icons/edit.svg')}}" class="icons-table" />
                                     </a>
                                     <form action="{{route('options.destroy',$item->id)}}" method="POST">
                                         @csrf
                                         {{method_field('delete')}}
                                         <button class="del-btn">
-                                            <img data-palcement="bottom" data-toggle="tooltip" title="Delete" src="{{asset('assets/images/icons/delete.svg')}}" class="icons-table" />
+                                            <img data-palcement="bottom" data-toggle="tooltip" title="حذف" src="{{asset('assets/images/icons/delete.svg')}}" class="icons-table" />
                                         </button>
                                     </form>
                                 </td>

@@ -52,7 +52,7 @@
                                 </td>
                                 <td class="text-center">
                                     <a href="{{route('items.edit',['id'=>$productId,'item'=>$item->id])}}">
-                                        <img data-palcement="bottom" data-toggle="tooltip" title="Edit" src="{{asset('assets/images/icons/edit.svg')}}" class="icons-table" />
+                                        <img data-palcement="bottom" data-toggle="tooltip" title="تعديل" src="{{asset('assets/images/icons/edit.svg')}}" class="icons-table" />
                                     </a>
                                     @if($item->status == 'Available')
                                         <a href="{{route('items.unavailable',['productId'=>$productId,'id'=>$item->id])}}">

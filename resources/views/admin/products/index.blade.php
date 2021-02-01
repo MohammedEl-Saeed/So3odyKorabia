@@ -55,7 +55,7 @@
                                         <img data-palcement="bottom" data-toggle="tooltip" title="الانواع" src="{{asset('assets/images/icons/types.svg')}}" class="icons-table" />
                                     </a>
                                     <a href="{{route('products.edit',['type'=>$type,'id'=>$item->id])}}">
-                                        <img data-palcement="bottom" data-toggle="tooltip" title="Edit" src="{{asset('assets/images/icons/edit.svg')}}" class="icons-table" />
+                                        <img data-palcement="bottom" data-toggle="tooltip" title="تعديل" src="{{asset('assets/images/icons/edit.svg')}}" class="icons-table" />
                                     </a>
                                     @if($item->status == 'Available')
                                         <a href="{{route('products.unavailable',['type'=>$type,'id'=>$item->id])}}">
