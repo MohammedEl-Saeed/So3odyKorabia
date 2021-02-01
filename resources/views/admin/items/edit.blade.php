@@ -14,7 +14,7 @@
             <div class="iq-card">
                 <div class="iq-card-header d-flex justify-content-between">
                     <div class="iq-header-title">
-                        <h4 class="card-title">Edit New Item</h4>
+                        <h4 class="card-title">تعديل بيانات المنتج</h4>
                     </div>
                 </div>
             </div>
@@ -29,7 +29,7 @@
                                     <img class="profile-pic img-fluid" src="{{asset('assets/plugins/vito/images/user/11.png')}}" alt="profile-pic">
                                 @endif
                                 <div class="p-image">
-                                    <a href="#" class="upload-button btn iq-bg-primary">Edit Logo</a>
+                                    <a href="#" class="upload-button btn iq-bg-primary">تعديل الشعار</a>
                                     <input class="file-upload" @if(is_null($item->logo)) required @endif form="main-form-to-add-doctor" type="file" accept="image/*" name="logo">
                                     <input type="hidden" value="{{$item->logo}}" name="logo_path">
                                 </div>
@@ -43,40 +43,37 @@
                 <div class="iq-card">
                     <div class="iq-card-header d-flex justify-content-between">
                         <div class="iq-header-title">
-                            <h4 class="card-title">New Item Information</h4>
+                            <h4 class="card-title">بيانات المنتج</h4>
                         </div>
                     </div>
                     <div class="iq-card-body">
                         <div class="new-user-info">
                                 <div class="row">
                                     <div class="form-group col-md-6">
-                                        <label for="name">Name:</label>
-                                        <input type="text" class="form-control" id="name" name="name" value="{{old('name',$item->name)}}"  min="3"  max="100" placeholder="Enter a name">
-                                        <span class="form-text text-muted">Please enter product name</span>
+                                        <label for="name">الاسم:</label>
+                                        <input type="text" class="form-control" id="name" name="name" value="{{old('name',$item->name)}}"  min="3"  max="100" placeholder="اسم المنتج">
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="name">Quantity by order:</label>
-                                        <input type="text" class="form-control" id="name" name="order_quantity" value="{{old('order_quantity',$item->order_quantity)}}"  min="3"  max="100" placeholder="Enter a order quantity">
-                                        <span class="form-text text-muted">Please enter order quantity</span>
+                                        <label for="name">كمية الطلب:</label>
+                                        <input type="text" class="form-control" id="name" name="order_quantity" value="{{old('order_quantity',$item->order_quantity)}}"  min="3"  max="100" placeholder="كمية الطلب">
                                     </div>
                                     <input type="hidden" value="{{$item->product_id}}" name="product_id">
                                     <div class="form-group col-md-12">
-                                        <label>description *</label>
-                                        <textarea class="form-control"   name="description" placeholder="Enter a Description"
+                                        <label>الوصف *</label>
+                                        <textarea class="form-control"   name="description" placeholder="وصف المنتج"
                                             rows="3">{{old('description',$item->description)}}</textarea>
-                                        <span class="form-text text-muted">Please enter a menu within text length range 50 and 100.</span>
                                     </div>
                                 </div>
                             <div class="col-md-12">
                                 <div id="kt_repeater_1">
                                     <div class="form-group row">
-                                    <label class="col-md-2 col-form-label">Options:</label>
+                                    <label class="col-md-2 col-form-label">خيارات:</label>
                                     <div class="col-md-10" id="repeated-product" data-repeater-list="options">
                                         @if(count($item->options) > 0)
                                             @foreach($item->options as $index => $itemOption)
                                                 <div class="row w-100 repeated-products" data-repeater-item="">
                                             <div class="col-md-4">
-                                                <label>Option:</label>
+                                                <label>خيار:</label>
                                                 <select  class="form-control options" name="options[{{$index}}][option_id]" value="{{old('option_id')}}">
                                                     @if(count($data) > 0)
                                                         @foreach($data as $type => $options)
@@ -91,15 +88,15 @@
                                                 <div class="d-md-none mb-2"></div>
                                             </div>
                                             <div class="col-md-4">
-                                                <label>Price:</label>
+                                                <label>السعر:</label>
                                                 <input type="number" name="options[{{$index}}][price]" value="{{old('price', $itemOption->pivot->price)}}" class="form-control price" min="0"
-                                                    placeholder="Enter Price" />
+                                                    placeholder="سعر المنتج" />
                                                 <div class="d-md-none mb-2"></div>
                                             </div>
                                             <div class="col-md-4 text-center">
                                                 <a class="btn btn-danger delete-product-option" style="margin-top:35px;color:#FFF">
                                                     <i class="la la-trash-o"></i>
-                                                    Delete
+                                                    حذف
                                                 </a>
                                             </div>
                                         </div>
@@ -113,7 +110,7 @@
                                             <div class="col-md-8">
                                                 <a class="btn btn-primary add-product-option" style="margin-top:25px;color:#FFF">
                                                     <i class="la la-plus"></i>
-                                                    Add
+                                                    أضافة
                                                 </a>
                                             </div>
                                         </div>
@@ -122,8 +119,8 @@
                                 </div>
                             </div>
                                 <div class="col-md-12">
-                                    <button type="submit" class="btn btn-success ml-2 pull-right">Edit New Item</button>
-                                    <button type="reset" class="btn btn-secondary pull-right">Cancel</button>
+                                    <button type="submit" class="btn btn-primary ml-2 pull-left">تعديل المنتج</button>
+                                    <button type="reset" class="btn btn-secondary pull-left">الغاء</button>
                                     <div class="clearfix"></div>
                                 </div>
                         </div>
