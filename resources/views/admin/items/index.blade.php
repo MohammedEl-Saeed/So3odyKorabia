@@ -11,14 +11,14 @@
         <!--begin::Card-->
         <div class="iq-card">
             <div class="card-header">
-                <h5 class="card-title">View All Items</h5>
+                <h5 class="card-title">عرض المنتجات</h5>
                 <a href="{{route('items.create',$productId)}}" class="btn btn-text-primary font-weight-bold btn-fixed" data-palcement="top" data-toggle="tooltip" title="إضافة {{$type}}">
                     <i class="fa fa-plus"></i>
                 </a>
             </div>
             <div class="iq-card-body">
                 @if(session()->has('success'))
-                    <div class="alert text-white bg-success" role="alert">
+                    <div class="alert text-white bg-primary" role="alert">
                         <div class="iq-alert-text">{{session()->get('success')}}</div>
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <i class="ri-close-line"></i>
@@ -30,12 +30,12 @@
                     <table class="table table-striped table-bordered mt-4 table-hover text-center datatable-example" id="kt_datatable">
                         <thead>
                         <tr>
-                            <th>Record ID</th>
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th>Status</th>
-                            <th>Logo</th>
-                            <th class="text-center">Actions</th>
+                            <th>#</th>
+                            <th>الاسم</th>
+                            <th>الوصف</th>
+                            <th>الحالة</th>
+                            <th>الشعار</th>
+                            <th class="text-center">الاجراءات </th>
                         </tr>
                         </thead>
                         <tbody>
@@ -52,7 +52,7 @@
                                 </td>
                                 <td class="text-center">
                                     <a href="{{route('items.edit',['id'=>$productId,'item'=>$item->id])}}">
-                                        <img data-palcement="bottom" data-toggle="tooltip" title="Edit" src="{{asset('assets/images/icons/edit.svg')}}" class="icons-table" />
+                                        <img data-palcement="bottom" data-toggle="tooltip" title="تعديل" src="{{asset('assets/images/icons/edit.svg')}}" class="icons-table" />
                                     </a>
                                     @if($item->status == 'Available')
                                         <a href="{{route('items.unavailable',['productId'=>$productId,'id'=>$item->id])}}">

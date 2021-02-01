@@ -44,7 +44,7 @@ class UserController extends Controller
     public function store(UserRequest $request)
     {
         $this->service->store($request);
-        session()->flash('success', 'User has been added successful');
+        session()->flash('success', 'تم أضافة المستخدم بنجاح');
         return redirect('/users');
     }
 
@@ -82,7 +82,7 @@ class UserController extends Controller
     public function update(UserRequest $request, $id)
     {
         $this->service->update($request, $id);
-        session()->flash('success', 'User has been Updated successful');
+        session()->flash('success', 'تم تعديل المستخدم بنجاح');
         return redirect('/users');
     }
 
@@ -95,7 +95,7 @@ class UserController extends Controller
     public function destroy($id)
     {
         $this->service->delete($id);
-        session()->flash('success' , 'User has been Deleted successful');
+        session()->flash('success' , 'تم حذف المستخدم بنجاح');
         return redirect('/users');
     }
 

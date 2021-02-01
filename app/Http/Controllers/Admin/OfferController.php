@@ -49,7 +49,7 @@ class OfferController extends Controller
     public function store(OfferRequest $request)
     {
         $this->service->store($request);
-        session()->flash('success' , 'offer has been added successful');
+        session()->flash('success' , 'تم أضافة العرض بنجاح');
         return redirect()->route('offers.index');
     }
 
@@ -87,7 +87,7 @@ class OfferController extends Controller
     public function update(OfferRequest $request, $id)
     {
         $this->service->update($request, $id);
-        session()->flash('success' , 'offer has been updated successful');
+        session()->flash('success' , 'تم تعديل العرض بنجاح');
         return redirect()->route('offers.index');
     }
 
@@ -100,7 +100,7 @@ class OfferController extends Controller
     public function destroy($id)
     {
         $this->service->delete($id);
-        session()->flash('success' , 'offer has been deletd successful');
+        session()->flash('success' , 'تم حذف العرض بنجاح');
         return redirect('/offers');
     }
 }

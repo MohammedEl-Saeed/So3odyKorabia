@@ -11,14 +11,14 @@
         <!--begin::Card-->
         <div class="iq-card">
             <div class="card-header">
-                <h5 class="card-title">View All Offers</h5>
-                <a href="{{route('offers.create')}}" class="btn btn-text-primary font-weight-bold btn-fixed" data-palcement="top" data-toggle="tooltip" title="Insert Offer">
+                <h5 class="card-title">العروض</h5>
+                <a href="{{route('offers.create')}}" class="btn btn-text-primary font-weight-bold btn-fixed" data-palcement="top" data-toggle="tooltip" title="أضافة عرض">
                     <i class="fa fa-plus"></i>
                 </a>
             </div>
             <div class="iq-card-body">
                 @if(session()->has('success'))
-                    <div class="alert text-white bg-success" role="alert">
+                    <div class="alert text-white bg-primary" role="alert">
                         <div class="iq-alert-text">{{session()->get('success')}}</div>
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <i class="ri-close-line"></i>
@@ -30,14 +30,14 @@
                     <table class="table table-striped table-bordered mt-4 table-hover text-center datatable-example" id="kt_datatable">
                         <thead>
                         <tr>
-                            <th>Record ID</th>
-                            <th>Code</th>
-                            <th>Discount</th>
-                            <th>Uses number</th>
-                            <th>Count number</th>
-                            <th>Start at</th>
-                            <th>End at</th>
-                            <th>Actions</th>
+                            <th>#</th>
+                            <th>الكود</th>
+                            <th>الخصم</th>
+                            <th>الرقم</th>
+                            <th>العدد</th>
+                            <th>يبدا في </th>
+                            <th>ينتهي في</th>
+                            <th>الاجراءات </th>
                         </tr>
                         </thead>
                         <tbody>
@@ -52,13 +52,13 @@
                                 <td>{{$item->end_at}}</td>
                                 <td class="text-center">
                                     <a href="{{route('offers.edit',$item->id)}}" >
-                                        <img data-palcement="bottom" data-toggle="tooltip" title="Edit" src="{{asset('assets/images/icons/edit.svg')}}" class="icons-table" />
+                                        <img data-palcement="bottom" data-toggle="tooltip" title="تعديل" src="{{asset('assets/images/icons/edit.svg')}}" class="icons-table" />
                                     </a>
-                                    <form action="{{route('offers.destroy',$item->id)}}" method="POST">
+                                    <form action="{{route('offers.destroy',$item->id)}}" class="d-inline" method="POST">
                                         @csrf
                                         {{method_field('delete')}}
                                         <button class="del-btn">
-                                            <img data-palcement="bottom" data-toggle="tooltip" title="Delete" src="{{asset('assets/images/icons/delete.svg')}}" class="icons-table" />
+                                            <img data-palcement="bottom" data-toggle="tooltip" title="حذف" src="{{asset('assets/images/icons/delete.svg')}}" class="icons-table" />
                                         </button>
                                     </form>
                                 </td>

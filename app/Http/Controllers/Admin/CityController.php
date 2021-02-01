@@ -44,7 +44,7 @@ class CityController extends Controller
     public function store(CityRequest $request)
     {
         $this->service->store($request);
-        session()->flash('success' , 'City has been added successful');
+        session()->flash('success' , 'تم أضافة المدينة بنجاح');
         return redirect('/cities');
     }
 
@@ -81,7 +81,7 @@ class CityController extends Controller
     public function update(CityRequest $request, $id)
     {
         $this->service->update($request, $id);
-        session()->flash('success' , 'City has been updated successful');
+        session()->flash('success' , 'تم تعديل المدينة بنحاج');
         return redirect('/cities');
     }
 
@@ -94,7 +94,7 @@ class CityController extends Controller
     public function destroy($id)
     {
         $this->service->delete($id);
-        session()->flash('success' , 'City has been deleted successful');
+        session()->flash('success' , 'تم حذف المدينة بنجاح');
         return redirect('/options');
     }
 }

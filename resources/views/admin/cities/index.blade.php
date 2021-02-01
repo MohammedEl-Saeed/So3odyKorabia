@@ -9,14 +9,14 @@
         <!--begin::Card-->
         <div class="iq-card">
             <div class="card-header">
-                <h5 class="card-title">View All City</h5>
-                <a href="{{route('cities.create')}}" class="btn btn-text-primary font-weight-bold btn-fixed" data-palcement="top" data-toggle="tooltip" title="Insert City">
+                <h5 class="card-title">عرض المدن</h5>
+                <a href="{{route('cities.create')}}" class="btn btn-text-primary font-weight-bold btn-fixed" data-palcement="top" data-toggle="tooltip" title="أضافة مدينة">
                     <i class="fa fa-plus"></i>
                 </a>
             </div>
             <div class="iq-card-body">
                 @if(session()->has('success'))
-                    <div class="alert text-white bg-success" role="alert">
+                    <div class="alert text-white bg-primary" role="alert">
                         <div class="iq-alert-text">{{session()->get('success')}}</div>
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <i class="ri-close-line"></i>
@@ -28,10 +28,10 @@
                     <table class="table table-striped table-bordered mt-4 table-hover text-center datatable-example" id="kt_datatable">
                         <thead>
                         <tr>
-                            <th>Record ID</th>
-                            <th>Name</th>
-                            <th>Availability</th>
-                            <th>Actions</th>
+                            <th>#</th>
+                            <th>الاسم</th>
+                            <th>الاتاحة</th>
+                            <th>الاجراءات </th>
                         </tr>
                         </thead>
                         <tbody>
@@ -41,14 +41,14 @@
                                 <td>{{$item->name}}</td>
                                 <td>
                                     @if($item->availability == 1)
-                                        Available
+                                        متاح
                                     @elseif($item->availability == 0)
-                                        Not available
+                                        غير متاح
                                     @endif
                                 </td>
                                 <td class="text-center">
                                     <a href="{{route('cities.edit',$item->id)}}">
-                                        <img data-palcement="bottom" data-toggle="tooltip" title="Edit" src="{{asset('assets/images/icons/edit.svg')}}" class="icons-table" />
+                                        <img data-palcement="bottom" data-toggle="tooltip" title="تعديل" src="{{asset('assets/images/icons/edit.svg')}}" class="icons-table" />
                                     </a>
                                 </td>
                             </tr>

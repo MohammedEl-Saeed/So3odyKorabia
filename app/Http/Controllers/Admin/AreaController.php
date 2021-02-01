@@ -48,7 +48,7 @@ class AreaController extends Controller
     public function store(AreaRequest $request)
     {
         $this->service->store($request);
-        session()->flash('susses','Area has been added successful');
+        session()->flash('susses','تم أضافه المنطقه بنجاح');
         return redirect('/areas');
     }
 
@@ -87,7 +87,7 @@ class AreaController extends Controller
     public function update(AreaRequest $request, $id)
     {
         $this->service->update($request, $id);
-        session()->flash('susses','Area has been Updated successful');
+        session()->flash('susses','تم تعديل المنطقة بنجاح');
         return redirect('/areas');
     }
 
@@ -100,7 +100,7 @@ class AreaController extends Controller
     public function destroy($id)
     {
         $this->service->delete($id);
-        session()->flash('susses','Area has been deleted successful');
+        session()->flash('susses','تم حذف المنطقه بنجاح');
         return redirect('/areas');
     }
 

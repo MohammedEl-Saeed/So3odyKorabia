@@ -11,7 +11,7 @@
             <div class="iq-card">
                 <div class="iq-card-header d-flex justify-content-between">
                     <div class="iq-header-title">
-                        <h4 class="card-title">New Option Information</h4>
+                        <h4 class="card-title">بيانات الاضافة</h4>
                     </div>
                 </div>
                 <div class="iq-card-body">
@@ -21,12 +21,11 @@
                             {{method_field('PUT')}}
                             <div class="row">
                                 <div class="form-group col-md-6">
-                                    <label for="name">Name:</label>
-                                    <input type="text" class="form-control" id="name" name="name" value="{{old('name',$item->name)}}"  min="3"  max="100" placeholder="Enter a name">
-                                    <span class="form-text text-muted">Please enter option name</span>
+                                    <label for="name">الاسم:</label>
+                                    <input type="text" class="form-control" id="name" name="name" value="{{old('name',$item->name)}}"  min="3"  max="100">
                                 </div>
-                                    <div class="col-md-4">
-                                        <label>Type:</label>
+                                    <div class="col-md-6">
+                                        <label>النوع:</label>
                                         <select  class="form-control options" name="type" value="{{old('type',$item->type)}}">
                                             @if(isset($types))
                                                 @foreach($types as $type)
@@ -38,8 +37,8 @@
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                <button type="submit" class="btn btn-success ml-2 pull-right">Edit New Option</button>
-                                <button type="reset" class="btn btn-secondary pull-right">Cancel</button>
+                                <button type="submit" class="btn btn-primary ml-2 pull-left">تعديل</button>
+                                <button type="reset" class="btn btn-secondary pull-left">الغاء</button>
                                 <div class="clearfix"></div>
                             </div>
                         </form>

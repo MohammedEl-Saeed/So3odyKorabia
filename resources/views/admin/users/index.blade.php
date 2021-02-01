@@ -30,12 +30,12 @@
                     <table class="table table-striped table-bordered mt-4 table-hover text-center datatable-example" id="kt_datatable">
                         <thead>
                         <tr>
-                            <th>Record ID</th>
+                            <th>#</th>
                             <th>Name</th>
                             <th>phone</th>
                             <th>email</th>
                             <th>Image</th>
-                            <th class="text-center">Actions</th>
+                            <th class="text-center">الاجراءات </th>
                         </tr>
                         </thead>
                         <tbody>
@@ -52,13 +52,13 @@
                                 </td>
                                 <td class="text-center">
                                     <a href="{{route('users.edit',$item->id)}}">
-                                        <img data-palcement="bottom" data-toggle="tooltip" title="Edit" src="{{asset('assets/images/icons/edit.svg')}}" class="icons-table" />
+                                        <img data-palcement="bottom" data-toggle="tooltip" title="تعديل" src="{{asset('assets/images/icons/edit.svg')}}" class="icons-table" />
                                     </a>
                                     <form class="d-inline" action="{{route('users.destroy',$item->id)}}" method="POST">
                                         @csrf
                                         {{method_field('delete')}}
                                         <button class="del-btn">
-                                            <img data-palcement="bottom" data-toggle="tooltip" title="Delete" src="{{asset('assets/images/icons/delete.svg')}}" class="icons-table" />
+                                            <img data-palcement="bottom" data-toggle="tooltip" title="حذف" src="{{asset('assets/images/icons/delete.svg')}}" class="icons-table" />
                                         </button>
                                     </form>
                                 </td>
