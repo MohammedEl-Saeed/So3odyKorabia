@@ -28,6 +28,7 @@ class OrderDetail extends Model
         $data = [];
         $data['id'] = $this->id;
         $data['total_price'] = $this->total_price;
+        $data['quantity'] = $this->quantity;
         $data['product'] = $this->product->getData();
         $data['item'] = $this->item->getData();
         $item_options_ids = explode(',',$this->item_options_ids);

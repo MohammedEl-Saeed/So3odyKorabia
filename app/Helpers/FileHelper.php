@@ -18,7 +18,7 @@ class FileHelper
             $local_url = $file_name . "." . $ext;
             $s3_url    =$folder_path . $local_url;
 
-            return  $s3_url ;
+            return  url($s3_url) ;
         }
 
     }

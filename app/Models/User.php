@@ -56,6 +56,7 @@ class User extends Authenticatable  implements JWTSubject
         $data['id'] = $this->id;
         $data['name'] = $this->name;
         $data['email'] = $this->email;
+        $data['phone'] = $this->phone;
         $data['type'] = $this->type;
         $data['image'] = $this->image;
         return $data;

@@ -21,4 +21,14 @@ class Order extends Model
         return $this->belongsTo(Offer::class,'offer_id');
     }
 
+    public function payment_type(){
+        if($this->payment_type == 1){
+            $type = 'Transfer';
+        }elseif($this->payment_type == 2){
+            $type = 'Credit Card';
+        } else{
+            $type = 'Cash';
+        }
+        return $type;
+    }
 }

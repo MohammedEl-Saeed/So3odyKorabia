@@ -145,26 +145,23 @@ class OrderService
         if($cartId) {
             $cartPrice = $this->order->updateTotalPriceForCart($cartId);
         }
-        $deliveryFees = UserAddress::find($request->address_id)->area->delivery_cost ?? 0;
+        $deliveryCosts = $this->order->getDeliveryFees($request->address_id);
         $offer = $this->getOffer($request->code);
         $totalPriceAfterOffer = $cartPrice;
         //get price after using promocode
         if($offer) {
             $totalPriceAfterOffer = $this->order->getOfferedPrice($offer, $cartPrice);
-            if($offer->discount_type == 'percent'){
-                $data['promoCodePercent'] = ($offer->discount/100) * $cartPrice ;
-            } else{
-                $data['promoCodePercent'] = $offer->discount;
-            }
+            $data['promoCodePercent'] = $this->order->getPromocodeValue($offer, $cartPrice);
         }
         $data['cartPrice'] = $cartPrice;
-        $data['deliveryFees'] = $deliveryFees;
+        $data['deliveryFees'] = $deliveryCosts;
         //get price after add delivery fees
-        $data['totalPrice'] = $totalPriceAfterOffer + $deliveryFees;
+        $data['totalPrice'] = $totalPriceAfterOffer + $deliveryCosts;
         return $data;
     }
 
     private function getOffer($code){
         return Offer::where('code', $code)->select('discount', 'discount_type')->first();
     }
+
 }

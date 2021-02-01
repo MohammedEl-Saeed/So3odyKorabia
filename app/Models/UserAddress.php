@@ -22,10 +22,10 @@ class UserAddress extends Model
     public function getData(){
         $data = [];
         $data['id'] = $this->id;
-        $data['city_id'] = $this->city_id;
+//        $data['city_id'] = $this->city_id;
         $data['city_name'] = $this->city->name ?? '';
         $data['area_name'] = $this->area->name ?? '';
-        $data['area_id'] = $this->area_id;
+//        $data['area_id'] = $this->area_id;
         $data['street'] = $this->street;
         $data['building_number'] = $this->building_number;
         $data['floor'] = $this->floor;
@@ -35,6 +35,28 @@ class UserAddress extends Model
         $data['address_longitude'] = $this->address_longitude;
         $data['default_address'] = $this->default_address;
         $data['note'] = $this->note;
+        return $data;
+    }
+
+    public function getFullAddress(){
+        $data = [];
+        $data['city_name'] = $this->city->name ?? '';
+        $data['area_name'] = $this->area->name ?? '';
+        if($this->street){
+            $data['street'] = $this->street;
+        }
+        if($this->building_number){
+            $data['building_number'] = $this->building_number;
+        }
+        if($this->floor){
+            $data['floor'] = $this->floor;
+        }
+        if($this->apartment_number){
+            $data['apartment_number'] = $this->apartment_number;
+        }
+        if($this->type){
+            $data['type'] = $this->type;
+        }
         return $data;
     }
 }
