@@ -67,6 +67,7 @@ class OrderRepository extends BaseRepository
         $data['created_at'] = $order->created_at;
         $data['updated_at'] = $order->updated_at;
         $data['user'] = $order->user->getData();
+        $results = [];
         $orderDetails = OrderDetail::where('order_id',$order->id)->get();
         foreach($orderDetails as $orderDetail){
             $results[] = $orderDetail->getData();
