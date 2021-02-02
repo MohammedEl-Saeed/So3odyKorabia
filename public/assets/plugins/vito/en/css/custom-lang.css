@@ -229,4 +229,10 @@ table.dataTable.no-footer
 .iq-footer{
     direction: rtl;
 }
-
+.dataTables_wrapper .dataTables_info {
+    float: right;
+}
+.dataTables_wrapper .dataTables_paginate {
+    float: left;
+    text-align: left;
+}
