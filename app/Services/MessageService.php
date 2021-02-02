@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Helpers\FileHelper;
 use App\Helpers\SMSHelper;
+use App\Mail\SupportReply;
 use App\Models\Message;
 use App\Repositories\MessageRepository;
  use App\Http\Traits\BasicTrait;
@@ -12,6 +13,7 @@ use App\Repositories\MessageRepository;
  use Auth;
  use DB;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Mail;
 
 class MessageService
 {
@@ -30,8 +32,10 @@ class MessageService
     }
 
     /** add new message to sysytem */
-    public function store($request){
-        return $this->message->store($request);
+    public function store($request, $parentId = null){
+        $request['text'] = $request->message;
+        Mail::to($request->to)->send(new SupportReply($request));
+        return $this->message->store($request, $parentId);
     }
 
     /** show specific message  */

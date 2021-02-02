@@ -30,6 +30,6 @@ class SupportReply extends Mailable
     public function build()
     {
         $data = $this->request;
-        return $this->view('view.mail.support_reply',compact('data'));
+        return $this->view('admin.messages.support_reply_mail',compact('data'));
     }
 }
