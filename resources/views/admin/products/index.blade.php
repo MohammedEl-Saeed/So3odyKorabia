@@ -11,14 +11,22 @@
         <!--begin::Card-->
         <div class="iq-card">
             <div class="card-header">
-                <h5 class="card-title">عرض  {{$type}}</h5>
-                <a href="{{route('products.create',$type)}}" class="btn btn-text-primary font-weight-bold btn-fixed" data-palcement="top" data-toggle="tooltip" title="Insert {{$type}}">
+                <h5 class="card-title">عرض
+                    @if($type == 'Sacrifice')
+                    الذبائح
+                    @elseif($type == 'Bird')
+                    الطيور
+                    @else
+                    {{$type}}
+                    @endif
+                </h5>
+                <a href="{{route('products.create',$type)}}" class="btn btn-text-primary font-weight-bold btn-fixed" data-palcement="top" data-toggle="tooltip" title="أضافة  @if($type == 'Sacrifice') الذبائح @elseif($type == 'Bird') الطيور @else {{$type}} @endif">
                     <i class="fa fa-plus"></i>
                 </a>
             </div>
             <div class="iq-card-body">
                 @if(session()->has('success'))
-                    <div class="alert text-white bg-success" role="alert">
+                    <div class="alert text-white bg-primary" role="alert">
                         <div class="iq-alert-text">{{session()->get('success')}}</div>
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <i class="ri-close-line"></i>

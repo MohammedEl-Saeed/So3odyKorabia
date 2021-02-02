@@ -8,10 +8,28 @@
         url('fonts/aref-lamsa.svg#Aref_Lamsa') format('svg');
 }
 
-.iq-waves-effect  , .logo-text , 
+.iq-waves-effect  , .logo-text ,
 h1 , h2 , h3 , h4 , h5 ,h6 {
     font-family: 'Aref_Lamsa' !important;
 }
 .images-sidebar + span {
     font-size: 25px;
+}
+h1{
+    font-size: 1.8em;
+}
+h2{
+    font-size: 1.7em;
+}
+h3{
+    font-size: 1.6em;
+}
+h4{
+    font-size: 1.5em;
+}
+h5{
+    font-size: 1.4em;
+}
+h6{
+    font-size: 1.2em;
 }
