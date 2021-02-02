@@ -159,7 +159,7 @@ class OrderRepository extends BaseRepository
         $offer_cost = 0;
         if($offer) {
             $priceAfterOffer = $this->getOfferedPrice($offer, $itemsPrice);
-            $offer_cost = $this->order->getPromocodeValue($offer, $itemsPrice);
+            $offer_cost = $this->getPromocodeValue($offer, $itemsPrice);
         }
         $totalPrice = $priceAfterOffer + $deliveryCosts;
         $this->model->update(['items_price'=>$itemsPrice,
