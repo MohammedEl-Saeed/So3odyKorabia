@@ -57,6 +57,7 @@ class OrderRepository extends BaseRepository
         $data['total_price'] = $order->total_price;
         $data['items_price'] = $order->items_price;
         $data['delivery_cost'] = $order->delivery_cost;
+        $data['delivery_time'] = $order->deliveryTimeRemaining();
         $data['offer_cost'] = $order->offer_cost;
         $data['payment_type'] = $order->payment_type();
         if($order->payment_type == 'Transfer'){
@@ -85,8 +86,10 @@ class OrderRepository extends BaseRepository
         $this->model->user_id = Auth::id();
         $this->model->status = 'Waiting';
         $this->model->user_address_id = $request->user_address_id;
-        $this->model->address = $this->getAddress($request->user_address_id);
-        $this->model->delivery_cost = $this->getDeliveryFees($request->user_address_id);
+        $address = $this->getAddress($request->user_address_id);
+        $this->model->address = $this->getFullAddress($address);
+        $this->model->delivery_cost = $this->getDeliveryFees($address);
+        $this->model->delivery_time = $address->area->delivery_time ?? null;
         if ($request->hasFile('transfer_image')){
             $image_path = FileHelper::upload_file('/uploads/orders/images/',$request['transfer_image']);
             $this->model->transfer_image = $image_path;
@@ -181,8 +184,8 @@ class OrderRepository extends BaseRepository
         return $total_price;
     }
 
-    public function getDeliveryFees($addressId){
-        return UserAddress::find($addressId)->area->delivery_cost ?? 0;
+    public function getDeliveryFees($address){
+        return $address->area->delivery_cost ?? 0;
     }
 
     public function getPromocodeValue($offer, $totalPrice){
@@ -195,10 +198,14 @@ class OrderRepository extends BaseRepository
         return $promoCodePercent;
     }
 
+    public function getFullAddress($address){
+        $fullAddress = $address->getFullAddress();
+        $fullAddress = implode(',',$fullAddress);
+        return $fullAddress;
+    }
+
     public function getAddress($addressId){
         $addressRepo = new UserAddressRepository();
-        $address = $addressRepo->show($addressId)->getFullAddress();
-        $address = implode(',',$address);
-        return $address;
+        return $addressRepo->show($addressId);
     }
 }
