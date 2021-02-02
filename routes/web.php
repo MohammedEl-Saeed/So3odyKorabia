@@ -24,7 +24,7 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     Route::group(['prefix' => 'products', 'as' => 'products.'], function () {
-//        Route::get('dashboard', 'Admin\ProductController@dashboard');
+        //        Route::get('dashboard', 'Admin\ProductController@dashboard');
         //Route::resource('products', 'Admin\ProductController');
         Route::get('/{type}', 'Admin\ProductController@index')->name('index');
         Route::get('/{type}/create', 'Admin\ProductController@create')->name('create');
@@ -35,7 +35,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/{type}/unavailable/{id}', 'Admin\ProductController@makeProductUnavailable')->name('unavailable');
         Route::get('/{type}/sold/{id}', 'Admin\ProductController@makeProductSold')->name('sold');
     });
-//        Route::get('/{id}', 'Admin\ProductController@store')->name('subProduct.index');
+    //        Route::get('/{id}', 'Admin\ProductController@store')->name('subProduct.index');
     Route::resource('options', 'Admin\OptionController');
 
     Route::resource('users', 'Admin\UserController');
@@ -54,7 +54,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('orders/accept/{id}', 'Admin\OrderController@acceptOrder')->name('orders.accept');
     Route::get('orders/reject/{id}', 'Admin\OrderController@rejectOrder')->name('orders.reject');
     Route::get('orders/done/{id}', 'Admin\OrderController@doneOrder')->name('orders.done');
-//});
+
+    //});
 
     Route::resource('options', 'Admin\OptionController');
 
@@ -63,22 +64,24 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('orders', 'Admin\OrderController');
 
     Route::resource('cities', 'Admin\CityController');
-    Route::resource('areas','Admin\AreaController');
-    Route::get('get/areas/{id}','Admin\AreaController@getAreasOfCity')->name('get.areas');
+    Route::resource('areas', 'Admin\AreaController');
+    Route::get('get/areas/{id}', 'Admin\AreaController@getAreasOfCity')->name('get.areas');
 
-//    Route::get('/index', 'Admin\AdminController@index')->name('dashboard');
+    //    Route::get('/index', 'Admin\AdminController@index')->name('dashboard');
     Route::get('show/settings/form', 'Admin\AdminController@showSettingsForm')->name('show.settings.form');
     Route::post('update/settings', 'Admin\AdminController@updateSettings')->name('update.settings');
+
+    Route::get('privacy-policy', 'Admin\AdminController@getPrivacy')->name('privacy.policy');
+    Route::get('terms', 'Admin\AdminController@getTerms')->name('terms');
 
     Route::get('messages', 'Admin\MessageController@index')->name('messages');
     Route::get('reply-message/{messageId}', 'Admin\MessageController@replyMessage')->name('messages.reply');
     Route::post('messages/store', 'Admin\MessageController@store')->name('messages.store');
-
 });
 Auth::routes();
 
 Route::group(['prefix' => 'vapulus-payment', 'as' => 'vapulusPayment.'], function () {
-//    Route::get('/createPayForm', 'VapulusPaymentController@createPayForm')->name('createPayForm');
+    //    Route::get('/createPayForm', 'VapulusPaymentController@createPayForm')->name('createPayForm');
     Route::get('/pay-form/{order_id}', 'Admin\VapulusPaymentController@payForm')->name('payForm');
     Route::post('/pay', 'Admin\VapulusPaymentController@pay')->name('pay');
     Route::get('/success-callback/{order_id}', 'Admin\VapulusPaymentController@successCallback')->name('successCallback');
