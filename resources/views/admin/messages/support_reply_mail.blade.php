@@ -27,9 +27,8 @@
                                 <tr style="background:#ffffff">
                                     <td align="auto" border="0" style="padding-left:20px;padding-right:20px;padding-top:29.8px;font-size:22px;color:#000000;letter-spacing:0;line-height:37px;font-family:AvenirNext-Regular,Droid Sans monospace,Roboto,Arial,sans-serif" dir="ltr">
                                         <p>
-                                            <span style="display:block">Hi {{$data->email}} </span>
-
-                                            <span style="display:block">Support Reply  </span>
+                                            <span style="display:block">Hi {{$data->to}} </span>
+                                            <span style="display:block">Support Reply</span>
                                             <span style="display:block;font-weight: bold;">{{$data->message}}</span>
                                         </p>
                                     </td>

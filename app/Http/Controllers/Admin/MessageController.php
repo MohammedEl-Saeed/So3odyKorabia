@@ -34,6 +34,6 @@ class MessageController extends Controller
 
     public function store(MessageRequest $request){
         $this->service->store($request, $request->id);
-        return redirect()->route('offers.index');
+        return redirect()->route('messages');
     }
 }

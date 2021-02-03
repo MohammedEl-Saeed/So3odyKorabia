@@ -81,7 +81,7 @@ class UserController extends Controller
      */
     public function update(UserRequest $request, $id)
     {
-        $this->service->update($request, $id);
+        $this->service->update($request,$id);
         session()->flash('success', 'تم تعديل المستخدم بنجاح');
         if(auth()->user()->id == $id){
             return redirect()->back();
