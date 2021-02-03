@@ -83,7 +83,11 @@ class UserController extends Controller
     {
         $this->service->update($request, $id);
         session()->flash('success', 'تم تعديل المستخدم بنجاح');
-        return redirect('/users');
+        if(auth()->user()->id == $id){
+            return redirect()->back();
+        }else{
+            return redirect('/users');
+        }
     }
 
     /**

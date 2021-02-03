@@ -62,11 +62,11 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="password">كلمة المرور:</label>
-                                    <input type="password" class="form-control" id="password" name="password" value="{{old('password')}}" min="6" placeholder="كلمة المرور">
+                                    <input type="password" class="form-control" id="password" name="password" value="{{old('password')}}" min="6" placeholder="كلمة المرور" autocomplete="new-password">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="password_confirmation">تاكيد كلمة المرور:</label>
-                                    <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" value="{{old('password_confirmation')}}" min="6" placeholder="تاكيد كلمة المرور">
+                                    <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" value="{{old('password_confirmation')}}" min="6" placeholder="تاكيد كلمة المرور" autocomplete="new-password">
                                 </div>
                                 <input type="hidden" value="User" name="type">
 
