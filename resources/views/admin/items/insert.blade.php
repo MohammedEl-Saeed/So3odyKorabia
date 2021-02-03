@@ -147,6 +147,5 @@
             $(this).parents('.repeated-products').remove();
         }
     });
-
 </script>
 @endsection

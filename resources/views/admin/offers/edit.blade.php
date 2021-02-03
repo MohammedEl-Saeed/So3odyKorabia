@@ -30,7 +30,7 @@
                                         <div class="d-md-none mb-2"></div>
                                 </div>
                                 <div class="col-md-4">
-                                    <label>Uses number:</label>
+                                    <label>عدد مرات الاستخدام:</label>
                                     <input type="number" min="0" name="uses_number" class="form-control" value="{{old('uses_number',$item->uses_number)}}">
                                     <div class="d-md-none mb-2"></div>
                                 </div>

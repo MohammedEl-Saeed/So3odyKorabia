@@ -148,12 +148,12 @@
                         <a class="iq-sub-card" href="#"><img src="{{asset('assets/plugins/vito/images/small/flag-06.png')}}" alt="img-flaf" class="img-fluid mr-2" />Japanese</a>
                     </div>
                 </li> --}}
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="search-toggle iq-waves-effect" href="#"><i class="ri-calendar-line"></i></a>
                     <div class="iq-sub-dropdown">
                         <div class="calender-small"></div>
                     </div>
-                </li>
+                </li> --}}
                 <li class="nav-item">
                     <a href="#" class="search-toggle iq-waves-effect">
                         <div id="lottie-beil"></div>

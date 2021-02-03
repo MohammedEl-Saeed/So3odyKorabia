@@ -12,22 +12,22 @@
             <div class="iq-card-body">
                 <ul class="nav nav-pills d-flex align-items-end profile-feed-items p-0 m-0">
                     <li>
-                        <a class="nav-link active" data-toggle="pill" href="#allorders">All</a>
+                        <a class="nav-link active" data-toggle="pill" href="#allorders">الكل</a>
                     </li>
                     <li>
-                        <a class="nav-link" data-toggle="pill" href="#todayorders">Today</a>
+                        <a class="nav-link" data-toggle="pill" href="#todayorders">اليوم</a>
                     </li>
                     <li>
-                        <a class="nav-link" data-toggle="pill" href="#neworders">New</a>
+                        <a class="nav-link" data-toggle="pill" href="#neworders">جديد</a>
                     </li>
                     <li>
-                        <a class="nav-link" data-toggle="pill" href="#pastorders">Past</a>
+                        <a class="nav-link" data-toggle="pill" href="#pastorders">قديم</a>
                     </li>
                     <li>
-                        <a class="nav-link" data-toggle="pill" href="#acceptedorders">Accepted</a>
+                        <a class="nav-link" data-toggle="pill" href="#acceptedorders">قبول</a>
                     </li>
                     <li>
-                        <a class="nav-link" data-toggle="pill" href="#rejectedorders">Rejected</a>
+                        <a class="nav-link" data-toggle="pill" href="#rejectedorders">رفض</a>
                     </li>
                 </ul>
             </div>
@@ -37,7 +37,7 @@
             <div class="tab-pane fade active show" id="allorders">
                 <div class="iq-card">
                     <div class="card-header">
-                        <h5 class="card-title">View All Orders</h5>
+                        <h5 class="card-title">عرض كل الطلبات</h5>
                     </div>
                     <div class="iq-card-body">
                         <div class="table-responsive">
@@ -45,9 +45,9 @@
                                 <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Price</th>
-                                    <th>User</th>
-                                    <th>Status</th>
+                                    <th>السعر</th>
+                                    <th>المستخدم</th>
+                                    <th>الحالة</th>
                                     <th>الاجراءات </th>
                                 </tr>
                                 </thead>
@@ -77,19 +77,19 @@
                                         <td>
                                             @if($order->status == 'Waiting')
                                                 <a href="{{route('orders.accept',$order->id)}}" >
-                                                    <img data-palcement="bottom" data-toggle="tooltip" title="Accept" src="{{asset('assets/images/icons/accept.svg')}}" class="icons-table" />
+                                                    <img data-palcement="bottom" data-toggle="tooltip" title="قبول" src="{{asset('assets/images/icons/accept.svg')}}" class="icons-table" />
                                                 </a>
                                                 <a href="{{route('orders.reject',$order->id)}}">
-                                                    <img data-palcement="bottom" data-toggle="tooltip" title="Reject" src="{{asset('assets/images/icons/reject.svg')}}" class="icons-table" />
+                                                    <img data-palcement="bottom" data-toggle="tooltip" title="رفض" src="{{asset('assets/images/icons/reject.svg')}}" class="icons-table" />
                                                 </a>
                                             @endif
                                             @if($order->status == 'Accepted')
                                                 <a href="{{route('orders.done',$order->id)}}" >
-                                                    <img data-palcement="bottom" data-toggle="tooltip" title="Done" src="{{asset('assets/images/icons/done.svg')}}" class="icons-table" />
+                                                    <img data-palcement="bottom" data-toggle="tooltip" title="انهاء" src="{{asset('assets/images/icons/done.svg')}}" class="icons-table" />
                                                 </a>
                                             @endif
                                             <a href="{{route('orders.show',$order->id)}}" >
-                                                <img data-palcement="bottom" data-toggle="tooltip" title="View" src="{{asset('assets/images/icons/view.svg')}}" class="icons-table" />
+                                                <img data-palcement="bottom" data-toggle="tooltip" title="عرض" src="{{asset('assets/images/icons/view.svg')}}" class="icons-table" />
                                             </a>
                                         </td>
                                     </tr>
@@ -106,7 +106,7 @@
             <div class="tab-pane fade" id="todayorders">
                 <div class="iq-card">
                     <div class="card-header">
-                        <h5 class="card-title">View Today Orders</h5>
+                        <h5 class="card-title">عرض طلبات اليوم</h5>
                     </div>
                     <div class="iq-card-body">
                         <div class="table-responsive">
@@ -114,9 +114,9 @@
                                 <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Price</th>
-                                    <th>User</th>
-                                    <th>Status</th>
+                                    <th>السعر</th>
+                                    <th>المستخدم</th>
+                                    <th>الحالة</th>
                                     <th>الاجراءات </th>
                                 </tr>
                                 </thead>
@@ -143,19 +143,19 @@
                                         <td>
                                             @if($order->status == 'Waiting')
                                                 <a href="{{route('orders.accept',$order->id)}}" >
-                                                    <img data-palcement="bottom" data-toggle="tooltip" title="Accept" src="{{asset('assets/images/icons/accept.svg')}}" class="icons-table" />
+                                                    <img data-palcement="bottom" data-toggle="tooltip" title="قبول" src="{{asset('assets/images/icons/accept.svg')}}" class="icons-table" />
                                                 </a>
                                                 <a href="{{route('orders.reject',$order->id)}}" >
-                                                    <img data-palcement="bottom" data-toggle="tooltip" title="Reject" src="{{asset('assets/images/icons/reject.svg')}}" class="icons-table" />
+                                                    <img data-palcement="bottom" data-toggle="tooltip" title="رفض" src="{{asset('assets/images/icons/reject.svg')}}" class="icons-table" />
                                                 </a>
                                             @endif
                                             @if($order->status == 'Accepted')
                                                 <a href="{{route('orders.done',$order->id)}}" >
-                                                    <img data-palcement="bottom" data-toggle="tooltip" title="Done" src="{{asset('assets/images/icons/done.svg')}}" class="icons-table" />
+                                                    <img data-palcement="bottom" data-toggle="tooltip" title="انهاء" src="{{asset('assets/images/icons/done.svg')}}" class="icons-table" />
                                                 </a>
                                             @endif
                                             <a href="{{route('orders.show',$order->id)}}" >
-                                                <img data-palcement="bottom" data-toggle="tooltip" title="View" src="{{asset('assets/images/icons/view.svg')}}" class="icons-table" />
+                                                <img data-palcement="bottom" data-toggle="tooltip" title="عرض" src="{{asset('assets/images/icons/view.svg')}}" class="icons-table" />
                                             </a>
                                         </td>
                                     </tr>
@@ -171,7 +171,7 @@
             <div class="tab-pane fade" id="neworders">
                 <div class="iq-card">
                     <div class="card-header">
-                        <h5 class="card-title">View New Orders</h5>
+                        <h5 class="card-title">عرض الطلبات الجديدة</h5>
                     </div>
                     <div class="iq-card-body">
                         <div class="table-responsive">
@@ -179,9 +179,9 @@
                                 <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Price</th>
-                                    <th>User</th>
-                                    <th>Status</th>
+                                    <th>السعر</th>
+                                    <th>المستخدم</th>
+                                    <th>الحالة</th>
                                     <th>الاجراءات </th>
                                 </tr>
                                 </thead>
@@ -208,19 +208,19 @@
                                         <td>
                                             @if($order->status == 'Waiting')
                                                 <a href="{{route('orders.accept',$order->id)}}" >
-                                                    <img data-palcement="bottom" data-toggle="tooltip" title="Accept" src="{{asset('assets/images/icons/accept.svg')}}" class="icons-table" />
+                                                    <img data-palcement="bottom" data-toggle="tooltip" title="قبول" src="{{asset('assets/images/icons/accept.svg')}}" class="icons-table" />
                                                 </a>
                                                 <a href="{{route('orders.reject',$order->id)}}">
-                                                    <img data-palcement="bottom" data-toggle="tooltip" title="Reject" src="{{asset('assets/images/icons/reject.svg')}}" class="icons-table" />
+                                                    <img data-palcement="bottom" data-toggle="tooltip" title="رفض" src="{{asset('assets/images/icons/reject.svg')}}" class="icons-table" />
                                                 </a>
                                             @endif
                                             @if($order->status == 'Accepted')
                                                 <a href="{{route('orders.done',$order->id)}}" >
-                                                    <img data-palcement="bottom" data-toggle="tooltip" title="Done" src="{{asset('assets/images/icons/done.svg')}}" class="icons-table" />
+                                                    <img data-palcement="bottom" data-toggle="tooltip" title="انهاء" src="{{asset('assets/images/icons/done.svg')}}" class="icons-table" />
                                                 </a>
                                             @endif
                                             <a href="{{route('orders.show',$order->id)}}" >
-                                                <img data-palcement="bottom" data-toggle="tooltip" title="View" src="{{asset('assets/images/icons/view.svg')}}" class="icons-table" />
+                                                <img data-palcement="bottom" data-toggle="tooltip" title="عرض" src="{{asset('assets/images/icons/view.svg')}}" class="icons-table" />
                                             </a>
                                         </td>
                                     </tr>
@@ -235,7 +235,7 @@
             <div class="tab-pane fade" id="pastorders">
                 <div class="iq-card">
                     <div class="card-header">
-                        <h5 class="card-title">View Past Orders</h5>
+                        <h5 class="card-title">عرض الطلبات القديمة</h5>
                     </div>
                     <div class="iq-card-body">
                         <div class="table-responsive">
@@ -243,9 +243,9 @@
                                 <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Price</th>
-                                    <th>User</th>
-                                    <th>Status</th>
+                                    <th>السعر</th>
+                                    <th>المستخدم</th>
+                                    <th>الحالة</th>
                                     <th>الاجراءات </th>
                                 </tr>
                                 </thead>
@@ -272,19 +272,19 @@
                                         <td>
                                             @if($order->status == 'Waiting')
                                                 <a href="{{route('orders.accept',$order->id)}}">
-                                                    <img data-palcement="bottom" data-toggle="tooltip" title="Accept" src="{{asset('assets/images/icons/accept.svg')}}" class="icons-table" />
+                                                    <img data-palcement="bottom" data-toggle="tooltip" title="قبول" src="{{asset('assets/images/icons/accept.svg')}}" class="icons-table" />
                                                 </a>
                                                 <a href="{{route('orders.reject',$order->id)}}">
-                                                    <img data-palcement="bottom" data-toggle="tooltip" title="Reject" src="{{asset('assets/images/icons/reject.svg')}}" class="icons-table" />
+                                                    <img data-palcement="bottom" data-toggle="tooltip" title="رفض" src="{{asset('assets/images/icons/reject.svg')}}" class="icons-table" />
                                                 </a>
                                             @endif
                                             @if($order->status == 'Accepted')
                                                 <a href="{{route('orders.done',$order->id)}}">
-                                                    <img data-palcement="bottom" data-toggle="tooltip" title="Done" src="{{asset('assets/images/icons/done.svg')}}" class="icons-table" />
+                                                    <img data-palcement="bottom" data-toggle="tooltip" title="انهاء" src="{{asset('assets/images/icons/done.svg')}}" class="icons-table" />
                                                 </a>
                                             @endif
                                             <a href="{{route('orders.show',$order->id)}}">
-                                                <img data-palcement="bottom" data-toggle="tooltip" title="View" src="{{asset('assets/images/icons/view.svg')}}" class="icons-table" />
+                                                <img data-palcement="bottom" data-toggle="tooltip" title="عرض" src="{{asset('assets/images/icons/view.svg')}}" class="icons-table" />
                                             </a>
                                         </td>
                                     </tr>
@@ -299,7 +299,7 @@
             <div class="tab-pane fade" id="acceptedorders">
                 <div class="iq-card">
                     <div class="card-header">
-                        <h5 class="card-title">View Accepted Orders</h5>
+                        <h5 class="card-title">عرض الطلبات المقبولة</h5>
                     </div>
                     <div class="iq-card-body">
                         <div class="table-responsive">
@@ -307,9 +307,9 @@
                                 <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Price</th>
-                                    <th>User</th>
-                                    <th>Status</th>
+                                    <th>السعر</th>
+                                    <th>المستخدم</th>
+                                    <th>الحالة</th>
                                     <th>الاجراءات </th>
                                 </tr>
                                 </thead>
@@ -336,19 +336,19 @@
                                         <td>
                                             @if($order->status == 'Waiting')
                                                 <a href="{{route('orders.accept',$order->id)}}">
-                                                    <img data-palcement="bottom" data-toggle="tooltip" title="Accept" src="{{asset('assets/images/icons/accept.svg')}}" class="icons-table" />
+                                                    <img data-palcement="bottom" data-toggle="tooltip" title="قبول" src="{{asset('assets/images/icons/accept.svg')}}" class="icons-table" />
                                                 </a>
                                                 <a href="{{route('orders.reject',$order->id)}}">
-                                                    <img data-palcement="bottom" data-toggle="tooltip" title="Reject" src="{{asset('assets/images/icons/reject.svg')}}" class="icons-table" />
+                                                    <img data-palcement="bottom" data-toggle="tooltip" title="رفض" src="{{asset('assets/images/icons/reject.svg')}}" class="icons-table" />
                                                 </a>
                                             @endif
                                             @if($order->status == 'Accepted')
                                                 <a href="{{route('orders.done',$order->id)}}">
-                                                    <img data-palcement="bottom" data-toggle="tooltip" title="Done" src="{{asset('assets/images/icons/done.svg')}}" class="icons-table" />
+                                                    <img data-palcement="bottom" data-toggle="tooltip" title="انهاء" src="{{asset('assets/images/icons/done.svg')}}" class="icons-table" />
                                                 </a>
                                             @endif
                                             <a href="{{route('orders.show',$order->id)}}">
-                                                <img data-palcement="bottom" data-toggle="tooltip" title="View" src="{{asset('assets/images/icons/view.svg')}}" class="icons-table" />
+                                                <img data-palcement="bottom" data-toggle="tooltip" title="عرض" src="{{asset('assets/images/icons/view.svg')}}" class="icons-table" />
                                             </a>
                                         </td>
                                     </tr>
@@ -364,7 +364,7 @@
             <div class="tab-pane fade" id="rejectedorders">
                 <div class="iq-card">
                     <div class="card-header">
-                        <h5 class="card-title">View Rejected Orders</h5>
+                        <h5 class="card-title">عرض الطلبات المرفوضه</h5>
                     </div>
                     <div class="iq-card-body">
                         <div class="table-responsive">
@@ -372,9 +372,9 @@
                                 <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Price</th>
-                                    <th>User</th>
-                                    <th>Status</th>
+                                    <th>السعر</th>
+                                    <th>المستخدم</th>
+                                    <th>الحالة</th>
                                     <th>الاجراءات </th>
                                 </tr>
                                 </thead>
@@ -401,19 +401,19 @@
                                         <td>
                                             @if($order->status == 'Waiting')
                                                 <a href="{{route('orders.accept',$order->id)}}">
-                                                    <img data-palcement="bottom" data-toggle="tooltip" title="Accept" src="{{asset('assets/images/icons/accept.svg')}}" class="icons-table" />
+                                                    <img data-palcement="bottom" data-toggle="tooltip" title="قبول" src="{{asset('assets/images/icons/accept.svg')}}" class="icons-table" />
                                                 </a>
                                                 <a href="{{route('orders.reject',$order->id)}}">
-                                                    <img data-palcement="bottom" data-toggle="tooltip" title="Reject" src="{{asset('assets/images/icons/reject.svg')}}" class="icons-table" />
+                                                    <img data-palcement="bottom" data-toggle="tooltip" title="رفض" src="{{asset('assets/images/icons/reject.svg')}}" class="icons-table" />
                                                 </a>
                                             @endif
                                             @if($order->status == 'Accepted')
                                                 <a href="{{route('orders.done',$order->id)}}">
-                                                    <img data-palcement="bottom" data-toggle="tooltip" title="Done" src="{{asset('assets/images/icons/done.svg')}}" class="icons-table" />
+                                                    <img data-palcement="bottom" data-toggle="tooltip" title="انهاء" src="{{asset('assets/images/icons/done.svg')}}" class="icons-table" />
                                                 </a>
                                             @endif
                                             <a href="{{route('orders.show',$order->id)}}">
-                                                <img data-palcement="bottom" data-toggle="tooltip" title="View" src="{{asset('assets/images/icons/view.svg')}}" class="icons-table" />
+                                                <img data-palcement="bottom" data-toggle="tooltip" title="عرض" src="{{asset('assets/images/icons/view.svg')}}" class="icons-table" />
                                             </a>
                                         </td>
                                     </tr>

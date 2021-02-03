@@ -13,7 +13,7 @@
             <div class="iq-card">
                 <div class="iq-card-header d-flex justify-content-between">
                     <div class="iq-header-title">
-                        <h4 class="card-title">Add New User</h4>
+                        <h4 class="card-title">أضافة مستخدم جديد</h4>
                     </div>
                 </div>
             </div>
@@ -24,7 +24,7 @@
                             <div class="add-img-user profile-img-edit">
                                 <img class="profile-pic img-fluid" src="{{asset('assets/plugins/vito/images/user/11.png')}}" alt="profile-pic">
                                 <div class="p-image">
-                                    <a href="#" class="upload-button btn iq-bg-primary">Add Logo</a>
+                                    <a href="#" class="upload-button btn iq-bg-primary">أضافة صورة شخصية</a>
                                     <input class="file-upload" form="main-form-to-add-doctor" type="file" accept="image/*" name="image">
                                 </div>
                             </div>
@@ -37,38 +37,34 @@
                 <div class="iq-card">
                     <div class="iq-card-header d-flex justify-content-between">
                         <div class="iq-header-title">
-                            <h4 class="card-title">New User Information</h4>
+                            <h4 class="card-title">بيانات المستخدم</h4>
                         </div>
                     </div>
                     <div class="iq-card-body">
                         <div class="new-user-info">
                                 <div class="row">
                                     <div class="form-group col-md-6">
-                                        <label for="name">Name:</label>
-                                        <input type="text" class="form-control" id="name" name="name" value="{{old('name')}}"  min="3"  max="100" placeholder="Enter a name">
-                                        <span class="form-text text-muted">Please enter user name</span>
+                                        <label for="name">الاسم:</label>
+                                        <input type="text" class="form-control" id="name" name="name" value="{{old('name')}}"  min="3"  max="100" placeholder="الاسم">
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="phone">Phone:</label>
-                                        <input type="text" class="form-control" id="phone" name="phone" value="{{old('phone')}}"  min="10"  placeholder="Enter a phone">
-                                        <span class="form-text text-muted">Please enter phone</span>
+                                        <label for="phone">رقم الجوال:</label>
+                                        <input type="text" class="form-control" id="phone" name="phone" value="{{old('phone')}}"  min="10"  placeholder="رقم الجوال">
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="email">Email:</label>
-                                        <input type="email" class="form-control" id="email" name="email" value="{{old('email')}}"  placeholder="Enter an email">
-                                        <span class="form-text text-muted">Please enter e-mail</span>
+                                        <label for="email">البريد الالكتروني:</label>
+                                        <input type="email" class="form-control" id="email" name="email" value="{{old('email')}}"  placeholder="البريد الالكتورني">
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="password">Password:</label>
-                                        <input type="password" class="form-control" id="password" name="password" value="{{old('password')}}"  min="6"  placeholder="Enter a password">
-                                        <span class="form-text text-muted">Please enter password</span>
+                                        <label for="password">كلمة المرور:</label>
+                                        <input type="password" class="form-control" id="password" name="password" value="{{old('password')}}"  min="6"  placeholder="كلمة المرور">
                                     </div>
                                     <input type="hidden" value="User" name="type">
 
                                 </div>
                                 <div class="col-md-12">
-                                    <button type="submit" class="btn btn-success ml-2 pull-right">Add New User</button>
-                                    <button type="reset" class="btn btn-secondary pull-right">Cancel</button>
+                                    <button type="submit" class="btn btn-primary ml-2 pull-left">أضافة مستخدم جديد</button>
+                                    <button type="reset" class="btn btn-secondary pull-left">الغاء</button>
                                     <div class="clearfix"></div>
                                 </div>
                         </div>

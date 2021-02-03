@@ -11,14 +11,14 @@
         <!--begin::Card-->
         <div class="iq-card">
             <div class="card-header">
-                <h5 class="card-title">View All User</h5>
-                <a href="{{route('users.create')}}" class="btn btn-text-primary font-weight-bold btn-fixed" data-palcement="top" data-toggle="tooltip" title="Insert User">
+                <h5 class="card-title">عرض المستخدمين</h5>
+                <a href="{{route('users.create')}}" class="btn btn-text-primary font-weight-bold btn-fixed" data-palcement="top" data-toggle="tooltip" title="أضافة مستخدم">
                     <i class="fa fa-plus"></i>
                 </a>
             </div>
             <div class="iq-card-body">
                 @if(session()->has('success'))
-                    <div class="alert text-white bg-success" role="alert">
+                    <div class="alert text-white bg-primary" role="alert">
                         <div class="iq-alert-text">{{session()->get('success')}}</div>
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <i class="ri-close-line"></i>
@@ -31,10 +31,10 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Name</th>
-                            <th>phone</th>
-                            <th>email</th>
-                            <th>Image</th>
+                            <th>الاسم</th>
+                            <th>رقم الجوال</th>
+                            <th>البريد الالكتروني</th>
+                            <th>الصورة الشخصية</th>
                             <th class="text-center">الاجراءات </th>
                         </tr>
                         </thead>
