@@ -19,6 +19,7 @@ class CreateOrdersTable extends Migration
             $table->double('total_price')->default(0);
             $table->double('items_price')->default(0);
             $table->double('delivery_cost')->default(0);
+            $table->integer('delivery_time')->nullable();
             $table->double('offer_cost')->default(0);
             $table->text('address')->nullable();
             $table->tinyInteger('payment_type')->default(0);

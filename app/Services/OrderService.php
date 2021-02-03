@@ -93,7 +93,9 @@ class OrderService
 
     public function orderStatus($orderId)
     {
-        return $this->order->orderStatus($orderId);
+        $order = $this->order->orderStatus($orderId);
+        $order->delivery_time = $order->deliveryTimeRemaining();
+        return $order;
     }
 
     public function getCities()
