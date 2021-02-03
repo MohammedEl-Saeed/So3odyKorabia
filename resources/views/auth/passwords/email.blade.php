@@ -1,8 +1,8 @@
 @extends('auth.base')
-@section('title' , 'تعديل كلمة المرور')
+@section('title' , 'ارسال كلمة المرور')
 @section('content')
 <div class="sign-in-from">
-    <h1 class="mb-0">تعديل كلمة المرور</h1>
+    <h1 class="mb-0">ارسال كلمة المرور</h1>
     @if(session()->has('status'))
         <div class="alert text-white bg-danger" role="alert">
             <div class="iq-alert-text">
@@ -33,7 +33,7 @@
 
             <div class="form-group mb-0">
                 <button type="submit" class="btn btn-primary float-right">
-                    تعديل كلمة المرور
+                    ارسال كلمة المرور
                 </button>
             </div>
         </form>

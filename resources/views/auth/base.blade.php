@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>@yield('title')</title>
         <!-- Favicon -->
-        <link rel="shortcut icon" href="images/favicon.ico" />
+        <link rel="shortcut icon" href="{{asset('assets/images/logos/logo.svg')}}" />
 
         <!-- ====================================== start css vito files ========================== -->
         <link href="{{asset('assets/plugins/vito/ar/css/bootstrap.min.css?v=7.0.3')}}" rel="stylesheet" type="text/css" />
