@@ -10,10 +10,11 @@
         <link rel="shortcut icon" href="images/favicon.ico" />
 
         <!-- ====================================== start css vito files ========================== -->
-        <link href="{{asset('assets/plugins/vito/en/css/bootstrap.min.css?v=7.0.3')}}" rel="stylesheet" type="text/css" />
-        <link href="{{asset('assets/plugins/vito/en/css/typography.css?v=7.0.3')}}" rel="stylesheet" type="text/css" />
-        <link href="{{asset('assets/plugins/vito/en/css/style.css?v=7.0.3')}}" rel="stylesheet" type="text/css" />
-        <link href="{{asset('assets/plugins/vito/en/css/responsive.css?v=7.0.3')}}" rel="stylesheet" type="text/css" />
+        <link href="{{asset('assets/plugins/vito/ar/css/bootstrap.min.css?v=7.0.3')}}" rel="stylesheet" type="text/css" />
+        <link href="{{asset('assets/plugins/vito/ar/css/typography.css?v=7.0.3')}}" rel="stylesheet" type="text/css" />
+        <link href="{{asset('assets/plugins/vito/ar/css/style.css?v=7.0.3')}}" rel="stylesheet" type="text/css" />
+        <link href="{{asset('assets/plugins/vito/ar/css/responsive.css?v=7.0.3')}}" rel="stylesheet" type="text/css" />
+        <link href="{{asset('assets/plugins/vito/en/css/custom-lang.css?v=7.0.3')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('assets/plugins/datatable-2/css/responsive.dataTables.min.css')}}" rel="stylesheet" />
         <link href="{{asset('assets/plugins/datatable-2/css/jquery.dataTables.min.css')}}" rel="stylesheet" />
         <script src="{{asset('assets/plugins/datatable-2/js/jquery-3.3.1.js')}}"></script>
@@ -49,40 +50,91 @@
                             </div>
                             <div id="printableArea">
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <h5>user name</h5>
-                                        @if(!empty($data['user']['name']))
+                                    @if(!empty($data['user']['name']))
+                                    <div class="col-md-4">
+                                        <h5>اسم المستخدم</h5>
                                         <p>
                                             @if(!@empty($data['user']['image']))
                                             <img src="{{asset($data['user']['image'])}}" style="width: 50px ; height: 50px; border-radius: 50% ; margin-right: 10px" />
                                             @endif
                                             {{$data['user']['name']}}
                                         </p>
-                                        @endif
                                     </div>
+                                    @endif
 
                                     @if(!empty($data['user']['email']))
-                                    <div class="col-md-6">
-                                        <h5>user email</h5>
+                                    <div class="col-md-4">
+                                        <h5>البريد الالكتروني</h5>
                                         <p>{{$data['user']['email']}}</p>
                                     </div>
                                     @endif
 
+                                    @if(!empty($data['user']['phone']))
+                                    <div class="col-md-4">
+                                        <h5>رقم الجوال</h5>
+                                        <p>{{$data['user']['phone']}}</p>
+                                    </div>
+                                    @endif
+
+                                    @if(!empty($data['items_price']))
+                                    <div class="col-md-4">
+                                        <h5>سعر المنتجات  </h5>
+                                        <p>{{$data['items_price']}}</p>
+                                    </div>
+                                    @endif
+
+                                    @if(!empty($data['offer_cost']))
+                                    <div class="col-md-4">
+                                        <h5>سعر العرض</h5>
+                                        <p>{{$data['offer_cost']}}</p>
+                                    </div>
+                                    @endif
+
+                                    @if(!empty($data['delivery_cost']))
+                                    <div class="col-md-4">
+                                        <h5>تكلفه التوصيل </h5>
+                                        <p>{{$data['delivery_cost']}}</p>
+                                    </div>
+                                    @endif
+
                                     @if(!empty($data['total_price']))
-                                    <div class="col-md-6">
-                                        <h5>total price : {{$data['total_price']}}</h5>
+                                    <div class="col-md-4">
+                                        <h5>السعر الكلي </h5>
+                                        <p>{{$data['total_price']}}</p>
+                                    </div>
+                                    @endif
+
+                                    @if(!empty($data['payment_type']))
+                                    <div class="col-md-4">
+                                        <h5>طريقة الدفع </h5>
+                                        <p>{{$data['payment_type']}}</p>
+                                    </div>
+                                    @endif
+
+                                    @if(!empty($data['status']))
+                                    <div class="col-md-4">
+                                        <h5>الحالة</h5>
+                                        <p>{{$data['status']}}</p>
+                                    </div>
+                                    @endif
+
+                                    @if(!empty($data['address']))
+                                    <div class="col-md-12">
+                                        <h5>العنوان</h5>
+                                        <p>{{$data['address']}}</p>
                                     </div>
                                     @endif
                                 </div>
+
                                 <table id="example" class="table table-hover table-striped table-bordered">
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th class="all">Product</th>
-                                            <th class="all">Item</th>
-                                            <th class="all">Item description</th>
-                                            <th class="all">logo</th>
-                                            <th class="all">Price</th>
+                                            <th class="all">المنتج</th>
+                                            <th class="all">الصنف</th>
+                                            <th class="all">الوصف</th>
+                                            <th class="all">الشعار</th>
+                                            <th class="all">السعر</th>
                                             <th class="none"></th>
                                         </tr>
                                     </thead>
@@ -103,8 +155,8 @@
                                                 @if(!empty($order['item_options']))
                                                 <table>
                                                     <thead>
-                                                        <th>option</th>
-                                                        <th>price</th>
+                                                        <th>الاضافه</th>
+                                                        <th>سعر الاضافة</th>
                                                     </thead>
                                                     <tbody>
                                                         @foreach($order['item_options'] as $option)
