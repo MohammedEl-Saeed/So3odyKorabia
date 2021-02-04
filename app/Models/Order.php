@@ -22,7 +22,7 @@ class Order extends Model
         return $this->belongsTo(Offer::class,'offer_id');
     }
 
-    public function payment_type(){
+    public function paymentType(){
         if($this->payment_type == 1){
             $type = 'Transfer';
         }elseif($this->payment_type == 2){

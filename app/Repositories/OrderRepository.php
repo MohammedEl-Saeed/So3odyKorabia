@@ -59,7 +59,7 @@ class OrderRepository extends BaseRepository
         $data['delivery_cost'] = $order->delivery_cost;
         $data['delivery_time'] = $order->deliveryTimeRemaining();
         $data['offer_cost'] = $order->offer_cost;
-        $data['payment_type'] = $order->payment_type();
+        $data['payment_type'] = $order->paymentType();
         if($order->payment_type == 'Transfer'){
             $data['transfer_image'] = $order->transfer_image;
         }
@@ -201,7 +201,7 @@ class OrderRepository extends BaseRepository
 
     public function getFullAddress($address){
         $fullAddress = $address->getFullAddress();
-        $fullAddress = implode(',',$fullAddress);
+        $fullAddress = implode(' -',$fullAddress);
         return $fullAddress;
     }
 
