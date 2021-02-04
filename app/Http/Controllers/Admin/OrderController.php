@@ -110,7 +110,7 @@ class OrderController extends Controller
             $this->service->updateStatus('Accepted',$orderId);
 //            event(new NotifcationEvent('you  Updates has been accepted ',url('/analysis/edit/profile'),$updated_id));
 //            $this->addToNotification($updated_id,'you updates has been accepted',url('/analysis/edit/profile'));
-            return redirect()->route('admin.orders.index')->with('flash_success','Request Acceptted and data changed');
+            return redirect()->route('orders.index')->with('flash_success','Request Acceptted and data changed');
         } catch(\Exception $e){
             return back()->with('flash_error', 'Something went wrong');
         }
@@ -122,7 +122,7 @@ class OrderController extends Controller
             $this->service->updateStatus('Rejected',$orderId);
 //            event(new NotifcationEvent('you  Updates has been accepted ',url('/analysis/edit/profile'),$updated_id));
 //            $this->addToNotification($updated_id,'you updates has been accepted',url('/analysis/edit/profile'));
-            return redirect()->route('admin.orders.index')->with('flash_success','Request Acceptted and data changed');
+            return redirect()->route('orders.index')->with('flash_success','Request Acceptted and data changed');
         } catch(\Exception $e){
             return back()->with('flash_error', 'Something went wrong');
         }
@@ -134,7 +134,7 @@ class OrderController extends Controller
             $this->service->updateStatus('Done',$orderId);
 //            event(new NotifcationEvent('you  Updates has been accepted ',url('/analysis/edit/profile'),$updated_id));
 //            $this->addToNotification($updated_id,'you updates has been accepted',url('/analysis/edit/profile'));
-            return redirect()->route('admin.orders.index')->with('flash_success','Request Acceptted and data changed');
+            return redirect()->route('orders.index')->with('flash_success','Request Acceptted and data changed');
         } catch(\Exception $e){
             return back()->with('flash_error', 'Something went wrong');
         }
