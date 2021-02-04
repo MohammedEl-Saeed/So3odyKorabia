@@ -22,10 +22,10 @@ class UserAddress extends Model
     public function getData(){
         $data = [];
         $data['id'] = $this->id;
-//        $data['city_id'] = $this->city_id;
+        $data['city_id'] = $this->city_id;
         $data['city_name'] = $this->city->name ?? '';
         $data['area_name'] = $this->area->name ?? '';
-//        $data['area_id'] = $this->area_id;
+        $data['area_id'] = $this->area_id;
         $data['street'] = $this->street;
         $data['building_number'] = $this->building_number;
         $data['floor'] = $this->floor;
