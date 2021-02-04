@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Http\Traits\BasicTrait;
 use App\Models\Cart;
 use App\Models\Offer;
+use App\Models\Order;
 use App\Models\UserAddress;
 use App\Repositories\CartRepository;
 use App\Repositories\CityRepository;
@@ -35,8 +36,10 @@ class OrderService
     public function createOrder($request)
     {
         $order = $this->order->createOrder($request);
-        $cart = new CartRepository();
-        $cart->emptyCart();
+        if ($request->payment_type != 2) {
+            $cart = new CartRepository();
+            $cart->emptyCart();
+        }
         return $order;
 
     }
@@ -70,9 +73,9 @@ class OrderService
 //    }
 
     /** delete order */
-    public function delete()
+    public function delete($id)
     {
-        return $this->order->delete();
+        return $this->order->delete($id);
     }
 
     /** update status for order by accept or reject  */
@@ -166,4 +169,9 @@ class OrderService
         return Offer::where('code', $code)->select('discount', 'discount_type')->first();
     }
 
+    public function updatePayment($orderId){
+        Order::where('id',$orderId)->update(['payment_completed'=>1]);
+        $cart = new CartRepository();
+        $cart->emptyCart();
+    }
 }

@@ -50,6 +50,7 @@ Route::group(['middleware' => ['jwtMiddleware']], function () {
     Route::post('get-orders', 'API\OrderController@getOrders');
     Route::post('re-order', 'API\OrderController@reOrder');
     Route::post('order-status', 'API\OrderController@orderStatus');
+    Route::post('delete-order', 'API\OrderController@deleteOrder');
 
     Route::post('add-address', 'API\UserAddressController@addAddress');
     Route::post('update-address', 'API\UserAddressController@updateAddress');

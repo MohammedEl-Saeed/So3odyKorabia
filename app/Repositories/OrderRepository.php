@@ -86,6 +86,7 @@ class OrderRepository extends BaseRepository
         $this->model->user_id = Auth::id();
         $this->model->status = 'Waiting';
         $this->model->user_address_id = $request->user_address_id;
+        $this->model->payment_type = $request->payment_type;
         $address = $this->getAddress($request->user_address_id);
         $this->model->address = $this->getFullAddress($address);
         $this->model->delivery_cost = $this->getDeliveryFees($address);
@@ -207,5 +208,9 @@ class OrderRepository extends BaseRepository
     public function getAddress($addressId){
         $addressRepo = new UserAddressRepository();
         return $addressRepo->show($addressId);
+    }
+
+    public function delete($id){
+        return $this->traitDelete($this->model, $id);
     }
 }

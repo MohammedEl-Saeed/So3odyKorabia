@@ -37,6 +37,7 @@ class OrderController extends Controller
         if(is_null($data)){
             $message = 'Your cart is empty';
         }else{
+            $data['url'] = url(route('vapulusPayment.payForm', $data['order_id']));
             $message = 'return Successfully';
         }
         return  $this->prepare_response(false,null,$message,$data,0 ,200);
@@ -129,4 +130,14 @@ class OrderController extends Controller
 
     }
 
+    public function deleteOrder(Request $request){
+        $validator = Validator::make($request->all(), [
+            'order_id' => 'required|exists:orders,id',
+        ]);
+        if ($validator->fails()) {
+            return $this->prepare_response(true,$validator->errors(),'Error validation',$request->all(),0,200) ;
+        }
+        $this->service->delete($request->order_id);
+        return $this->prepare_response(false,null,'return Successfully',null,0 ,200,4);
+    }
 }
