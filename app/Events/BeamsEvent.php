@@ -14,12 +14,12 @@ class BeamsEvent
     public $data = [];
     public $users = [];
 
-    public function __construct(array $users,array $data)
+    public function __construct(array $users, array $data)
     {
         $this->data = $data;
         $this->users = $users;
+//        dd($users, $data);
     }
-
 
     public function broadcastOn()
     {

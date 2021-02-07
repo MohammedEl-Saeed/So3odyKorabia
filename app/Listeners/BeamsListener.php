@@ -12,11 +12,13 @@ class BeamsListener
 
     protected $beams;
 
-    public function __construct(PushNotifications $pushNotifications)
+    public function __construct()
     {
-        $this->beams = $pushNotifications;
+        $this->beams = new PushNotifications(array(
+            "instanceId" => env('PUSHER_BEAMS_INSTANCE_ID'),
+            "secretKey" =>  env('PUSHER_BEAMS_SECRET_KEY'),
+        ));
     }
-
 
     /**
      * Handle the event.
