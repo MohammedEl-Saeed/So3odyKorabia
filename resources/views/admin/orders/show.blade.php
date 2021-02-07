@@ -25,6 +25,11 @@
         <!-- ====================================== end css vito files ============================ -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
         <link href="{{asset('css/Aref_Lamsa.css')}}" rel="stylesheet" type="text/css" />
+        <style>
+            .buttons-print svg{
+                filter: invert(44%) sepia(97%) saturate(472%) hue-rotate(329deg) brightness(91%) contrast(79%);
+            }
+        </style>
     </head>
     <body>
         <div class="wrapper">
@@ -34,98 +39,115 @@
                     <div class="m-3">
                         @include('admin.include.messages_errors')
                     </div>
-                    <div class="iq-card">
-                        <div class="iq-card-body">
-                            <div class="dt-buttons btn-group flex-wrap float-right">
-                                <button type="button" class="btn buttons-print" onclick="printDiv('printableArea')">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 15.271 16.067">
-                                        <g id="Group" style="mix-blend-mode: darken;isolation: isolate">
-                                            <path id="Path_1315" data-name="Path 1315" d="M24.847,3.293h-.413V2.374A2.378,2.378,0,0,0,22.06,0H17.075A2.378,2.378,0,0,0,14.7,2.374v.919h-.376A2.378,2.378,0,0,0,11.95,5.668V9.5a2.378,2.378,0,0,0,2.374,2.374H14.7v3.01a1.188,1.188,0,0,0,1.185,1.185h7.363a1.188,1.188,0,0,0,1.185-1.185v-3.01h.416A2.378,2.378,0,0,0,27.221,9.5V5.668A2.378,2.378,0,0,0,24.847,3.293ZM15.6,2.374A1.478,1.478,0,0,1,17.071.9h4.982a1.478,1.478,0,0,1,1.475,1.475v.919H15.6Zm7.935,12.514a.289.289,0,0,1-.286.286H15.883a.289.289,0,0,1-.286-.286V9.923h7.935ZM26.322,9.5a1.478,1.478,0,0,1-1.475,1.475h-.413V9.923h.593a.45.45,0,1,0,0-.9H14.038a.45.45,0,0,0,0,.9H14.7v1.052h-.376A1.478,1.478,0,0,1,12.849,9.5V5.671A1.478,1.478,0,0,1,14.324,4.2H24.847a1.478,1.478,0,0,1,1.475,1.475Z" transform="translate(-11.95 0)" fill="#ba8a13"></path>
-                                            <path id="Path_1316" data-name="Path 1316" d="M141.1,338.3h5.724a.45.45,0,0,0,0-.9H141.1a.45.45,0,0,0,0,.9Z" transform="translate(-136.364 -326.165)" fill="#ba8a13"></path>
-                                            <path id="Path_1317" data-name="Path 1317" d="M147.827,392.6H142.1a.45.45,0,1,0,0,.9h5.724a.45.45,0,0,0,0-.9Z" transform="translate(-137.331 -379.527)" fill="#ba8a13"></path>
-                                            <path id="Path_1318" data-name="Path 1318" d="M359.412,151.9H358.5a.45.45,0,1,0,0,.9h.912a.45.45,0,0,0,0-.9Z" transform="translate(-346.525 -146.842)" fill="#ba8a13"></path>
-                                        </g>
-                                    </svg>
-                                </button>
-                            </div>
-                            <div id="printableArea">
-                                <div class="row">
-                                    @if(!empty($data['user']['name']))
-                                    <div class="col-md-4">
-                                        <h5>اسم المستخدم</h5>
-                                        <p>
+                    <div class="dt-buttons btn-group flex-wrap float-right">
+                        <button type="button" class="btn buttons-print" onclick="printDiv('printableArea')">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 15.271 16.067">
+                                <g id="Group" style="mix-blend-mode: darken;isolation: isolate">
+                                    <path id="Path_1315" data-name="Path 1315" d="M24.847,3.293h-.413V2.374A2.378,2.378,0,0,0,22.06,0H17.075A2.378,2.378,0,0,0,14.7,2.374v.919h-.376A2.378,2.378,0,0,0,11.95,5.668V9.5a2.378,2.378,0,0,0,2.374,2.374H14.7v3.01a1.188,1.188,0,0,0,1.185,1.185h7.363a1.188,1.188,0,0,0,1.185-1.185v-3.01h.416A2.378,2.378,0,0,0,27.221,9.5V5.668A2.378,2.378,0,0,0,24.847,3.293ZM15.6,2.374A1.478,1.478,0,0,1,17.071.9h4.982a1.478,1.478,0,0,1,1.475,1.475v.919H15.6Zm7.935,12.514a.289.289,0,0,1-.286.286H15.883a.289.289,0,0,1-.286-.286V9.923h7.935ZM26.322,9.5a1.478,1.478,0,0,1-1.475,1.475h-.413V9.923h.593a.45.45,0,1,0,0-.9H14.038a.45.45,0,0,0,0,.9H14.7v1.052h-.376A1.478,1.478,0,0,1,12.849,9.5V5.671A1.478,1.478,0,0,1,14.324,4.2H24.847a1.478,1.478,0,0,1,1.475,1.475Z" transform="translate(-11.95 0)" fill="#ba8a13"></path>
+                                    <path id="Path_1316" data-name="Path 1316" d="M141.1,338.3h5.724a.45.45,0,0,0,0-.9H141.1a.45.45,0,0,0,0,.9Z" transform="translate(-136.364 -326.165)" fill="#ba8a13"></path>
+                                    <path id="Path_1317" data-name="Path 1317" d="M147.827,392.6H142.1a.45.45,0,1,0,0,.9h5.724a.45.45,0,0,0,0-.9Z" transform="translate(-137.331 -379.527)" fill="#ba8a13"></path>
+                                    <path id="Path_1318" data-name="Path 1318" d="M359.412,151.9H358.5a.45.45,0,1,0,0,.9h.912a.45.45,0,0,0,0-.9Z" transform="translate(-346.525 -146.842)" fill="#ba8a13"></path>
+                                </g>
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="printableArea">
+                        <div class="iq-card ">
+                            <div class="card-body iq-card-body ">
+                                <div class="row align-items-center justify-content-center">
+                                    <div class="col-md-5 iq-item-product-left ">
+                                        <div class="h-56 d-flex align-items-center justify-content-center mb-4">
                                             @if(!@empty($data['user']['image']))
-                                            <img src="{{asset($data['user']['image'])}}" style="width: 50px ; height: 50px; border-radius: 50% ; margin-right: 10px" />
+                                            <img src="{{asset($data['user']['image'])}}" class="grid-view-img px-4 w-200">
                                             @endif
-                                            {{$data['user']['name']}}
-                                        </p>
+                                        </div>
                                     </div>
-                                    @endif
+                                    <div class="col-md-7 iq-item-product-right">
+                                        <div class="product-additional-details">
+                                            @if(!empty($data['user']['name']))
+                                            <h4 class="productpage_title">
+                                                {{$data['user']['name']}}
+                                            </h4>
+                                            @endif
 
-                                    @if(!empty($data['user']['email']))
-                                    <div class="col-md-4">
-                                        <h5>البريد الالكتروني</h5>
-                                        <p>{{$data['user']['email']}}</p>
-                                    </div>
-                                    @endif
+                                            @if(!empty($data['user']['email']))
+                                                <p><b>{{$data['user']['email']}}</b></p>
+                                            @endif
 
-                                    @if(!empty($data['user']['phone']))
-                                    <div class="col-md-4">
-                                        <h5>رقم الجوال</h5>
-                                        <p>{{$data['user']['phone']}}</p>
-                                    </div>
-                                    @endif
+                                            @if(!empty($data['user']['phone']))
+                                                <p><b>{{$data['user']['phone']}}</b></p>
+                                            @endif
 
-                                    @if(!empty($data['items_price']))
-                                    <div class="col-md-4">
-                                        <h5>سعر المنتجات  </h5>
-                                        <p>{{$data['items_price']}}</p>
-                                    </div>
-                                    @endif
+                                            @if(!empty($data['items_price']))
+                                            <div class="shipping">
+                                                <p class="mb-0">
+                                                    سعر المنتجات:
+                                                    {{$data['items_price']}}
+                                                </p>
+                                            </div>
+                                            @endif
 
-                                    @if(!empty($data['offer_cost']))
-                                    <div class="col-md-4">
-                                        <h5>سعر العرض</h5>
-                                        <p>{{$data['offer_cost']}}</p>
-                                    </div>
-                                    @endif
+                                            @if(!empty($data['offer_cost']))
+                                            <div class="shipping">
+                                                <p class="mb-0">
+                                                    سعر العرض :
+                                                    {{$data['offer_cost']}}
+                                                </p>
+                                            </div>
+                                            @endif
 
-                                    @if(!empty($data['delivery_cost']))
-                                    <div class="col-md-4">
-                                        <h5>تكلفه التوصيل </h5>
-                                        <p>{{$data['delivery_cost']}}</p>
-                                    </div>
-                                    @endif
+                                            @if(!empty($data['delivery_cost']))
+                                            <div class="shipping">
+                                                <p class="mb-0">
+                                                    تكلفه التوصيل :
+                                                    {{$data['delivery_cost']}}
+                                                </p>
+                                            </div>
+                                            @endif
 
-                                    @if(!empty($data['total_price']))
-                                    <div class="col-md-4">
-                                        <h5>السعر الكلي </h5>
-                                        <p>{{$data['total_price']}}</p>
-                                    </div>
-                                    @endif
+                                            @if(!empty($data['total_price']))
+                                            <div class="shipping">
+                                                <p class="mb-0">
+                                                    السعر الكلي :
+                                                    {{$data['total_price']}}
+                                                </p>
+                                            </div>
+                                            @endif
 
-                                    @if(!empty($data['payment_type']))
-                                    <div class="col-md-4">
-                                        <h5>طريقة الدفع </h5>
-                                        <p>{{$data['payment_type']}}</p>
-                                    </div>
-                                    @endif
+                                            @if(!empty($data['payment_type']))
+                                            <div class="shipping">
+                                                <p class="mb-0">
+                                                    طريقة الدفع :
+                                                    {{$data['payment_type']}}
+                                                </p>
+                                            </div>
+                                            @endif
 
-                                    @if(!empty($data['status']))
-                                    <div class="col-md-4">
-                                        <h5>الحالة</h5>
-                                        <p>{{$data['status']}}</p>
-                                    </div>
-                                    @endif
+                                            @if(!empty($data['status']))
+                                            <div class="shipping">
+                                                <p class="mb-0">
+                                                    الحالة :
+                                                    {{$data['status']}}
+                                                </p>
+                                            </div>
+                                            @endif
 
-                                    @if(!empty($data['address']))
-                                    <div class="col-md-12">
-                                        <h5>العنوان</h5>
-                                        <p>{{$data['address']}}</p>
+                                            @if(!empty($data['address']))
+                                            <div class="shipping">
+                                                <p class="mb-0">
+                                                    العنوان :
+                                                    {{$data['address']}}
+                                                </p>
+                                            </div>
+                                            @endif
+
+                                        </div>
                                     </div>
-                                    @endif
                                 </div>
-
+                            </div>
+                        </div>
+                        <div class="iq-card">
+                            <div class="iq-card-body">
                                 <table id="example" class="table table-hover table-striped table-bordered">
                                     <thead>
                                         <tr>
