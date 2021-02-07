@@ -37,7 +37,7 @@ class BeamsListener
                 )
             )
         );
-dd($notificationData);
+
         $result = $this->beams->publishToUsers($event->users, $notificationData);
         return ($result);
     }
