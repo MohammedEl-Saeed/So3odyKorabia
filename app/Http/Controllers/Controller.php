@@ -53,9 +53,10 @@ class Controller extends BaseController
     }
 
     public function sendNotification($user_ids = [], $title = '', $body = '', $notificationType, $data_id, $screenName = null){
+//      dd(  $this->getNotificationObject($title, $body, $notificationType , $data_id));
         event(new BeamsEvent($this->getUsers($user_ids),
             $this->getNotificationObject($title, $body, $notificationType , $data_id)));
-        $this->storeNotifications($user_ids, $title, $body, $notificationType, $data_id);
+//        $this->storeNotifications($user_ids, $title, $body, $notificationType, $data_id);
     }
 
     public function storeNotifications($user_ids = [], $title = '', $body = '', $notificationType, $data_id, $screenName = null){
