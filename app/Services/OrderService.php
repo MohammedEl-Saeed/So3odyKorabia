@@ -2,13 +2,16 @@
 
 namespace App\Services;
 
+use App\Http\Controllers\Controller;
 use App\Http\Traits\BasicTrait;
 use App\Models\Cart;
 use App\Models\Offer;
+use App\Models\Order;
 use App\Models\UserAddress;
 use App\Repositories\CartRepository;
 use App\Repositories\CityRepository;
 use App\Repositories\OrderRepository;
+use App\Utility\NotificationTypes;
 use Auth;
 use DB;
 
@@ -35,8 +38,10 @@ class OrderService
     public function createOrder($request)
     {
         $order = $this->order->createOrder($request);
-        $cart = new CartRepository();
-        $cart->emptyCart();
+        if ($request->payment_type != 2) {
+            $cart = new CartRepository();
+            $cart->emptyCart();
+        }
         return $order;
 
     }
@@ -70,14 +75,22 @@ class OrderService
 //    }
 
     /** delete order */
-    public function delete()
+    public function delete($id)
     {
-        return $this->order->delete();
+        return $this->order->delete($id);
     }
 
     /** update status for order by accept or reject  */
     public function updateStatus($status, $id)
     {
+//        $controller = new Controller();
+//        //notify
+//        $title = 'Order status updated';
+//        $body = 'you have update on your order';
+//        $notificationType = NotificationTypes::UPDATE_ORDER_STATUS;
+//        $data_id = $id;
+//        $user_id = [Order::find($id)->user_id];
+//        $controller->sendNotification($user_id, $title, $body, $notificationType, $data_id);
         return $this->order->updateStatus($status, $id);
     }
 
@@ -166,4 +179,9 @@ class OrderService
         return Offer::where('code', $code)->select('discount', 'discount_type')->first();
     }
 
+    public function updatePayment($orderId){
+        Order::where('id',$orderId)->update(['payment_completed'=>1]);
+        $cart = new CartRepository();
+        $cart->emptyCart();
+    }
 }

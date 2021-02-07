@@ -59,7 +59,7 @@ class OrderRepository extends BaseRepository
         $data['delivery_cost'] = $order->delivery_cost;
         $data['delivery_time'] = $order->deliveryTimeRemaining();
         $data['offer_cost'] = $order->offer_cost;
-        $data['payment_type'] = $order->payment_type();
+        $data['payment_type'] = $order->paymentType();
         if($order->payment_type == 'Transfer'){
             $data['transfer_image'] = $order->transfer_image;
         }
@@ -86,6 +86,7 @@ class OrderRepository extends BaseRepository
         $this->model->user_id = Auth::id();
         $this->model->status = 'Waiting';
         $this->model->user_address_id = $request->user_address_id;
+        $this->model->payment_type = $request->payment_type;
         $address = $this->getAddress($request->user_address_id);
         $this->model->address = $this->getFullAddress($address);
         $this->model->delivery_cost = $this->getDeliveryFees($address);
@@ -166,7 +167,7 @@ class OrderRepository extends BaseRepository
             $offer_cost = $this->getPromocodeValue($offer, $itemsPrice);
         }
         $totalPrice = $priceAfterOffer + $deliveryCosts;
-        $this->model->update(['items_price'=>$itemsPrice,
+        $this->model::where('id',$orderId)->update(['items_price'=>$itemsPrice,
             'delivery_cost'=>$deliveryCosts,
             'offer_cost'=>$offer_cost,
             'total_price'=>$totalPrice]);
@@ -200,12 +201,16 @@ class OrderRepository extends BaseRepository
 
     public function getFullAddress($address){
         $fullAddress = $address->getFullAddress();
-        $fullAddress = implode(',',$fullAddress);
+        $fullAddress = implode(' -',$fullAddress);
         return $fullAddress;
     }
 
     public function getAddress($addressId){
         $addressRepo = new UserAddressRepository();
         return $addressRepo->show($addressId);
+    }
+
+    public function delete($id){
+        return $this->traitDelete($this->model, $id);
     }
 }

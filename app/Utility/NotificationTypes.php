@@ -9,8 +9,7 @@ class NotificationTypes
     const NEW_ORDERS="new Orders";
     const ASSIGNED_ORDERS="assigned orders";
     const CHAT="chat";
-    const START_MEDICAL="start medical";
     const ACCEPT_ORDER="Accept order";
     const REJECT_ORDER="Reject order";
-    const UPDATE_ORDER="update order";
+    const UPDATE_ORDER_STATUS="update order status";
 }

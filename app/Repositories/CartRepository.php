@@ -129,9 +129,7 @@ class CartRepository extends BaseRepository
     }
 
     public function emptyCart(){
-        Cart::where('user_id',Auth::id())->delete();
-        $this->model->where('user_id',Auth::id())->delete();
-        return true;
+       return Cart::where('user_id',Auth::id())->delete();
     }
 
     public function delete($cartDetailsId){

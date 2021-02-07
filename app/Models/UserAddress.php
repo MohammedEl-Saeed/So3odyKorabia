@@ -22,10 +22,10 @@ class UserAddress extends Model
     public function getData(){
         $data = [];
         $data['id'] = $this->id;
-//        $data['city_id'] = $this->city_id;
+        $data['city_id'] = $this->city_id;
         $data['city_name'] = $this->city->name ?? '';
         $data['area_name'] = $this->area->name ?? '';
-//        $data['area_id'] = $this->area_id;
+        $data['area_id'] = $this->area_id;
         $data['street'] = $this->street;
         $data['building_number'] = $this->building_number;
         $data['floor'] = $this->floor;
@@ -43,19 +43,31 @@ class UserAddress extends Model
         $data['city_name'] = $this->city->name ?? '';
         $data['area_name'] = $this->area->name ?? '';
         if($this->street){
-            $data['street'] = $this->street;
+            $data['street'] = 'الشارع: '.$this->street;
         }
         if($this->building_number){
-            $data['building_number'] = $this->building_number;
+            $data['building_number'] = 'رقم المبنى:'.$this->building_number;
         }
         if($this->floor){
-            $data['floor'] = $this->floor;
+            $data['floor'] = 'الطابق:'.$this->floor;
         }
         if($this->apartment_number){
-            $data['apartment_number'] = $this->apartment_number;
+            $data['apartment_number'] = 'رقم الشقة:'.$this->apartment_number;
         }
         if($this->type){
-            $data['type'] = $this->type;
+            switch ($this->type){
+                case '0':
+                    $data['type'] = 'النوع:'.'منزل';
+                    break;
+                case '1':
+                    $data['type'] = 'النوع:'.'عمل';
+                    break;
+                case '2':
+                    $data['type'] = 'النوع:'.'أخرى';
+                    break;
+                default:
+                    $data['type'] = 'النوع:'.'لم يتم الاختيار';
+            }
         }
         return $data;
     }

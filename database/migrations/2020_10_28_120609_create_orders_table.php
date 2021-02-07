@@ -24,6 +24,7 @@ class CreateOrdersTable extends Migration
             $table->text('address')->nullable();
             $table->tinyInteger('payment_type')->default(0);
             $table->text('transfer_image')->nullable();
+            $table->boolean('payment_completed')->default(0);
             $table->enum('status', ['Waiting','Accepted', 'Rejected','InProgress','InWay','Done']);
             $table->timestamps();
         });

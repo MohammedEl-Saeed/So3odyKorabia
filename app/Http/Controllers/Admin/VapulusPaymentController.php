@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Transaction;
+use App\Services\OrderService;
 use Illuminate\Http\Request;
 
 class VapulusPaymentController extends Controller
@@ -109,6 +110,8 @@ class VapulusPaymentController extends Controller
             $trancaction->status = $request->status;
             $trancaction->save();
             $message = 'success payment';
+            $orderService = new OrderService();
+            $orderService->updatePayment($order_id);
             return view('payment.success_payment', compact('message'));
         }
         $message = 'failed payment';
