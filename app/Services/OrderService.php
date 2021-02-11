@@ -83,7 +83,6 @@ class OrderService
     /** update status for order by accept or reject  */
     public function updateStatus($status, $id)
     {
-//        dd($status);
         $controller = new Controller();
         //notify
         $title = 'Order status updated';
@@ -91,7 +90,6 @@ class OrderService
         $notificationType = NotificationTypes::UPDATE_ORDER_STATUS;
         $data_id = $id;
         $user_id = [Order::find($id)->user_id];
-//        dd('here');
         $controller->sendNotification($user_id, $title, $body, $notificationType, $data_id);
         return $this->order->updateStatus($status, $id);
     }

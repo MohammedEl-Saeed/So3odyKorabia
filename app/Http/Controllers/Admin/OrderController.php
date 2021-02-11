@@ -26,7 +26,7 @@ class OrderController extends Controller
     {
         $done_orders = $this->service->index()->where('status','Done')->get();
         $new_orders = $this->service->index()->where('status','Waiting')->get();
-        $today_orders = $this->service->index()->whereDate('created_at','=',date('H-m-d'));
+        $today_orders = $this->service->index()->whereDate('created_at','=',date('Y-m-d'));
         $all_orders = $this->service->index()->get();
         $accepted_orders = $this->service->index()->where('status','Accepted')->get();
         $rejected_orders = $this->service->index()->where('status','Rejected')->get();
@@ -106,14 +106,14 @@ class OrderController extends Controller
 
     /** accept new order */
     public function acceptOrder($orderId){
-//        try{
+        try{
             $this->service->updateStatus('Accepted',$orderId);
 //            event(new NotifcationEvent('you  Updates has been accepted ',url('/analysis/edit/profile'),$updated_id));
 //            $this->addToNotification($updated_id,'you updates has been accepted',url('/analysis/edit/profile'));
             return redirect()->route('orders.index')->with('flash_success','Request Acceptted and data changed');
-//        } catch(\Exception $e){
-//            return back()->with('flash_error', 'Something went wrong');
-//        }
+        } catch(\Exception $e){
+            return back()->with('flash_error', 'Something went wrong');
+        }
     }
 
      /** reject new order */
