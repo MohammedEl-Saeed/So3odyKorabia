@@ -157,11 +157,12 @@ class ItemRepository
         foreach($options as $option){
             $newOptionIds[] = $option['option_id'];
             $itemOption = ItemsOption::where('item_id',$itemId)->where('option_id',$option['option_id'])->first();
-            //update item option if exist and else not exist create new one
+            //update item option if exist and if not exist create new one
             if($itemOption){
                 $itemOption->price = $option['price'];
                 $itemOption->update();
             } else{
+                $itemOption = new ItemsOption();
                 $itemOption->item_id = $itemId;
                 $itemOption->option_id = $option['option_id'];
                 $itemOption->price = $option['price'];
