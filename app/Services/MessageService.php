@@ -33,8 +33,6 @@ class MessageService
 
     /** add new message to sysytem */
     public function store($request, $parentId = null){
-        $request['text'] = $request->message;
-        Mail::to($request->to)->send(new SupportReply($request));
         return $this->message->store($request, $parentId);
     }
 

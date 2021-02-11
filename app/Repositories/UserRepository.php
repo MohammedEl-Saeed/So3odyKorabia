@@ -60,8 +60,10 @@ class UserRepository
     /** update user Or when Accepting Update request , new changes will be add to user */
     public function update($request, $id){
         $arr= [];
-        $arr['name'] = $request->name;
-        $arr['phone'] = $request->phone;
+        if($request->name){
+            $arr['name'] = $request->name;
+        }
+//        $arr['phone'] = $request->phone;
         if($request->email) {
             $arr['email'] = $request->email;
         }
