@@ -83,14 +83,14 @@ class OrderService
     /** update status for order by accept or reject  */
     public function updateStatus($status, $id)
     {
-//        $controller = new Controller();
-//        //notify
-//        $title = 'Order status updated';
-//        $body = 'you have update on your order';
-//        $notificationType = NotificationTypes::UPDATE_ORDER_STATUS;
-//        $data_id = $id;
-//        $user_id = [Order::find($id)->user_id];
-//        $controller->sendNotification($user_id, $title, $body, $notificationType, $data_id);
+        $controller = new Controller();
+        //notify
+        $title = 'Order status updated';
+        $body = 'you have update on your order';
+        $notificationType = NotificationTypes::UPDATE_ORDER_STATUS;
+        $data_id = $id;
+        $user_id = [Order::find($id)->user_id];
+        $controller->sendNotification($user_id, $title, $body, $notificationType, $data_id);
         return $this->order->updateStatus($status, $id);
     }
 

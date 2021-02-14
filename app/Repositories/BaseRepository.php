@@ -28,7 +28,7 @@ class BaseRepository
         $cartDetails = CartDetail::where('cart_id',$cartId)->get();
         $totalPrice = 0;
         foreach ($cartDetails as $cartDetail){
-            $cartDetailPrice = $this->getTotalPriceForItem($cartDetail->item_options_ids);
+            $cartDetailPrice = $cartDetail->quantity * $this->getTotalPriceForItem($cartDetail->item_options_ids);
             $cartDetail->update(['total_price'=>$cartDetailPrice]);
             $totalPrice += $cartDetailPrice;
         }

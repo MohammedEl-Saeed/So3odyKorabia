@@ -27,7 +27,7 @@ class AuthController extends Controller
     public function __construct(UserService $service)
     {
         $this->service = $service;
-        $this->middleware('auth:api', ['except' => ['login', 'register','sendCode','checkCode','resetNewPassword']]);
+//        $this->middleware('auth:api', ['except' => ['login', 'register','sendCode','checkCode','resetNewPassword']]);
     }
 
     /**
@@ -154,7 +154,7 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|between:2,100',
             'email' => 'string|email|max:100|unique:users,email,'.Auth::id(),
-            'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|unique:users,phone,'.Auth::id(),
+            'phone' => 'regex:/^([0-9\s\-\+\(\)]*)$/|unique:users,phone,'.Auth::id(),
             'password' => 'required|string|confirmed|min:6',
             'image' => 'nullable|mimes:jpeg,jpg,bmp,png|max:20240'
         ]);

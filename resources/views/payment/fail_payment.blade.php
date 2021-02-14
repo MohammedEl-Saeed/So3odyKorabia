@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Family Doctor</title>
+        <title>Meat Village</title>
         <link rel="icon" href="{{asset('assets/media/logos/favicon.svg')}}" type="image/x-icon"/>
         <meta name="csrf-token" content="{{ csrf_token() }}"/>
         <link href="https://getbootstrap.com/docs/3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -35,10 +35,10 @@
             <div class="col-sm-8">
                 <div class="row" style="border:1px solid #EEE">
                     <div class="col-sm-12 p-0">
-                        <h3>Family Doctor</h3>
+                        <h3>Meat Village</h3>
                     </div>
                     <div class="col-sm-4 p-0">
-                        <img src="{{asset('assets/media/logos/favicon.svg')}}" class="logo">
+                        <img src="{{asset('assets/images/logos/logo.svg')}}" class="logo">
                     </div>
                     <div class="col-sm-8 p-0">
                         <h4>Failed.</h4>

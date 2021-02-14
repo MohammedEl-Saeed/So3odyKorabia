@@ -76,3 +76,4 @@ Route::post('/get-products', 'API\ProductController@getProducts');
 Route::get('get-offers', 'API\OrderController@getOffers');
 Route::get('get-cities', 'API\OrderController@getCities');
 Route::get('get-areas/{cityId}', 'API\UserAddressController@getAreas');
+Route::get('get-terms-privacy','API\SettingController@getTerms');

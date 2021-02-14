@@ -24,14 +24,14 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $done_orders = $this->service->index()->where('status','Done')->get();
-        $new_orders = $this->service->index()->where('status','Waiting')->get();
-        $today_orders = $this->service->index()->whereDate('created_at','=',date('H-m-d'));
-        $all_orders = $this->service->index()->get();
-        $accepted_orders = $this->service->index()->where('status','Accepted')->get();
-        $rejected_orders = $this->service->index()->where('status','Rejected')->get();
-//        $Inprogress_orders = $this->service->index()->where('status','InProgress')->get();
-        return view('admin.orders.index', compact('done_orders','new_orders','today_orders','all_orders','accepted_orders','rejected_orders'));
+        $all_orders = $this->service->index()->chunk(100);
+        $done_orders =$all_orders->where('status','Done');
+        $new_orders = $all_orders->where('status','Waiting');
+        $accepted_orders = $all_orders->where('status','Accepted');
+        $rejected_orders =$all_orders->where('status','Rejected');
+        $Inprogress_orders = $all_orders->where('status','InProgress');
+        $today_orders = $this->service->index()->whereDate('created_at','=',date('Y-m-d'));
+        return view('admin.orders.index', compact('done_orders','Inprogress_orders','new_orders','today_orders','all_orders','accepted_orders','rejected_orders'));
     }
 
     /**

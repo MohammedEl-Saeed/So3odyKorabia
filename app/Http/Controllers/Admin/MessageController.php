@@ -33,7 +33,9 @@ class MessageController extends Controller
     }
 
     public function store(MessageRequest $request){
+        $request['text'] = $request->message;
         $this->service->store($request, $request->id);
+        Mail::to($request->to)->send(new SupportReply($request));
         return redirect()->route('messages');
     }
 }
