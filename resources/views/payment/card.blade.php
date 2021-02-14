@@ -5,6 +5,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <meta name="csrf-token" content="{{ csrf_token() }}"/>
     <link href="https://getbootstrap.com/docs/3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- INCLUDE SESSION.JS JAVASCRIPT LIBRARY -->
     <script src="https://api.vapulus.com:1338/app/session/script?appId=738bdc3e-167e-4afb-aeb9-a3a535c8ac53"></script>
     <!-- APPLY CLICK-JACKING STYLING AND HIDE CONTENTS OF THE PAGE -->
@@ -14,62 +15,166 @@
             background-color: #EFEFEF !important;
         }
     </style>
+
+    <style>
+        body {
+            font-family: Arial;
+            font-size: 17px;
+            padding: 8px;
+            overflow-x: hidden;
+        }
+
+
+        .row {
+            display: -ms-flexbox; /* IE10 */
+            display: flex;
+            -ms-flex-wrap: wrap; /* IE10 */
+            flex-wrap: wrap;
+            margin: 0 -16px;
+        }
+
+        .col-25 {
+        -ms-flex: 25%; /* IE10 */
+            flex: 25%;
+        }
+
+        .col-50 {
+        -ms-flex: 50%; /* IE10 */
+            flex: 50%;
+        }
+
+        .col-75 {
+        -ms-flex: 75%; /* IE10 */
+            flex: 75%;
+        }
+
+            .col-25,
+            .col-50,
+            .col-75 {
+                padding: 0 16px;
+            }
+
+            .container {
+                background-color: #f2f2f2;
+                padding: 5px 20px 15px 20px;
+                border: 1px solid lightgrey;
+                border-radius: 3px;
+            }
+
+            input[type=text] {
+                width: 100%;
+                margin-bottom: 20px;
+                padding: 12px;
+                border: 1px solid #ccc;
+                border-radius: 3px;
+            }
+
+            label {
+                margin-bottom: 10px;
+                display: block;
+            }
+
+            .icon-container {
+                margin-bottom: 20px;
+                padding: 7px 0;
+                font-size: 24px;
+            }
+
+            .btn {
+                background-color: #4CAF50;
+                color: white;
+                padding: 12px;
+                margin: 10px 0;
+                border: none;
+                width: 100%;
+                border-radius: 3px;
+                cursor: pointer;
+                font-size: 17px;
+            }
+
+            .btn:hover {
+                background-color: #45a049;
+            }
+
+            a {
+                color: #2196F3;
+            }
+
+            hr {
+                border: 1px solid lightgrey;
+            }
+
+            span.price {
+                float: right;
+                color: grey;
+            }
+
+            /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other (also change the direction - make the "cart" column go on top) */
+            @media (max-width: 800px) {
+                .row {
+                    flex-direction: column-reverse;
+                }
+                .col-25 {
+                    margin-bottom: 20px;
+                }
+            }
+    </style>
 </head>
 
-<body style="background-color:  #EFEFEF">
-<section class="text-center">
-    <div class="container">
-        <h1 class="jumbotron-heading">Hosted Session</h1>
-        <p class="lead text-muted">Vapulus Hosted Session Integration Sample.</p>
-    </div>
-</section>
-<!-- CREATE THE HTML FOR THE PAYMENT PAGE -->
-<div class="container">
-    <div class="iq-card">
-        <div class="iq-card-body" style="padding: 15px;background-color: #FFF;border-radius: 15px">
-            <div class="row">
-                <div class="contents col-12">
-                    @if($errors->any())
-                        <div class="alert alert-danger" style="margin-right: 15px;margin-left: 15px" role="alert">
-                            @foreach($errors->all() as $error)
-                                <p>{{$error}}</p>
-                            @endforeach
-                        </div>
-                    @endif
-                    <div class="alert alert-danger alert-errors"
-                         style="margin-right: 15px;margin-left: 15px ; display: none" role="alert">
-                        <p class="mb-0 alert-errors"></p>
+<body>
+    <div class="row" style="margin-top: 30px">
+        <div class="col-75">
+            <div class="container">
+                @if($errors->any())
+                    <div class="alert alert-danger" style="margin-right: 15px;margin-left: 15px" role="alert">
+                        @foreach($errors->all() as $error)
+                            <p>{{$error}}</p>
+                        @endforeach
                     </div>
-                    <form id="payForm" method="post" action="{{route('vapulusPayment.pay')}}">
-                        @csrf
-                        <input type="hidden" name="order_id" id="order_id" value="{{$orderId}}" readonly/>
-                        <input type="hidden" name="sessionId" id="sessionId" readonly/>
-                        <div class="form-group col-md-6">
-                            <label class="control-label" for="cardNumber">Card number:</label>
-                            <input type="text" id="cardNumber" class="form-control input-md" readonly/>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="control-label" for="cardMonth">Expiry month:</label>
-                            <input type="text" id="cardMonth" class="form-control input-md"/>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="col-md-8 control-label" for="cardYear">Expiry year:</label>
-                            <input type="text" id="cardYear" class="form-control input-md"/>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="col-md-8 control-label" for="cardCVC">Security code:</label>
-                            <input type="text" id="cardCVC" class="form-control input-md" readonly/>
-                        </div>
-                    </form>
-                    <button class="btn btn-primary pull-right" id="payButton" style="margin-right: 15px"
-                            onclick="pay();">Pay
-                    </button>
-                    <div class="clearfix"></div>
+                @endif
+                <div class="alert alert-danger alert-errors" style="margin-right: 15px;margin-left: 15px ; display: none" role="alert">
+                    <p class="mb-0 alert-errors"></p>
                 </div>
+                <form id="payForm" method="post" action="{{route('vapulusPayment.pay')}}">
+                    @csrf
+                    <input type="hidden" name="order_id" id="order_id" value="{{$orderId}}" readonly/>
+                    <input type="hidden" name="sessionId" id="sessionId" readonly/>
+
+                    <h3>Payment</h3>
+                    <label for="fname">Accepted Cards</label>
+
+                    <div class="icon-container">
+                        <i class="fa fa-cc-visa" style="color:navy;"></i>
+                        <i class="fa fa-cc-amex" style="color:blue;"></i>
+                        <i class="fa fa-cc-mastercard" style="color:red;"></i>
+                        <i class="fa fa-cc-discover" style="color:orange;"></i>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-50">
+                            <label for="cardNumber">Credit card number</label>
+                            <input type="text" id="cardNumber" readonly>
+
+                            <label for="cardMonth">Exp Month</label>
+                            <input type="text" id="cardMonth">
+                        </div>
+
+                        <div class="col-50">
+                            <label for="cardCVC">Security code:</label>
+                            <input type="text" id="cardCVC" readonly/>
+
+                            <label for="cardYear">Exp Year</label>
+                            <input type="text" id="cardYear">
+                        </div>
+
+                    </div>
+                </form>
+                <button class="btn btn-primary pull-right" id="payButton" style="margin-right: 15px"
+                        onclick="pay();">Pay
+                </button>
             </div>
         </div>
     </div>
-</div>
 
 <!-- JAVASCRIPT FRAME-BREAKER CODE TO PROVIDE PROTECTION AGAINST IFRAME CLICK-JACKING -->
 <script type="text/javascript">
