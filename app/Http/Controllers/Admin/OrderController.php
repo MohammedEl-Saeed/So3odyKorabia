@@ -24,7 +24,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $all_orders = $this->service->index()->chunk(100);
+        $all_orders = $this->service->index()->get();
         $done_orders =$all_orders->where('status','Done');
         $new_orders = $all_orders->where('status','Waiting');
         $accepted_orders = $all_orders->where('status','Accepted');

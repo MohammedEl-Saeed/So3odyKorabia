@@ -258,7 +258,7 @@ class AuthController extends Controller
         }
         $data = $this->service->checkPhone($request);
         if($data){
-            return $this->prepare_response(false,$validator->errors(),'Code Checked your phone is changed',null,0,200) ;
+            return $this->prepare_response(false,null,'Code Checked your phone is changed',null,0,200) ;
         }else{
             return $this->prepare_response(true,$validator->errors(),'try again code is wrong',null,1,200) ;
         }
