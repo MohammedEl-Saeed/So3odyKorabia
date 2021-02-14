@@ -132,6 +132,24 @@
                                         </div>
                                         @endif
 
+                                        @if(!empty($data['delivery_time']['delivery_day']))
+                                        <div class="shipping">
+                                            <p class="mb-0">
+                                                موعد التسليم :
+                                                {{$data['delivery_time']['delivery_day']}}
+                                            </p>
+                                        </div>
+                                        @endif
+
+                                        @if(!empty($data['delivery_time']['delivery_time_remaining']))
+                                        <div class="shipping">
+                                            <p class="mb-0">
+                                                الوقت الباقي لموعد التسليم :
+                                                {{$data['delivery_time']['delivery_time_remaining']}}
+                                            </p>
+                                        </div>
+                                        @endif
+
                                         @if(!empty($data['address']))
                                         <div class="shipping">
                                             <p class="mb-0">
@@ -139,6 +157,11 @@
                                                 {{$data['address']}}
                                             </p>
                                         </div>
+                                        @endif
+
+                                        @if(!empty($data['transfer_image']))
+                                        صورة الحوالة
+                                        <img src="{{asset($data['transfer_image'])}}" style="max-width: 100% ;" />
                                         @endif
 
                                     </div>
