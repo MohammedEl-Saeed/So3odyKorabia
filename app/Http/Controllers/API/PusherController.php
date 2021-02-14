@@ -9,6 +9,28 @@ use Pusher\PushNotifications\PushNotifications;
 
 class PusherController extends Controller
 {
+
+//    public $pusher;
+
+//    public function __construct()
+//    {
+//        $this->pusher = new \Pusher\Pusher(
+//            config('broadcasting.connections.pusher.key'),
+//            config('broadcasting.connections.pusher.secret'),
+//            config('broadcasting.connections.pusher.app_id'),
+//            [
+//                'cluster' => config('broadcasting.connections.pusher.options.cluster'),
+//                'encrypted' => false
+//            ]
+//        );
+//    }
+//
+//    public function authPusherChannel(Request $request)
+//    {
+//        $result = $this->pusher->socket_auth($request->channel_name, $request->socket_id);
+//        return ($result);
+//    }
+
     public function getPusherBeamsToken()
     {
         $user = Auth::user();

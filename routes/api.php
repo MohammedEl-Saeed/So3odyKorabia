@@ -64,6 +64,7 @@ Route::group(['middleware' => ['jwtMiddleware']], function () {
 
     Route::apiResource('user/paymentCards', "API\PaymentCardsController");
 
+    Route::get('pusher/beams-auth', 'API\PusherController@getPusherBeamsToken')->name('getPusherBeamsToken');
 
 });
 Route::get('/create-pay-form', 'API\VapulusPaymentController@createPayForm')->name('createPayForm');
