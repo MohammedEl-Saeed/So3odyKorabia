@@ -154,8 +154,7 @@
                     }
                 });
             } );
-{{--        </script>--}}
-{{--        <script>--}}
+            
             const beamsClient = new PusherPushNotifications.Client({
                 instanceId: '72becb2c-5c2a-4830-96d0-60da5a3172ab',
             });

@@ -1,6 +1,6 @@
 @extends('admin.layout.base')
 
-@section('title', 'Offers')
+@section('title', 'Orders')
 
 @section('content')
 @section('main_header', 'Offers Section')
