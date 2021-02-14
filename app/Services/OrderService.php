@@ -160,7 +160,8 @@ class OrderService
         if($cartId) {
             $cartPrice = $this->order->updateTotalPriceForCart($cartId);
         }
-        $deliveryCosts = $this->order->getDeliveryFees($request->address_id);
+        $address = $this->order->getAddress($request->address_id);
+        $deliveryCosts = $this->order->getDeliveryFees($address);
         $offer = $this->getOffer($request->code);
         $totalPriceAfterOffer = $cartPrice;
         //get price after using promocode

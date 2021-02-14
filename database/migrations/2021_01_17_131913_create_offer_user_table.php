@@ -15,8 +15,8 @@ class CreateOfferUserTable extends Migration
     {
         Schema::create('offer_user', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('offer_id')->constrained('offers')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('offer_id')->constrained('offers');
             $table->timestamps();
         });
     }
