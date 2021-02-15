@@ -141,7 +141,8 @@
                     <input type="hidden" name="sessionId" id="sessionId" readonly/>
 
                     <h3>Payment</h3>
-                    <label for="fname">Accepted Cards</label>
+                    <label for="fname">Total Price : {{$amount }}</label>
+                    
 
                     <div class="icon-container">
                         <i class="fa fa-cc-visa" style="color:navy;"></i>
