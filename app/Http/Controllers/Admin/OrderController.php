@@ -140,4 +140,17 @@ class OrderController extends Controller
         }
     }
 
+
+/** done new order */
+    public function inProgressOrder($orderId){
+        try{
+            $this->service->updateStatus('InProgress',$orderId);
+//            event(new NotifcationEvent('you  Updates has been accepted ',url('/analysis/edit/profile'),$updated_id));
+//            $this->addToNotification($updated_id,'you updates has been accepted',url('/analysis/edit/profile'));
+            return redirect()->route('orders.index')->with('flash_success','Request InProgress and data changed');
+        } catch(\Exception $e){
+            return back()->with('flash_error', 'Something went wrong');
+        }
+    }
+
 }
