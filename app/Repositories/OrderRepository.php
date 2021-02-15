@@ -60,7 +60,7 @@ class OrderRepository extends BaseRepository
         $data['delivery_time'] = $order->deliveryTimeRemaining();
         $data['offer_cost'] = $order->offer_cost;
         $data['payment_type'] = $order->paymentType();
-        if($order->payment_type == 'Transfer'){
+        if($order->paymentType() == 'Transfer'){
             $data['transfer_image'] = $order->transfer_image;
         }
         $data['address'] = $order->address;

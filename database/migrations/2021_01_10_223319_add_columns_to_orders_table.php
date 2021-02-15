@@ -14,8 +14,8 @@ class AddColumnsToOrdersTable extends Migration
     public function up()
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->foreignId('user_address_id')->constrained('user_addresses')->onDelete('cascade');
-            $table->foreignId('offer_id')->nullable()->constrained('offers')->onDelete('cascade');
+            $table->foreignId('user_address_id')->constrained('user_addresses');
+            $table->foreignId('offer_id')->nullable()->constrained('offers');
         });
     }
 

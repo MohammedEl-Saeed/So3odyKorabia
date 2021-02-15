@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PayWithVapulusRequest;
 use App\Models\Order;
 use App\Models\Transaction;
+use App\models\User;
 use App\Services\OrderService;
 use Illuminate\Http\Request;
 
@@ -24,7 +26,9 @@ class VapulusPaymentController extends Controller
 
     public function payForm($orderId)
     {
-        return view('payment.card', compact('orderId'));
+        $order = $this->getOrder($orderId);
+        $amount = $order->total_price;
+        return view('payment.card', compact('orderId','amount'));
     }
 
     //https://repl.it/@islamvapulus/php-http-request-with-hashing
@@ -65,35 +69,36 @@ class VapulusPaymentController extends Controller
         return $response;
     }
 
-    public function pay(Request $request)
+    public function pay(PayWithVapulusRequest $request)
     {
-        $postData = array(
-            'sessionId' => $request->sessionId,
-            'mobileNumber' => '01124772675',
-            'email' => 'dev.teraninja28@gmail.com',
-            'amount' => '15.0',
-            'firstName' => 'Mohammed',
-            'lastName' => 'El-Saeed',
-            'onAccept' => url(route('vapulusPayment.successCallback', ['order_id' => $request->order_id])),
-            'onFail' => url(route('vapulusPayment.failCallback', ['order_id' => $request->order_id]))
-        );
-
-        $secureHash = $this->secureHash;
-        $postData['hashSecret'] = $this->generateHash($secureHash, $postData);
-
-        $postData['appId'] = $this->appID;
-        $postData['password'] = $this->password;
-
-        $url = 'https://api.vapulus.com:1338/app/session/pay';
-
-        $response = $this->HTTPPost($url, $postData);
-
-        $decodedResponse = json_decode($response);
-        if ($decodedResponse->statusCode == 200) {
-            $htmlBodyContent = $decodedResponse->data->htmlBodyContent;
-            return view('payment.test_payment', compact('htmlBodyContent'));
-        } else {
-            return $response;
+        try{
+            $order = $this->getOrder($request->order_id);
+            $user = $order->user;
+            $postData = array(
+                'sessionId' => $request->sessionId,
+                'mobileNumber' => $user->phone,
+                'email' => $user->email ?? '',
+                'amount' => $order->total_price,
+                'firstName' => $user->name,
+                'lastName' => $user->name,
+                'onAccept' => url(route('vapulusPayment.successCallback', ['order_id' => $request->order_id])),
+                'onFail' => url(route('vapulusPayment.failCallback', ['order_id' => $request->order_id]))
+            );
+            $secureHash = $this->secureHash;
+            $postData['hashSecret'] = $this->generateHash($secureHash, $postData);
+            $postData['appId'] = $this->appID;
+            $postData['password'] = $this->password;
+            $url = 'https://api.vapulus.com:1338/app/session/pay';
+            $response = $this->HTTPPost($url, $postData);
+            $decodedResponse = json_decode($response);
+            if ($decodedResponse->statusCode == 200) {
+                $htmlBodyContent = $decodedResponse->data->htmlBodyContent;
+                return view('payment.test_payment', compact('htmlBodyContent'));
+            } else {
+                return $response;
+            }
+        } catch(\Exception $e){
+            return back()->with('flash_error', 'Something went wrong');
         }
 
     }
@@ -102,7 +107,7 @@ class VapulusPaymentController extends Controller
     {
         if ($this->checkTranscationID($request->transactionId)) {
             $trancaction = new Transaction();
-            $order = Order::findOrFail($order_id);
+            $order = $this->getOrder($order_id);
             $trancaction->user_id = $order->user_id;
             $trancaction->order_id = $order_id;
             $trancaction->transaction_id = $request->transactionId;
@@ -123,7 +128,7 @@ class VapulusPaymentController extends Controller
     {
         if ($this->checkTranscationID($request->transactionId)) {
             $trancaction = new Transaction();
-            $order = Order::findOrFail($order_id);
+            $order = $this->getOrder($order_id);
             $trancaction->user_id = $order->user_id;
             $trancaction->order_id = $order_id;
             $trancaction->transactionId = $request->transactionId;
@@ -152,5 +157,9 @@ class VapulusPaymentController extends Controller
         } else {
             return false;
         }
+    }
+
+    public function getOrder($orderId){
+        return Order::findOrFail($orderId);
     }
 }
