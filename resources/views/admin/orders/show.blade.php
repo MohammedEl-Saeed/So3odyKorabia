@@ -50,7 +50,7 @@
 
                                         @if(!empty($data['user']['name']))
                                         <h4 class="productpage_title">
-                                            العميل
+                                             العميل : 
                                             {{$data['user']['name']}}
                                         </h4>
                                         @endif
@@ -73,52 +73,92 @@
                                             </p>
                                         @endif
 
+                                        @if(!empty($data['address']))
+                                        <p>
+                                            <b class="mb-0">
+                                                العنوان :
+                                                {{$data['address']}}
+                                            </b>
+                                        </p>
+                                        @endif
+
                                     </div>
                                 </div>
 
                                 <div class="iq-card">
                                     <div class="iq-card-body">
+
                                         @if(!empty($data['items_price']))
                                         <div class="shipping">
                                             <p class="mb-0">
-                                                سعر المنتجات:
+                                                <b>
+                                                    سعر المنتجات:
+                                                </b>
                                                 {{$data['items_price']}}
                                             </p>
                                         </div>
                                         @endif
-
+        
                                         @if(!empty($data['offer_cost']))
                                         <div class="shipping">
                                             <p class="mb-0">
-                                                سعر العرض :
+                                                <b>
+                                                    سعر العرض :
+                                                </b>
                                                 {{$data['offer_cost']}}
                                             </p>
                                         </div>
+                                        @else
+                                        <div class="shipping">
+                                            <p class="mb-0">
+                                                <b>
+                                                    سعر العرض :
+                                                </b>
+                                                0
+                                            </p>
+                                        </div>
                                         @endif
-
+        
                                         @if(!empty($data['delivery_cost']))
                                         <div class="shipping">
                                             <p class="mb-0">
-                                                تكلفه التوصيل :
+                                                <b>
+                                                    تكلفه التوصيل :
+                                                </b>
                                                 {{$data['delivery_cost']}}
                                             </p>
                                         </div>
                                         @endif
-
+        
                                         @if(!empty($data['total_price']))
                                         <div class="shipping">
                                             <p class="mb-0">
-                                                السعر الكلي :
-                                                {{$data['total_price']}}
+                                                <b>
+                                                    السعر الكلي :
+                                                    {{$data['total_price']}}
+                                                </b>
                                             </p>
                                         </div>
                                         @endif
-
+        
+                                    </div>
+                                </div>
+                                
+                                <div class="iq-card">
+                                    <div class="iq-card-body">
                                         @if(!empty($data['payment_type']))
                                         <div class="shipping">
                                             <p class="mb-0">
-                                                طريقة الدفع :
-                                                {{$data['payment_type']}}
+                                                <b>
+                                                    طريقة الدفع :
+                                                </b>
+                                                @if($data['payment_type'] == 'Transfer')
+                                                حوالة بنكية
+                                                @elseif($data['payment_type'] == 'Cach')
+                                                    عند الاستلام
+                                                @elseif($data['payment_type'] == 'Credit Card')
+                                                    اون لاين
+                                                @endif
                                             </p>
                                         </div>
                                         @endif
@@ -126,8 +166,20 @@
                                         @if(!empty($data['status']))
                                         <div class="shipping">
                                             <p class="mb-0">
-                                                الحالة :
-                                                {{$data['status']}}
+                                                <b>
+                                                    الحالة :
+                                                </b>
+                                                @if($data['status'] == 'Waiting')
+                                                منتظر
+                                                @elseif($data['status'] == 'Accepted')
+                                                مقبول
+                                                @elseif($data['status'] == 'Rejected')
+                                                مرفوض
+                                                @elseif($data['status'] == 'InProgress')
+                                                جاري التحضير
+                                                @elseif($data['status'] == 'Done')
+                                                تم التسليم
+                                                @endif
                                             </p>
                                         </div>
                                         @endif
@@ -135,7 +187,9 @@
                                         @if(!empty($data['delivery_time']['delivery_day']))
                                         <div class="shipping">
                                             <p class="mb-0">
-                                                موعد التسليم :
+                                                <b>
+                                                    موعد التسليم :
+                                                </b>
                                                 {{$data['delivery_time']['delivery_day']}}
                                             </p>
                                         </div>
@@ -144,24 +198,21 @@
                                         @if(!empty($data['delivery_time']['delivery_time_remaining']))
                                         <div class="shipping">
                                             <p class="mb-0">
-                                                الوقت الباقي لموعد التسليم :
+                                                <b>
+                                                    الوقت المتبقي لموعد التسليم :
+                                                </b>
                                                 {{$data['delivery_time']['delivery_time_remaining']}}
                                             </p>
                                         </div>
                                         @endif
 
-                                        @if(!empty($data['address']))
-                                        <div class="shipping">
-                                            <p class="mb-0">
-                                                العنوان :
-                                                {{$data['address']}}
-                                            </p>
-                                        </div>
-                                        @endif
-
                                         @if(!empty($data['transfer_image']))
-                                        صورة الحوالة
-                                        <img src="{{asset($data['transfer_image'])}}" style="max-width: 100% ;" />
+                                        <b>
+                                            صورة الحوالة
+                                        </b>
+                                        <a href="{{asset($data['transfer_image'])}}">
+                                            <img data-placement="top" data-toggle="tooltip" title="اضغط علي الصورة للتكبير" src="{{asset($data['transfer_image'])}}" style="max-width: 100% ;" />
+                                        </a>
                                         @endif
 
                                     </div>
