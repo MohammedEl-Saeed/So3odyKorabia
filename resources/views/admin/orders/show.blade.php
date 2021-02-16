@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>The Farm | Show Order</title>
         <!-- Favicon -->
-        <link rel="shortcut icon" href="images/favicon.ico" />
+        <link rel="shortcut icon" href="{{asset('assets/images/logos/logo_small.svg')}}" />
 
         <!-- ====================================== start css vito files ========================== -->
         <link href="{{asset('assets/plugins/vito/ar/css/bootstrap.min.css?v=7.0.3')}}" rel="stylesheet" type="text/css" />
@@ -50,7 +50,7 @@
 
                                         @if(!empty($data['user']['name']))
                                         <h4 class="productpage_title">
-                                             العميل : 
+                                             العميل :
                                             {{$data['user']['name']}}
                                         </h4>
                                         @endif
@@ -98,7 +98,7 @@
                                             </p>
                                         </div>
                                         @endif
-        
+
                                         @if(!empty($data['offer_cost']))
                                         <div class="shipping">
                                             <p class="mb-0">
@@ -118,7 +118,7 @@
                                             </p>
                                         </div>
                                         @endif
-        
+
                                         @if(!empty($data['delivery_cost']))
                                         <div class="shipping">
                                             <p class="mb-0">
@@ -129,10 +129,10 @@
                                             </p>
                                         </div>
                                         @endif
-        
+
                                         @if(!empty($data['total_price']))
                                         <div class="shipping">
-                                            <p class="mb-0">
+                                            <p class="mb-0" style="color:#5a5555">
                                                 <b>
                                                     السعر الكلي :
                                                     {{$data['total_price']}}
@@ -140,10 +140,10 @@
                                             </p>
                                         </div>
                                         @endif
-        
+
                                     </div>
                                 </div>
-                                
+
                                 <div class="iq-card">
                                     <div class="iq-card-body">
                                         @if(!empty($data['payment_type']))
@@ -262,12 +262,14 @@
                                                         @if(!empty($order['item_options']))
                                                         <table>
                                                             <thead>
-                                                                <th>الاضافه</th>
-                                                                <th>سعر الاضافة</th>
+                                                                <th>النوع</th>
+                                                                <th>الاضافة</th>
+                                                                <th>السعر</th>
                                                             </thead>
                                                             <tbody>
                                                                 @foreach($order['item_options'] as $option)
                                                                 <tr>
+                                                                    <td>{{$option['option_type']}}</td>
                                                                     <td>{{$option['option_name']}}</td>
                                                                     <td>{{$option['price']}}</td>
                                                                 </tr>
@@ -357,6 +359,26 @@
 
                 document.body.innerHTML = originalContents;
             }
+
+            $('.iq-menu-bt-sidebar').on('click' , function(){
+                if($('.logo-text').hasClass('delete-logo-text')){
+                    $('.logo-text').removeClass('delete-logo-text');
+                }else{
+                    $('.logo-text').addClass('delete-logo-text');
+                }
+            });
+
+            $('.iq-sidebar').on('mouseleave' , function(){
+                if($('.logo-text').hasClass('delete-logo-text')){
+                    $('.logo-text').fadeOut(300);
+                }
+            });
+
+            $('.iq-sidebar').on('mouseenter' , function(){
+                if($('.logo-text').hasClass('delete-logo-text')){
+                    $('.logo-text').fadeIn(300);
+                }
+            });
         </script>
         <!-- ===============================  end vito js files ================================= -->
     </body>
