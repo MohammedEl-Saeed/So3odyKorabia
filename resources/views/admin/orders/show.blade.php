@@ -50,7 +50,7 @@
 
                                         @if(!empty($data['user']['name']))
                                         <h4 class="productpage_title">
-                                             العميل : 
+                                             العميل :
                                             {{$data['user']['name']}}
                                         </h4>
                                         @endif
@@ -98,7 +98,7 @@
                                             </p>
                                         </div>
                                         @endif
-        
+
                                         @if(!empty($data['offer_cost']))
                                         <div class="shipping">
                                             <p class="mb-0">
@@ -118,7 +118,7 @@
                                             </p>
                                         </div>
                                         @endif
-        
+
                                         @if(!empty($data['delivery_cost']))
                                         <div class="shipping">
                                             <p class="mb-0">
@@ -129,7 +129,7 @@
                                             </p>
                                         </div>
                                         @endif
-        
+
                                         @if(!empty($data['total_price']))
                                         <div class="shipping">
                                             <p class="mb-0">
@@ -140,10 +140,10 @@
                                             </p>
                                         </div>
                                         @endif
-        
+
                                     </div>
                                 </div>
-                                
+
                                 <div class="iq-card">
                                     <div class="iq-card-body">
                                         @if(!empty($data['payment_type']))
@@ -263,12 +263,14 @@
                                                         <table>
                                                             <thead>
                                                                 <th>الاضافه</th>
+                                                                <th>نوع الاضافة</th>
                                                                 <th>سعر الاضافة</th>
                                                             </thead>
                                                             <tbody>
                                                                 @foreach($order['item_options'] as $option)
                                                                 <tr>
                                                                     <td>{{$option['option_name']}}</td>
+                                                                    <td>{{$option['type']}}</td>
                                                                     <td>{{$option['price']}}</td>
                                                                 </tr>
                                                                 @endforeach
