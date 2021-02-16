@@ -82,8 +82,12 @@
                                                 <a href="{{route('orders.reject',$order->id)}}">
                                                     <img data-palcement="bottom" data-toggle="tooltip" title="رفض" src="{{asset('assets/images/icons/reject.svg')}}" class="icons-table" />
                                                 </a>
-                                            @endif
-                                            @if($order->status == 'Accepted')
+{{--                                            @endif--}}
+                                            @elseif($order->status == 'Accepted')
+                                                <a href="{{route('orders.inProgress',$order->id)}}" >
+                                                    <img data-palcement="bottom" data-toggle="tooltip" title="جاري تجهيز الطلب" src="{{asset('assets/images/icons/accept.svg')}}" class="icons-table" />
+                                                </a>
+                                            @elseif($order->status == 'InProgress')
                                                 <a href="{{route('orders.done',$order->id)}}" >
                                                     <img data-palcement="bottom" data-toggle="tooltip" title="انهاء" src="{{asset('assets/images/icons/done.svg')}}" class="icons-table" />
                                                 </a>

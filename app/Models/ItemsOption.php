@@ -17,6 +17,7 @@ class ItemsOption extends Model
         $data['id'] = $this->id;
         $data['price'] = $this->price;
         $data['option_name'] = $this->option->name;
+        $data['option_type'] = $this->option->type;
         return $data;
     }
 
