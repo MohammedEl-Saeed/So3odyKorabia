@@ -26,7 +26,7 @@ Route::group([
     Route::post('/register', [\App\Http\Controllers\Auth\AuthController::class, 'register']);
     Route::post('/logout', [\App\Http\Controllers\Auth\AuthController::class, 'logout']);
     Route::post('/refresh', [\App\Http\Controllers\Auth\AuthController::class, 'refresh']);
-    Route::get('/user-profile', [\App\Http\Controllers\Auth\AuthController::class, 'userProfile']);
+    Route::get('/user-profile', [\App\Http\Controllers\Auth\AuthController::class, 'userProfile'])->middleware('jwtMiddleware');
     Route::post('/edit-profile', [\App\Http\Controllers\Auth\AuthController::class, 'editProfile'])->middleware('jwtMiddleware');
     Route::post('/change-phone', [\App\Http\Controllers\Auth\AuthController::class, 'changePhone'])->middleware('jwtMiddleware');
     Route::post('/verify-phone', [\App\Http\Controllers\Auth\AuthController::class, 'verifyPhone'])->middleware('jwtMiddleware');

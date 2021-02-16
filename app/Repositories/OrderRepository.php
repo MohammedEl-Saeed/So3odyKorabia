@@ -101,8 +101,8 @@ class OrderRepository extends BaseRepository
                 Offer::find($request->offer_id)->increment('count');
                 $this->model->offer_id = $request->offer_id;
             }
-            $this->model->save();
-            return $this->model;
+        $this->model->save();
+        return $this->model;
     }
 
     public function getOrders(){

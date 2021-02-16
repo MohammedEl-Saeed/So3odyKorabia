@@ -112,7 +112,10 @@ class AuthController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function userProfile() {
-        return response()->json(auth()->user());
+        $data = $this->getLogginData();
+        $hasCart = $this->checkCart();
+        return $this->prepareResponse(false,null,'User return successfully',$data,0,200,$hasCart) ;
+
     }
 
     /**
@@ -123,15 +126,7 @@ class AuthController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     protected function createNewToken($token){
-        $data = [];
-        $user = auth()->user();
-        $data['user'] = $user;
-        $userAddress = $user->addresses->where('default_address',1)->first();
-        if(!is_null($userAddress)){
-            $userAddress = $userAddress->getData();
-        }
-        $data['address'] = $userAddress;
-        unset($user['addresses']);
+        $data = $this->getLogginData();
         $data['token'] = $token;
         $data['token_type'] = 'bearer';
         $hasCart = $this->checkCart();
@@ -262,5 +257,24 @@ class AuthController extends Controller
         }else{
             return $this->prepare_response(true,$validator->errors(),'try again code is wrong',null,1,200) ;
         }
+    }
+
+    public function getLogginData(){
+        $data = [];
+        $data['address'] = $this->getAddressData();
+        $user = auth()->user();
+        $data['user'] = $user;
+        return $data;
+
+    }
+
+    public function getAddressData(){
+        $user = auth()->user();
+        $userAddress = $user->addresses->where('default_address',1)->first();
+        if(!is_null($userAddress)){
+            $userAddress = $userAddress->getData();
+        }
+        unset($user['addresses']);
+        return $userAddress;
     }
 }
