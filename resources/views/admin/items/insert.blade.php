@@ -29,7 +29,7 @@
                                 @elseif($type == 'Egg')
                                     <img style="border-radius: 0;" class="profile-pic img-fluid" src="{{asset('assets/images/icons/egg.svg')}}" alt="profile-pic">
                                 @else
-                                    <img class="profile-pic img-fluid" src="{{asset('assets/plugins/vito/images/user/11.png')}}" alt="profile-pic">
+                                    <img class="profile-pic img-fluid" src="{{asset('assets/images/Meat-Village-LogoGray.png')}}" alt="profile-pic">
                                 @endif
                                 <div class="p-image">
                                     <a href="#" class="upload-button btn iq-bg-primary">أضافة شعار</a>

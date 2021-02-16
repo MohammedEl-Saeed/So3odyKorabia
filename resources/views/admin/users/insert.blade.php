@@ -22,7 +22,7 @@
                     <form>
                         <div class="form-group text-center">
                             <div class="add-img-user profile-img-edit">
-                                <img class="profile-pic img-fluid" src="{{asset('assets/plugins/vito/images/user/11.png')}}" alt="profile-pic">
+                                <img class="profile-pic img-fluid" src="{{asset('assets/images/user.png')}}" alt="profile-pic">
                                 <div class="p-image">
                                     <a href="#" class="upload-button btn iq-bg-primary">أضافة صورة شخصية</a>
                                     <input class="file-upload" form="main-form-to-add-doctor" type="file" accept="image/*" name="image">
