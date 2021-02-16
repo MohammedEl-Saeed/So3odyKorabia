@@ -54,6 +54,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('orders/accept/{id}', 'Admin\OrderController@acceptOrder')->name('orders.accept');
     Route::get('orders/reject/{id}', 'Admin\OrderController@rejectOrder')->name('orders.reject');
     Route::get('orders/done/{id}', 'Admin\OrderController@doneOrder')->name('orders.done');
+    Route::get('orders/in-progress/{id}', 'Admin\OrderController@inProgressOrder')->name('orders.inProgress');
 
     //});
 

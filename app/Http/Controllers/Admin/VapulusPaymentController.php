@@ -131,7 +131,7 @@ class VapulusPaymentController extends Controller
             $order = $this->getOrder($order_id);
             $trancaction->user_id = $order->user_id;
             $trancaction->order_id = $order_id;
-            $trancaction->transactionId = $request->transactionId;
+            $trancaction->transaction_id = $request->transactionId;
             $trancaction->amount = $order->total_price;
             $trancaction->status = $request->status;
             $trancaction->save();
