@@ -38,6 +38,7 @@ class Controller extends BaseController
     public function checkCart(){
         $userId = Auth::id();
         if(is_null($userId)){
+            //get authenticated user id from token sent from api
             $userId = auth('api')->id();
         }
         if(count(CartDetail::where('user_id',$userId)->get()) > 0){

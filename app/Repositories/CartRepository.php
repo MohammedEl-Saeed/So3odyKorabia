@@ -128,7 +128,10 @@ class CartRepository extends BaseRepository
         return null;
     }
 
-    public function emptyCart(){
+    public function emptyCart($userId = 0){
+        if($userId){
+            return Cart::where('user_id',$userId)->delete();
+        }
        return Cart::where('user_id',Auth::id())->delete();
     }
 

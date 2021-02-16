@@ -180,9 +180,9 @@ class OrderService
         return Offer::where('code', $code)->select('discount', 'discount_type')->first();
     }
 
-    public function updatePayment($orderId){
+    public function updatePayment($orderId, $userId){
         Order::where('id',$orderId)->update(['payment_completed'=>1]);
         $cart = new CartRepository();
-        $cart->emptyCart();
+        $cart->emptyCart($userId);
     }
 }
