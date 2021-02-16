@@ -270,7 +270,7 @@
                                                                 @foreach($order['item_options'] as $option)
                                                                 <tr>
                                                                     <td>{{$option['option_name']}}</td>
-                                                                    <td>{{$option['type']}}</td>
+                                                                    <td>{{$option['option_type']}}</td>
                                                                     <td>{{$option['price']}}</td>
                                                                 </tr>
                                                                 @endforeach

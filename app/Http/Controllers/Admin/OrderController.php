@@ -65,7 +65,7 @@ class OrderController extends Controller
     public function show($id)
     {
         $data = $this->service->show($id);
-        dd($data);
+        // dd($data);
         return view('admin.orders.show',compact('data'));
     }
 
