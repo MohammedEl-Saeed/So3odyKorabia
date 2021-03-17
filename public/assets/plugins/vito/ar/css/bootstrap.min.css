@@ -3052,8 +3052,8 @@ fieldset:disabled a.btn {
 .btn-outline-primary:not(:disabled):not(.disabled):active,
 .show>.btn-outline-primary.dropdown-toggle {
 	color: #fff;
-	background-color: #827af3;
-	border-color: #827af3
+	background-color: #d16643;
+	border-color: #d16643
 }
 
 .btn-outline-primary:not(:disabled):not(.disabled).active:focus,
@@ -5284,9 +5284,9 @@ input[type=submit].btn-block {
 	padding: .5rem .75rem;
 	margin-right: -1px;
 	line-height: 1.25;
-	color: #827af3;
+	color: #d16643;
 	background-color: #fff;
-	border: 1px solid #827af3
+	border: 1px solid #d16643
 }
 
 .page-link:hover {
@@ -5294,7 +5294,7 @@ input[type=submit].btn-block {
 	color: #0056b3;
 	text-decoration: none;
 	background-color: #e9ecef;
-	border-color: #827af3
+	border-color: #d16643
 }
 
 .page-link:focus {
@@ -5317,8 +5317,8 @@ input[type=submit].btn-block {
 .page-item.active .page-link {
 	z-index: 3;
 	color: #fff;
-	background-color: #827af3;
-	border-color: #827af3
+	background-color: #d16643;
+	border-color: #d16643
 }
 
 .page-item.disabled .page-link {
@@ -5326,7 +5326,7 @@ input[type=submit].btn-block {
 	pointer-events: none;
 	cursor: auto;
 	background-color: #fff;
-	border-color: #827af3
+	border-color: #d16643
 }
 
 .pagination-lg .page-link {
