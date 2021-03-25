@@ -45,7 +45,7 @@ class CityController extends Controller
     {
         $this->service->store($request);
         session()->flash('success' , 'تم أضافة المدينة بنجاح');
-        return redirect('/cities');
+        return redirect()->route('cities.index');
     }
 
     /**
@@ -82,7 +82,7 @@ class CityController extends Controller
     {
         $this->service->update($request, $id);
         session()->flash('success' , 'تم تعديل المدينة بنحاج');
-        return redirect('/cities');
+        return redirect()->route('cities.index');
     }
 
     /**
@@ -95,6 +95,6 @@ class CityController extends Controller
     {
         $this->service->delete($id);
         session()->flash('success' , 'تم حذف المدينة بنجاح');
-        return redirect('/options');
+        return redirect()->route('cities.index');
     }
 }

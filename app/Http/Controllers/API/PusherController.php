@@ -40,5 +40,6 @@ class PusherController extends Controller
         ));
         $beamsToken = $beamsClient->generateToken((string)$user->id);
         return response()->json($beamsToken);
+        
     }
 }

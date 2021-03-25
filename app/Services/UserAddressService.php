@@ -38,10 +38,6 @@ class UserAddressService
          return $this->userAddress->show($id);
     }
 
-    /** accept updates for userAddress */
-    public function update($updated_data, $id){
-        return  $this->userAddress->update($updated_data, $id);
-    }
 
     /** block specific userAddress */
 
@@ -66,14 +62,6 @@ class UserAddressService
         return $this->userAddress->delete($id);
     }
 
-    public function getAddressesForUser(){
-        $addresses = $this->userAddress->getAddressesForUser();
-        $data = [];
-        foreach ($addresses as $address){
-            $data[] = $address->getData();
-        }
-        return $data;
-    }
 
     public function getAreas($cityId){
         return Area::where('city_id',$cityId)->get();

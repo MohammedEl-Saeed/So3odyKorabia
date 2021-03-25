@@ -93,8 +93,8 @@ class AuthController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function logout() {
-        auth()->logout();
-        return response()->json(['message' => 'User successfully signed out']);
+        $this->service->logout();
+        return $this->prepare_response(false,null,'User successfully signed out',null,0,200) ;
     }
 
     /**
@@ -112,7 +112,7 @@ class AuthController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function userProfile() {
-        $data = $this->getLogginData();
+        $data = $this->getLogginUser();
         $hasCart = $this->checkCart();
         return $this->prepareResponse(false,null,'User return successfully',$data,0,200,$hasCart) ;
 
@@ -126,7 +126,7 @@ class AuthController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     protected function createNewToken($token){
-        $data = $this->getLogginData();
+        $data = $this->getLogginUser();
         $data['token'] = $token;
         $data['token_type'] = 'bearer';
         $hasCart = $this->checkCart();
@@ -203,13 +203,13 @@ class AuthController extends Controller
             'code' => 'required|exists:users,code',
         ]);
         if($validator->fails()){
-            return $this->prepare_response(true,$validator->errors(),'Error validation',null,1,200) ;
+            return $this->prepare_response(true,$validator->errors(),'Error validation',null,1,422) ;
         }
         $data = $this->service->checkCode($request);
         if($data){
             return $this->prepare_response(false,null,'Code Checked',null,0,200) ;
         }else{
-            return $this->prepare_response(true,null,'try again code is wrong',null,1,200) ;
+            return $this->prepare_response(true,null,'try again code is wrong',null,1,422) ;
 //            return response()->json(['error'=>true,'status'=>1,'message'=>'try again code is wrong'],200);
         }
     }
@@ -259,7 +259,7 @@ class AuthController extends Controller
         }
     }
 
-    public function getLogginData(){
+    public function getLogginUser(){
         $data = [];
         $data['address'] = $this->getAddressData();
         $user = auth()->user();
