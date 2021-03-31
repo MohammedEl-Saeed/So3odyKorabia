@@ -57,7 +57,7 @@
 
                 <li class="{{active_link('options')}}">
                     <a href="{{route('options.index')}}" class="iq-waves-effect">
-                        <img src="{{asset('assets/images/icons/options.png')}}" class="images-sidebar">
+                        <img src="{{asset('assets/images/icons/options.svg')}}" class="images-sidebar">
                         <span >إضافات </span>
                     </a>
                 </li>
@@ -71,35 +71,35 @@
 
                 <li class="{{active_link('orders')}}">
                     <a href="{{route('orders.index')}}" class="iq-waves-effect">
-                        <img src="{{asset('assets/images/icons/order.png')}}" class="images-sidebar">
+                        <img src="{{asset('assets/images/icons/order.svg')}}" class="images-sidebar">
                         <span > طلبات </span>
                     </a>
                 </li>
 
                 <li class="{{active_link('cities')}}">
                     <a href="{{route('cities.index')}}" class="iq-waves-effect">
-                        <img src="{{asset('assets/images/icons/place.png')}}" class="images-sidebar">
+                        <img src="{{asset('assets/images/icons/cities.svg')}}" class="images-sidebar">
                         <span > المدن </span>
                     </a>
                 </li>
 
                 <li class="{{active_link('areas')}}">
                     <a href="{{route('areas.index')}}" class="iq-waves-effect">
-                        <img src="{{asset('assets/images/icons/place.png')}}" class="images-sidebar">
+                        <img src="{{asset('assets/images/icons/map.svg')}}" class="images-sidebar">
                         <span > المناطق </span>
                     </a>
                 </li>
 
                 <li class="{{active_link('users')}}">
                     <a href="{{route('users.index')}}" class="iq-waves-effect">
-                        <img src="{{asset('assets/images/icons/farmer.png')}}" class="images-sidebar">
+                        <img src="{{asset('assets/images/icons/farmer.svg')}}" class="images-sidebar">
                         <span > العملاء </span>
                     </a>
                 </li>
 
                 <li class="{{active_link('show' , 'settings')}}">
                     <a href="{{route('show.settings.form')}}" class="iq-waves-effect">
-                        <img src="{{asset('assets/images/icons/settings.png')}}" class="images-sidebar">
+                        <img src="{{asset('assets/images/icons/settings.svg')}}" class="images-sidebar">
                         <span > الإعدادات </span>
                     </a>
                 </li>
