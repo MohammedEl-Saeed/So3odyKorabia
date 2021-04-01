@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
                     ],
                     [
                     'name'=>'Mohammed',
-                    'phone'=>'01124772675',
+                    'phone'=>'0111111111',
                     'email'=>'mohamed@gmail.com',
                     'password'=>'$2y$10$bhWz5bWsp9/7/m6zxlToZOCoG3AwauqDyDp5CGsLSVLgkPQFQ/2Iy', //12345678
                     'image'=>'https://pngimage.net/wp-content/uploads/2018/06/logo-admin-png-7.png',
