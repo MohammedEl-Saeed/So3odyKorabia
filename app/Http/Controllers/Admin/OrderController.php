@@ -25,6 +25,11 @@ class OrderController extends Controller
     public function index()
     {
         $all_orders = $this->service->index()->orderBy('id', 'desc')->get();
+        $done_orders =$all_orders->where('status','Done');
+        $new_orders = $all_orders->where('status','Waiting');
+        $accepted_orders = $all_orders->where('status','Accepted');
+        $rejected_orders =$all_orders->where('status','Rejected');
+        $Inprogress_orders = $all_orders->where('status','InProgress');
         $today_orders = $this->service->index()->whereDate('created_at','=',date('Y-m-d'));
         return view('admin.orders.index', compact('done_orders','Inprogress_orders','new_orders','today_orders','all_orders','accepted_orders','rejected_orders'));
     }

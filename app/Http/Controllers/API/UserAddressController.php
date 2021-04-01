@@ -30,7 +30,25 @@ class UserAddressController extends Controller
     }
 
 
+     public function updateAddress(Request $request){
+        $validator = Validator::make($request->all(), [
+            'id' => 'required|exists:user_addresses,id',
+            'city_id' => 'required|exists:cities,id',
+            'area_id' => 'required|exists:areas,id',
+            'default_address'=>'in:1,0',
+            'street' => 'required|string',
+        ]);
+        if ($validator->fails()) {
+            return   $this->prepare_response(true,$validator->errors(),'Error validation',$request->all(),0,200) ;
+        }
+        $data = $this->service->update($request, $request->id);
+        return  $this->prepare_response(false,null,'return Successfully',$data,0 ,200);
+    }
 
+    public function getUserAddresses(){
+        $data = $this->service->getAddressesForUser();
+        return  $this->prepare_response(false,null,'return Successfully',$data,0 ,200);
+    }
 
     public function removeAddress(Request $request){
         $validator = Validator::make($request->all(), [

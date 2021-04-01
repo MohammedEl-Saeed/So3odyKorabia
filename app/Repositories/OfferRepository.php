@@ -39,6 +39,10 @@ class OfferRepository
 
     /** add new user in system */
     public function store($request){
+        if ($request->hasFile('image')){
+            $image_path = FileHelper::upload_file('/uploads/users/images/',$request['image']);
+            $request->image = $image_path;
+        }
           return $this->model::create($request->all());
     }
 
@@ -50,6 +54,13 @@ class OfferRepository
     /** update user Or when Accepting Update request , new changes will be add to user */
     public function update($request, $id){
         $arr= [];
+        $arr['code'] = $request->code;
+        $arr['description'] = $request->description;
+        $arr['discount'] = $request->discount;
+        $arr['uses_number'] = $request->uses_number;
+//        $arr['discount_type'] = $request->discount_type;
+        $arr['start_at'] = $request->start_at;
+        $arr['end_at'] = $request->end_at;
         $arr['status'] = $request->status;
         if ($request->hasFile('image')){
             $image_path = FileHelper::upload_file('/uploads/users/images/',$request['image']);

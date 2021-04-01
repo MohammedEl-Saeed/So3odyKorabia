@@ -43,6 +43,8 @@ class OrderRepository extends BaseRepository
             $order = $this->newOrder($request);
             $cartDetails = CartDetail::where('user_id', Auth::id())->get();
             //add cartDetails to orderItemDetails
+            $this->addOrderDetails($cartDetails, $order->id);
+            $this->updateOrderPrice($order->id);
             return $this->show($order->id);
         }
     }
@@ -51,6 +53,16 @@ class OrderRepository extends BaseRepository
     public function show($id){
         $data = [];
         $order = $this->traitShow($this->model, $id);
+        $data['order_id'] = $order->id;
+        $data['total_price'] = $order->total_price;
+        $data['items_price'] = $order->items_price;
+        $data['delivery_cost'] = $order->delivery_cost;
+        $data['delivery_time'] = $order->deliveryTimeRemaining();
+        $data['offer_cost'] = $order->offer_cost;
+        $data['payment_type'] = $order->paymentType();
+        if($order->paymentType() == 'Transfer'){
+            $data['transfer_image'] = $order->transfer_image;
+        }
         $data['address'] = $order->address;
         $data['status'] = $order->status;
         $data['created_at'] = $order->created_at;
@@ -58,7 +70,9 @@ class OrderRepository extends BaseRepository
         $data['user'] = $order->user->getData();
         $results = [];
         $orderDetails = OrderDetail::where('order_id',$order->id)->get();
-
+        foreach($orderDetails as $orderDetail){
+            $results[] = $orderDetail->getData();
+        }
         $data['orderDetails'] =$results;
         return $data;
     }
@@ -73,16 +87,40 @@ class OrderRepository extends BaseRepository
         $this->model->status = 'Waiting';
         $this->model->user_address_id = $request->user_address_id;
         $this->model->payment_type = $request->payment_type;
-
+        $address = $this->getAddress($request->user_address_id);
+        $this->model->address = $this->getFullAddress($address);
+        $this->model->delivery_cost = $this->getDeliveryFees($address);
+        $this->model->delivery_time = $address->area->delivery_time ?? null;
+        if ($request->hasFile('transfer_image')){
+            $image_path = FileHelper::upload_file('/uploads/orders/images/',$request['transfer_image']);
+            $this->model->transfer_image = $image_path;
+        }
+        if(!is_null($request->offer_id)) {
+                $offer = Auth::user()->offer();
+                $offer->attach($request->offer_id);
+                Offer::find($request->offer_id)->increment('count');
+                $this->model->offer_id = $request->offer_id;
+            }
         $this->model->save();
         return $this->model;
     }
 
+    public function getOrders(){
+        $data = [];
+        $orders = $this->model->where('user_id',Auth::id())->get();
+        foreach($orders as $order){
+            $orderInfo = $this->show($order->id);
+            unset($orderInfo['user']);
+            $data[] = $orderInfo;
+        }
+        return $data;
+    }
 
     public function reOrder($orderId){
         $orderDetails = OrderDetail::where('order_id',$orderId)->get();
         $order = $this->newOrder();
-
+        $this->addOrderDetails($orderDetails, $order->id);
+        $this->updateOrderPrice($order->id);
         return $order;
     }
 

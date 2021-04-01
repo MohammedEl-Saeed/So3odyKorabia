@@ -88,6 +88,9 @@ class OrderService
         $title = 'Order status updated';
         $body = 'you have update on your order';
         $notificationType = NotificationTypes::UPDATE_ORDER_STATUS;
+        $data_id = $id;
+        $user_id = [Order::find($id)->user_id];
+        $controller->sendNotification($user_id, $title, $body, $notificationType, $data_id);
         return $this->order->updateStatus($status, $id);
     }
 
@@ -136,6 +139,7 @@ class OrderService
         $now = date('Y-m-d H:m:i');
         $offers = Offer::whereDate('start_at', '<', $now)
             ->whereDate('end_at', '>', $now)
+            ->whereRaw('count < uses_number OR uses_number IS NULL')
             ->where('status', 'Available')
             ->orWhere('status', 'Reopened')
             ->get();
@@ -156,15 +160,19 @@ class OrderService
         if($cartId) {
             $cartPrice = $this->order->updateTotalPriceForCart($cartId);
         }
-       $offer = $this->getOffer($request->code);
+        $address = $this->order->getAddress($request->address_id);
+        $deliveryCosts = $this->order->getDeliveryFees($address);
+        $offer = $this->getOffer($request->code);
         $totalPriceAfterOffer = $cartPrice;
         //get price after using promocode
         if($offer) {
             $totalPriceAfterOffer = $this->order->getOfferedPrice($offer, $cartPrice);
             $data['promoCodePercent'] = $this->order->getPromocodeValue($offer, $cartPrice);
         }
+        $data['cartPrice'] = $cartPrice;
+        $data['deliveryFees'] = $deliveryCosts;
         //get price after add delivery fees
-//        $data['totalPrice'] = $totalPriceAfterOffer + $deliveryCosts;
+        $data['totalPrice'] = $totalPriceAfterOffer + $deliveryCosts;
         return $data;
     }
 

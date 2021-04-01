@@ -86,6 +86,49 @@ class OrderController extends Controller
         return  $this->prepare_response(false,null,'return Successfully',$data,0 ,200);
     }
 
+    public function checkCode(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'code' => 'required|exists:offers,code',
+        ]);
+        if ($validator->fails()) {
+            return $this->prepare_response(true, $validator->errors(), 'Error validation', null, 0, 200);
+        }
+        $data = null;
+        $codeId = $this->service->offerAvailability($request->code);
+        $cart = $this->checkCart();
+        if(!$cart){
+            $message = 'You cart is empty!';
+        }elseif(is_null($codeId)){
+            $message = 'This code may you use before or not available now';
+        }else{
+            $data = $this->service->checkCode($request->code);
+            $message = 'return Successfully';
+        }
+//        event(new BeamsEvent(['1'], $data));
+
+        //
+//        event(new BeamsEvent($this->getUsers([$patient_id]),$this->getNotificationObject('Reservation',
+//                'Doctor Accept  Your Reservation',
+//                ProviderTypes::PATIENT,
+//                ProviderTypes::DOCTOR,
+//                NotificationTypes::DOCTOR_RESERVATION, $request->id)));
+        //
+        return $this->prepare_response(false,null,$message,$data,0 ,200,4);
+    }
+
+    public function getOrderPriceDetails(Request $request){
+        $validator = Validator::make($request->all(), [
+            'address_id' => 'required|exists:user_addresses,id',
+            'code' => 'exists:offers,code',
+        ]);
+        if ($validator->fails()) {
+            return $this->prepare_response(true, $validator->errors(), 'Error validation', null, 0, 200);
+        }
+        $data = $this->service->getOrderPriceDetails($request);
+        return $this->prepare_response(false,null,'return Successfully',$data,0 ,200,4);
+
+    }
 
     public function deleteOrder(Request $request){
         $validator = Validator::make($request->all(), [
