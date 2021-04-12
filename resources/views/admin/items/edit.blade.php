@@ -6,7 +6,7 @@
 
 
 <!-- ========================== start new form to add doctor ============================== -->
-<form id="main-form-to-add-doctor" class="form" method="post" action="{{route('items.update', $item->id)}}" enctype="multipart/form-data">
+<form id="main-form-to-add-doctor" class="form" method="post" action="{{route('items.update', ['id'=>$item->product_id,'itemId'=>$item->id])}}" enctype="multipart/form-data">
     @csrf
     {{method_field('PUT')}}
     <div class="row">

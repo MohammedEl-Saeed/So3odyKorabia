@@ -45,7 +45,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('{id}/items', 'Admin\ItemController');
     Route::get('items/{productId}/available/{id}', 'Admin\ItemController@makeProductAvailable')->name('items.available');
     Route::get('items/{productId}/unavailable/{id}', 'Admin\ItemController@makeProductUnavailable')->name('items.unavailable');
-    Route::put('item/update/{id}', 'Admin\ItemController@update')->name('items.update');
+    Route::put('item/{id}/update/{itemId}', 'Admin\ItemController@update')->name('items.update');
     Route::get('items/{productId}/sold/{id}', 'Admin\ItemController@makeProductSold')->name('items.sold');
 
     Route::resource('offers', 'Admin\OfferController');

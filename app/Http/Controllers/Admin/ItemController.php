@@ -96,7 +96,7 @@ class ItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ItemRequest $request, $id)
+    public function update(ItemRequest $request, $productId, $id)
     {
         $this->service->update($request, $id);
         session()->flash('success' , 'تم تعديل المنتج بنجاح');
