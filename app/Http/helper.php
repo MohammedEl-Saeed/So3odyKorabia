@@ -1,4 +1,5 @@
 <?php
+use App\Models\BeamNotification;
 if(!function_exists('active_link')){
     function active_link($param1 , $param2 = null){
         if($param2 == null){
@@ -18,5 +19,12 @@ if(!function_exists('active_link')){
                 return '';
             }
         }
+    }
+}
+
+if(!function_exists('get_notification')){
+    function get_notification(){
+        $all = BeamNotification::where('read' , 0)->get();
+        return $all;
     }
 }
