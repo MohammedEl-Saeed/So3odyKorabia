@@ -45,6 +45,7 @@
                                 <thead>
                                 <tr>
                                     <th>#</th>
+                                    <td>رقم الطلب</td>
                                     <th>السعر</th>
                                     <th>المستخدم</th>
                                     <th>الحالة</th>
@@ -54,7 +55,8 @@
                                 <tbody>
                                 @foreach($all_orders as $index=>$order)
                                     <tr>
-                                        <td>{{$index + 1}}</td>
+                                        <td>{{$index += 1}}</td>
+                                        <td>{{$order->id}}</td>
                                         <td>{{$order->total_price}}</td>
                                         <td>
 {{--                                            <a href="{{route('user.orders' ,$order->user->id)}}">--}}
@@ -114,10 +116,11 @@
                     </div>
                     <div class="iq-card-body">
                         <div class="table-responsive">
-                            <table class="table table-hover table-striped datatable-example table-bordered datatable-table text-center">
+                            <table class="table table-hover table-striped datatable-example table-bordered datatable-table text-center w-100">
                                 <thead>
                                 <tr>
                                     <th>#</th>
+                                    <td>رقم الطلب</td>
                                     <th>السعر</th>
                                     <th>المستخدم</th>
                                     <th>الحالة</th>
@@ -127,7 +130,8 @@
                                 <tbody>
                                 @foreach($today_orders as $index=>$order)
                                     <tr>
-                                        <td>{{$index + 1}}</td>
+                                        <td>{{$index += 1}}</td>
+                                        <td>{{$order->id}}</td>
                                         <td>{{$order->total_price}}</td>
                                         <td>
                                             <a href="{{route('user.orders' ,$order->user->id)}}">{{$order->user->name}}
@@ -179,10 +183,11 @@
                     </div>
                     <div class="iq-card-body">
                         <div class="table-responsive">
-                            <table class="table table-hover table-striped datatable-example table-bordered datatable-table text-center">
+                            <table class="table table-hover table-striped datatable-example table-bordered datatable-table text-center w-100">
                                 <thead>
                                 <tr>
                                     <th>#</th>
+                                    <td>رقم الطلب</td>
                                     <th>السعر</th>
                                     <th>المستخدم</th>
                                     <th>الحالة</th>
@@ -192,7 +197,8 @@
                                 <tbody>
                                 @foreach($new_orders as $index=>$order)
                                     <tr>
-                                        <td>{{$index + 1}}</td>
+                                        <td>{{$index += 1}}</td>
+                                        <td>{{$order->id}}</td>
                                         <td>{{$order->total_price}}</td>
                                         <td>
                                             <a href="{{route('user.orders' ,$order->user->id)}}">{{$order->user->name}}
@@ -243,10 +249,11 @@
                     </div>
                     <div class="iq-card-body">
                         <div class="table-responsive">
-                            <table class="table table-hover table-striped datatable-example table-bordered datatable-table text-center">
+                            <table class="table table-hover table-striped datatable-example table-bordered datatable-table text-center w-100">
                                 <thead>
                                 <tr>
                                     <th>#</th>
+                                    <td>رقم الطلب</td>
                                     <th>السعر</th>
                                     <th>المستخدم</th>
                                     <th>الحالة</th>
@@ -256,7 +263,8 @@
                                 <tbody>
                                 @foreach($done_orders as $index=>$order)
                                     <tr>
-                                        <td>{{$index + 1}}</td>
+                                        <td>{{$index += 1}}</td>
+                                        <td>{{$order->id}}</td>
                                         <td>{{$order->total_price}}</td>
                                         <td>
                                             <a href="{{route('user.orders' ,$order->user->id)}}">{{$order->user->name}}
@@ -307,10 +315,11 @@
                     </div>
                     <div class="iq-card-body">
                         <div class="table-responsive">
-                            <table class="table table-hover table-striped datatable-example table-bordered datatable-table text-center">
+                            <table class="table table-hover table-striped datatable-example table-bordered datatable-table text-center w-100">
                                 <thead>
                                 <tr>
                                     <th>#</th>
+                                    <td>رقم الطلب</td>
                                     <th>السعر</th>
                                     <th>المستخدم</th>
                                     <th>الحالة</th>
@@ -320,7 +329,8 @@
                                 <tbody>
                                 @foreach($accepted_orders as $index=>$order)
                                     <tr>
-                                        <td>{{$index + 1}}</td>
+                                        <td>{{$index += 1}}</td>
+                                        <td>{{$order->id}}</td>
                                         <td>{{$order->total_price}}</td>
                                         <td>
                                             <a href="{{route('user.orders' ,$order->user->id)}}">{{$order->user->name}}
@@ -372,10 +382,11 @@
                     </div>
                     <div class="iq-card-body">
                         <div class="table-responsive">
-                            <table class="table table-hover table-striped datatable-example table-bordered datatable-table text-center">
+                            <table class="table table-hover table-striped datatable-example table-bordered datatable-table text-center w-100">
                                 <thead>
                                 <tr>
                                     <th>#</th>
+                                    <td>رقم الطلب</td>
                                     <th>السعر</th>
                                     <th>المستخدم</th>
                                     <th>الحالة</th>
@@ -385,7 +396,8 @@
                                 <tbody>
                                 @foreach($rejected_orders as $index=>$order)
                                     <tr>
-                                        <td>{{$index + 1}}</td>
+                                        <td>{{$index += 1}}</td>
+                                        <td>{{$order->id}}</td>
                                         <td>{{$order->total_price}}</td>
                                         <td>
                                             <a href="{{route('user.orders' ,$order->user->id)}}">{{$order->user->name}}
