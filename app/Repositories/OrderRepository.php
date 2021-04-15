@@ -101,8 +101,8 @@ class OrderRepository extends BaseRepository
                 Offer::find($request->offer_id)->increment('count');
                 $this->model->offer_id = $request->offer_id;
             }
-            $this->model->save();
-            return $this->model;
+        $this->model->save();
+        return $this->model;
     }
 
     public function getOrders(){
@@ -179,6 +179,7 @@ class OrderRepository extends BaseRepository
             if ($discount_type == 'percent') {
                 // calculate to percent of discount and remove it from price
                 $total_price = $total_price - (($discount / 100) * $total_price);
+                $total_price = round($total_price,2);
             } else {
                 $total_price = $total_price - $discount;
             }

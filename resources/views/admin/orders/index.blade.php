@@ -57,9 +57,9 @@
                                         <td>{{$index + 1}}</td>
                                         <td>{{$order->total_price}}</td>
                                         <td>
-                                            <a href="{{route('user.orders' ,$order->user->id)}}">
+{{--                                            <a href="{{route('user.orders' ,$order->user->id)}}">--}}
                                                 {{$order->user->name}}
-                                            </a>
+{{--                                            </a>--}}
                                         </td>
                                         <td>
                                             @if($order->status == 'Accepted')

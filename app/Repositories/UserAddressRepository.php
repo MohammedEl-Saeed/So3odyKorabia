@@ -51,8 +51,10 @@ class UserAddressRepository
         $this->model->address_latitude = $request->address_latitude;
         $this->model->address_longitude = $request->address_longitude;
         $this->model->note = $request->note;
-        $this->updateDefaultAddress();
-//        $this->model->default_address = $request->default_address;
+        if($request->default_address){
+            $this->updateDefaultAddress();
+        }
+        $this->model->default_address = $request->default_address;
         $this->model->save();
 
         return $this->model;

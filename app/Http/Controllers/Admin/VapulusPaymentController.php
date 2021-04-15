@@ -116,7 +116,7 @@ class VapulusPaymentController extends Controller
             $trancaction->save();
             $message = 'success payment';
             $orderService = new OrderService();
-            $orderService->updatePayment($order_id);
+            $orderService->updatePayment($order_id, $order->user_id);
             return view('payment.success_payment', compact('message'));
         }
         $message = 'failed payment';

@@ -13,6 +13,7 @@ use App\Repositories\UserRepository;
  use Auth;
  use DB;
 use Illuminate\Database\Eloquent\Model;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class UserService
 {
@@ -106,5 +107,10 @@ class UserService
         } else{
             return false;
         }
+    }
+
+    public function logout(){
+        auth()->logout();
+        JWTAuth::invalidate();
     }
 }
