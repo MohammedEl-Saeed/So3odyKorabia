@@ -118,11 +118,35 @@
                     margin-bottom: 20px;
                 }
             }
+            body{
+                margin: 0;
+                padding: 0;
+            }
+            .landpage{
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                z-index: 9999;
+                background-color: rgba(0, 0, 0, .7);
+            }
+            .landpage img{
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50% , -50%);
+                width: 300px;
+            }
+            .d-none{
+                display: none;
+            }
     </style>
 </head>
 
 <body>
-    <div class="row" style="margin-top: 30px">
+    <div class="landpage d-none">
+        <img src="{{asset('assets/images/loader.gif')}}" />
+    </div>
+    <div class="row" style="padding-top: 30px">
         <div class="col-75">
             <div class="container">
                 @if($errors->any())
@@ -142,7 +166,7 @@
 
                     <h3>Payment</h3>
                     <label for="fname">Total Price : {{$amount }}</label>
-                    
+
 
                     <div class="icon-container">
                         <i class="fa fa-cc-visa" style="color:navy;"></i>
@@ -205,6 +229,7 @@
                 formSessionUpdate: function (err, response) {
                     console.log("update callback.....");
                     console.log(err, response);
+                    $('.landpage').addClass('d-none');
                     $('.alert-errors').fadeIn(400);
                     $('.alert-errors').empty();
                     $('.alert-errors').append(`<p class="mb-0">` + response.message + `</p>`);
@@ -236,6 +261,7 @@
 
     function pay() {
         // UPDATE THE SESSION WITH THE INPUT FROM HOSTED FIELDS
+        $('.landpage').removeClass('d-none');
         PaymentSession.updateSessionFromForm();
     }
 </script>

@@ -1,5 +1,4 @@
 @extends('auth.base')
-
 @section('content')
 <div class="sign-in-from">
     <h1 class="mb-0">تعديل كرمة المرور</h1>
