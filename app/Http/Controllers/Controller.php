@@ -53,7 +53,7 @@ class Controller extends BaseController
         return $phone;
     }
 
-    public function sendNotification($user_ids = [], $title = '', $body = '', $notificationType, $data_id, $screenName = null){
+    public function sendNotification($user_ids = [], $title = '', $body = '', $notificationType, $data_id = null, $screenName = null){
         event(new BeamsEvent($this->getUsers($user_ids),
             $this->getNotificationObject($title, $body, $notificationType , $data_id)));
         $this->storeNotifications($user_ids, $title, $body, $notificationType, $data_id);

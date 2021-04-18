@@ -97,6 +97,13 @@
                     </a>
                 </li>
 
+                <li class="{{active_link('notifications')}}">
+                    <a href="{{route('notifications.create')}}" class="iq-waves-effect">
+                        <span class="images-sidebar" id="lottie-beil"></span>
+                        <span > إرسال إشعارات </span>
+                    </a>
+                </li>
+
                 <li class="{{active_link('show' , 'settings')}}">
                     <a href="{{route('show.settings.form')}}" class="iq-waves-effect">
                         <img src="{{asset('assets/images/icons/settings.svg')}}" class="images-sidebar">

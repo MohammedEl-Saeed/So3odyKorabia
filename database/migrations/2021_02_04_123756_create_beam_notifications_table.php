@@ -16,7 +16,7 @@ class CreateBeamNotificationsTable extends Migration
         Schema::create('beam_notifications', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('order_id')->constrained('orders')->onDelete('cascade');
+            $table->foreignId('order_id')->nullable()->constrained('orders')->onDelete('cascade');
             $table->string('title')->nullable();
             $table->text('body')->nullable();
             $table->string('notificationType')->nullable();
