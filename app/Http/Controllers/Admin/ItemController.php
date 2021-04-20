@@ -30,7 +30,7 @@ class ItemController extends Controller
      */
     public function index($productId)
     {
-        $data = $this->service->index($productId);
+        $data = $this->service->index($productId)->get();
         $product = Product::findorFail($productId);
         $type = $product->name;
         return view('admin.items.index', compact('data', 'productId' , 'type'));

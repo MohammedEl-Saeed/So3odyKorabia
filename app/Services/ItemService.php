@@ -25,7 +25,7 @@ class ItemService
     }
     /** get all item by itemId  */
     public function index($productId){
-        $data = $this->item->index($productId)->get();
+        $data = $this->item->index($productId);
         return $data;
     }
 

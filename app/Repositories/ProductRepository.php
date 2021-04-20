@@ -33,7 +33,7 @@ class ProductRepository
 
     /** get all users due to type */
     public function index($type){
-        return  $this->model->where('type',$type)->where('status','Available');
+        return  $this->model->where('type',$type);
 
     }
 

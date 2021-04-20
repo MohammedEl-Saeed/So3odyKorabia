@@ -73,8 +73,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('update/settings', 'Admin\AdminController@updateSettings')->name('update.settings');
 
     // send notification
-    Route::get('notifications/create','Admin\notificationController@create')->name('notifications.create');
-    Route::post('notifications/send','Admin\notificationController@send')->name('notifications.send');
+    Route::get('notifications/create','Admin\NotificationController@create')->name('notifications.create');
+    Route::post('notifications/send','Admin\NotificationController@send')->name('notifications.send');
 
     Route::get('messages', 'Admin\MessageController@index')->name('messages');
     Route::get('reply-message/{messageId}', 'Admin\MessageController@replyMessage')->name('messages.reply');

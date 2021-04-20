@@ -36,7 +36,7 @@ class ItemRepository
 
     /** get all users due to type */
     public function index($productId){
-        return  $this->model->where('product_id',$productId)->where('status','Available');
+        return  $this->model->where('product_id',$productId);
 
     }
 

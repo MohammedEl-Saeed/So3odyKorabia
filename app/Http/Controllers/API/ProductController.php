@@ -33,7 +33,7 @@ class ProductController extends Controller
 //            $data['items'] = $this->item_service->index($product->id);
 //            $data ['product_id'] = $product->id;
 //        } elgetse {
-            $data = $this->product_service->index($request->type);
+            $data = $this->product_service->index($request->type)->where('status','Available')->get();
 //        }
         return  $this->prepare_response(false,null,'return Successfully',$data,0 ,200);
     }

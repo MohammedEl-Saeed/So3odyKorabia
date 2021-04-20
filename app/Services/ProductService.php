@@ -26,7 +26,7 @@ class ProductService
     }
     /** get all product by type  */
     public function index($type){
-        return $this->product->index($type)->get();
+        return $this->product->index($type);
     }
 
     /** add new product to sysytem */
