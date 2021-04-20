@@ -29,7 +29,7 @@ class ProductController extends Controller
             return   $this->prepare_response(true,$validator->errors(),'Error validation',$request->all(),0,200) ;
         }
 //        if($request->type == 'Egg' || $request->type == 'Milk' || $request->type == 'Butter'){
-//            $product = $this->product_service->checkProduct($request->type);
+//            $product = $this->ئproduct_service->checkProduct($request->type);
 //            $data['items'] = $this->item_service->index($product->id);
 //            $data ['product_id'] = $product->id;
 //        } elgetse {
