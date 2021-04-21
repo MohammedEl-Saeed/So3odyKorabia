@@ -33,12 +33,12 @@ class ProductController extends Controller
     {
         //        dd(Auth::user());
         if ($type == 'Sacrifice' || $type == 'Bird') {
-            $data = $this->service->index($type);
+            $data = $this->service->index($type)->get();
             return view('admin.products.index', compact('data', 'type'));
         } else {
             $product = $this->service->checkProduct($type);
             $productId = $product->id;
-            $data = $this->itemService->index($productId);
+            $data = $this->itemService->index($productId)->get();
             $productName = Product::findorFail($productId);
             $type = $productName->name;
             return view('admin.items.index', compact('data', 'productId' , 'type'));

@@ -28,7 +28,7 @@ class OfferRequest extends FormRequest
                 'code' => 'required|unique:offers',
                 'discount' => 'required|numeric|max:100',
                 'uses_number' => 'nullable|numeric',
-                'discount_type' => 'required|in:value,percent',
+//                'discount_type' => 'required|in:value,percent',
                 'start_at' => 'required|date|after:now',
                 'end_at' => 'required|date|after:start_date'
             ];
@@ -37,7 +37,7 @@ class OfferRequest extends FormRequest
                 'code' => 'required|unique:offers,code,'.$this->offer,
                 'discount' => 'required|numeric|max:100',
                 'uses_number' => 'nullable|numeric',
-                'discount_type' => 'required|in:value,percent',
+//                'discount_type' => 'required|in:value,percent',
                 'start_at' => 'required|date',
                 'end_at' => 'required|date|after:start_date',
                 'status' => 'in:Available,Unavailable,Expired,Closed,Reopened'

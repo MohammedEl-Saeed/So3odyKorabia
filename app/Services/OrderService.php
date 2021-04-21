@@ -140,6 +140,7 @@ class OrderService
         $offers = Offer::whereDate('start_at', '<', $now)
             ->whereDate('end_at', '>', $now)
             ->whereRaw('count < uses_number OR uses_number IS NULL')
+            ->where('status', 'Available')
             ->orWhere('status', 'Reopened')
             ->get();
         return $offers;
@@ -160,7 +161,7 @@ class OrderService
             $cartPrice = $this->order->updateTotalPriceForCart($cartId);
         }
         $address = $this->order->getAddress($request->address_id);
-        $deliveryCosts = 0;
+        $deliveryCosts = $this->order->getDeliveryFees($address);
         $offer = $this->getOffer($request->code);
         $totalPriceAfterOffer = $cartPrice;
         //get price after using promocode
@@ -171,7 +172,7 @@ class OrderService
         $data['cartPrice'] = $cartPrice;
         $data['deliveryFees'] = $deliveryCosts;
         //get price after add delivery fees
-        $data['totalPrice'] = $totalPriceAfterOffer + 1;
+        $data['totalPrice'] = $totalPriceAfterOffer + $deliveryCosts;
         return $data;
     }
 
