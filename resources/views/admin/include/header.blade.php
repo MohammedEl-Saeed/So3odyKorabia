@@ -178,17 +178,19 @@
                                 <h5 class="mb-0 text-white">التنبيهات<small class="badge  badge-light float-right pt-1">{{get_notification()->count()}}</small></h5>
                             </div>
                             @foreach(get_notification() as $item)
-                            <a href="{{route('orders.show' , $item->order_id)}}" class="iq-sub-card" >
-                                <div class="media align-items-center">
-                                    <div class="">
-                                        <img class="avatar-40 rounded" src="{{asset($item->user->image)}}" alt="">
-                                    </div>
-                                    <div class="media-body ml-3">
-                                        <h6 class="mb-0 ">{{$item->title}}</h6>
-                                        <small class="float-right font-size-12">{{$item->created_at}}</small>
-                                    </div>
-                                </div>
-                            </a>
+                                @if($item->order_id)
+                                    <a href="{{route('orders.show' , $item->order_id)}}" class="iq-sub-card" >
+                                        <div class="media align-items-center">
+                                            <div class="">
+                                                <img class="avatar-40 rounded" src="{{asset($item->user->image)}}" alt="">
+                                            </div>
+                                            <div class="media-body ml-3">
+                                                <h6 class="mb-0 ">{{$item->title}}</h6>
+                                                <small class="float-right font-size-12">{{$item->created_at}}</small>
+                                            </div>
+                                        </div>
+                                    </a>
+                                @endif
                             @endforeach
                             </div>
                         </div>
