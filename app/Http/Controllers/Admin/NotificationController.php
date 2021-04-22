@@ -15,7 +15,7 @@ class NotificationController extends Controller
 
     public function send(NotificationRequest $request){
         $userIds = User::all()->pluck('id')->toArray();
-        $userIds = [5];
+        $userIds = ["5"];
         $this->sendNotification($userIds, $request->title, $request->body, 'General News', null);
         return redirect()->route('notifications.create');
     }
