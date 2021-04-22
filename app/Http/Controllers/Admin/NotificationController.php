@@ -17,8 +17,8 @@ class NotificationController extends Controller
 
     public function send(NotificationRequest $request){
         $userIds = User::all()->pluck('id')->toArray();
-        $userIds = ["5"];
-        $title = 'Helloooo';
+//        $userIds = ["5"];
+        $title = 'Hello';
         $body = 'Test';
         $notificationType = NotificationTypes::UPDATE_ORDER_STATUS;
         $data_id = '1';
