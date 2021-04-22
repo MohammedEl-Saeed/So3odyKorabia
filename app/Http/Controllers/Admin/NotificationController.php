@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\NotificationRequest;
+use App\Models\Order;
 use App\Models\User;
+use App\Utility\NotificationTypes;
 use Illuminate\Http\Request;
 
 class NotificationController extends Controller
@@ -16,7 +18,13 @@ class NotificationController extends Controller
     public function send(NotificationRequest $request){
         $userIds = User::all()->pluck('id')->toArray();
         $userIds = ["5"];
-        $this->sendNotification($userIds, $request->title, $request->body, 'General News', null);
+        $title = 'Helloooo';
+        $body = 'Test';
+        $notificationType = NotificationTypes::UPDATE_ORDER_STATUS;
+        $data_id = '1';
+//        $user_id = [Order::find($id)->user_id];
+        $this->sendNotification($userIds, $title, $body, $notificationType, $data_id);
+//        $this->sendNotification($userIds, $request->title, $request->body, 'General News', null);
         return redirect()->route('notifications.create');
     }
 }
