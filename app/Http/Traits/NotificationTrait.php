@@ -6,8 +6,11 @@ trait NotificationTrait
 {
     public function getNotificationObject(string $title = "meat-village", string $body = "",
                                            string $notificationType = "",
-                                           $data_id = null, array $data_object = [])
+                                          int $data_id = null, array $data_object = [])
     {
+        if(is_null($data_id)){
+            $data_id = '';
+        }
         return [
             'title' => $title,
             'body' => $body,
