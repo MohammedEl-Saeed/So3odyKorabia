@@ -20,10 +20,11 @@ class NotificationController extends Controller
 //        $userIds = ["5"];
         $title = $request->title;
         $body = $request->body;
-        $notificationType = NotificationTypes::UPDATE_ORDER_STATUS;
-        $data_id = '1';
+//        $notificationType = NotificationTypes::UPDATE_ORDER_STATUS;
+        $notificationType = 'General News';
+        $data_id = '0';
 //        $user_id = [Order::find($id)->user_id];
-        $this->sendNotification($userIds, $title, $body, $notificationType, null);
+        $this->sendNotification($userIds, $title, $body, $notificationType, $data_id);
 //        $this->sendNotification($userIds, $request->title, $request->body, 'General News', null);
         return redirect()->route('notifications.create');
     }
