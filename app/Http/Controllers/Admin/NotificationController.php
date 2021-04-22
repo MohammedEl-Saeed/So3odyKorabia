@@ -22,7 +22,7 @@ class NotificationController extends Controller
         $body = $request->body;
 //        $notificationType = NotificationTypes::UPDATE_ORDER_STATUS;
         $notificationType = 'General News';
-        $data_id = '0';
+        $data_id = null;
 //        $user_id = [Order::find($id)->user_id];
         $this->sendNotification($userIds, $title, $body, $notificationType, $data_id);
 //        $this->sendNotification($userIds, $request->title, $request->body, 'General News', null);
