@@ -17,13 +17,10 @@ class NotificationController extends Controller
 
     public function send(NotificationRequest $request){
         $userIds = User::all()->pluck('id')->toArray();
-//        $userIds = ["5"];
         $title = $request->title;
         $body = $request->body;
-//        $notificationType = NotificationTypes::UPDATE_ORDER_STATUS;
         $notificationType = 'General News';
         $data_id = null;
-//        $user_id = [Order::find($id)->user_id];
         $this->sendNotification($userIds, $title, $body, $notificationType, $data_id);
 //        $this->sendNotification($userIds, $request->title, $request->body, 'General News', null);
         return redirect()->route('notifications.create');
